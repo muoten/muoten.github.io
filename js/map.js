@@ -19,7 +19,7 @@ if (query2)
   query = query2
 // Challenge - Park and Open Space (Polygons)
 var featureLayer = new FeatureLayer({
-  url: "https://services.arcgis.com/Qo2anKIAMzIEkIJB/arcgis/rest/services/berlin_bars_pubs/FeatureServer/0/query?Where=rating%3D9&f=pjson",
+  url: "https://services.arcgis.com/Qo2anKIAMzIEkIJB/ArcGIS/rest/services/berlin_bars_pubs/FeatureServer/0/query?where=rating%3D1&f=pjson",
   definitionExpression: query,
 });
 
