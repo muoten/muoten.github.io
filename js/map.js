@@ -23,7 +23,7 @@ var featureLayer = new FeatureLayer({
   definitionExpression: query,
 });
 
-map.add(featureLayer);
+//map.add(featureLayer);
 
 var view = new MapView({
   container: "viewDiv",
