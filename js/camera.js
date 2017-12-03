@@ -69,8 +69,14 @@
 	function init() {
 		initCamera();
 
+		var reload = false;
 		document.querySelector('img.button').addEventListener('click', function() {
-			takePicture(pictureCallback);
+			if (reload) {
+				document.location.reload();
+			} else {
+				takePicture(pictureCallback);
+				reload = true;
+			}
 		});
 	}
 
