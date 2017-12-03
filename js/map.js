@@ -7,7 +7,7 @@ require([
 //"libs/jquery",
 ], function(Map, MapView, FeatureLayer) {
 
-var map = new Map({
+var myMap = new Map({
   basemap: "topo-vector"
 });
 
@@ -23,20 +23,20 @@ var featureLayer = new FeatureLayer({
   definitionExpression: query,
 });
 
-//map.add(featureLayer);
+myMap.add(featureLayer);
 
 var view = new MapView({
   container: "viewDiv",
-  map: map,
+  map: myMap,
   center: [13.40, 52.52],
-  zoom: 10
+  zoom: 10,
 }).then(function(evt) {
-  stopLoader();
-/*
+
   setTimeout(function(){
       stopLoader();
   }, 2000);
-*/
+
+  });
 });
-});
+
 };
