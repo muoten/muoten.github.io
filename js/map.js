@@ -1,4 +1,4 @@
-function initMap() {
+function initMap(isBerlin) {
 require([
 "esri/Map",
 "esri/views/MapView",
@@ -11,15 +11,12 @@ var myMap = new Map({
   basemap: "topo-vector"
 });
 
-var query = "rating>0";
-
-var urlParams = new URLSearchParams(window.location.search);
-var query2 = urlParams.get('query');
-if (query2)
-  query = query2
+var query = "rating=1";
+if (isBerlin == true)
+  query = "rating>0"
 // Challenge - Park and Open Space (Polygons)
 var featureLayer = new FeatureLayer({
-  url: "https://services.arcgis.com/Qo2anKIAMzIEkIJB/ArcGIS/rest/services/berlin_bars_pubs/FeatureServer/0/query?where=rating%3D1&f=pjson",
+  url: "https://services.arcgis.com/Qo2anKIAMzIEkIJB/ArcGIS/rest/services/berlin_bars_pubs/FeatureServer",
   definitionExpression: query,
 });
 
