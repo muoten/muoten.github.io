@@ -31,6 +31,7 @@ var view = new MapView({
   center: [13.40, 52.52],
   zoom: 10
 }).then(function(evt) {
+  stopLoader();
 /*
   setTimeout(function(){
       stopLoader();
