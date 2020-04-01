@@ -1,34 +1,208 @@
-<html>
-	<head>
-		 <meta charset="UTF-8">
-		<link rel="stylesheet" href="styles/main.css">
-		<link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
-		<link rel="stylesheet" href="https://js.arcgis.com/4.5/esri/css/main.css">
+<!DOCTYPE html>
+<html lang="en">
 
-	</head>
-	<body>
-		<div class="container">
-			<div class="camera">
+<head>
 
-				<video id="video"></video>
-				<canvas id="canvas"></canvas>
-				<div class="overlay">
-					<img class="logo" src="img/logo.png"/>
-					<img class="button" src="img/button.png"/>
-				</div>
-			</div>
-			<div class="map">
-				<image id="image-loader"></image>
-				<div id="viewDiv"></div>
-			</div>
-		</div>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
 
-	<script type="text/javascript" src="js/loader.js"></script>
-	<script src="https://js.arcgis.com/4.5/"></script>
-		<script type="text/javascript" src="js/map.js"></script>
-		<script type="text/javascript" src="js/cv.js"></script>
-		<script type="text/javascript" src="js/camera.js"></script>
+  <title>muoten.github.io: Data &amp; Science &amp; Engineering...</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom fonts for this template -->
+  <link href="https://fonts.googleapis.com/css?family=Saira+Extra+Condensed:500,700" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Muli:400,400i,800,800i" rel="stylesheet">
+  <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
+
+  <!-- Custom styles for this template -->
+  <link href="css/resume.min.css" rel="stylesheet">
+
+</head>
+
+<body id="page-top">
+
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top" id="sideNav">
+    <a class="navbar-brand js-scroll-trigger" href="#page-top">
+      <span class="d-block d-lg-none">Clarence Taylor</span>
+      <span class="d-none d-lg-block">
+        <img class="img-fluid img-profile rounded-circle mx-auto mb-2" src="img/profile.png" alt="">
+      </span>
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link js-scroll-trigger" href="#about">About</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link js-scroll-trigger" href="#covid19">Covid-19</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link js-scroll-trigger" href="#workshops">Workshops/Talks</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link js-scroll-trigger" href="#hacks">Hackathons/Demos</a>
+        </li>
+
+      </ul>
+    </div>
+  </nav>
+
+  <div class="container-fluid p-0">
+
+    <section class="resume-section p-3 p-lg-5 d-flex align-items-center" id="about">
+      <div class="w-100">
+        <!--<h1 class="mb-0">
+          <span class="text-primary">Data &amp; Science &; Engineering &;.../span>
+        </h1>-->
+        <div class="subheading mb-5">Data (and) Science (and) Engineering (and)...
+        <!--  <a href="mailto:name@email.com">eoteromuras@gmail.com</a>-->
+        </div>
+        <p class="lead mb-5"><i> "All [my] models are wrong, some are [maybe] useful."</i></p>
+        <div class="social-icons">
+          <a href="https://www.linkedin.com/in/enrique-otero-muras-0aab1a133">
+            <i class="fab fa-linkedin-in"></i>
+          </a>
+          <a href="https://github.com/muoten">
+            <i class="fab fa-github"></i>
+          </a>
+          <a href="https://twitter.com/eoteromuras">
+            <i class="fab fa-twitter"></i>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!--<hr class="m-0">-->
+
+    <section class="resume-section p-3 p-lg-5 d-flex justify-content-center" id="covid19">
+      <div class="w-100">
+        <h2 class="mb-5">Covid-19</h2>
+
+        <div class="resume-item d-flex flex-column flex-md-row justify-content-between mb-5">
+          <div class="resume-content">
+            <h3 class="mb-0">Epidemic Calculator</h3>
+            <div class="subheading mb-3">Simulation model</div>
+            <p>13 parameter model <a href="https://gabgoh.github.io/COVID/index.html?p_num_ind=300000&CFR=0.01&D_hospital_lag=5&D_incbation=5.2&D_infectious=2.9&D_recovery_mild=11.1&D_recovery_severe=28.6&I0=1&InterventionAmt=0.33333333333333337&InterventionTime=100&P_SEVERE=0.2&R0=2.2&Time_to_death=32&logN=15.761420707019587">simulation of Covid-19 evolution on Region of Madrid (Spain)</a>. This calculator implements a classical infectious disease model: SEIR (Susceptible → Exposed → Infected → Removed) [Wu, et. al, Kucharski et. al]. </p>
+<a href="https://gabgoh.github.io/COVID/index.html?p_num_ind=300000&CFR=0.01&D_hospital_lag=5&D_incbation=5.2&D_infectious=2.9&D_recovery_mild=11.1&D_recovery_severe=28.6&I0=1&InterventionAmt=0.33333333333333337&InterventionTime=100&P_SEVERE=0.2&R0=2.2&Time_to_death=32&logN=15.761420707019587"><img src="img/epcalc_madrid.png" width="100%"></img></a>
+            <p>Thanks to <a href="https://github.com/gabgoh/epcalc">Gabriel Goh epcalc</a> project.
+            </p>
+
+          </div>
+          <div class="resume-date text-md-right">
+            <span class="text-primary">March 2020</span>
+          </div>
+        </div>
+
+        <div class="resume-item d-flex flex-column flex-md-row justify-content-between mb-5">
+          <div class="resume-content">
+            <h3 class="mb-0">Number of cases and tests per country</h3>
+            <div class="subheading mb-3">Demo</div>
+            <p>Interactive simple <a href='https://covid-19-data-streamlit.herokuapp.com/'>demo</a>
+            </p>
+            <p>Thanks to Heroku, streamlit, worldometer...
+            </p>
+          </div>
+          <div class="resume-date text-md-right">
+            <span class="text-primary">March 2020</span>
+          </div>
+        </div>
 
 
-	</body>
+      </div>
+
+    </section>
+
+    <hr class="m-0">
+
+    <section class="resume-section p-3 p-lg-5 d-flex justify-content-center" id="workshops">
+      <div class="w-100">
+        <h2 class="mb-5">Workshops &amp; Talks</h2>
+
+        <div class="resume-item d-flex flex-column flex-md-row justify-content-between mb-5">
+          <div class="resume-content">
+            <h3 class="mb-0">Deep Learning</h3>
+            <div class="subheading mb-3">Simulation model</div>
+            <p>Deep Learning: Agárrate que vienen curvas / Hold on come curves</p>
+            <a href="https://github.com/muoten/car-behavioral-cloning">Car Behavioral Cloning</a>. Based on Udacity Behavioral Cloning project and the <a href"https://devblogs.nvidia.com/deep-learning-self-driving-cars/">NVIDIA Convolutional Neural Network model</a>
+            <a href="https://github.com/muoten/car-behavioral-cloning"><img src="img/lake_track.png" width="100%"/></a>
+            <p>Thanks to UDACITY, Nvidia, Keras and <a href="https://github.com/naokishibuya/car-behavioral-cloning">Naoki Shibuya</a> first implementation of car-behavioral-cloning project.
+            </p>
+
+          </div>
+          <div class="resume-date text-md-right">
+            <span class="text-primary">May 2019</span>
+          </div>
+        </div>
+
+    </section>
+
+    <hr class="m-0">
+
+    <section class="resume-section p-3 p-lg-5 d-flex align-items-center" id="hacks">
+      <div class="w-100">
+        <h2 class="mb-5">Hackathons &amp; Demos</h2>
+
+        <div class="resume-item d-flex flex-column flex-md-row justify-content-between mb-5">
+          <div class="resume-content">
+            <h3 class="mb-0">Diversifynd</h3>
+            <div class="subheading mb-3">Hackathon StartMeApp Artificial Intelligence 2019</div>
+            <p>
+              Diversifynd is a platform that supports diversity.
+
+Users can check which events or organizations have a better degree of representation in term of gender or race.
+For this purpose computer vision is applied to images of these events or organizations
+            </p>
+            <p><a href="https://github.com/muoten/diversityscore">Code</a>
+            </p>
+            <p>A project by <i>TheAlfredoLambdas</i>
+            </p>
+          </div>
+          <div class="resume-date text-md-right">
+            <span class="text-primary">Dic 2018</span>
+          </div>
+        </div>
+
+        <div class="resume-item d-flex flex-column flex-md-row justify-content-between">
+          <div class="resume-content">
+            <h3 class="mb-0">Augmented choices</h3>
+            <div class="subheading mb-3">Hackatrips. Minube and Fitur</div>
+            <p>Personalized and Gamified Trip Experiences with Augmented Reality.
+            </p>
+            <p>
+              <a href="https://github.com/muoten/augmented-choices">Code.</a>
+              Powered by: Minube API, Oracle Cloud Platform: Oracle Container Service, Hotelscombined API.
+            </p>
+            <p>A project by <i>TheAlfredoLambdas</i>
+            </p>
+          </div>
+          <div class="resume-date text-md-right">
+            <span class="text-primary">Jan 2018</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+
+  </div>
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Plugin JavaScript -->
+  <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+  <!-- Custom scripts for this template -->
+  <script src="js/resume.min.js"></script>
+
+</body>
+
 </html>
