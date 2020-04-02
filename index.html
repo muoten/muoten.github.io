@@ -44,7 +44,13 @@
           <a class="nav-link js-scroll-trigger" href="#covid19-ref-tweets">Covid-19 Twitter Refs.</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link js-scroll-trigger" href="#epcalc">Covid-19. Simulations</a>
+          <a class="nav-link js-scroll-trigger" href="#covid19-ages">Covid-19. Analysis</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link js-scroll-trigger" href="#covid19-epcalc">Covid-19. Simulations</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link js-scroll-trigger" href="#covid19-data">Covid-19. Datasets</a>
         </li>
         <li class="nav-item">
           <a class="nav-link js-scroll-trigger" href="#workshops">Workshops/Talks</a>
@@ -75,10 +81,13 @@
         <p>New Covid-19 section, with:
           <ul>
             <li>
-            <a href="#epcalc">Epidemic Simulator</a>
+            Analysis <a href="#covid19-ages">age distributions of confirmed cases</a>
           </li>
           <li>
-            References: on <a href="#covid19-ref-tweets">Twitter</a>, Github, papers...
+            Simulations <a href="#covid19-epcalc">Epidemic Simulator</a>
+          </li>
+          <li>
+            References: on <a href="#covid19-ref-tweets">Twitter</a>, <a href="#covid19-data">datasets</a>, articles...
           </li>
           </ul>
         </p>
@@ -139,7 +148,49 @@
 
       </div>
 
-        <div class="resume-item d-flex flex-column flex-md-row justify-content-between mb-5" id="epcalc">
+      <div class="resume-item d-flex flex-column flex-md-row justify-content-between mb-5" id="covid19-ages">
+        <div class="resume-content">
+          <h3 class="mb-0">Confirmed Cases by Age Distribution</h3>
+          <div class="subheading mb-3">Spain vs Germany</div>
+
+          <p>The number of confirmed cases in Germany at 2 April is higher than 84K people, not so far from 112K confirmed cases in Spain
+            (<a href="https://www.arcgis.com/apps/opsdashboard/index.html#/85320e2ea5424dfaaa75ae62e5c06e61">Johns Hopkins University</a>,
+            <a href="https://www.worldometers.info/coronavirus/#countries">worldometer</a>). But relative lethality estimates by Covid-19 on Germany seems 1%. Much lower than figures in Spain (9%)
+            or Italy (12%).
+</p>
+<p>
+
+            There are several aspects than could explain this big difference.
+            But I will focus on the representativity of the sample of confirmed tests in relation to the overall population.
+            If we compare the distribution of confirmed cases by age in Spain and Germany we can see that:
+            <ul>
+              <li>
+            In Spain confirmed cases are biased to ranges of older people. While young people would be underrepresented.
+          </li>
+          <li>
+            In Germany we have just the opposite effect. Older people is underrepresented.
+          </li>
+        </ul>
+            We could think in South Korea as a country with a high number of tests performed
+            and a more representative sample in terms of age distribution.
+
+          <iframe id="covid_by_age_spain" scrolling="no" style="border:none;" seamless="seamless" src="Spain_covid19_by_age.html"
+          height="400" width="100%">
+        </iframe>
+          <iframe id="covid_by_age_germany" scrolling="no" style="border:none;" seamless="seamless" src="Germany_covid19_by_age.html"
+          height="400" width="100%">
+        </iframe>
+          <p>Thanks to <a href="https://github.com/datadista">datadista</a>,
+            <a href="https://npgeo-corona-npgeo-de.hub.arcgis.com/app/478220a4c454480e823b17327b2bf1d4">
+            Robert Koch</a> Institute and plotly.
+          </p>
+
+        </div>
+      </div>
+
+
+
+        <div class="resume-item d-flex flex-column flex-md-row justify-content-between mb-5" id="covid19-epcalc">
           <div class="resume-content">
             <h3 class="mb-0">Epidemic Calculator</h3>
             <div class="subheading mb-3">Simulation model</div>
@@ -165,6 +216,25 @@ and provide more reliable estimates than starting from the first confirmed case.
             <span class="text-primary">March 2020</span>
           </div>
         </div>
+
+        <div class="resume-item d-flex flex-column flex-md-row justify-content-between mb-5" id="covid19-data">
+          <div class="resume-content">
+            <h3 class="mb-0">Covid-19 Datasets</h3>
+            <div class="subheading mb-3">Datasets &amp; Dashboards</div>
+            <p>
+            <ul>
+              <li><a href="https://www.covid.is/english">Iceland</a>
+              </li>
+              <li><a href="https://experience.arcgis.com/experience/7e30edc490a5441a874f9efe67bd8b89">Singapore</a>
+              </li>
+            </ul>
+            </p>
+          </div>
+          <div class="resume-date text-md-right">
+            <span class="text-primary">March 2020</span>
+          </div>
+        </div>
+
 
         <div class="resume-item d-flex flex-column flex-md-row justify-content-between mb-5">
           <div class="resume-content">
