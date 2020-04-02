@@ -41,7 +41,10 @@
           <a class="nav-link js-scroll-trigger" href="#about">About</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link js-scroll-trigger" href="#covid19">Covid-19</a>
+          <a class="nav-link js-scroll-trigger" href="#covid19-ref-tweets">Covid-19 Twitter Refs.</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link js-scroll-trigger" href="#epcalc">Covid-19. Simulations</a>
         </li>
         <li class="nav-item">
           <a class="nav-link js-scroll-trigger" href="#workshops">Workshops/Talks</a>
@@ -69,7 +72,17 @@
           considering that...<br/>
           <i>"all (my) models are wrong, some are (maybe) useful".</i>
         </p>
-        <p>Feedback welcome ;)
+        <p>New Covid-19 section, with:
+          <ul>
+            <li>
+            <a href="#epcalc">Epidemic Simulator</a>
+          </li>
+          <li>
+            References: on <a href="#covid19-ref-tweets">Twitter</a>, Github, papers...
+          </li>
+          </ul>
+        </p>
+        <p>Feedback welcome
         </p>
 
         <div class="social-icons">
@@ -88,11 +101,41 @@
 
     <!--<hr class="m-0">-->
 
+
+
     <section class="resume-section p-3 p-lg-5 d-flex justify-content-center" id="covid19">
       <div class="w-100">
         <h2 class="mb-5">Covid-19</h2>
 
-        <div class="resume-item d-flex flex-column flex-md-row justify-content-between mb-5">
+        <div class="resume-item d-flex flex-column flex-md-row justify-content-between mb-5" id="covid19-ref-tweets">
+          <div class="resume-content">
+            <h3 class="mb-0">Covid-19 References</h3>
+            <div class="subheading mb-3">Confirmed cases vs. estimates of actual infections</div>
+            <p> <strong>Confirmed cases</strong> are only a (small and biased) subsample of actual infections.
+              <!--It depends on the number of tests performed per country/region.-->
+              How small and how biased? It depends on the <strong>testing</strong> resources and protocols applied in each country/region.
+              But it seems Covid-19 could be less lethal in relative terms than current figures we get in Italy or Spain (confirmed deaths/confirmed cases vs estimated deaths/estimated infections).
+              Though much more contagious than we expected. So <i>much more lethal in absolute terms</i>. With the aggravating circumstance of saturating healthcare systems and increasing even more the number of direct and indirect deaths caused.
+
+            <p> Moreover confirmed cases and alternative kind of <strong>estimates</strong> of actual infections should be understood under their <strong>context</strong>. Language should be used rigourously to avoid <i>misinformation</i>.
+              <!--Terms should be explicit and avoid to mix and use as synonyms, or directly compare different types of estimates or variables with different meanings.-->
+
+
+            <p> I personally recommend analysis and data curated by <a href="https://ourworldindata.org/coronavirus">Our World in Data</a>. Thanks to <a href="https://twitter.com/MaxCRoser">Max Roser</a> et al.
+                I also appreciate their effort to persuade general press to use adequate terms. And to promote curated analysis from different sources:
+                <blockquote class="twitter-tweet"><p lang="en" dir="ltr">The study from Timothy Russell and coauthors estimates that only 5.8% of all symptomatic cases in Italy are reported.<a href="https://t.co/d5eRoOltBj">https://t.co/d5eRoOltBj</a><br><br>Let’s hope Italy is bending the curve.<br><br>But reported cases don’t tell us much when they are likely only a small fraction of the total. <a href="https://t.co/QvvRtzyzVA">pic.twitter.com/QvvRtzyzVA</a></p>&mdash; Max Roser (@MaxCRoser) <a href="https://twitter.com/MaxCRoser/status/1245464450997649411?ref_src=twsrc%5Etfw">April 1, 2020</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+            </p>
+            <p> In Spain, in general press, I think articles by Kiko Llaneras et al, at elpais.com, accomplish this mission. An example (Spanish):
+              <blockquote class="twitter-tweet"><p lang="es" dir="ltr">🔎¿Cuántos infectados hay realmente en España? Seguramente cientos de miles. Repaso cuatro cálculos sencillos pero orientativos que arrojan cifras del orden de 300.000 o 900.000 casos: <a href="https://t.co/cACMrd9MHY">https://t.co/cACMrd9MHY</a></p>&mdash; Kiko Llaneras (@kikollan) <a href="https://twitter.com/kikollan/status/1242759416446926848?ref_src=twsrc%5Etfw">March 25, 2020</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+            <p> Additional info (Spanish):
+              <blockquote class="twitter-tweet"><p lang="es" dir="ltr">Como veo que hay mucho lío con las cifras de casos y muertes por coronavirus, (&quot;vamos mejor o peor que X país&quot;, &quot;el gobierno de X país miente&quot;, etc.), abro hilo explicativo para intentar que se entiendan mejor los conceptos.<a href="https://twitter.com/hashtag/COVID19?src=hash&amp;ref_src=twsrc%5Etfw">#COVID19</a> <a href="https://t.co/T2CllkjbUV">pic.twitter.com/T2CllkjbUV</a></p>&mdash; Carlos Fernández (Mejor Prevenir) (@pezcharles) <a href="https://twitter.com/pezcharles/status/1244643827060703232?ref_src=twsrc%5Etfw">March 30, 2020</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+            </p>
+        </div>
+
+      </div>
+
+        <div class="resume-item d-flex flex-column flex-md-row justify-content-between mb-5" id="epcalc">
           <div class="resume-content">
             <h3 class="mb-0">Epidemic Calculator</h3>
             <div class="subheading mb-3">Simulation model</div>
