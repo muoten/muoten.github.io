@@ -114,18 +114,22 @@
             <p> <strong>Confirmed cases</strong> are only a (small and biased) subsample of actual infections.
               <!--It depends on the number of tests performed per country/region.-->
               How small and how biased? It depends on the <strong>testing</strong> resources and protocols applied in each country/region.
-              But it seems Covid-19 could be less lethal in relative terms than current figures we get in Italy or Spain (confirmed deaths/confirmed cases vs estimated deaths/estimated infections).
-              Though much more contagious than we expected. So <i>much more lethal in absolute terms</i>. With the aggravating circumstance of saturating healthcare systems and increasing even more the number of direct and indirect deaths caused.
+                  <!--Terms should be explicit and avoid to mix and use as synonyms, or directly compare different types of estimates or variables with different meanings.-->
 
-            <p> Moreover confirmed cases and alternative kind of <strong>estimates</strong> of actual infections should be understood under their <strong>context</strong>. Language should be used rigourously to avoid <i>misinformation</i>.
-              <!--Terms should be explicit and avoid to mix and use as synonyms, or directly compare different types of estimates or variables with different meanings.-->
+</p>
+<p>
+              Moreover the number of confirmed and notified deaths is also an estimate or actual deaths caused by the virus. And specially in some countries/regions this value could be underestimated. Statistics on mortality monitoring on all causes, as project <a href="https://www.euromomo.eu/">EuroMomo</a> does, can be useful to infer alternative (and better) estimates based on excess mortality.
+              But it seems that Covid-19 could be less lethal in relative terms than current figures we get in Italy or Spain (<i>confirmed deaths/confirmed cases vs estimated deaths/estimated infections</i>).
+              Though much more contagious than we expected. So <i>much more lethal in absolute terms</i>. With the aggravating circumstance of saturating healthcare systems and increasing even more the number of direct and indirect deaths caused.
+              Any confirmed cases and alternative kind of <strong>estimates</strong> of actual infections and deaths should be understood under their <strong>context</strong>. Language should be used rigourously to avoid <i>misinformation</i>.
+
 
 
             <p> I personally recommend analysis and data curated by <a href="https://ourworldindata.org/coronavirus">Our World in Data</a>. Thanks to <a href="https://twitter.com/MaxCRoser">Max Roser</a> et al.
                 I also appreciate their effort to persuade general press to use adequate terms. And to promote curated analysis from different sources:
                 <blockquote class="twitter-tweet"><p lang="en" dir="ltr">The study from Timothy Russell and coauthors estimates that only 5.8% of all symptomatic cases in Italy are reported.<a href="https://t.co/d5eRoOltBj">https://t.co/d5eRoOltBj</a><br><br>Let’s hope Italy is bending the curve.<br><br>But reported cases don’t tell us much when they are likely only a small fraction of the total. <a href="https://t.co/QvvRtzyzVA">pic.twitter.com/QvvRtzyzVA</a></p>&mdash; Max Roser (@MaxCRoser) <a href="https://twitter.com/MaxCRoser/status/1245464450997649411?ref_src=twsrc%5Etfw">April 1, 2020</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
             </p>
-            <p> In Spain, in general press, I think articles by Kiko Llaneras et al, at elpais.com, accomplish this mission. An example (Spanish):
+            <p> In Spain, in general press, I think articles by Kiko Llaneras et al, at <a href="https://elpais.com/sociedad/2020/03/17/actualidad/1584436648_230452.html">elpais.com</a>, accomplish this mission. An example (Spanish):
               <blockquote class="twitter-tweet"><p lang="es" dir="ltr">🔎¿Cuántos infectados hay realmente en España? Seguramente cientos de miles. Repaso cuatro cálculos sencillos pero orientativos que arrojan cifras del orden de 300.000 o 900.000 casos: <a href="https://t.co/cACMrd9MHY">https://t.co/cACMrd9MHY</a></p>&mdash; Kiko Llaneras (@kikollan) <a href="https://twitter.com/kikollan/status/1242759416446926848?ref_src=twsrc%5Etfw">March 25, 2020</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 
             <p> Additional info (Spanish):
@@ -139,8 +143,20 @@
           <div class="resume-content">
             <h3 class="mb-0">Epidemic Calculator</h3>
             <div class="subheading mb-3">Simulation model</div>
-            <p>13 parameter model <a href="https://gabgoh.github.io/COVID/index.html?p_num_ind=300000&CFR=0.01&D_hospital_lag=5&D_incbation=5.2&D_infectious=2.9&D_recovery_mild=11.1&D_recovery_severe=28.6&I0=1&InterventionAmt=0.33333333333333337&InterventionTime=100&P_SEVERE=0.2&R0=2.2&Time_to_death=32&logN=15.761420707019587">simulation of Covid-19 evolution on Region of Madrid (Spain)</a>. This calculator implements a classical infectious disease model: SEIR (Susceptible → Exposed → Infected → Removed) [Wu, et. al, Kucharski et. al]. </p>
-<a href="https://gabgoh.github.io/COVID/index.html?p_num_ind=300000&CFR=0.01&D_hospital_lag=5&D_incbation=5.2&D_infectious=2.9&D_recovery_mild=11.1&D_recovery_severe=28.6&I0=1&InterventionAmt=0.33333333333333337&InterventionTime=100&P_SEVERE=0.2&R0=2.2&Time_to_death=32&logN=15.761420707019587"><img src="img/epcalc_madrid.png" width="100%"></img></a>
+            <p>13 parameter model <a href="https://gabgoh.github.io/COVID/index.html?p_num_ind=300000&CFR=0.01&D_hospital_lag=5&D_incbation=5.2&D_infectious=2.9&D_recovery_mild=11.1&D_recovery_severe=28.6&I0=1&InterventionAmt=0.33333333333333337&InterventionTime=100&P_SEVERE=0.2&R0=2.2&Time_to_death=32&logN=15.761420707019587">simulation of Covid-19 evolution on Region of Madrid (Spain)
+            </a>. This calculator implements a classical infectious disease model:
+            SEIR (Susceptible → Exposed → Infected → Removed) [Wu, et. al, Kucharski et. al].
+</p>
+<p>
+I tried to adjust the evolution of confirmed deaths (<i>Fatalities</i>) in Madrid since the day this number was over N=10.
+Displacing <i>Intervention</i> day relatively to this reference. And ignoring the <i>Day 0</i> as time origin.
+I expect that following trends of confirmed fatalities would propagate less uncertainty
+and provide more reliable estimates than starting from the first confirmed case.
+
+<a href="https://gabgoh.github.io/COVID/index.html?p_num_ind=300000&CFR=0.01&D_hospital_lag=5&D_incbation=5.2&D_infectious=2.9&D_recovery_mild=11.1&D_recovery_severe=28.6&I0=1&InterventionAmt=0.33333333333333337&InterventionTime=100&P_SEVERE=0.2&R0=2.2&Time_to_death=32&logN=15.761420707019587">
+  <img src="img/epcalc_madrid.png" width="100%"></img>
+</a>
+  </p>
             <p>Thanks to <a href="https://github.com/gabgoh/epcalc">Gabriel Goh epcalc</a> project.
             </p>
 
