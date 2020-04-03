@@ -41,24 +41,34 @@
           <a class="nav-link js-scroll-trigger" href="#about">About</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link js-scroll-trigger" href="#covid19-ref-tweets">Covid-19 Twitter Refs.</a>
+          <a class="nav-link js-scroll-trigger" href="#covid19">Covid-19 sections:</a>
+        </li>
+        <ul>
+        <li class="nav-item">
+          <a class="nav-link js-scroll-trigger" href="#covid19-ref-tweets">References</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link js-scroll-trigger" href="#covid19-ages">Covid-19. Analysis</a>
+          <a class="nav-link js-scroll-trigger" href="#covid19-ages">Analysis</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link js-scroll-trigger" href="#covid19-epcalc">Covid-19. Simulations</a>
+          <a class="nav-link js-scroll-trigger" href="#covid19-epcalc">Simulations</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link js-scroll-trigger" href="#covid19-data">Covid-19. Datasets</a>
+          <a class="nav-link js-scroll-trigger" href="#covid19-data">Datasets</a>
         </li>
+      </ul>
+      <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link js-scroll-trigger" href="#workshops">Workshops/Talks</a>
+          <a class="nav-link js-scroll-trigger" href="#others">Other topics:</a>
+        </li>
+        <ul>
+        <li class="nav-item">
+          <a class="nav-link js-scroll-trigger" href="#computervision">Computer Vision</a>
         </li>
         <li class="nav-item">
           <a class="nav-link js-scroll-trigger" href="#hacks">Hackathons/Demos</a>
         </li>
-
+      </ul>
       </ul>
     </div>
   </nav>
@@ -78,20 +88,21 @@
           considering that...<br/>
           <i>"all (my) models are wrong, some are (maybe) useful".</i>
         </p>
-        <p>New Covid-19 section, with:
+        <p>New Covid-19 sections, with:
           <ul>
             <li>
-            Analysis <a href="#covid19-ages">age distributions of confirmed cases</a>
+            Analysis of <a href="#covid19-ages">age distributions of confirmed cases</a>
           </li>
           <li>
-            Simulations <a href="#covid19-epcalc">Epidemic Simulator</a>
+            Simulations with <a href="#covid19-epcalc">Epidemic Calculator</a>
           </li>
           <li>
-            References: on <a href="#covid19-ref-tweets">Twitter</a>, <a href="#covid19-data">datasets</a>, articles...
+            References on <a href="#covid19-ref-tweets">Twitter</a>, <a href="#covid19-data">datasets</a>, articles...
           </li>
           </ul>
         </p>
-        <p>Feedback welcome
+
+        <p>Feedback welcome!
         </p>
 
         <div class="social-icons">
@@ -105,10 +116,12 @@
             <i class="fab fa-twitter"></i>
           </a>
         </div>
+        <p><br/><i><small>Content layout based on <a href="https://github.com/BlackrockDigital/startbootstrap-resume">startbootstrap-resume</a>. Custom charts generated with <a href="https://plotly.com/python/plotly-express/">Plotly Express</a>.</i></small>
+        </p>
       </div>
     </section>
 
-    <!--<hr class="m-0">-->
+
 
 
 
@@ -150,7 +163,7 @@
 
       <div class="resume-item d-flex flex-column flex-md-row justify-content-between mb-5" id="covid19-ages">
         <div class="resume-content">
-          <h3 class="mb-0">Confirmed Cases by Age Distribution</h3>
+          <h3 class="mb-0">Analysis: Confirmed Cases by Age Distribution</h3>
           <div class="subheading mb-3">Spain vs Germany</div>
 
           <p>The number of confirmed cases in Germany at 2 April is higher than 84K people, not so far from 112K confirmed cases in Spain
@@ -192,8 +205,8 @@
 
         <div class="resume-item d-flex flex-column flex-md-row justify-content-between mb-5" id="covid19-epcalc">
           <div class="resume-content">
-            <h3 class="mb-0">Epidemic Calculator</h3>
-            <div class="subheading mb-3">Simulation model</div>
+            <h3 class="mb-0">Simulation: Epidemic Calculator</h3>
+            <div class="subheading mb-3">SEIR Model applied to Madrid</div>
             <p>13 parameter model <a href="https://gabgoh.github.io/COVID/index.html?p_num_ind=300000&CFR=0.01&D_hospital_lag=5&D_incbation=5.2&D_infectious=2.9&D_recovery_mild=11.1&D_recovery_severe=28.6&I0=1&InterventionAmt=0.33333333333333337&InterventionTime=100&P_SEVERE=0.2&R0=2.2&Time_to_death=32&logN=15.761420707019587">simulation of Covid-19 evolution on Region of Madrid (Spain)
             </a>. This calculator implements a classical infectious disease model:
             SEIR (Susceptible → Exposed → Infected → Removed) [Wu, et. al, Kucharski et. al].
@@ -257,14 +270,14 @@ and provide more reliable estimates than starting from the first confirmed case.
 
     <hr class="m-0">
 
-    <section class="resume-section p-3 p-lg-5 d-flex justify-content-center" id="workshops">
+    <section class="resume-section p-3 p-lg-5 d-flex justify-content-center" id="others">
       <div class="w-100">
-        <h2 class="mb-5">Workshops &amp; Talks</h2>
+        <h2 class="mb-5">Other topics</h2>
 
-        <div class="resume-item d-flex flex-column flex-md-row justify-content-between mb-5">
+        <div class="resume-item d-flex flex-column flex-md-row justify-content-between mb-5" id="computervision">
           <div class="resume-content">
-            <h3 class="mb-0">Deep Learning</h3>
-            <div class="subheading mb-3">Machine learning model</div>
+            <h3 class="mb-0">Car Behavioral Cloning</h3>
+            <div class="subheading mb-3">Computer Vision models: Deep Learning vs classical Machine Learning</div>
             <p>Deep Learning: Agárrate que vienen curvas / Hold on come curves
             </p>
           <p>
