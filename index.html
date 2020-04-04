@@ -27,7 +27,7 @@
 
   <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top" id="sideNav">
     <a class="navbar-brand js-scroll-trigger" href="#page-top">
-      <span class="d-block d-lg-none">Clarence Taylor</span>
+      <span class="d-block d-lg-none">Data &amp; Science &amp; Engineering &amp;...</span>
       <span class="d-none d-lg-block">
         <img class="img-fluid img-profile rounded-circle mx-auto mb-2" src="img/profile.png" alt="">
       </span>
@@ -41,7 +41,7 @@
           <a class="nav-link js-scroll-trigger" href="#about">About</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link js-scroll-trigger" href="#covid19">Covid-19 sections:</a>
+          <a class="nav-link js-scroll-trigger" href="#covid19">COVID-19 sections:</a>
         </li>
         <ul>
         <li class="nav-item">
@@ -84,11 +84,24 @@
         <!--  <a href="mailto:name@email.com">eoteromuras@gmail.com</a>-->
         </div>
           <p></p>
-        <p class="lead mb-5">several personal projects and also references to topics of interest,
-          considering that...<br/>
-          <i>"all (my) models are wrong, some are (maybe) useful".</i>
+        <p class="lead mb-1">several personal projects and also references to topics of interest,considering that...
         </p>
-        <p>New Covid-19 sections, with:
+        <p>
+        <ul>
+          <li>
+          <i>"essentially all models are wrong, but some are useful".</i> <a href="https://rss.onlinelibrary.wiley.com/doi/pdf/10.1111/j.1740-9713.2010.00442.x">Box G.</a> et al.
+        </li>
+        <li>
+          <i>"explicit better than implicit". <a href="https://www.python.org/dev/peps/pep-0020/">The Zen of Python</a> et al.
+            (rule of thumb with very few but curious <a href="https://resources.bibblio.org/hubfs/share/2018-01-24-RecSysLDN-Ravelin.pdf">
+              exceptions</a>).
+          </i>
+        </li>
+      </ul>
+    </p>
+      <p class="lead mb-5">I expect the models presented on this web to be wrong, but contextualized with explicit assumptions.</p>
+        </p>
+        <p>New <a href="#covid19">COVID-19 sections</a>, with:
           <ul>
             <li>
             Analysis of <a href="#covid19-ages">age distributions of confirmed cases</a>
@@ -127,11 +140,11 @@
 
     <section class="resume-section p-3 p-lg-5 d-flex justify-content-center" id="covid19">
       <div class="w-100">
-        <h2 class="mb-5">Covid-19</h2>
+        <h2 class="mb-5">COVID-19</h2>
 
         <div class="resume-item d-flex flex-column flex-md-row justify-content-between mb-5" id="covid19-ref-tweets">
           <div class="resume-content">
-            <h3 class="mb-0">Covid-19 References</h3>
+            <h3 class="mb-0">COVID-19 References</h3>
             <div class="subheading mb-3">Confirmed cases vs. estimates of actual infections</div>
             <p> <strong>Confirmed cases</strong> are only a (small and biased) subsample of actual infections.
               <!--It depends on the number of tests performed per country/region.-->
@@ -141,7 +154,7 @@
 </p>
 <p>
               Moreover the number of confirmed and notified deaths is also an estimate or actual deaths caused by the virus. And specially in some countries/regions this value could be underestimated. Statistics on mortality monitoring on all causes, as project <a href="https://www.euromomo.eu/">EuroMomo</a> does, can be useful to infer alternative (and better) estimates based on excess mortality.
-              But it seems that Covid-19 could be less lethal in relative terms than current figures we get in Italy or Spain (<i>confirmed deaths/confirmed cases vs estimated deaths/estimated infections</i>).
+              But it seems that COVID-19 virus (SARS-CoV-2) could be less lethal in relative terms than current figures we get in Italy or Spain (<i>confirmed deaths/confirmed cases vs estimated deaths/estimated infections</i>).
               Though much more contagious than we expected. So <i>much more lethal in absolute terms</i>. With the aggravating circumstance of saturating healthcare systems and increasing even more the number of direct and indirect deaths caused.
               Any confirmed cases and alternative kind of <strong>estimates</strong> of actual infections and deaths should be understood under their <strong>context</strong>. Language should be used rigourously to avoid <i>misinformation</i>.
 
@@ -168,7 +181,7 @@
 
           <p>The number of confirmed cases in Germany at 2 April is higher than 84K people, not so far from 112K confirmed cases in Spain
             (<a href="https://www.arcgis.com/apps/opsdashboard/index.html#/85320e2ea5424dfaaa75ae62e5c06e61">Johns Hopkins University</a>,
-            <a href="https://www.worldometers.info/coronavirus/#countries">worldometer</a>). But relative lethality estimates by Covid-19 on Germany seems 1%. Much lower than figures in Spain (9%)
+            <a href="https://www.worldometers.info/coronavirus/#countries">worldometer</a>). But relative lethality estimates by COVID-19 on Germany seems 1%. Much lower than figures in Spain (9%)
             or Italy (12%).
 </p>
 <p>
@@ -207,7 +220,7 @@
           <div class="resume-content">
             <h3 class="mb-0">Simulation: Epidemic Calculator</h3>
             <div class="subheading mb-3">SEIR Model applied to Madrid</div>
-            <p>13 parameter model <a href="https://gabgoh.github.io/COVID/index.html?p_num_ind=300000&CFR=0.01&D_hospital_lag=5&D_incbation=5.2&D_infectious=2.9&D_recovery_mild=11.1&D_recovery_severe=28.6&I0=1&InterventionAmt=0.33333333333333337&InterventionTime=100&P_SEVERE=0.2&R0=2.2&Time_to_death=32&logN=15.761420707019587">simulation of Covid-19 evolution on Region of Madrid (Spain)
+            <p>13 parameter model <a href="https://gabgoh.github.io/COVID/index.html?p_num_ind=300000&CFR=0.01&D_hospital_lag=5&D_incbation=5.2&D_infectious=2.9&D_recovery_mild=11.1&D_recovery_severe=28.6&I0=1&InterventionAmt=0.33333333333333337&InterventionTime=100&P_SEVERE=0.2&R0=2.2&Time_to_death=32&logN=15.761420707019587">simulation of COVID-19 evolution on Region of Madrid (Spain)
             </a>. This calculator implements a classical infectious disease model:
             SEIR (Susceptible → Exposed → Infected → Removed) [Wu, et. al, Kucharski et. al].
 </p>
@@ -232,7 +245,7 @@ and provide more reliable estimates than starting from the first confirmed case.
 
         <div class="resume-item d-flex flex-column flex-md-row justify-content-between mb-5" id="covid19-data">
           <div class="resume-content">
-            <h3 class="mb-0">Covid-19 Datasets</h3>
+            <h3 class="mb-0">COVID-19 Datasets</h3>
             <div class="subheading mb-3">Datasets &amp; Dashboards</div>
             <p>
             <ul>
