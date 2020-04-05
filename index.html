@@ -45,7 +45,7 @@
         </li>
         <ul>
         <li class="nav-item">
-          <a class="nav-link js-scroll-trigger" href="#covid19-ref-tweets">References</a>
+          <a class="nav-link js-scroll-trigger" href="#covid19-ref-tweets">Context</a>
         </li>
         <li class="nav-item">
           <a class="nav-link js-scroll-trigger" href="#covid19-ages">Analysis</a>
@@ -54,7 +54,7 @@
           <a class="nav-link js-scroll-trigger" href="#covid19-epcalc">Simulations</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link js-scroll-trigger" href="#covid19-data">Datasets</a>
+          <a class="nav-link js-scroll-trigger" href="#covid19-data">References</a>
         </li>
       </ul>
       <ul class="navbar-nav">
@@ -141,18 +141,27 @@
 
         <div class="resume-item d-flex flex-column flex-md-row justify-content-between mb-5" id="covid19-ref-tweets">
           <div class="resume-content">
-            <h3 class="mb-0">COVID-19 References</h3>
+            <h3 class="mb-0">Estimates and Context. Language matters</h3>
             <div class="subheading mb-3">Confirmed cases vs. estimates of actual infections</div>
-            <p> <strong>Confirmed cases</strong> are only a (small and biased) subsample of actual infections.
+            <p> <strong>Confirmed cases</strong> are only a (generally small and biased) subsample of actual infections.
 
               How small and how biased?
               It depends on the <strong>testing</strong> resources and protocols applied in each country/region.
 </p>
 <p>
-              Moreover the number of confirmed and notified deaths is also an estimate or actual deaths caused by the virus. And specially in some countries/regions this value could be underestimated. Statistics on mortality monitoring on all causes, as project <a href="https://www.euromomo.eu/">EuroMomo</a> does, can be useful to infer alternative (and better) estimates based on excess mortality.
-              But it seems that COVID-19 virus (SARS-CoV-2) could be less lethal in relative terms than current figures we get in Italy or Spain (<i>confirmed deaths/confirmed cases vs estimated deaths/estimated infections</i>).
+              Moreover the number of confirmed and notified deaths is also an estimate or actual deaths caused by the virus. And specially in some countries/regions this value could be underestimated. Statistics on mortality monitoring on all causes,
+              as project <a href="https://www.euromomo.eu/">EuroMomo</a> does, can be useful to infer alternative (and better) estimates based on excess mortality. In a following section there are some <a href="#covid19-momo-spain">examples extracted from Spanish MoMo Reports 2020</a>
+              <p>
+              <img src="https://www.euromomo.eu/slices/Maps-2020/MAP-2020-13.png" width="50%">
+            </p>
+            <p>
+              It seems that COVID-19 virus (SARS-CoV-2) could be less lethal in relative terms than current figures we get in Italy or Spain (<i>confirmed deaths/confirmed cases vs estimated deaths/estimated infections</i>).
               Though much more contagious than we expected. So <i>much more lethal in absolute terms</i>. With the aggravating circumstance of saturating healthcare systems and increasing even more the number of direct and indirect deaths caused.
               Any confirmed cases and alternative kind of <strong>estimates</strong> of actual infections and deaths should be understood under their <strong>context</strong>. Language should be used rigourously to avoid <i>misinformation</i>.
+            </p>
+              <p>
+              In April 4th a <a href="https://www.mscbs.gob.es/profesionales/saludPublica/ccayes/alertasActual/nCov-China/documentos/20200404_ITCoronavirus.pdf">report by CCAES</a> (Center of Alert Coordination and Healthcare Emergencies) from the Ministerio de Sanidad of Spanish Government estimates that mortality between infected could be between 0.3% and 1% in general population. They refer to an article published on The Lancet by <a href="https://www.thelancet.com/journals/lancet/article/PIIS0140-6736(20)30567-5/fulltext">Anderson RM et al </a>. And lethality on hospitalized cases would be estimated on 14%, according to a study by <a href="https://www.eurosurveillance.org/content/10.2807/1560-7917.ES.2020.25.3.2000044">Wu P. et al</a> in Wuhan, dated January 23th.
+            </p>
 
 
 
@@ -166,9 +175,38 @@
             <p> Additional info (Spanish):
               <blockquote class="twitter-tweet"><p lang="es" dir="ltr">Como veo que hay mucho lío con las cifras de casos y muertes por coronavirus, (&quot;vamos mejor o peor que X país&quot;, &quot;el gobierno de X país miente&quot;, etc.), abro hilo explicativo para intentar que se entiendan mejor los conceptos.<a href="https://twitter.com/hashtag/COVID19?src=hash&amp;ref_src=twsrc%5Etfw">#COVID19</a> <a href="https://t.co/T2CllkjbUV">pic.twitter.com/T2CllkjbUV</a></p>&mdash; Carlos Fernández (Mejor Prevenir) (@pezcharles) <a href="https://twitter.com/pezcharles/status/1244643827060703232?ref_src=twsrc%5Etfw">March 30, 2020</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
             </p>
-        </div>
+
+
+            <div class="subheading mb-3" id="covid19-momo-spain">MoMo: Monitoring of Excess Mortality</div>
+
+              <p>Despite the dramatic situation in many places, differences are still huge even for regions in the same country.
+                For instance, the following charts belong to the
+                <a href="https://www.isciii.es/QueHacemos/Servicios/VigilanciaSaludPublicaRENAVE/EnfermedadesTransmisibles/MoMo/Documents/informesMoMo2020/MoMo_Situacion%20a%202%20de%20abril_CNE.pdf">
+                  Spanish MoMo report (April 2th):
+              <img src="img/momo_spain.png" width="75%">
+              <img src="img/momo_madrid.png" width="80%">
+                <img src="img/momo_canarias.png" width="80%">
+              </a>
+              </p>
+              <p>
+                We can observe excess mortality has been yet dramatically huge in the second figure representing the Region of Madrid.
+
+                 However the third figure represents Canary Islands, where the first case in Spain was diagnosed.
+                 And it shows the impact on mortality in this region has been much lower.
+              </p>
+              <p>
+                Fortunately, after the hard confinement measures decreed by the Spanish Government,
+                both regions have current estimations of Basic Reproduction Number (R0) at April 4th near of under 1.
+                According to official
+                <a href="https://portalcne.isciii.es/covid19/">estimates by the Spanish Ministry of Healthcare</a>,
+                R0 estimates would be 1.02 for Madrid and 0.75 for the Canary Islands.
+              </p>
+
+            </div>
 
       </div>
+
+
 
       <div class="resume-item d-flex flex-column flex-md-row justify-content-between mb-5" id="covid19-ages">
         <div class="resume-content">
@@ -211,9 +249,16 @@
             Robert Koch</a> Institute and plotly.
           </p>
           <p>
-
+          Related chart, considering both age and sex groups in Spain:
+        </p>
+        <p>
+          <a href="https://www.isciii.es/QueHacemos/Servicios/VigilanciaSaludPublicaRENAVE/EnfermedadesTransmisibles/Documents/INFORMES/Informes%20COVID-19/Informe%20n%C2%BA%2020.%20Situaci%C3%B3n%20de%20COVID-19%20en%20Espa%C3%B1a%20a%203%20de%20abril%20de%202020.pdf">
+<img src="img/covid19_by_age_and_sex_spain.png" width="80%"/>
+<figcaption><small>Source: Red Nacional de Vigilancia Epidemiológica (RENAVE). Instituto de Salud Carlos III (ISCIII)</small></a>
+          </a>
           </p>
-
+          <p>
+          </p>
           <p>Additional related information was published by <a href="https://medium.com/@andreasbackhausab">
             Andreas Backhaus</a> on March 13th, in Medium.
             <a href="https://medium.com/@andreasbackhausab/coronavirus-why-its-so-deadly-in-italy-c4200a15a7bf">
@@ -287,7 +332,10 @@ and provide more reliable estimates than starting from the first confirmed case.
               <li><a href="https://elpais.com/sociedad/2020/04/03/actualidad/1585936102_333545.html">Así evoluciona la curva del coronavirus en España y en cada autonomía (elpais.com, Spanish)</a>
               </li>
               <li>
-                <a href="https://www.isciii.es/QueHacemos/Servicios/VigilanciaSaludPublicaRENAVE/EnfermedadesTransmisibles/MoMo/Documents/informesMoMo2020/MoMo_Situacion%20a%2031%20de%20marzo_CNE.pdf">Monitoring of all-cause mortality in Spain (MoMo report. 31th March. Spanish only)</a>
+                <a href="https://www.isciii.es/QueHacemos/Servicios/VigilanciaSaludPublicaRENAVE/EnfermedadesTransmisibles/MoMo/Documents/informesMoMo2020/MoMo_Situacion%20a%202%20de%20abril_CNE.pdf">Monitoring of all-cause mortality in Spain (MoMo report. April 2th. Spanish only)</a>
+              </li>
+              <li>
+                <a href="https://www.isciii.es/QueHacemos/Servicios/VigilanciaSaludPublicaRENAVE/EnfermedadesTransmisibles/Documents/INFORMES/Informes%20COVID-19/Informe%20n%C2%BA%2020.%20Situaci%C3%B3n%20de%20COVID-19%20en%20Espa%C3%B1a%20a%203%20de%20abril%20de%202020.pdf">Informe sobre la situación de COVID-19 en España. 3 abril 2020. RENAVE. CNE. CNM (ISCIII)</a>
               </li>
               <li>
                 <a href="https://www.mscbs.gob.es/profesionales/saludPublica/ccayes/alertasActual/nCov-China/documentos/20200404_ITCoronavirus.pdf">Información científica-técnica. Enfermedad por coronavirus, COVID-19 (4th April, Spanish)</a>
