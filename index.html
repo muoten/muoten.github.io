@@ -45,7 +45,7 @@
         </li>
         <ul>
         <li class="nav-item">
-          <a class="nav-link js-scroll-trigger" href="#covid19-ref-tweets">Context</a>
+          <a class="nav-link js-scroll-trigger" href="#covid19-estimates">Context</a>
         </li>
         <li class="nav-item">
           <a class="nav-link js-scroll-trigger" href="#covid19-ages">Analysis</a>
@@ -101,14 +101,16 @@
         <p>New <a href="#covid19">COVID-19 sections</a>, with:
           <ul>
             <li>
+              Context on <!--<a href="#covid19-ref-tweets">articles</a>,-->
+              <a href="#covid19-estimates">confirmed cases vs estimates</a>, <a href="#covid19-estimates-deaths">mortality</a>, <a href="#covid19-data">data sources</a>...
+            </li>
+            <li>
             Analysis of <a href="#covid19-ages">confirmed cases by age</a>
           </li>
           <li>
             Simulations with <a href="#covid19-epcalc">Epidemic Calculator</a>
           </li>
-          <li>
-            References on <a href="#covid19-ref-tweets">articles</a>, <a href="#covid19-data">data sources</a>...
-          </li>
+
           </ul>
         </p>
 
@@ -139,7 +141,7 @@
       <div class="w-100">
         <h2 class="mb-5">COVID-19</h2>
 
-        <div class="resume-item d-flex flex-column flex-md-row justify-content-between mb-5" id="covid19-ref-tweets">
+        <div class="resume-item d-flex flex-column flex-md-row justify-content-between mb-5" id="covid19-estimates">
           <div class="resume-content">
             <h3 class="mb-0">Estimates and Context. Language matters</h3>
             <div class="subheading mb-3">Confirmed cases vs. estimates of actual infections</div>
@@ -155,7 +157,7 @@
             For instance, the following values have been reported by the
             <a href="https://www.imperial.ac.uk/media/imperial-college/medicine/mrc-gida/2020-04-03-COVID19-Report-14.pdf">
               Imperial College London COVID-19 Response Team
-            <img src="img/imperial_college_estimates.png" width="90%">
+            <img src="img/imperial_college_estimates.png" width="100%">
           </a>
         </p>
           <p>
@@ -166,12 +168,12 @@
         </p>
         <p><a href="https://twitter.com/kikollan">Kiko Llaneras</a> et al also published at
           <a href="https://elpais.com/sociedad/2020/03/17/actualidad/1584436648_230452.html">elpais.com</a>
-          4 different estimates, from different researchers and models, ranging from 150K to 900K expected infections
+          4 different calculations, from different researchers and models, ranging from 150K to 900K expected infections
           in Spain at March 24th. When confirmed cases were below 40K according to Spanish government.
             <blockquote class="twitter-tweet"><p lang="es" dir="ltr">🔎¿Cuántos infectados hay realmente en España? Seguramente cientos de miles. Repaso cuatro cálculos sencillos pero orientativos que arrojan cifras del orden de 300.000 o 900.000 casos: <a href="https://t.co/cACMrd9MHY">https://t.co/cACMrd9MHY</a></p>&mdash; Kiko Llaneras (@kikollan) <a href="https://twitter.com/kikollan/status/1242759416446926848?ref_src=twsrc%5Etfw">March 25, 2020</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 
-          While the estimates of Imperial College have been broadly communicated in mass media, often ignoring
+          While the estimations of Imperial College have been broadly communicated in mass media, often ignoring
           the main <strong>assumptions</strong> and confidence intervals underlying the gross numbers,
           I think data team at <i>elpais.com</i>, and specially Llaneras is doing a god job on communicating the numbers
           but also contextualizing assumptions under these numbers.
@@ -197,19 +199,55 @@
             </p>
 
 
-            <div class="subheading mb-3" id="covid19-momo-spain">Reported deaths vs estimates of actual deaths.</div>
+            <div class="subheading mb-3" id="covid19-estimates-deaths">Reported deaths vs estimates of actual deaths.</div>
               <!--MoMo: Monitoring of Excess Mortality-->
               <p>
-                Moreover the number of confirmed and notified deaths is also an estimate of actual deaths caused by the virus.
-                And specially in some countries/regions this value could be highly underestimated.
+                Moreover the number of confirmed and notified deaths is also an estimation of actual deaths caused by the virus.
+                And specially in some countries/regions this value could be highly undervalued.
                 Statistics on mortality monitoring on all causes, as project <a href="https://www.euromomo.eu/">EuroMomo</a> does,
                 can be useful to infer alternative (and better) estimates based on excess mortality.
+                This project was launched in 2008 and it uses data from a network of 29 partner Institutes from 26 countries.
+                They have accessible maps with weekly estimated deviations from the baseline
+                (<a href="https://www.euromomo.eu/outputs/images/z-score_lightbox.fw.png">z-scores</a>)
+                 from week 1 of 2010 up until today. And charts with disaggregated <a href"https://www.euromomo.eu/outputs/zscore_country_total.html">
+                data by country and age range</a> for the past 4½ years.
                 <!--In a following section there are some <a href="#covid19-momo-spain">examples extracted from Spanish MoMo Reports 2020</a>
 -->
               </p>
                 <p>
                 <img src="https://www.euromomo.eu/slices/Maps-2020/MAP-2020-13.png" width="90%">
               </p>
+
+              <p>Despite the dramatic situation in many places, differences are still huge even for regions in the same country.
+                For instance, the following charts belong to the
+                <a href="https://www.isciii.es/QueHacemos/Servicios/VigilanciaSaludPublicaRENAVE/EnfermedadesTransmisibles/MoMo/Documents/informesMoMo2020/MoMo_Situacion%20a%202%20de%20abril_CNE.pdf">
+                  Spanish MoMo report (April 2th):
+              <img src="img/momo_spain.png" width="75%">
+              <img src="img/momo_madrid.png" width="80%">
+                <img src="img/momo_canarias.png" width="80%">
+              </a>
+              </p>
+              <p>
+                We can observe excess mortality has been yet dramatically huge in the second figure representing the Region of Madrid.
+
+                 However the third figure represents Canary Islands, where the first case in Spain was diagnosed.
+                 And it shows the impact on mortality in this region has been much lower.
+              </p>
+              <p>MoMo project in Spain collect information of aproximately 4K civil registers,
+                with a coverage of the 92% of the Spanish population. Estimates of expected mortality are based
+                on historical averages of observed mortality since January 1th 2008 until one year before the current date.
+              </p>
+              <p>
+                Fortunately, after the hard confinement measures decreed by the Spanish Government,
+                both regions have current estimations of Basic Reproduction Number (R0) at April 4th near of under 1.
+                According to official
+                <a href="https://portalcne.isciii.es/covid19/">estimates by the Spanish Ministry of Healthcare</a>,
+                R0 estimates would be 1.02 for Madrid and 0.75 for the Canary Islands.
+              </p>
+
+
+                          <div class="subheading mb-3" id="covid19-momo-spain">Reported case fatality rates vs estimates of actual fatality rates.</div>
+
               <p>
                 It seems that COVID-19 virus (SARS-CoV-2) could be less lethal in relative terms than current figures we get in Italy or Spain
                 (<i>estimated deaths/estimated infections</i> would be lower than </i>confirmed deaths/confirmed cases</i>).
@@ -236,38 +274,15 @@
             </p>
 
 
-              <p>Despite the dramatic situation in many places, differences are still huge even for regions in the same country.
-                For instance, the following charts belong to the
-                <a href="https://www.isciii.es/QueHacemos/Servicios/VigilanciaSaludPublicaRENAVE/EnfermedadesTransmisibles/MoMo/Documents/informesMoMo2020/MoMo_Situacion%20a%202%20de%20abril_CNE.pdf">
-                  Spanish MoMo report (April 2th):
-              <img src="img/momo_spain.png" width="75%">
-              <img src="img/momo_madrid.png" width="80%">
-                <img src="img/momo_canarias.png" width="80%">
-              </a>
-              </p>
-              <p>
-                We can observe excess mortality has been yet dramatically huge in the second figure representing the Region of Madrid.
-
-                 However the third figure represents Canary Islands, where the first case in Spain was diagnosed.
-                 And it shows the impact on mortality in this region has been much lower.
-              </p>
-              <p>
-                Fortunately, after the hard confinement measures decreed by the Spanish Government,
-                both regions have current estimations of Basic Reproduction Number (R0) at April 4th near of under 1.
-                According to official
-                <a href="https://portalcne.isciii.es/covid19/">estimates by the Spanish Ministry of Healthcare</a>,
-                R0 estimates would be 1.02 for Madrid and 0.75 for the Canary Islands.
-              </p>
-
             </div>
 
       </div>
 
 
 
-      <div class="resume-item d-flex flex-column flex-md-row justify-content-between mb-5" id="covid19-ages">
+      <div class="resume-item d-flex flex-column flex-md-row justify-content-between mb-5" >
         <div class="resume-content">
-          <h3 class="mb-0">Analysis: Confirmed Cases by Age Groups</h3>
+          <h3 class="mb-0" id="covid19-ages">Analysis: Confirmed Cases by Age Groups </h3>
           <div class="subheading mb-3">Spain vs Germany</div>
 
           <p>The number of confirmed cases in Germany at 5 April is higher than 96K people, not so far from 130K confirmed cases in Spain
@@ -328,30 +343,56 @@
 
 
 
-        <div class="resume-item d-flex flex-column flex-md-row justify-content-between mb-5" id="covid19-epcalc">
+        <div class="resume-item d-flex flex-column flex-md-row justify-content-between mb-5" >
           <div class="resume-content">
-            <h3 class="mb-0">Simulation: Epidemic Calculator</h3>
+            <h3 class="mb-0" id="covid19-epcalc">Simulation: Epidemic Calculator</h3>
             <div class="subheading mb-3">SEIR Model applied to Madrid</div>
-            <p>13 parameter model <a href="https://gabgoh.github.io/COVID/index.html?p_num_ind=300000&CFR=0.01&D_hospital_lag=5&D_incbation=5.2&D_infectious=2.9&D_recovery_mild=11.1&D_recovery_severe=28.6&I0=1&InterventionAmt=0.33333333333333337&InterventionTime=100&P_SEVERE=0.2&R0=2.2&Time_to_death=32&logN=15.761420707019587">simulation of COVID-19 evolution on Region of Madrid (Spain)
-            </a>. This calculator implements a classical infectious disease model:
-            SEIR (Susceptible → Exposed → Infected → Removed) [Wu, et. al, Kucharski et. al].
+            <p>
+              <!--
+              <a href="https://gabgoh.github.io/COVID/index.html?p_num_ind=300000&CFR=0.01&D_hospital_lag=5&D_incbation=5.2&D_infectious=2.9&D_recovery_mild=11.1&D_recovery_severe=28.6&I0=1&InterventionAmt=0.33333333333333337&InterventionTime=100&P_SEVERE=0.2&R0=2.2&Time_to_death=32&logN=15.761420707019587">Simulation of COVID-19 evolution on Region of Madrid (Spain)
+            </a> -->
+            This <a href="https://gabgoh.github.io/COVID/index.html?CFR=0.01&D_hospital_lag=5&D_incbation=5.2&D_infectious=10&D_recovery_mild=11.1&D_recovery_severe=28.6&I0=1&InterventionAmt=0.26&InterventionTime=94.4&P_SEVERE=0.2&R0=3.9&Time_to_death=32&logN=15.761420707019587">simulator</a> implements a classical infectious disease model:
+            <i>SEIR (Susceptible → Exposed → Infected → Removed)</i> [<a href="https://www.thelancet.com/journals/lancet/article/PIIS0140-6736(20)30260-9/fulltext">Wu, et. al</a>, Kucharski et. al].
+            The model uses 13 parameters, including <i>Mortality statistics</i> and the <i>Basic Reproduction Number (R0)</i> before and after the <i>Intervention</i> day.
 </p>
 <p>
-I tried to adjust the evolution of confirmed deaths (<i>Fatalities</i>) in Madrid since the day this number was over N=10.
+I tried to adjust the evolution of confirmed deaths (<i>Fatalities</i>) in the Region of Madrid since the day this number was over N=10.
 Displacing <i>Intervention</i> day relatively to this reference. And ignoring the <i>Day 0</i> as time origin.
-I expect that following trends of confirmed fatalities would propagate less uncertainty
-and provide more reliable estimates than starting from the first confirmed case.
+<!--I expect that following trends of confirmed fatalities would propagate less uncertainty
+and provide more reliable estimates than starting from the first confirmed case.-->
+</p>
 
+
+<!--
 <a href="https://gabgoh.github.io/COVID/index.html?p_num_ind=300000&CFR=0.01&D_hospital_lag=5&D_incbation=5.2&D_infectious=2.9&D_recovery_mild=11.1&D_recovery_severe=28.6&I0=1&InterventionAmt=0.33333333333333337&InterventionTime=100&P_SEVERE=0.2&R0=2.2&Time_to_death=32&logN=15.761420707019587">
+-->
+<a href="https://gabgoh.github.io/COVID/index.html?CFR=0.01&D_hospital_lag=5&D_incbation=5.2&D_infectious=10&D_recovery_mild=11.1&D_recovery_severe=28.6&I0=1&InterventionAmt=0.26&InterventionTime=94.4&P_SEVERE=0.2&R0=3.9&Time_to_death=32&logN=15.761420707019587"</a>
   <img src="img/epcalc_madrid.png" width="100%"></img>
 </a>
+  </p>
+  <p> Concretely, the number of reported deaths on the Region of Madrid at 14th March, when the Spanish Government decreeted
+    the state of Alarm, was 213. While only 7 days before, the number was 16. And 3 weeks later this number increased from 213 to
+    5136, according to <a href="https://covid19.isciii.es/resources/serie_historica_acumulados.csv">covid19.iscii.es data</a>.
+  </p>
+  <p>
+    I used 1% as <i>Mortality Statistics</i> and 10 days for <i>T<small>inf</small> (Duration patient is infectious)</i>.
+    And in order to fit the evolution of confirmed deaths R0 was established to 3.9 before the intervention
+    and 1.0 after the intervention.
+  </p>
+  <p>
+    I think the model is useful to have an idea of the interconnected variables and effects.
+    <!--And trying to fit the different parameters according to the last knowledge available.-->
+    But results from this model should be read with caution.
+    Moreover, appart from the uncertainty introduced by many different estimated paramters and hidden variables,
+    this implementation of SEIR ignores the effect of the healthcare capacity system,
+    and the possibility on mortality increase due to ICU bed shortage.
   </p>
             <p>Thanks to <a href="https://github.com/gabgoh/epcalc">Gabriel Goh epcalc</a> project.
             </p>
 
           </div>
           <div class="resume-date text-md-right">
-            <span class="text-primary">March 2020</span>
+            <span class="text-primary">6/4/2020</span>
           </div>
         </div>
 
@@ -381,7 +422,7 @@ and provide more reliable estimates than starting from the first confirmed case.
               </li>
             </ul>
             </p>
-            <div class="subheading mb-3">Reports</div>
+            <div class="subheading mb-3">Reports, articles, papers...</div>
             <p>
             <ul>
               <li><a href="https://ourworldindata.org/coronavirus">Our World in Data. Coronavirus Disease (COVID-19) – Statistics and Research</a>
@@ -405,11 +446,17 @@ and provide more reliable estimates than starting from the first confirmed case.
               <li>
                 <a href="https://www.mscbs.gob.es/profesionales/saludPublica/ccayes/alertasActual/nCov-China/documentos/20200404_ITCoronavirus.pdf">Información científica-técnica. Enfermedad por coronavirus, COVID-19 (4th April, Spanish)</a>
               </li>
+              <li>
+                <a href="https://www.thelancet.com/action/showPdf?pii=S0140-6736%2820%2930260-9">
+                    Nowcasting and forecasting the potential domestic and international spread of the 2019-nCoV outbreak originating in Wuhan, China: a modelling study
+                  </a>
             </ul>
+
+
             </p>
           </div>
           <div class="resume-date text-md-right">
-            <span class="text-primary">March 2020</span>
+            <span class="text-primary">6/4/2020</span>
           </div>
         </div>
 
