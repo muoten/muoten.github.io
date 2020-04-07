@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>muoten.github.io: Data (&amp;) Science (&amp;) ...</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom fonts for this template -->
+  <link href="https://fonts.googleapis.com/css?family=Saira+Extra+Condensed:500,700" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Muli:400,400i,800,800i" rel="stylesheet">
+  <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
+
+  <!-- Custom styles for this template -->
+  <link href="css/resume.min.css" rel="stylesheet">
+
+</head>
+
+<body id="page-top">
+
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top" id="sideNav">
+    <a class="navbar-brand js-scroll-trigger" href="#page-top">
+      <span class="d-block d-lg-none">Data (&amp;) Science (&amp;)...</span>
+      <span class="d-none d-lg-block">
+        <img class="img-fluid img-profile rounded-circle mx-auto mb-2" src="img/profile.png" alt="Profile picture or avatar">
+      </span>
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link js-scroll-trigger" href="#about">About</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link js-scroll-trigger" href="#covid19">COVID-19 sections:</a>
+        </li>
+        <li>
+        <ul>
+        <li class="nav-item">
+          <a class="nav-link js-scroll-trigger" href="#covid19-estimates">Context</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link js-scroll-trigger" href="#covid19-ages">Analysis</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link js-scroll-trigger" href="#covid19-epcalc">Simulations</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link js-scroll-trigger" href="#covid19-data">References</a>
+        </li>
+      </ul>
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link js-scroll-trigger" href="#others">Other topics:</a>
+        </li>
+        <li>
+        <ul>
+        <li class="nav-item">
+          <a class="nav-link js-scroll-trigger" href="#computervision">Computer Vision</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link js-scroll-trigger" href="#hacks">Hackathons/Demos</a>
+        </li>
+      </ul>
+    </li>
+    </ul>
+  </ul>
+  </div>
+  </nav>
+
+  <div class="container-fluid p-0">
+
+    <section class="resume-section p-3 p-lg-5 d-flex align-items-center" id="about">
+      <div class="w-100">
+
+        <div class="subheading mb-4">Data <small>(&amp;)</small> Science <small>(&amp;)</small> ...
+
+        </div>
+        <p class="lead mb-1">personal projects and recommended links, considering that...
+        </p>
+        <p>
+        <ul>
+          <li>
+          <i>"essentially all models are wrong, but some are useful".</i> <a href="https://rss.onlinelibrary.wiley.com/doi/pdf/10.1111/j.1740-9713.2010.00442.x">Box G.</a> et al.
+          </li>
+          <li>
+          <i>"explicit better than implicit". <a href="https://www.python.org/dev/peps/pep-0020/">The Zen of Python</a> et al.
+            (with <a href="https://resources.bibblio.org/hubfs/share/2018-01-24-RecSysLDN-Ravelin.pdf">
+              exceptions</a>).
+          </i>
+          </li>
+        </ul>
+        </p>
+        <p class="lead mb-5">I expect models being wrong, but their assumptions explicit.
+       </p>
+       <p>New <a href="#covid19">COVID-19 sections</a>, with:
+          <ul>
+            <li>
+              Context on <!--<a href="#covid19-ref-tweets">articles</a>,-->
+              <a href="#covid19-estimates">confirmed cases vs estimates</a>, <a href="#covid19-estimates-deaths">mortality</a>, <a href="#covid19-data">data sources</a>...
+            </li>
+            <li>
+            Analysis of <a href="#covid19-ages">confirmed cases by age</a>
+            </li>
+            <li>
+            Simulations with <a href="#covid19-epcalc">Epidemic Calculator</a>
+            </li>
+
+          </ul>
+       </p>
+
+        <p>Feedback welcome!
+        </p>
+
+        <div class="social-icons">
+          <a href="https://www.linkedin.com/in/enrique-otero-muras-0aab1a133">
+            <i class="fab fa-linkedin-in"></i>
+          </a>
+          <a href="https://github.com/muoten">
+            <i class="fab fa-github"></i>
+          </a>
+          <a href="https://twitter.com/eoteromuras">
+            <i class="fab fa-twitter"></i>
+          </a>
+        </div>
+        <p><br/>
+          <i><small>Content layout based on
+            <a href="https://github.com/BlackrockDigital/startbootstrap-resume">startbootstrap-resume</a>.
+            Custom charts generated with <a href="https://plotly.com/python/plotly-express/">Plotly Express</a>.
+          </small>
+        </i>
+        </p>
+      </div>
+    </section>
+
+
+
+
+
+    <section class="resume-section p-3 p-lg-5 d-flex justify-content-center" id="covid19">
+      <div class="w-100">
+        <h2 class="mb-5">COVID-19</h2>
+
+        <div class="resume-item d-flex flex-column flex-md-row justify-content-between mb-5" id="covid19-estimates">
+          <div class="resume-content">
+            <h3 class="mb-0">Estimates and Context. Language matters</h3>
+            <div class="subheading mb-3">Confirmed cases vs. estimates of actual infections</div>
+            <p> <strong>Confirmed cases</strong> are only a (generally small and biased) subsample of actual infections.
+
+              How small and how biased?
+              It depends on the <strong>testing</strong> resources and protocols applied in each country/region.
+            </p>
+
+          <p>
+            How many people could be actually infected all around?
+            Estimations have been done by different models and analysts.
+            For instance, the following values have been reported by the
+            <a href="https://www.imperial.ac.uk/media/imperial-college/medicine/mrc-gida/2020-04-03-COVID19-Report-14.pdf">
+              Imperial College London COVID-19 Response Team
+            <img src="img/imperial_college_estimates.png"  alt="Estimates by Imperial College COVID-19 Response Team">
+          </a>
+        </p>
+          <p>
+          According to this model, Spain could have around 15% of infected population as of March 28th.
+          But the 95% credible interval provided was between 3.7% and 41%. So the <strong>uncertainty</strong> is still huge!
+          However, even the lower bound of the estimation corresponded to almost 2 million people.
+          Almost 30 times higher than the number of confirmed cases in Spain at that date (72K).
+        </p>
+        <p><a href="https://twitter.com/kikollan">Kiko Llaneras</a> et al also published at
+          <a href="https://elpais.com/sociedad/2020/03/17/actualidad/1584436648_230452.html">elpais.com
+          </a>
+          4 different calculations, from different researchers and models, ranging from 150K to 900K expected infections
+          in Spain at March 24th. When confirmed cases were below 40K according to Spanish government.
+            <blockquote class="twitter-tweet">
+              <p lang="es" dir="ltr">🔎¿Cuántos infectados hay realmente en España?
+              Seguramente cientos de miles. Repaso cuatro cálculos sencillos pero orientativos que arrojan cifras
+              del orden de 300.000 o 900.000 casos: <a href="https://t.co/cACMrd9MHY">https://t.co/cACMrd9MHY</a>
+            </p>&mdash; Kiko Llaneras (@kikollan)
+            <a href="https://twitter.com/kikollan/status/1242759416446926848?ref_src=twsrc%5Etfw">March 25, 2020</a>
+          </blockquote>
+          <script async src="https://platform.twitter.com/widgets.js" charset="utf-8">
+          </script>
+
+
+          While the estimations of Imperial College have been broadly communicated in mass media, often ignoring
+          the main <strong>assumptions</strong> and confidence intervals underlying the gross numbers,
+          I think data team at <i>elpais.com</i>, and specially Llaneras is doing a god job on communicating the numbers
+          but also contextualizing assumptions under these numbers.
+        </p>
+            <p>
+              Anyhow, numbers from confirmed cases and notified deaths per country, and alternative
+              <strong>estimates</strong> of actual infections and deaths
+              infered by different studies and models
+              should be understood under their <strong>context</strong>.
+              Language should be used rigourously to avoid <i>misinformation</i>.
+            </p>
+
+
+
+
+            <p> I personally recommend analysis and data curated by <a href="https://ourworldindata.org/coronavirus">Our World in Data</a>. Thanks to <a href="https://twitter.com/MaxCRoser">Max Roser</a> et al.
+                I also appreciate their effort to persuade general press to use adequate terms. And to promote curated analysis from different sources:
+                <blockquote class="twitter-tweet"><p lang="en" dir="ltr">The study from Timothy Russell and coauthors estimates that only 5.8% of all symptomatic cases in Italy are reported.<a href="https://t.co/d5eRoOltBj">https://t.co/d5eRoOltBj</a><br><br>Let’s hope Italy is bending the curve.<br><br>But reported cases don’t tell us much when they are likely only a small fraction of the total. <a href="https://t.co/QvvRtzyzVA">pic.twitter.com/QvvRtzyzVA</a></p>&mdash; Max Roser (@MaxCRoser) <a href="https://twitter.com/MaxCRoser/status/1245464450997649411?ref_src=twsrc%5Etfw">April 1, 2020</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+            </p>
+
+            <p> Additional info (Spanish):
+              <blockquote class="twitter-tweet"><p lang="es" dir="ltr">Como veo que hay mucho lío con las cifras de casos y muertes por coronavirus, (&quot;vamos mejor o peor que X país&quot;, &quot;el gobierno de X país miente&quot;, etc.), abro hilo explicativo para intentar que se entiendan mejor los conceptos.<a href="https://twitter.com/hashtag/COVID19?src=hash&amp;ref_src=twsrc%5Etfw">#COVID19</a> <a href="https://t.co/T2CllkjbUV">pic.twitter.com/T2CllkjbUV</a></p>&mdash; Carlos Fernández (Mejor Prevenir) (@pezcharles) <a href="https://twitter.com/pezcharles/status/1244643827060703232?ref_src=twsrc%5Etfw">March 30, 2020</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+            </p>
+
+
+            <div class="subheading mb-3" id="covid19-estimates-deaths">Reported deaths vs estimates of actual deaths.</div>
+              <!--MoMo: Monitoring of Excess Mortality-->
+              <p>
+                Moreover the number of confirmed and notified deaths is also an estimation of actual deaths caused by the virus.
+                And specially in some countries/regions this value could be highly underestimated.
+                Statistics on mortality monitoring on all causes, as project <a href="https://www.euromomo.eu">EuroMomo</a> does,
+                can be useful to infer alternative (and better) estimates based on excess mortality.
+                This project was launched in 2008 and it uses data from a network of 29 partner Institutes from 26 countries.
+                They have accessible maps with weekly estimated deviations from the baseline
+                (<a href="https://www.euromomo.eu/outputs/images/z-score_lightbox.fw.png">z-scores</a>)
+                 from week 1 of 2010 up until today. And charts with disaggregated <a href="https://www.euromomo.eu/outputs/zscore_country_total.html">
+                data by country and age range</a> for the past 4½ years.
+                <!--In a following section there are some <a href="#covid19-momo-spain">examples extracted from Spanish MoMo Reports 2020</a>
+-->
+              </p>
+                <p>
+                <img src="https://www.euromomo.eu/slices/Maps-2020/MAP-2020-13.png" width="90%" alt="euromomo.eu map 2020 week 13">
+              </p>
+
+              <p>Despite the dramatic situation in many places, differences are still huge even for regions in the same country.
+                For instance, the following charts belong to the
+                <a href="https://www.isciii.es/QueHacemos/Servicios/VigilanciaSaludPublicaRENAVE/EnfermedadesTransmisibles/MoMo/Documents/informesMoMo2020/MoMo_Situacion%20a%202%20de%20abril_CNE.pdf">
+                  Spanish MoMo report (April 2th):
+              <img src="img/momo_spain.png" width="75%" alt="euromomo Spain">
+              <img src="img/momo_madrid.png" width="80%" alt="euromomo Madrid">
+                <img src="img/momo_canarias.png" width="80%" alt="euromomo Canary Islands">
+              </a>
+              </p>
+              <p>
+                We can observe excess mortality has been yet dramatically huge in the second figure representing the Region of Madrid.
+
+                 However the third figure represents Canary Islands, where the first case in Spain was diagnosed.
+                 And it shows the impact on mortality in this region has been much lower.
+              </p>
+              <p>MoMo project in Spain collects information of aproximately 4K civil registers,
+                with a coverage of the 92% of the Spanish population. Estimates of expected mortality are based
+                on historical averages of observed mortality since January 1th 2008 until one year before the current date.
+              </p>
+              <p>
+                Fortunately, after the hard confinement measures decreed by the Spanish Government,
+                both regions have current estimations of Basic Reproduction Number (R0) at April 4th near or under 1.
+                According to official
+                <a href="https://portalcne.isciii.es/covid19/">estimates by the Spanish Ministry of Healthcare</a>,
+                R0 estimates would be 1.02 for Madrid and 0.75 for the Canary Islands.
+              </p>
+
+
+              <div class="subheading mb-3" id="covid19-momo-spain">Reported case fatality rates vs estimates of actual fatality rates.</div>
+
+              <p>
+                It seems that COVID-19 virus (SARS-CoV-2) could be less lethal in relative terms than current figures we get in Italy or Spain
+                (<i>estimated deaths/estimated infections</i> would be lower than <i>confirmed deaths/confirmed cases</i>).
+                Though much more contagious than we expected. So <i>much more lethal in absolute terms</i>.
+                With the aggravating circumstance of saturating healthcare systems
+                and increasing even more the number of direct and indirect deaths caused.
+              </p>
+              <!--<p>
+                Both confirmed cases and notified deaths have limitations,
+                specially when read on a static basis they don't reveal the actual magnitude of the disease.
+                Though, while the protocols don't change for a given series of data,
+                they allow to follow trends and monitor the exponential/geometrical growth.
+                A critical factor on the expansion of the virus.
+              </p>-->
+              <p>
+              In <a href="https://www.mscbs.gob.es/profesionales/saludPublica/ccayes/alertasActual/nCov-China/documentos/20200404_ITCoronavirus.pdf">
+                April 4th report by CCAES</a> (Center of Alert Coordination and Healthcare Emergencies),
+                a public institution from the Spanish Ministry of Healthcare, says that mortality between overall infected
+                population could be between 0.3% and 1%. They refer to an article published on The Lancet by
+                <a href="https://www.thelancet.com/journals/lancet/article/PIIS0140-6736(20)30567-5/fulltext">Anderson RM et al
+                </a>. And lethality on hospitalized cases would be estimated on 14%, according to a study by
+                <a href="https://www.eurosurveillance.org/content/10.2807/1560-7917.ES.2020.25.3.2000044">Wu P. et al
+                </a> in Wuhan, dated January 23th.
+            </p>
+
+
+            </div>
+
+      </div> <!--   end of <div class="resume-item"> -->
+
+
+
+      <div class="resume-item d-flex flex-column flex-md-row justify-content-between mb-5" >
+        <div class="resume-content">
+          <h3 class="mb-0" id="covid19-ages">Analysis: Confirmed Cases by Age Groups </h3>
+          <div class="subheading mb-3">Spain vs Germany</div>
+
+          <p>The number of confirmed cases in Germany at 5 April is higher than 96K people, not so far from 130K confirmed cases in Spain
+            (<a href="https://www.arcgis.com/apps/opsdashboard/index.html#/85320e2ea5424dfaaa75ae62e5c06e61">Johns Hopkins University</a>,
+            <a href="https://www.worldometers.info/coronavirus/#countries">worldometer</a>). But relative lethality estimates by COVID-19 on Germany seems 1.5% (<i>confirmed deaths / confirmed cases</i>). Much lower than figures in Spain (10%)
+            or Italy (12%).
+</p>
+<p>
+
+            There are several aspects than could explain this big difference.
+            But I will focus on the representativity of the sample of confirmed tests in relation to the overall population.
+            If we compare the distribution of confirmed cases by age groups in Spain and Germany we can see that:
+            <ul>
+              <li>
+            In Spain confirmed cases are biased to ranges of older people. While young people would be underrepresented.
+          </li>
+          <li>
+            In Germany we have just the opposite effect. Though their distribution of confirmed cases is more similar to the overall distribution, people from 60 to 79 would be slightly underrepresented, while age group of 35 to 59 would be overrepresented among confirmed cases.
+          </li>
+        </ul>
+            We could think in South Korea as a country with a high number of tests performed
+            and a representative sample in terms of age distribution.
+<p>
+          <iframe id="covid_by_age_spain" scrolling="no" style="border:none;" seamless="seamless" src="Spain_covid19_by_age.html"
+          height="400" width="350">
+        </iframe>
+          <iframe id="covid_by_age_germany" scrolling="no" style="border:none;" seamless="seamless" src="Germany_covid19_by_age.html"
+          height="400" width="350">
+        </iframe>
+      </p>
+          <p>  <a href="https://github.com/muoten/life-expectancy/blob/master/covid-19/covid19_distribution_by_age.ipynb">Code</a>.
+          </p>
+          <p>
+            Thanks to <a href="https://github.com/datadista">datadista</a>,
+            <a href="https://npgeo-corona-npgeo-de.hub.arcgis.com/app/478220a4c454480e823b17327b2bf1d4">
+            Robert Koch</a> Institute and plotly.
+          </p>
+          <p>
+          Related chart, considering both age and sex groups in Spain:
+          </p>
+          <p>
+          <a href="https://www.isciii.es/QueHacemos/Servicios/VigilanciaSaludPublicaRENAVE/EnfermedadesTransmisibles/Documents/INFORMES/Informes%20COVID-19/Informe%20n%C2%BA%2020.%20Situaci%C3%B3n%20de%20COVID-19%20en%20Espa%C3%B1a%20a%203%20de%20abril%20de%202020.pdf">
+<img src="img/covid19_by_age_and_sex_spain.png"  alt="COVID-19 by age and sex in Spain"/>
+<figcaption><small>Source: Red Nacional de Vigilancia Epidemiológica (RENAVE). Instituto de Salud Carlos III (ISCIII)</small>
+          </a>
+          </p>
+        <br/>
+          <p>Additional related information was published by <a href="https://medium.com/@andreasbackhausab">
+            Andreas Backhaus</a> on March 13th, in Medium.
+            <a href="https://medium.com/@andreasbackhausab/coronavirus-why-its-so-deadly-in-italy-c4200a15a7bf">
+            <img src="https://miro.medium.com/max/1400/1*7UiMwZS1ibeerKx-LfanEA.png"  alt="Coronavirus: why it's so deadly in Italy"/>
+            <figcaption><small>Source: https://medium.com/@andreasbackhausab/coronavirus-why-its-so-deadly-in-italy-c4200a15a7bf</small></figcaption>
+          </a>
+        </p>
+        </div>
+      </div>
+
+
+
+        <div class="resume-item d-flex flex-column flex-md-row justify-content-between mb-5" >
+          <div class="resume-content">
+            <h3 class="mb-0" id="covid19-epcalc">Simulation: Epidemic Calculator</h3>
+            <div class="subheading mb-3">SEIR Model applied to Madrid</div>
+            <p>
+              <!--
+              <a href="https://gabgoh.github.io/COVID/index.html?p_num_ind=300000&CFR=0.01&D_hospital_lag=5&D_incbation=5.2&D_infectious=2.9&D_recovery_mild=11.1&D_recovery_severe=28.6&I0=1&InterventionAmt=0.33333333333333337&InterventionTime=100&P_SEVERE=0.2&R0=2.2&Time_to_death=32&logN=15.761420707019587">Simulation of COVID-19 evolution on Region of Madrid (Spain)
+            </a> -->
+            This <a href="https://gabgoh.github.io/COVID/index.html?CFR=0.01&D_hospital_lag=5&D_incbation=5.2&D_infectious=10&D_recovery_mild=11.1&D_recovery_severe=28.6&I0=1&InterventionAmt=0.26&InterventionTime=94.4&P_SEVERE=0.2&R0=3.9&Time_to_death=32&logN=15.761420707019587">simulator</a> implements a classical infectious disease model:
+            <i>SEIR (Susceptible → Exposed → Infected → Removed)</i> [<a href="https://www.thelancet.com/journals/lancet/article/PIIS0140-6736(20)30260-9/fulltext">Wu, et. al</a>, Kucharski et. al].
+            The model uses 13 parameters, including <i>Mortality statistics</i> and the <i>Basic Reproduction Number (R0)</i> before and after the <i>Intervention</i> day.
+</p>
+<p>
+I tried to adjust the evolution of confirmed deaths (<i>Fatalities</i>) in the Region of Madrid since the day this number was over N=10.
+Displacing <i>Intervention</i> day relatively to this reference. And ignoring the <i>Day 0</i> as time origin.
+<!--I expect that following trends of confirmed fatalities would propagate less uncertainty
+and provide more reliable estimates than starting from the first confirmed case.-->
+</p>
+
+
+<!--
+<a href="https://gabgoh.github.io/COVID/index.html?p_num_ind=300000&CFR=0.01&D_hospital_lag=5&D_incbation=5.2&D_infectious=2.9&D_recovery_mild=11.1&D_recovery_severe=28.6&I0=1&InterventionAmt=0.33333333333333337&InterventionTime=100&P_SEVERE=0.2&R0=2.2&Time_to_death=32&logN=15.761420707019587">
+-->
+<a href="https://gabgoh.github.io/COVID/index.html?CFR=0.01&D_hospital_lag=5&D_incbation=5.2&D_infectious=10&D_recovery_mild=11.1&D_recovery_severe=28.6&I0=1&InterventionAmt=0.26&InterventionTime=94.4&P_SEVERE=0.2&R0=3.9&Time_to_death=32&logN=15.761420707019587"</a>
+  <img src="img/epcalc_madrid.png"  alt="Epidemic Calculator"></img>
+</a>
+  </p>
+  <p> Concretely, the number of reported deaths on the Region of Madrid at 14th March, when the Spanish Government decreeted
+    the state of Alarm, was 213. While only 7 days before, the number was 16. And 3 weeks later this number increased from 213 to
+    5136, according to <a href="https://covid19.isciii.es/resources/serie_historica_acumulados.csv">covid19.iscii.es data</a>.
+  </p>
+  <p>
+    I used 1% as <i>Mortality Statistics</i> and 10 days for <i>T<small>inf</small> (Duration patient is infectious)</i>.
+    And in order to fit the evolution of confirmed deaths R0 was established to 3.9 before the intervention
+    and 1.0 after the intervention.
+  </p>
+  <p>
+    I think the model is useful to have an idea of the interconnected variables and effects.
+    <!--And trying to fit the different parameters according to the last knowledge available.-->
+    But results from this model should be read with caution.
+    Moreover, appart from the uncertainty introduced by many different estimated parameters and hidden variables,
+    this implementation of SEIR ignores the effect of the healthcare capacity system,
+    and the possibility on mortality increase due to ICU bed shortage.
+  </p>
+            <p>Thanks to <a href="https://github.com/gabgoh/epcalc">Gabriel Goh epcalc</a> project.
+            </p>
+
+          </div>
+          <div class="resume-date text-md-right">
+            <span class="text-primary">6/4/2020</span>
+          </div>
+        </div>
+
+        <div class="resume-item d-flex flex-column flex-md-row justify-content-between mb-5" id="covid19-data">
+          <div class="resume-content">
+            <h3 class="mb-0">COVID-19 Datasets</h3>
+            <div class="subheading mb-3">Datasets</div>
+            <p>
+              <ul>
+                <li><a href="https://github.com/datadista/datasets/tree/master/COVID%2019">Data from Spanish government made accesible on CSV by @datadista</a>
+                </li>
+                <li><a href="https://www.covid.is/data">COVID-19 in Iceland – Statistics</a>
+                </li>
+                <li><a href="https://covidtracking.com/api">The COVID Tracking Project (US)
+                </a>
+              </li>
+              </ul>
+            </p>
+            <div class="subheading mb-3">Dashboards</div>
+            <p>
+            <ul>
+              <li><a href="https://www.arcgis.com/apps/opsdashboard/index.html#/bda7594740fd40299423467b48e9ecf6">Coronavirus COVID-19 Global Cases by the CSSE at John Hopkins University</a>
+              </li>
+              <li><a href="https://www.worldometers.info/coronavirus/#countries">Worldometer. Confirmed Cases and Deaths by Country, Territory or Conveyance</a>
+              </li>
+              <li><a href="https://experience.arcgis.com/experience/7e30edc490a5441a874f9efe67bd8b89">Official Update of COVID-19 Situation in Singapore</a>
+              </li>
+            </ul>
+            </p>
+            <div class="subheading mb-3">Reports, articles, papers...</div>
+            <p>
+            <ul>
+              <li><a href="https://ourworldindata.org/coronavirus">Our World in Data. Coronavirus Disease (COVID-19) – Statistics and Research</a>
+              </li>
+              <li id="euromomo">
+                <a href="https://www.euromomo.eu/">EuroMomo: European Monitoring of Excess Mortality for Publich Health Action</a>
+              </li>
+              <li>
+                <a href="https://www.imperial.ac.uk/media/imperial-college/medicine/mrc-gida/2020-04-03-COVID19-Report-14.pdf">
+                  Report 14: OnlineCommunity Involvement in COVID-19 Research &amp; Outbreak Response. Pristera P. et al. Imperial College
+                </a>
+              </li>
+              <li>
+                <a href="https://www.thelancet.com/journals/lancet/article/PIIS0140-6736(20)30260-9/fulltext">
+                    Nowcasting and forecasting the potential domestic and international spread of the 2019-nCoV outbreak originating in Wuhan, China: a modelling study. Wu J.T. et al. The Lancet. Jan 31,2020
+                  </a>
+                </li>
+            </ul>
+          </p>
+          <p>Spanish only:
+              <ul>
+              <li><a href="https://elpais.com/sociedad/2020/04/03/actualidad/1585936102_333545.html">Así evoluciona la curva del coronavirus en España y en cada autonomía (elpais.com)</a>
+              </li>
+              <li>
+                <a href="https://www.isciii.es/QueHacemos/Servicios/VigilanciaSaludPublicaRENAVE/EnfermedadesTransmisibles/MoMo/Documents/informesMoMo2020/MoMo_Situacion%20a%202%20de%20abril_CNE.pdf">Vigilancia de los excesos de mortalidad por todas las causas. MoMo (Situación a 2/4/2020)</a>
+              </li>
+              <li>
+                <a href="https://www.isciii.es/QueHacemos/Servicios/VigilanciaSaludPublicaRENAVE/EnfermedadesTransmisibles/Documents/INFORMES/Informes%20COVID-19/Informe%20n%C2%BA%2020.%20Situaci%C3%B3n%20de%20COVID-19%20en%20Espa%C3%B1a%20a%203%20de%20abril%20de%202020.pdf">Informe sobre la situación de COVID-19 en España. 3 abril 2020. RENAVE. CNE. CNM (ISCIII)</a>
+              </li>
+              <li>
+                <a href="https://www.mscbs.gob.es/profesionales/saludPublica/ccayes/alertasActual/nCov-China/documentos/20200404_ITCoronavirus.pdf">Información científica-técnica. Enfermedad por coronavirus, COVID-19 (4th April, Spanish)</a>
+              </li>
+
+            </ul>
+
+
+            </p>
+          </div>
+          <div class="resume-date text-md-right">
+            <span class="text-primary">6/4/2020</span>
+          </div>
+        </div>
+
+
+        <!--
+        <div class="resume-item d-flex flex-column flex-md-row justify-content-between mb-5">
+          <div class="resume-content">
+            <h3 class="mb-0">Number of cases and tests per country</h3>
+            <div class="subheading mb-3">Demo</div>
+            <p>Interactive simple <a href='https://covid-19-data-streamlit.herokuapp.com/'>demo</a>
+            </p>
+            <p>Thanks to Heroku, streamlit, worldometer...
+            </p>
+          </div>
+          <div class="resume-date text-md-right">
+            <span class="text-primary">March 2020</span>
+          </div>
+        </div>
+      -->
+
+      </div>
+
+    </section>
+
+    <hr class="m-0">
+
+    <section class="resume-section p-3 p-lg-5 d-flex justify-content-center" id="others">
+      <div class="w-100">
+        <h2 class="mb-5">Other topics</h2>
+
+        <div class="resume-item d-flex flex-column flex-md-row justify-content-between mb-5" id="computervision">
+          <div class="resume-content">
+            <h3 class="mb-0">Car Behavioral Cloning</h3>
+            <div class="subheading mb-3">Computer Vision models: Deep Learning vs classical Machine Learning</div>
+            <p>Deep Learning: Agárrate que vienen curvas / Hold on come curves
+            </p>
+          <p>
+            Custom workshop materials on Deep Learning and classical Machine Learning applied self-driving car simulator. Based on <a href="https://github.com/udacity/CarND-Behavioral-Cloning-P3">Udacity CarND Behavioral Cloning Project</a> and the <a href="https://devblogs.nvidia.com/deep-learning-self-driving-cars/">NVIDIA Convolutional Neural Network model</a>
+          </p>
+          <p>
+            <a href="https://github.com/muoten/car-behavioral-cloning">
+            <img src="img/lake_track.png"  alt="Car Behavioral Cloning"/>
+            Code
+            </a>
+          </p>
+            <p>Thanks to UDACITY, Nvidia, Keras and <a href="https://github.com/naokishibuya/car-behavioral-cloning">Naoki Shibuya</a> first implementation of car-behavioral-cloning project.
+              And also to my colleague <a href="https://github.com/kingkastle">Rafa Castillo</a> and the <a href="https://www.meetup.com/es-ES/meetup-group-ICEMD/events/261039964/">ICEMD</a>.
+            </p>
+
+          </div>
+          <div class="resume-date text-md-right">
+            <span class="text-primary">May 2019</span>
+          </div>
+        </div>
+
+    </section>
+
+    <hr class="m-0">
+
+    <section class="resume-section p-3 p-lg-5 d-flex align-items-center" id="hacks">
+      <div class="w-100">
+        <h2 class="mb-5">Hackathons &amp; Demos</h2>
+
+        <div class="resume-item d-flex flex-column flex-md-row justify-content-between mb-5">
+          <div class="resume-content">
+            <h3 class="mb-0">Diversifynd</h3>
+            <div class="subheading mb-3">Hackathon StartMeApp Artificial Intelligence 2019</div>
+            <p>
+              <strong>Diversifynd</strong> is a platform that supports diversity.
+            </p>
+            <p>Users can check which events or organizations have a better degree of representation in term of gender or race.
+              For this purpose computer vision is applied to images of these events or organizations. By traning our custom model.
+            </p>
+            <p><a href="https://github.com/muoten/diversityscore">
+              <img src="img/thealfredolambdas_hackathon.png"  alt="Diversifynd"/>
+              Code
+            </a>
+            </p>
+            <p>
+              Developed by <i><a href="https://twitter.com/info_hoss/status/1097551695947677696">TheAlfredoLambdas</a></i> (magnificent) team.
+              Thanks also to Tensorflow/serving, FaceNet and a project by <a href="https://medium.com/@zhuyan/gender-and-race-recognition-transfer-multi-task-learning-for-the-laziest-88316e6e492"> Zhu Yan</a> And also heroku, azure, docker...
+            </p>
+
+          </div>
+          <div class="resume-date text-md-right">
+            <span class="text-primary">Dic 2018</span>
+          </div>
+        </div>
+
+        <div class="resume-item d-flex flex-column flex-md-row justify-content-between mb-5">
+          <div class="resume-content">
+            <h3 class="mb-0">Augmented Choices</h3>
+            <div class="subheading mb-3">Hackatrips. Minube and Fitur</div>
+            <p><strong>Augmented Choices</strong>: Personalized and Gamified Trip Experiences with Augmented Reality.
+            </p>
+            <p>
+              <a href="https://github.com/muoten/augmented-choices">Code.
+              </a>
+            </p>
+            <p>Developed by <i>TheAlfredoLambdas</i> (splendiferous) team.
+              Thanks also to Minube API, Oracle Cloud Platform Container Service, Hotelscombined API...
+            </p>
+          </div>
+          <div class="resume-date text-md-right">
+            <span class="text-primary">Jan 2018</span>
+          </div>
+        </div>
+
+        <div class="resume-item d-flex flex-column flex-md-row justify-content-between mb-5">
+          <div class="resume-content">
+            <h3 class="mb-0">Berlin &amp; Berlout</h3>
+            <div class="subheading mb-3">Techcrunch Disrupt Hackathon Berlin</div>
+            <p>Could you get into a berlin exclusive nightclub?
+              <strong>Berlout</strong> tells users if they fit the admission criteria for Berlin clubs:
+              dark clothes, no jeans, no more than 3 people, around 30s, no laughing, no drinks...
+
+              You only have to take a picture.
+              And <i>computer vision</i> algorithm identifies elements related with your probability of being rejected.
+              You will see what clubs you could enter with more chances according to this evaluation.
+            </p>
+
+            <p>
+              <a href="https://github.com/muoten/augmented-choices">
+                <img src="img/berlout_screenshot.jpg"  alt="Berlin/Berlout"/>
+                Code.
+              </a>
+            </p>
+            <p>Team work. Thanks to <a href="https://twitter.com/chus9000@">Jesus Martín</a> and the rest of the (marvelous) team! Thanks also to Microsoft Azure Cognitive Services, and Techcrunch, and the <a href="https://techcrunch.com/2017/12/03/unicorn-battle/">unicorns</a>...
+            </p>
+          </div>
+          <div class="resume-date text-md-right">
+            <span class="text-primary">Dec 2017</span>
+          </div>
+        </div>
+
+      </div>
+
+
+    </section>
+
+
+  </div>
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Plugin JavaScript -->
+  <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+  <!-- Custom scripts for this template -->
+  <script src="js/resume.min.js"></script>
+
+</body>
+</p>
+</html>
