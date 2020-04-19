@@ -105,16 +105,30 @@
        <p>New <a href="#covid19">COVID-19 sections</a>, with:
        </p>
           <ul>
+
             <li>
               Context on <!--<a href="#covid19-ref-tweets">articles</a>,-->
-              <a href="#covid19-estimates">confirmed cases vs estimates</a>, <a href="#covid19-estimates-deaths">mortality</a>, <a href="#covid19-data">data sources</a>...
+              <a href="#covid19-estimates">confirmed cases vs estimates</a>, <a href="#covid19-estimates-deaths">mortality</a>,
+
+
+<!--
+              ...
             </li>
             <li>
-            Analysis of <a href="#covid19-ages">confirmed cases by age</a>
-            </li>
+            Analysis of -->
+
+
+
+
             <li>
             Simulations with <a href="#covid19-epcalc">Epidemic Calculator</a>
             </li>
+            <li><i><u>Last updates</u>:
+              <a href="#covid19-ages">cases by age</a> <sup><small>(18/04/2020)</small></sup>,
+              <a href="#covid19-data">data sources </a><sup><small>(6/04/2020)</small></sup>
+            </i>
+
+              </li>
 
           </ul>
 
@@ -265,6 +279,10 @@
                  However the third figure represents Canary Islands, where the first case in Spain was diagnosed.
                  And it shows the impact on mortality in this region has been much lower.
               </p>
+              <p>MoMo project in Spain collects information of aproximately 4K civil registers,
+                with a coverage of the 92% of the Spanish population. Estimates of expected mortality are based
+                on historical averages of observed mortality since January 1th 2008 until one year before the current date.
+              </p>
               <p>
                 Fortunately, after the hard confinement measures decreed by the Spanish Government,
                 both regions have current estimations of Basic Reproduction Number (R0) at April 4th near or under 1.
@@ -272,34 +290,6 @@
                 <a href="https://portalcne.isciii.es/covid19/">estimates by the Spanish Ministry of Healthcare</a>,
                 R0 estimates would be 1.02 for Madrid and 0.75 for the Canary Islands.
               </p>
-              <p>MoMo project in Spain collects information of aproximately 4K civil registers,
-                with a coverage of the 92% of the Spanish population. Estimates of expected mortality are based
-                on historical averages of observed mortality since January 1th 2008 until one year before the current date.
-                This information has been published in reports in PDF format. Buth they have recently developed also an
-                <a href="https://momo.isciii.es/public/momo/dashboard/momo_dashboard.html">interactive dashboard</a>
-                with access to historical <a href="https://momo.isciii.es/public/momo/dashboard/momo_dashboard.html#datos">
-                  data in CSV</a> for the last 2 years.
-              </p>
-              <p>
-                Next figure published by <a href="https://elpais.com/sociedad/2020/04/09/actualidad/1586435286_092135.html">elpais</a>
-                presents both the number of deaths registered by MoMo and deaths confirmed with COVID-19 until April 2th in
-                the 17 regional autonomies of Spain.
-              </p>
-              <img src="https://pbs.twimg.com/media/EVOt6YQU8AA2abE?format=jpg&name=medium" alt="Deaths registered by MoMo vs deaths confirmed with COVID-19 in Spain">
-<p>
-  Despite this chart doesn't show the excess mortality estimates by MoMo, but the total number of deaths, we can
-  see that confirmed COVID-19 deaths at april 2th in Madrid or Catalunya are even higher than the total number
-  of deaths registered in these regions until April 7th. Whereas in Castilla y León and Castilla La Mancha,
-  where high ratios of excess mortality have been detected, the reported COVID-19 deaths have been significantly lower.
-</p>
-<p>
-  <i>Due to the <strong>latency</strong> in collecting this kind of data conclusions have to be read with <strong>caution</strong></i>.
-Curiously, the excess mortality estimated by MoMo at April 5th (12940) approximates a lot the 12418 COVID-19
-confirmed deaths at country level at the same date. If this trend consolidates, one possible hypothesis for underestimates and overestimates at region level
-could be related with interregional demographics. Maybe many residents in Madrid originary from Castilla y Leon and Castilla La Mancha could have been registered
-  as deaths in their regions of birth.
-</p>
-
 
 
               <div class="subheading mb-3" id="covid19-momo-spain">Reported case fatality rates vs estimates of actual fatality rates.</div>
@@ -339,18 +329,19 @@ could be related with interregional demographics. Maybe many residents in Madrid
       <div class="resume-item d-flex flex-column flex-md-row justify-content-between mb-5" >
         <div class="resume-content">
           <h3 class="mb-0" id="covid19-ages">Analysis: Confirmed Cases by Age Groups </h3>
-          <div class="subheading mb-3">Spain vs Germany</div>
+          <div class="subheading mb-3">Spain vs Germany (updated 18-04-2020)</div>
 
-          <p>The number of confirmed cases in Germany at 5 April is higher than 96K people, not so far from 130K confirmed cases in Spain
+          <p>The number of confirmed cases in Germany at 18 April is around 140K people, whereas there are around 190K confirmed cases in Spain
             (<a href="https://www.arcgis.com/apps/opsdashboard/index.html#/85320e2ea5424dfaaa75ae62e5c06e61">Johns Hopkins University</a>,
-            <a href="https://www.worldometers.info/coronavirus/#countries">worldometer</a>). But relative lethality estimates by COVID-19 on Germany seems 1.5% (<i>confirmed deaths / confirmed cases</i>). Much lower than figures in Spain (10%)
-            or Italy (12%).
-</p>
-<p>
+            <a href="https://www.worldometers.info/coronavirus/#countries">worldometer</a>). But relative lethality estimates by COVID-19 on Germany seems 3% (<i>confirmed deaths / confirmed cases</i>). Much lower than figures in Spain (10%)
+            or Italy (13%).
+          </p>
+          <p>
 
             There are several aspects than could explain this big difference.
             But I will focus on the representativity of the sample of confirmed tests in relation to the overall population.
             If we compare the distribution of confirmed cases by age groups in Spain and Germany we can see that:
+          </p>
             <ul>
               <li>
             In Spain confirmed cases are biased to ranges of older people. While young people would be underrepresented.
@@ -361,13 +352,14 @@ could be related with interregional demographics. Maybe many residents in Madrid
         </ul>
             We could think in South Korea as a country with a high number of tests performed
             and a representative sample in terms of age distribution.
+
       <p>
-          <iframe id="covid_by_age_spain" style="border:none;" src="Spain_covid19_by_age.html"
-          height="400" width="350" scrolling="no">
-        </iframe>
-          <iframe id="covid_by_age_germany" style="border:none;" src="Germany_covid19_by_age.html"
-          height="400" width="350" scrolling="no">
-        </iframe>
+        <a href="spain_covid19_by_age.html">
+      <img class="covid_by_age" src="img/Spain_covid19_by_age.gif" style="width:350px" alt="Spain: covid-19 confirmed cases by age groups">
+    </a>
+    <a href="germany_covid19_by_age.html">
+      <img class="covid_by_age" src="img/Germany_covid19_by_age.gif" style="width:350px" alt="Germany: covid-19 confirmed cases by age groups">
+    </a>
       </p>
           <p>  <a href="https://github.com/muoten/life-expectancy/blob/master/covid-19/covid19_distribution_by_age.ipynb">Code</a>.
           </p>
@@ -411,7 +403,7 @@ could be related with interregional demographics. Maybe many residents in Madrid
           <div class="resume-content">
             <h3 class="mb-0" id="covid19-epcalc">Simulation: Epidemic Calculator</h3>
             <div class="subheading mb-3">SEIR Model applied to Madrid</div>
-            <p>
+<p>
               <!--
               <a href="https://gabgoh.github.io/COVID/index.html?p_num_ind=300000&CFR=0.01&D_hospital_lag=5&D_incbation=5.2&D_infectious=2.9&D_recovery_mild=11.1&D_recovery_severe=28.6&I0=1&InterventionAmt=0.33333333333333337&InterventionTime=100&P_SEVERE=0.2&R0=2.2&Time_to_death=32&logN=15.761420707019587">Simulation of COVID-19 evolution on Region of Madrid (Spain)
             </a> -->
@@ -467,15 +459,11 @@ and provide more reliable estimates than starting from the first confirmed case.
               <ul>
                 <li><a href="https://github.com/datadista/datasets/tree/master/COVID%2019">Data from Spanish government made accesible on CSV by @datadista</a>
                 </li>
-                <li><a href="https://momo.isciii.es/public/momo/dashboard/momo_dashboard.html#datos">Mortality by all causes (MoMo), Spain. 2 years of historical data. Daily updates</a>
-                </li>
                 <li><a href="https://www.covid.is/data">COVID-19 in Iceland – Statistics</a>
                 </li>
                 <li><a href="https://covidtracking.com/api">The COVID Tracking Project (US)
                 </a>
-                </li>
-                <li><a href="https://aws.amazon.com/es/data-exchange/covid-19">Data related to COVID-19 available at AWS Data Exchange</a>
-                </li>
+              </li>
               </ul>
 
             <div class="subheading mb-3">Dashboards</div>
@@ -521,13 +509,7 @@ and provide more reliable estimates than starting from the first confirmed case.
                 <a href="https://www.isciii.es/QueHacemos/Servicios/VigilanciaSaludPublicaRENAVE/EnfermedadesTransmisibles/Documents/INFORMES/Informes%20COVID-19/Informe%20n%C2%BA%2020.%20Situaci%C3%B3n%20de%20COVID-19%20en%20Espa%C3%B1a%20a%203%20de%20abril%20de%202020.pdf">Informe sobre la situación de COVID-19 en España. 3 abril 2020. RENAVE. CNE. CNM (ISCIII)</a>
               </li>
               <li>
-                <a href="https://www.mscbs.gob.es/profesionales/saludPublica/ccayes/alertasActual/nCov-China/documentos/20200404_ITCoronavirus.pdf">Información científica-técnica. Enfermedad por coronavirus, COVID-19 (mscbs.gob.es, 4/04/2020)</a>
-              </li>
-              <li>
-                <a href="https://www.elconfidencial.com/tecnologia/ciencia/2020-04-03/covid19-test-pcr-coronavirus-espana_2531844/">Razones (fundamentadas) por las que España no está haciendo esos 20000 test PCR al día (El Confidencial, 3/04/2020)</a>
-              </li>
-              <li>
-                <a href="https://civio.es/medicamentalia/2020/04/08/coronavirus-sars-cov-2-pruebas-pcr-espana/">Sin medios contra el coronavirus: cómo España intentó huir a ciegas del "tsunami" (CIVIO, 8/04/2020)</a>
+                <a href="https://www.mscbs.gob.es/profesionales/saludPublica/ccayes/alertasActual/nCov-China/documentos/20200404_ITCoronavirus.pdf">Información científica-técnica. Enfermedad por coronavirus, COVID-19 (4th April, Spanish)</a>
               </li>
 
             </ul>
@@ -536,7 +518,7 @@ and provide more reliable estimates than starting from the first confirmed case.
 
           </div>
           <div class="resume-date text-md-right">
-            <span class="text-primary">15/4/2020</span>
+            <span class="text-primary">6/4/2020</span>
           </div>
         </div>
 
