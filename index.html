@@ -211,7 +211,7 @@
         </ul>
 
 <br/>
-        <h5 id="covid19-seroprevalence-bias">My analysis on measure error estimates and possible information bias (Updated 15/05/2020, work in progress)</h5>
+        <h5 id="covid19-seroprevalence-bias">Measure error estimates and possible information bias (Updated 15/05/2020, work in progress)</h5>
         <p>
           Tests used to detect antibodies, as other kind of clinical measures don't have to be perfect to be useful.
           Generally 2 characteristics define this kind of imperfections: <strong>specificity</strong> (or true negative rate) and <strong>sensitivity</strong> (or true positive rate).
@@ -219,19 +219,34 @@
           <strong>false positives</strong> and <strong>false negatives</strong> respectively.
         </p>
         <p>
-          Often there is some unbalance between these two kind of error rates.
+          These two kind of errors are also known in statistics as <i>type 1</i> and <i>type 2</i> errors.
+          And there is often some unbalance between their corresponding error rates.
           For clinical diagnoses these unbalance can be even desirable, as both type of errors don't have in general the same impact.
+        </p>
+        <blockquote class="twitter-tweet"><p lang="en" dir="ltr">I’m not sure who made this, but I might have to stick above my desk because it’s the only way I seem to be able remember the difference between type 1 and type 2 error! <a href="https://t.co/bmk9DI30Jw">pic.twitter.com/bmk9DI30Jw</a></p>&mdash; Dr Ellen Grimås (@EllenGrimas) <a href="https://twitter.com/EllenGrimas/status/1171002176551956480?ref_src=twsrc%5Etfw">September 9, 2019</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+        <p>
           But in order to quantify prevalences it's preferable that both errors compensate.
-          Or making <a href="http://www.med.mcgill.ca/epidemiology/joseph/publications/Methodological/speybroeck2012.pdf">
-            posterior adjustments</a> if this unbalance is significant and can't be tuned.
+          Or making posterior adjustments if this unbalance is significant and can't be tuned.
         </p>
           When undetected false negatives are not compensated with false positives there is <strong>misclasification bias</strong>, a kind of measure or information bias,
-          dependending on the taxonomy or scientific literature being consulted.
-          Anyhow, independently of terminological considerations it should be adjusted in a similar way as other biases, like selection bias</u>.
+          depending on the taxonomy or scientific literature being consulted.
+          Anyhow, independently of terminological considerations it should be adjusted in a similar way as other biases, like selection bias.
+          <i>Further (and harder) related information can be read on the following scientific reports by
+            <a href="https://www.nature.com/articles/srep11861">M.L. Bermingham et al, 2015</a> or
+            <a href="http://www.med.mcgill.ca/epidemiology/joseph/publications/Methodological/speybroeck2012.pdf">Speybroeck et al 2012</a></i>.
+
+          <!--Moreover a particular code snippet to adjust estimates considering
+          <a href="https://www.datanalytics.com/2020/04/27/muestreo-sensibilidad-y-especificidad/">sample size, sensitivity and specificity (text in Spanish)</a>
+          by <a href="https://twitter.com/gilbellosta/status/1260669385670307846">@gilbellosta</a>.
+        -->
         </p>
         <p>
           The ENECovid19 report with preliminary results briefly describes its methodology to compensate for selection bias
-          Though I don't find any information regarding measurement adjustment... so I'll try to infer by the numbers if it was taken into account.
+          Though I don't find any information regarding measurement adjustment... and it seems I'm not the only one...
+        </p>
+        <blockquote class="twitter-tweet"><p lang="es" dir="ltr">Tampoco he visto el el informe INE/ISCIII que se mencione la corrección de las estimaciones por la especificidad. Más al respecto, (incluyendo código para compensar por una especificidad &lt; 100%) aquí: <a href="https://t.co/Bsvoq6KFtC">https://t.co/Bsvoq6KFtC</a></p>&mdash; Carlos Gil Bellosta (@gilbellosta) <a href="https://twitter.com/gilbellosta/status/1260669385670307846?ref_src=twsrc%5Etfw">May 13, 2020</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+        <p>
+          So I'll try to infer by the numbers if correction on specificity and sensitivity was taken into account.
         </p>
         <p>
         According to the report, rapid tests for IgG were used, with estimated 100% specificity and 79% sensitivity.
