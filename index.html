@@ -162,7 +162,7 @@
             <h3 class="mb-0">Estimates and Context. Language matters</h3>
 
 
-          <div class="subheading mb-3" id="covid19-seroprevalence-spain">Preliminary results of Spain's seroprevalence study (15/05/2020)
+          <div class="subheading mb-3" id="covid19-seroprevalence-spain">Preliminary results of Spain's seroprevalence study ENECOVID19(15/05/2020)
           </div>
           <p>
 
@@ -211,7 +211,7 @@
         </ul>
 
 <br/>
-        <h5 id="covid19-seroprevalence-bias">Measure error estimates and possible information bias (Updated 16/05/2020, work in progress)</h5>
+        <h5 id="covid19-seroprevalence-bias">Test error estimates and (my) simplified bias analysis on ENECOVID19 preliminary results (Updated 16/05/2020, work in progress)</h5>
         <p>
           Tests used to detect antibodies, as other kind of clinical measures don't have to be perfect to be useful.
           Generally 2 characteristics define this kind of imperfections: <strong>specificity</strong> (or true negative rate) and <strong>sensitivity</strong> (or true positive rate).
@@ -263,7 +263,10 @@
           Assuming according to this claim that adjustment on sensitivity was not yet applied, I'll try to infer by the numbers in a simplified way how we could approximate adjusted seroprevalence according to the current provided numbers.
         </p>
         <p>
-        According to the report, rapid tests for IgG were used, with estimated 100% specificity and 79% sensitivity.
+        According to the report, rapid tests Orient GeneIgM/IgG were used, from company ZhejiangOrient Gene Biotech. Due to the difficulty of reading IgM band all the results refer to IgG.
+        Manufacturer-reported sensitivity and specificity for serological detection of IgG is 97% and 100%. But these values are probably too optimistic.
+        Reliability studies performed by ENE-COVID19 documented 79% sensitivity and 100% specificity for IgG.
+
       </p>
       <img src="img/seroprevalence_and_bias_2.png" alt="Seroprevalence methodology. Estimated specificity and sensitivity of rapid tests">
       <figcaption><small>Source: ENE-COVID19: First Round. <a href="https://www.mscbs.gob.es/ciudadanos/ene-covid/docs/ESTUDIO_ENE-COVID19_PRIMERA_RONDA_INFORME_PRELIMINAR.pdf">Preliminary results</a></small>
@@ -282,7 +285,7 @@
            So for the reminder 4.7% to 5.4% the accuracy of IgG rapid test would be approximately
           between 50% (=0.973-0.946)/0.054) and 42.6% (=0.973-0.953)/0.047).
         </p>
-        <p>In the worst case, considering a conservative true sensitivity of IgG rapid test of only 42%,
+        <p>In the worst case, considering a pessimistic conservative true sensitivity of IgG rapid test of only 42%,
           which is unlikely, false negatives could approximate to 6.9% (=0.58 x 0.05 / 0.42),
           and estimated seroprevalence would rise to near 12%.
         </p>
@@ -292,8 +295,14 @@
           and actual seroprevalence would be around 5.7%.
         </p>
         <p>
-           In other words, <u>if specificity was indeed 100%, for conservative estimates of actual sensitivity between 42% and 88.2%,
-             my (educated?) guess would be actual seroprevalence in the (asymmetric) range between 5.7% and 12%, and probably closer to an estimate of 6.3%</u>.
+          Considering event the most optimistic scenario with 100% specificity and 97% sensitivity reported by the manufacturer,
+          false negatives could approximate to 0.1% (=0.03 x 0.05 / 0.97). And 5.1% seroprevalence would be in the current provided 95% Interval of Confidence (4.7%, 5.4%).
+          However, with analogous calculation, below 92% sensitivity seroprevalence would rise
+          above the current provided 5.4% upper bound.
+        </p>
+        <p>
+           In other words, <u>if specificity was indeed 100%, for conservative estimates of actual sensitivity between 42% and 97%,
+             my (educated?) guess would be actual seroprevalence in the (asymmetric) range between 5.1% and 12%, and probably closer to an estimate of 6.3%</u>.
         </p>
         <p>As it was previously mentioned in the referred preliminary report, this sensitivity/especificity bias is expected to be adjusted in the next round of results by the combination of estimates from immunoassay.
         </p>
