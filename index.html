@@ -242,7 +242,7 @@
          <h6>(17/05/2020, Work in progress)</h6>
         <p>
           Tests used to detect antibodies, as other kind of clinical measures don't have to be perfect to be useful.
-          Generally 2 characteristics define this kind of imperfections: <strong>specificity</strong> (or true negative rate) and <strong>sensitivity</strong> (or true positive rate, or <i>recall</i>).
+          Generally 2 characteristics define this kind of imperfections: <strong>specificity</strong> (true negative rate) and <strong>sensitivity</strong> (true positive rate or <i>recall</i>).
           Let's say, they relate to the ability to avoid
           <strong>false positives</strong> and <strong>false negatives</strong> respectively.
         </p>
@@ -281,9 +281,9 @@
         </p>
         <blockquote class="twitter-tweet"><p lang="es" dir="ltr">Tampoco he visto el el informe INE/ISCIII que se mencione la corrección de las estimaciones por la especificidad. Más al respecto, (incluyendo código para compensar por una especificidad &lt; 100%) aquí: <a href="https://t.co/Bsvoq6KFtC">https://t.co/Bsvoq6KFtC</a></p>&mdash; Carlos Gil Bellosta (@gilbellosta) <a href="https://twitter.com/gilbellosta/status/1260669385670307846?ref_src=twsrc%5Etfw">May 13, 2020</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
       -->
-    <p>Regarding of possible misclassification bias due to test errors there is detailed the adjustement method to be employed in Annex 3 of
-      <a href="https://portalcne.isciii.es/enecovid19/documentos/ene_covid19_dis.pdf">study design</a>
-    </p>
+      <p>Furthermore an adjustment method to compensate possible misclassification bias due to test errors, similar to <a href="https://www.medrxiv.org/content/medrxiv/suppl/2020/04/17/2020.04.14.20062463.DC1/2020.04.14.20062463-1.pdf">Santa Clara's statistical approach</a>, is also detailed
+        in Annex 3 of <a href="https://portalcne.isciii.es/enecovid19/documentos/ene_covid19_dis.pdf">ENECOVID study design</a>
+      </p>
       <img src="img/seroprevalence_and_bias_4.png" alt="Seroprevalence methodology. Method to compensate misclassification bias" style="border:1px solid black">
       <figcaption><small>Source: ENE-COVID19: Study Design. <a href="https://portalcne.isciii.es/enecovid19/documentos/ene_covid19_dis.pdf">Preliminary results</a></small>
       </figcaption>
@@ -299,7 +299,7 @@
 
         <br/>
         <p>
-          So I assume according to this claim that adjustment on sensitivity was not yet applied, and I'll try to infer by the numbers in a simplified way how we could approximate the
+          So I assume according to this claim that adjustment on sensitivity was not yet applied, and I'll try to infer in a simplified way how we could approximate the
           adjusted seroprevalence according to the current provided numbers.
         </p>
         <p>
@@ -310,6 +310,20 @@
       </p>
       <img src="img/seroprevalence_and_bias_2.png" alt="Seroprevalence methodology. Estimated specificity and sensitivity of rapid tests" style="border:1px solid black">
       <figcaption><small>Source: ENE-COVID19: First Round. <a href="https://www.mscbs.gob.es/ciudadanos/ene-covid/docs/ESTUDIO_ENE-COVID19_PRIMERA_RONDA_INFORME_PRELIMINAR.pdf">Preliminary results</a></small>
+      </figcaption>
+      <br/>
+      <p>Annex 1 of study design provides more detail on these reliability studies. So we know 150 PCR samples were used to evaluate the rapid test, being 97 PCR+ and 53 PCR-.
+      Under this benchmark global sensitivity for IgG+ was 79.4% and specificity 100%. But due to the small size of evaluated test samples
+      we could provide
+      more conservative estimations. For specificity our uncertainty margin could be in the interval <math>[98.1% (=53/54), 100%]</math>.
+      Whereas for sensitivity we could infer that 77 true positives were detected by IgG,
+      <!--so the uncertainty margin would be <math>[78.6% (=77/98), 80.4% (=78/97)]</math>,-->
+      and we could estimate also a
+      <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3661219/figure/F3/">95% confidence interval</a> of <math>[71.4%, 87.4%]</math>.
+
+    </p>
+      <img src="img/test_reliability_study.png" alt="Seroprevalence methodology. Reliability study to evaluate specificity and sensitivity of rapid tests" style="border:1px solid black">
+      <figcaption><small>Source: ENE-COVID19: First Round. <a href="https://portalcne.isciii.es/enecovid19/documentos/ene_covid19_dis.pdf">ENECOVID study design</a></small>
       </figcaption>
       <br/>
       <h6>Assumptions: 100% specificity, lower sensitivity</h6>
