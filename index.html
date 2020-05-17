@@ -114,7 +114,7 @@
             Simulations with <a href="#covid19-epcalc">Epidemic Calculator</a>
             </li>
             <li><i><u>Last updates</u>:
-              <a href="#covid19-seroprevalence-bias">seroprevalence bias analysis</a><sup><small>(16/05/2020)</small></sup>,
+              <a href="#covid19-seroprevalence-bias">seroprevalence bias analysis</a><sup><small>(17/05/2020)</small></sup>,
               <a href="#covid19-data">data sources</a><sup><small>(16/05/2020)</small></sup>
             </i>
 
@@ -240,10 +240,11 @@
         </ul>
 
 <br/>
-        <h5 id="covid19-seroprevalence-bias">Test error estimates and (my) simplified bias analysis on ENECOVID19 preliminary results (Updated 16/05/2020, work in progress)</h5>
+        <h4 id="covid19-seroprevalence-bias">Test error estimates and (my) simplified bias analysis on ENECOVID preliminary results</h4>
+         <h6>(17/05/2020, Work in progress)</h6>
         <p>
           Tests used to detect antibodies, as other kind of clinical measures don't have to be perfect to be useful.
-          Generally 2 characteristics define this kind of imperfections: <strong>specificity</strong> (or true negative rate) and <strong>sensitivity</strong> (or true positive rate).
+          Generally 2 characteristics define this kind of imperfections: <strong>specificity</strong> (or true negative rate) and <strong>sensitivity</strong> (or true positive rate, or <i>recall</i>).
           Let's say, they relate to the ability to avoid
           <strong>false positives</strong> and <strong>false negatives</strong> respectively.
         </p>
@@ -301,6 +302,7 @@
       <figcaption><small>Source: ENE-COVID19: First Round. <a href="https://www.mscbs.gob.es/ciudadanos/ene-covid/docs/ESTUDIO_ENE-COVID19_PRIMERA_RONDA_INFORME_PRELIMINAR.pdf">Preliminary results</a></small>
       </figcaption>
       <br/>
+      <h6>Assumptions: 100% specificity, lower sensitivity</h6>
       <p>
         With 100% specificity there would be no false positives.
         And with sensitivity of 79%, for a prevalence of 5% there would be 5% of true positives and approximately 1.3% (= 0.21 x 0.05 / 0.79) of false negatives.
@@ -331,6 +333,7 @@
           <!--(=0.118 x 0.05 / 0.882)-->
           and seroprevalence would be around 5.7%.
         </p>
+
         <p>
           Considering even the most optimistic scenario with 100% specificity and 97% sensitivity reported by the manufacturer,
           false negatives could approximate to 0.1% <!--(=0.03 x 0.05 / 0.97)-->.
@@ -338,13 +341,45 @@
           However, with analogous calculation, if sensitivity was lower than 92%,
           seroprevalence would rise above the current provided 5.4% upper bound.
         </p>
+        <h6>Assumptions: 99% specificity, lower sensitivity</h6>
+        <p>All the previous calculations based on the assumption that specificity for IgG detection was truly 100%
+          as manufacturer claims and reliability studies made for ENE-COVID seemingly registered. But what if this specificity was 99%, for instance?
+        </p>
         <p>
-           In other words, <u>if specificity of rapid test was indeed 100%, for conservative estimates of actual sensitivity of IgG detection between 42% and 97%,
-             my (educated?) guess would be actual seroprevalence in the (asymmetric) range between 5.1% and 12%, and probably closer to an estimate of 6.3%</u>.
+          In this case, maintaining the assumption of 79% sensitivity, true positives would have been 4.1%
+          with the remainder 0.9% bein false positives, and approximately 1.1% false negatives.
+          So actual prevalence would be around 5.2%, between the margins of the provided 95% IC.
+          Curiously, as previously said, a worse specificity, undesirable for clinical purposes, would produce
+          better raw estimates of prevalence. As long as for each 20 false negatives due to low sensitivity
+          we would get 1 false positive due to imperfect specificity.
+          And boths effects would compensate each other for an expected prevalence near to 5%.
+        </p>
+        <!--<img src="https://media.giphy.com/media/SV0kYmJBeXm6Fndmxn/giphy.gif" alt="Rick &nbsp; What's the point giphy" style="width:50%">-->
+
+        <h6>Conclusions</h6>
+        <p>While we wait for the immunoassays to be completed to "fine tune" the preliminary ENECOVID seroprevalence estimate,
+          we could get some rules of thumb (or <i>cuentas de la vieja</i>) for the effects
+          of expected test errors on the 5% provided average value.
+          In particular, due to the relation between actual specificity and sensitivity for IgG detection
+          with the rapid test Orient Gene Biotech.
+        </p>
+        <p>
+          <u>If sensitivity and specificity for IgG were 100% and 97% as reported by the manufacturer, there would be no significant misclasification bias</u>.
+        </p>
+        <p>
+          Otherwise, if these values approximate to those reported by reliability studies to ENECOVID, we could expect bias.
+          Concretely, if sensitivity was 79%, false negative would rise the actual seroprevalence above the provided confidence interval margins.
+          Unless this effect was compensated with posterior adjustment or specificity being closer to 99% instead of 100%.
+        </p>
+        <p>
+           And particularly, <u>if specificity of rapid test was indeed 100% and sensitivity for IgG 79%, my (educated?) guess would be
+             actual seroprevalence closer to 6.3%</u>. Additionally, a more conservative range of sensitivity estimates between (very pesimistic) 42% and (very optimistic) 97%,
+             would broaden the interval of possible seroprevalence between 5.1% and 12%.
         </p>
         <p>In any case, despite this possible unadjusted bias, actual average seroprevalence in Spain would be still far from remote possibility of "herd immunity",
-          though it could affect to Infection Fatality Rate estimates, for instance. And as it was previously mentioned in the referred preliminary report,
-          this sensitivity/especificity bias is expected to be corrected in the next round of results by the combination of estimates from immunoassay.
+          though it could affect to Infection Fatality Rate estimates, for instance. And as it was mentioned in the referred preliminary ENECOVID report,
+          and also previously remarked in this analysis just a few paragraphs before,
+          <u>this sensitivity/specificity bias is expected to be corrected in the next round of results by the combination of estimates from immunoassay</u>.
         </p>
         <p>
         <i>Anyway, my provisionally inferred simplified numbers could be significantly wrong or I could be missing the point.
