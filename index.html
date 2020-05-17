@@ -20,7 +20,15 @@
 
   <!-- Custom styles for this template -->
   <link href="css/resume.min.css" rel="stylesheet">
-
+<script>
+$(document).ready(function() {
+    if(window.location.hash) {
+        $('html, body').animate({
+            scrollTop: $(window.location.hash).offset().top - 20
+        }, 500);
+    }
+});
+</script>
 </head>
 
 <body id="page-top">
@@ -213,7 +221,7 @@
           <li>
            Questions on methodology:
            <ul>
-               <li>could be some unadjusted measure or misclasification bias? More details in next section</li>
+               <li>could be some unadjusted measure or misclasification bias? <u>More details in next section</u></li>
                <li>could be some kind of unadjusted selection bias?</li>
            </ul>
          </li>
