@@ -122,8 +122,8 @@ $(document).ready(function() {
             Simulations with <a href="#covid19-epcalc">Epidemic Calculator</a>
             </li>
             <li><i><u>Last updates</u>:
-              <a href="#covid19-seroprevalence-bias">seroprevalence bias analysis</a><sup><small>(17/05/2020)</small></sup>,
-              <a href="#covid19-data">data sources</a><sup><small>(17/05/2020)</small></sup>
+              <a href="#covid19-seroprevalence-bias">seroprevalence bias analysis</a><sup><small>(21/05/2020)</small></sup>,
+              <a href="#covid19-data">data sources</a><sup><small>(21/05/2020)</small></sup>
             </i>
 
               </li>
@@ -247,7 +247,7 @@ $(document).ready(function() {
 
 <br/>
         <h4 id="covid19-seroprevalence-bias">Test error estimates and (my) simplified bias analysis on ENECOVID preliminary results</h4>
-         <h6>(17/05/2020, Work in progress)</h6>
+         <h6>(21/05/2020, Work in progress)</h6>
         <p>
           Tests used to detect antibodies, as other kind of clinical measures don't have to be perfect to be useful.
           Generally 2 characteristics define this kind of imperfections: <strong>specificity</strong> (true negative rate) and <strong>sensitivity</strong> (true positive rate or <i>recall</i>).
@@ -267,17 +267,33 @@ $(document).ready(function() {
           When undetected false negatives are not compensated with false positives there is <strong>misclasification bias</strong>, a kind of measure or information bias,
           depending on the taxonomy or scientific literature being consulted.
           Anyhow, independently of terminological considerations it should be adjusted in a similar way as other biases, like selection bias.
-          Details of an applied methodology to adjust a particular study similar to ENECOVID can be consulted on
-          <a href="https://www.medrxiv.org/content/10.1101/2020.04.14.20062463v1.full.pdf">COVID-19 Antibody Seroprevalence in Santa Clara (California)</a> by E. Bendavid et al (April 11 2020),
+        </p>
+      </p>
+          Details of an applied <strong>statistical methodology</strong> to adjust a particular study similar to ENECOVID can be consulted on
+          a
+          <a href="https://www.medrxiv.org/content/10.1101/2020.04.14.20062463v1.full.pdf">recent paper by E. Bendavid et al</a> (April 11 2020),
           and its <a href="https://www.medrxiv.org/content/medrxiv/suppl/2020/04/17/2020.04.14.20062463.DC1/2020.04.14.20062463-1.pdf">
-            statistical appendix</a> (via <a href="https://www.datanalytics.com/2020/04/27/muestreo-sensibilidad-y-especificidad/">@datanalytics</a>).
-          <i>Further (and harder) related information can be read on the following scientific reports by
-            <a href="https://www.nature.com/articles/srep11861">M.L. Bermingham et al</a> (2015) or
-            <a href="http://www.med.mcgill.ca/epidemiology/joseph/publications/Methodological/speybroeck2012.pdf">Speybroeck et al</a> (2012)</i>.
+            statistical appendix</a>
+            describing the procedure followed to measure the seroprevalence of antibodies to SARS-CoV-2 in Santa Clara County (California).
+            I found this study via <a href="https://www.datanalytics.com/2020/04/27/muestreo-sensibilidad-y-especificidad/">@datanalytics</a>,
+            soon accompanied by a
+            <a href="https://www.datanalytics.com/2020/05/21/analisis-bayesiano-de-pruebas-con-sensibilidad-especificidad-desconocida"/>critical opinion</a>
+            to usual improper (or lack of) methods to <strong>propagate uncertainty</strong> on the parameter estimates.
+              A challenge undertaken with a
+              <a href="https://bob-carpenter.github.io/diagnostic-testing/reports/specificity.pdf">
+                bayesian analysis by A. Gelman et al (May 20 2020)</a>.
+                A <strong>complex</strong> task I'm gonna ignore for my first simplified analysis.
+              Though I hope to address in a near future.
+
+          <i>Besides, further (and harder) related information can be read on the following scientific reports by
+  <a href="http://www.med.mcgill.ca/epidemiology/joseph/publications/Methodological/speybroeck2012.pdf">Speybroeck et al</a> (2012)</i> or
+            <a href="https://www.nature.com/articles/srep11861">M.L. Bermingham et al</a> (2015).
+
 
         </p>
+         <h6>What about ENECOVID methodology?</h6>
         <p>
-          The ENECovid19 report with preliminary results briefly describes its methodology to compensate selection bias:
+          Regarding the Spain's ENE-Covid19 serosurvey, the report with preliminary results briefly describes its technical approach to compensate for selection bias:
         </p>
         <img src="img/seroprevalence_and_bias_0.png" alt="Seroprevalence methodology. Method to compensate selection bias" style="border:1px solid black">
         <figcaption><small>Source: ENE-COVID19: First Round. <a href="https://www.mscbs.gob.es/ciudadanos/ene-covid/docs/ESTUDIO_ENE-COVID19_PRIMERA_RONDA_INFORME_PRELIMINAR.pdf">Preliminary results</a></small>
@@ -865,6 +881,9 @@ and provide more reliable estimates than starting from the first confirmed case.
             <li>
                 <a href="http://www.med.mcgill.ca/epidemiology/joseph/publications/Methodological/speybroeck2012.pdf">Misclassification errors in prevalence estimation: Bayesianhandling with care. Speybroeck et al 2012. Int J Public Health</a>
             </li>
+            <li>
+              <a href="https://bob-carpenter.github.io/diagnostic-testing/reports/specificity.pdf">Bayesian analysis of tests with unknown specificity and sensitivity. Gelman et al (20 May 2020)</a>
+            </li>
           </ul>
 
           <p>Spanish only:
@@ -901,6 +920,11 @@ and provide more reliable estimates than starting from the first confirmed case.
           </li>
          <li>
            <a href="https://portalcne.isciii.es/enecovid19/documentos/ene_covid19_dis.pdf">Diseño del estudio ENE-COVID19</a>
+         </li>
+         <li><a href="https://www.elconfidencial.com/espana/2020-05-20/grafico-muertes-coronavirus-espana-siglo-xxi_2599704/">El gráfico que muestra cómo el covid-19 ha roto todos los registros de muertes del siglo (elconfidencial.com, 20-05-2020)</a>
+         </li>
+         <li>
+           <a href="https://www.datanalytics.com/2020/05/21/analisis-bayesiano-de-pruebas-con-sensibilidad-especificidad-desconocida/">Análisis (bayesiano) de pruebas con sensibilidad/especificidad desconocida (datanalytics 21-05-2020)</a>
          </li>
             </ul>
 
