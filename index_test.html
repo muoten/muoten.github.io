@@ -179,7 +179,7 @@ $(document).ready(function() {
             <div class="subheading mb-3">From Ordinary Least Squares to Causal Discovery</div>
           -->
           <h3 class="mb-0">Uncool Data Science</h3>
-          <div id="linear-regression" class="subheading mb-3">Regression to Linear Regression</div>
+          <div id="linear-models" class="subheading mb-3">Regression to Linear Regression</div>
 
 
             <h6>(14/7/2020)</h6>
@@ -197,7 +197,7 @@ $(document).ready(function() {
               in details?
             </p>
             <img src="img/linear_regression_bro.jpeg" alt="Linear Regression concept in Layman Term" style="border:1px solid black; width:70%;margin:auto;display:block">
-            <figcaption style="text-align:center"><small>Source: https://medium.com/@sarawritezz
+            <figcaption style="text-align:center" ><small>Source: https://medium.com/@sarawritezz
               <a href="https://medium.com/swlh/this-is-how-i-explain-linear-regression-to-12-year-old-boy-using-sklearn-python-library-d4bb06a649cc">
                 This is how I explain Linear Regression to 12-Year-old Boy(using Scikit python library)</a></small>
             </figcaption>
@@ -432,7 +432,7 @@ $(document).ready(function() {
               as <strong>longitudinal</strong> or also <strong>panel data</strong>.
             </p>
             <p>In python there are at least 3 different libraries we could use to apply linear models to our data.
-              And I've compared the implementations of:
+              And I've compared the implementations of the following Python packages:
               <ul>
                 <li><pre>scikitlearn</pre></li>
                 <li><pre>statsmodels</pre></li>
@@ -477,21 +477,62 @@ $(document).ready(function() {
             <p>Furthermore, in the notebook they are more details about the Coefficient of Determination calculation,
               or the relation and differences between different configurations of Linear Regression models for longitudinal (panel) data.
               Finally this first analysis have limited to Ordinary Least Squares,
-              with <a href="http://statmath.wu.ac.at/~hauser/LVs/FinEtricsQF/FEtrics_Chp5.pdf">Fixed Effect and Random Effect variants,
+              with <a href="http://statmath.wu.ac.at/~hauser/LVs/FinEtricsQF/FEtrics_Chp5.pdf">Fixed Effect and Random Effect variants</a>,
                 supported by
               <a href="https://bashtage.github.io/linearmodels/doc/panel/mathematical-formula.html#panel-mathematical-notation">
                 linearmodels package.</a>, with the names of PanelOLS and RandomEffects, respectively.
               Other alternatives, as Lasso (L1) and Ridge (L2) regularizations have been excluded from the scope, at the moment.
           </p>
 
-          <!--
+
           <br/>
           <h4>Linear regression. Recycling the residuals</h4>
           <p>
             The residuals in a linear regression model are the differences between the estimates and the true values.
-            Besides to optimize in order to be as small as possible, it's important to check these residuals are independent.
+            Besides to optimize them in order to be as small as possible, it's important to check these residuals are independent.
           </p>
--->
+          <p>
+            Non random patterns in the residuals reveal our model is not good enough.
+            Further, in the OLS context, random errors are assumed to produce residuals that are
+            normally distributed and centered in zero. Moreover, the residuals should not be correlated with another variable, and adjacent residuals should not be correlated with each other (autocorrelation)
+    <a href="https://blog.minitab.com/blog/adventures-in-statistics-2/why-you-need-to-check-your-residual-plots-for-regression-analysis">
+    Reference</a>
+            </p>
+            <p>
+              The python package <a href="https://www.scikit-yb.org/en/latest/api/regressor/residuals.html">
+                yellowbrick</a> includes oneline methods to visualize ResidualPlots of a scikit-learn model.
+                By plotting the residuals for the Life Expectancy vs Health Expenditure (log) LinearRegression Model of the previous example
+                we can see there is indeed a pattern.
+            </p>
+            <img src="img/residuals_plot.png" style="border:1px solid black;width:70%;margin:auto;display:block"
+            alt="Residuals for LinerRegression Model">
+            <figcaption style="text-align:center"><small>Source: <a href="https://github.com/muoten/life-expectancy/blob/master/life_expectancy_vs_health_expenditure_linear_regression.ipynb">
+              muoten.github.io</a> Residuals for Life Expectancy vs Health Expenditure (log) LinerRegression Model
+            </small>
+            </figcaption>
+            <br/>
+
+            <h4>Regression by dependence minimization. And causal discovery</h4>
+            <p>
+              After reading
+            <a href='http://is.tuebingen.mpg.de/fileadmin/user_upload/files/publications/ICML2009-Mooij_[0].pdf'>
+              "Regression by dependence minimization and its application to causal inference in additive noise models"</a>
+              by Mooij et al, even simple regression models seem less uncool.
+              And looking into the residuals becomes even more interesting.
+            </p>
+            <p>Anyhow, we have to be cautious, as Judea Pearl says, no matter how sophisticated an algorithm is,
+              you can not infer causality by only looking to the data. Some previous assumptions are required.
+              Application of this "cool" algorithms don't get results for free. To move Data Science from
+              "data fitting" direction to "data-intensive Causal Science".
+              Or as I'd rephrase, from being fully data-driven to be model-driven but data-supported.
+              Or in <a href="https://twitter.com/_miguelhernan/status/897918662514024448?lang=es">
+                @_MiguelHernan</a> words: "draw your assumptions before your conclusions".
+            </p>
+            <blockquote class="twitter-tweet"><p lang="en" dir="ltr">Contesting the Soul of Data-Science. Below, an introduction to the Spanish translation of <a href="https://twitter.com/hashtag/Bookofwhy?src=hash&amp;ref_src=twsrc%5Etfw">#Bookofwhy</a>:<a href="https://t.co/gWpMQEIWhX">https://t.co/gWpMQEIWhX</a>. It expresses my conviction that the data-fitting direction taken by “Data Science” is temporary, soon to be replaced by &quot;Data-intensive Causal Science&quot;</p>&mdash; Judea Pearl (@yudapearl) <a href="https://twitter.com/yudapearl/status/1280791406894694410?ref_src=twsrc%5Etfw">July 8, 2020</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+            <p>
+              To be continued...
+            </p>
+
 <!--
             <h4>Regression, confounding and selection bias</h4>
             <p>
