@@ -196,11 +196,13 @@ $(document).ready(function() {
               is it really worth the time to review the fundamentals of linear and logistic regression
               in details?
             </p>
+            <figure>
             <img src="img/linear_regression_bro.jpeg" alt="Linear Regression concept in Layman Term" style="border:1px solid black; width:70%;margin:auto;display:block">
             <figcaption style="text-align:center" ><small>Source: https://medium.com/@sarawritezz
               <a href="https://medium.com/swlh/this-is-how-i-explain-linear-regression-to-12-year-old-boy-using-sklearn-python-library-d4bb06a649cc">
                 This is how I explain Linear Regression to 12-Year-old Boy</a></small>
             </figcaption>
+            </figure>
             <br/>
             <p>
               My opinion is that it's not crucial to know implementation details of algorithms to get reasonable accurate predictions
@@ -416,6 +418,7 @@ $(document).ready(function() {
                 OurWorldInData</a>. More details in my <a href="https://github.com/muoten/life-expectancy/blob/master/life_expectancy_vs_health_expenditure_linear_regression.ipynb">
                   Jupyter Notebook on github</a>.
           </p>
+          <figure>
           <img src="img/health_expenditure_and_life_expectancy.png"
           alt="Health Expenditure and Life Expectancy" style="border:1px solid black;width:70%;margin:auto;display:block">
           <figcaption style="text-align:center"><small>Source: <a href="https://github.com/muoten/life-expectancy/blob/master/life_expectancy_vs_health_expenditure_linear_regression.ipynb">
@@ -424,6 +427,7 @@ $(document).ready(function() {
               WHO's Global Health Expenditure Database</a>
           </small>
           </figcaption>
+          </figure>
           <br/>
 
             <p>
@@ -441,31 +445,37 @@ $(document).ready(function() {
             </p>
             <p>First of all, after preparing and exploring the data, I decide to transform Health Expenditure variable by applying the natural logarithm.
             </p>
+            <figure>
             <img src="img/life_expectancy_and_health_expenditure_log.png"
             alt="Health Expenditure and Life Expectancy (log)">
             <figcaption style="text-align:center"><small>Source: <a href="https://github.com/muoten/life-expectancy/blob/master/life_expectancy_vs_health_expenditure_linear_regression.ipynb">
               muoten.github.io</a>
             </small>
             </figcaption>
+            </figure>
             <br/>
             <p>Finally we can compare the different implementations of Ordinary Least Squares.
               In the next figures, the statsmodel implementation, with a constant term (the intercept).
-              Resulting in a coefficient value (beta) of <math>4.32</math> for the explanatory variable, with standard error of <math>0.33</math>.
+              Resulting in a coefficient value (beta) of <math>4,32</math> for the explanatory variable, with standard error of <math>0,33</math>.
               Assuming that <i>the covariance matrix of the errors is correctly specified</i>, as indicated in the output.
             </p>
+            <figure>
             <img src="img/ols_regression_life_expectancy_vs_health_expenditure_log_metrics.png" style="border:1px solid black;width:70%;margin:auto;display:block"
             alt="Ordinary Least Squares (statsmodel): Life Expectancy vs Health Expenditure (log)">
             <figcaption style="text-align:center"><small>Source: <a href="https://github.com/muoten/life-expectancy/blob/master/life_expectancy_vs_health_expenditure_linear_regression.ipynb">
               muoten.github.io</a> Ordinary Least Squares (statsmodel): Life Expectancy vs Health Expenditure (log)
             </small>
             </figcaption>
+            </figure>
             <br/>
+            <figure>
             <img src="img/ols_regression_life_expectancy_vs_health_expenditure_log.png" style="border:1px solid black;width:70%;margin:auto;display:block"
             alt="Ordinary Least Squares (statsmodel): Life Expectancy vs Health Expenditure (log)">
             <figcaption style="text-align:center"><small>Source: <a href="https://github.com/muoten/life-expectancy/blob/master/life_expectancy_vs_health_expenditure_linear_regression.ipynb">
               muoten.github.io</a> Ordinary Least Squares (statsmodel): Life Expectancy vs Health Expenditure (log)
             </small>
             </figcaption>
+            </figure>
             <br/>
 
             <p>According to our simple model the life expectancy for Spain in 2017 could be roughly estimated as <math>79.6</math> years (<math>=46.0 + 4.3·log(2500)</math>).
@@ -504,12 +514,14 @@ $(document).ready(function() {
                 By plotting the residuals for the Life Expectancy vs Health Expenditure (log) LinearRegression Model of the previous example
                 we can see there is indeed a pattern.
             </p>
+            <figure>
             <img src="img/residuals_plot.png" style="border:1px solid black;width:70%;margin:auto;display:block"
             alt="Residuals for LinerRegression Model">
             <figcaption style="text-align:center"><small>Source: <a href="https://github.com/muoten/life-expectancy/blob/master/life_expectancy_vs_health_expenditure_linear_regression.ipynb">
               muoten.github.io</a> Residuals for Life Expectancy vs Health Expenditure (log) LinerRegression Model
             </small>
             </figcaption>
+            </figure>
             <br/>
 
             <h4>Regression by dependence minimization. And causal discovery</h4>
