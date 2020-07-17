@@ -199,7 +199,7 @@ $(document).ready(function() {
             <img src="img/linear_regression_bro.jpeg" alt="Linear Regression concept in Layman Term" style="border:1px solid black; width:70%;margin:auto;display:block">
             <figcaption style="text-align:center" ><small>Source: https://medium.com/@sarawritezz
               <a href="https://medium.com/swlh/this-is-how-i-explain-linear-regression-to-12-year-old-boy-using-sklearn-python-library-d4bb06a649cc">
-                This is how I explain Linear Regression to 12-Year-old Boy(using Scikit python library)</a></small>
+                This is how I explain Linear Regression to 12-Year-old Boy</a></small>
             </figcaption>
             <br/>
             <p>
@@ -427,12 +427,12 @@ $(document).ready(function() {
           <br/>
 
             <p>
-              Both datasets correspond to multidimensional data involving "measurements"
+              Both datasets correspond to multi-dimensional data involving "measurements"
               over time. This kind of data is usually referred in statistics and econometrics,
               as <strong>longitudinal</strong> or also <strong>panel data</strong>.
             </p>
-            <p>In python there are at least 3 different libraries we could use to apply linear models to our data.
-              And I've compared the implementations of the following Python packages:
+            <p>In Python there are at least 3 different packages we could use to apply linear models to our data.
+              So I've compared the implementations of the following:
               <ul>
                 <li><pre>scikitlearn</pre></li>
                 <li><pre>statsmodels</pre></li>
@@ -468,7 +468,7 @@ $(document).ready(function() {
             </figcaption>
             <br/>
 
-            <p>According to our simple model the life expectancy for Spain in 2017 could be roughly estimated as <math>79.6</math> years <math>(=46.0 + 4.3·log(2500))</math>.
+            <p>According to our simple model the life expectancy for Spain in 2017 could be roughly estimated as <math>79.6</math> years (<math>=46.0 + 4.3·log(2500)</math>).
               Assuming standard errors in the margin of <math>+-0.8</math>. Actually life expectancy in Spain is even higher,
               as it is one of the highest in the world. Concretely, the value in our dataset for 2017 was <math>83.3</math> years.
               Anyway not so bad taking into account that is a single variable simple model.
@@ -656,11 +656,12 @@ $(document).ready(function() {
           But in order to quantify prevalences it's preferable that both errors compensate.
           Or making posterior adjustments if this unbalance is significant and can't be tuned.
         </p>
+        <p>
           When undetected false negatives are not compensated with false positives there is <strong>misclasification bias</strong>, a kind of measure or information bias,
           depending on the taxonomy or scientific literature being consulted.
           Anyhow, independently of terminological considerations it should be adjusted in a similar way as other biases, like selection bias.
         </p>
-      </p>
+      <p>
           Details of an applied <strong>statistical methodology</strong> to adjust a particular study similar to ENECOVID can be consulted on
           a
           <a href="https://www.medrxiv.org/content/10.1101/2020.04.14.20062463v1.full.pdf">recent paper by E. Bendavid et al</a> (April 11 2020),
@@ -669,7 +670,7 @@ $(document).ready(function() {
             describing the procedure followed to measure the seroprevalence of antibodies to SARS-CoV-2 in Santa Clara County (California).
             I found this study via <a href="https://www.datanalytics.com/2020/04/27/muestreo-sensibilidad-y-especificidad/">@datanalytics</a>,
             soon accompanied by a
-            <a href="https://www.datanalytics.com/2020/05/21/analisis-bayesiano-de-pruebas-con-sensibilidad-especificidad-desconocida"/>critical opinion</a>
+            <a href="https://www.datanalytics.com/2020/05/21/analisis-bayesiano-de-pruebas-con-sensibilidad-especificidad-desconocida">critical opinion</a>
             to usual improper (or lack of) methods to <strong>propagate uncertainty</strong> on the parameter estimates.
               A challenge undertaken with a
               <a href="https://bob-carpenter.github.io/diagnostic-testing/reports/specificity.pdf">
@@ -681,8 +682,8 @@ $(document).ready(function() {
   <a href="http://www.med.mcgill.ca/epidemiology/joseph/publications/Methodological/speybroeck2012.pdf">Speybroeck et al</a> (2012)</i> or
             <a href="https://www.nature.com/articles/srep11861">M.L. Bermingham et al</a> (2015).
 
-
         </p>
+
          <h6>What about ENECOVID methodology?</h6>
         <p>
           Regarding the Spain's ENE-Covid19 serosurvey, the report with preliminary results briefly describes its technical approach to compensate for selection bias:
