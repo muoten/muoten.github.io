@@ -688,9 +688,11 @@ $(document).ready(function() {
         <p>
           Regarding the Spain's ENE-Covid19 serosurvey, the report with preliminary results briefly describes its technical approach to compensate for selection bias:
         </p>
+        <figure>
         <img src="img/seroprevalence_and_bias_0.png" alt="Seroprevalence methodology. Method to compensate selection bias" style="border:1px solid black">
         <figcaption><small>Source: ENE-COVID19: First Round. <a href="https://www.mscbs.gob.es/ciudadanos/ene-covid/docs/ESTUDIO_ENE-COVID19_PRIMERA_RONDA_INFORME_PRELIMINAR.pdf">Preliminary results</a></small>
         </figcaption>
+        </figure>
         <br/>
         <!--
         <p>
@@ -701,18 +703,22 @@ $(document).ready(function() {
       <p>Furthermore an adjustment method to compensate possible misclassification bias due to test errors, similar to <a href="https://www.medrxiv.org/content/medrxiv/suppl/2020/04/17/2020.04.14.20062463.DC1/2020.04.14.20062463-1.pdf">Santa Clara's statistical approach</a>, is also detailed
         in Annex 3 of <a href="https://portalcne.isciii.es/enecovid19/documentos/ene_covid19_dis.pdf">ENECOVID study design</a>
       </p>
+      <figure>
       <img src="img/seroprevalence_and_bias_4.png" alt="Seroprevalence methodology. Method to compensate misclassification bias" style="border:1px solid black">
       <figcaption><small>Source: ENE-COVID19 <a href="https://portalcne.isciii.es/enecovid19/documentos/ene_covid19_dis.pdf">study design</a></small>
       </figcaption>
+      </figure>
       <br/>
         <p>
         However the report with preliminary results warns that results are provisional because of the lack of combination with immunoassay.
         And also mentions in future tense that the combination of rapid tests and immunoassay will correct the minor sensitivity of the former
         with the results of the latter to maximize the representativity and the information quality.
       </p>
+        <figure>
         <img src="img/seroprevalence_and_bias_1.png" alt="Seroprevalence methodology to compensate lower sensitivity" style="border:1px solid black">
         <figcaption><small>Source: ENE-COVID19: First Round. <a href="https://www.mscbs.gob.es/ciudadanos/ene-covid/docs/ESTUDIO_ENE-COVID19_PRIMERA_RONDA_INFORME_PRELIMINAR.pdf">Preliminary report</a></small>
         </figcaption>
+        </figure>
 
         <br/>
         <p>
@@ -725,9 +731,11 @@ $(document).ready(function() {
         Reliability studies performed by ENE-COVID19 documented 79% sensitivity and 100% specificity for IgG.
 
       </p>
+      <figure>
       <img src="img/seroprevalence_and_bias_2.png" alt="Seroprevalence methodology. Estimated specificity and sensitivity of rapid tests" style="border:1px solid black">
       <figcaption><small>Source: ENE-COVID19: First Round. <a href="https://www.mscbs.gob.es/ciudadanos/ene-covid/docs/ESTUDIO_ENE-COVID19_PRIMERA_RONDA_INFORME_PRELIMINAR.pdf">Preliminary results</a></small>
       </figcaption>
+      </figure>
       <br/>
       <p>Annex 1 of study design provides more detail on these reliability studies. So we know 150 PCR samples were used to evaluate the rapid test, being 97 PCR+ and 53 PCR-.
       Under this benchmark global sensitivity for IgG+ was 79.4% and specificity 100%. But due to the small size of evaluated test samples
@@ -739,9 +747,11 @@ $(document).ready(function() {
       <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3661219/figure/F3/">95% confidence interval</a> of <math>[71.4%, 87.4%]</math>.
 
     </p>
+      <figure>
       <img src="img/test_reliability_study.png" alt="Seroprevalence methodology. Reliability study to evaluate specificity and sensitivity of rapid tests" style="border:1px solid black">
       <figcaption><small>Source: ENE-COVID19 <a href="https://portalcne.isciii.es/enecovid19/documentos/ene_covid19_dis.pdf">study design</a></small>
       </figcaption>
+      </figure>
       <br/>
       <h6>Assumptions: 100% specificity, lower sensitivity</h6>
       <p>
@@ -762,7 +772,7 @@ $(document).ready(function() {
           being 97.3% for 16953 analysed samples. But... if "ground truth" was 100% reliable, specificity for IgG was 100%
            and prevalence less than 5.4% then sould be 94.6% of true negatives perfectly detected.
            So for the reminder 4.7% to 5.4% the accuracy of IgG rapid test would be approximately
-          between 50% <math>(= (0.973 - 0.946) / 0.054)</math> and 42.6% <math>(= (0.973 - 0.953) / 0.047)</math>.
+          between 50% (<math>= (0.973 - 0.946) / 0.054</math>) and 42.6% (<math>= (0.973 - 0.953) / 0.047</math>).
         </p>
         <p>In the worst case, considering the more pessimistic sensitivity for IgG being only 42.6%, or rounding down, <a href="https://www.theguardian.com/books/2011/feb/03/douglas-adams-42-hitchhiker?INTCMP=SRCH">42</a>%,
           which is unlikely, false negatives could approximate to 6.9% <!--(= 0.58 x 0.05 / 0.42),-->
@@ -770,9 +780,11 @@ $(document).ready(function() {
         </p>
         <p>Furthermore, from 247 participants with PCR+, IgG antibodies were detected on 83% <math>(76.2 - 88.2 IC 95%)</math>, as presented in the next table.
         </p>
+        <figure>
         <img src="img/seroprevalence_and_bias_3.png" alt="Seroprevalence methodology. IgG detection vs PCR" style="border:1px solid black">
         <figcaption><small>Source: ENE-COVID19: First Round. <a href="https://www.mscbs.gob.es/ciudadanos/ene-covid/docs/ESTUDIO_ENE-COVID19_PRIMERA_RONDA_INFORME_PRELIMINAR.pdf">Preliminary report</a></small>
         </figcaption>
+        </figure>
         <br/>
       <p>
           Assuming 100% reliability on PCR+ and 100% specificity of rapid test, IgG sensitivity could be on the interval between 76.2% and 88.2%.
