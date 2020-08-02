@@ -178,7 +178,8 @@ $(document).ready(function() {
             <p>
               Sometimes we can feel we know the basics and it's time to move on to something else.
              If <strong>gradient boosted trees are good enough to fit my tabular data</strong>,
-               but xgboost implementation seems not efficient and accurate enough to my needs, I could try lightgbm or catboost.
+               but <a href="https://xgboost.readthedocs.io/en/latest/">xgboost</a> implementation seems not efficient and accurate enough to my needs,
+               I could try <a href="https://github.com/microsoft/LightGBM">lightgbm</a> or <a href="https://catboost.ai/">catboost</a>.
                Moreover, all of these algorithm implementations deal
               reasonable well even with unbalanced datasets and colinearity. So <strong>why should I care about</strong> simpler (and older) <strong>regression models?</strong>
             </p>
@@ -212,10 +213,11 @@ $(document).ready(function() {
           <blockquote style='display: block;margin-top: 1em;margin-bottom: 1em;margin-left: 40px;margin-right: 40px; border:1px; content: open-quote;'>
             <p><i>Sometimes...You can't see the forest for the (Gradient Boosted) trees</i></p></blockquote>
           <p>
-            After realizing I could have not really understand some benefits and relevant aspects of linear models because of the great advantages of
-            <i>xgboost</i> I tried to compare different linear regression implementations.
+            The great performance of <i>xgboost</i> might cause that I didn't really understand and value
+            some benefits and relevant aspects of linear models.
+            To better understand linear regression I've tried to compare different implementations.
             My goal was to model the main variables that affect <strong>life expectancy</strong>.
-            And trying to isolate the effect of multiple collinearities and interdependences expected between the different explanatory variables.
+            Attempting to isolate the effect of multiple collinearities and interdependences expected between the explanatory variables.
           </p>
           <p>As this goal was quite ambitious I started by using only
           the <strong>health expenditure</strong> per capita as explanatory variable. For this purpose
@@ -341,7 +343,7 @@ $(document).ready(function() {
               After reading
             <a href="https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&cad=rja&uact=8&ved=2ahUKEwicpOi5v_rqAhVFC2MBHfD6BvgQFjABegQIBBAB&url=http%3A%2F%2Fis.tuebingen.mpg.de%2Ffileadmin%2Fuser_upload%2Ffiles%2Fpublications%2FICML2009-Mooij_%5B0%5D.pdf">
               "Regression by dependence minimization and its application to causal inference in additive noise models"</a>
-              by Mooij et al, even simple regression models seem less uncool.
+              by Mooij et al, even simple regression models seem more <i>cool</i>.
               And looking into the residuals becomes even more interesting.
             </p>
             <p>Anyhow, we have to be cautious, as Judea Pearl says, no matter how sophisticated an algorithm is,
