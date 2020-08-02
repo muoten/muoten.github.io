@@ -49,7 +49,17 @@ $(document).ready(function() {
           <a class="nav-link js-scroll-trigger" href="#about">About</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link js-scroll-trigger" href="#covid19">COVID-19 sections:</a>
+          <a class="nav-link js-scroll-trigger" href="#uncool">Uncool Data Science:</a>
+        </li>
+        <li>
+        <ul>
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="#linear-models">Linear models</a>
+          </li>
+        </ul>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link js-scroll-trigger" href="#covid19">COVID-19:</a>
         </li>
         <li>
         <ul>
@@ -89,13 +99,11 @@ $(document).ready(function() {
 
     <section class="resume-section p-3 p-lg-5 d-flex align-items-center" id="about">
       <div class="w-100">
+        <h4 style="font-family:'Arial Narrow';margin-bottom: 1.5rem">Data <small>(&amp;)</small> Science <small>(&amp;)</small> ...
+        </h4>
 
-        <div class="subheading mb-4">Data <small>(&amp;)</small> Science <small>(&amp;)</small> ...
-
-        </div>
         <p class="lead mb-1">personal projects and recommended links, considering that...
         </p>
-      <!--  <p>-->
         <ul>
           <li>
           <i>"essentially all models are wrong, but some are useful".</i> <a href="https://rss.onlinelibrary.wiley.com/doi/pdf/10.1111/j.1740-9713.2010.00442.x">Box G.</a> et al.
@@ -107,21 +115,19 @@ $(document).ready(function() {
           </i>
           </li>
         </ul>
-        <!--</p>-->
         <p class="lead mb-5">I expect models being wrong, but their assumptions explicit.
        </p>
-       <p>New <a href="#covid19">COVID-19 sections</a>, with:
+       <p><i>Last update</i>: <a href="#uncool">Uncool Data Science (I): Regression to Linear Regression</a><sup><small>(2/8/2020)</small></sup></p>
+       <p>Moreover <a href="#covid19">COVID-19 sections</a>, with:
        </p>
           <ul>
 
             <li>
-              Context on <!--<a href="#covid19-ref-tweets">articles</a>,-->
+              Context on
               <a href="#covid19-estimates">confirmed cases vs estimates</a><sup><small>(17/05/2020)</small></sup>, <a href="#covid19-estimates-deaths">mortality</a><i><sup><small>(10/04/2020)</small></sup></i>
             </li>
-            <li>
-            Simulations with <a href="#covid19-epcalc">Epidemic Calculator</a>
-            </li>
-            <li><i><u>Last updates</u>:
+
+            <li><i><!--<u>Last updates</u>:-->
               <a href="#covid19-seroprevalence-bias">seroprevalence bias analysis</a><sup><small>(21/05/2020)</small></sup>,
               <a href="#covid19-data">data sources</a><sup><small>(21/05/2020)</small></sup>
             </i>
@@ -157,6 +163,215 @@ $(document).ready(function() {
 
 
 
+    <section class="resume-section p-3 p-lg-5 d-flex align-items-center" id="uncool">
+      <div class="w-100">
+
+        <div class="resume-item d-flex flex-column flex-md-row justify-content-between mb-5">
+          <div class="resume-content">
+
+          <h3 class="mb-0">Uncool Data Science</h3>
+          <div id="linear-models" class="subheading mb-3">Regression to Linear Regression</div>
+
+
+            <h6>(2/8/2020)</h6>
+
+            <p>
+              Sometimes we can feel we know the basics and it's time to move on to something else.
+             If <strong>gradient boosted trees are good enough to fit my tabular data</strong>,
+               but xgboost implementation seems not efficient and accurate enough to my needs, I could try lightgbm or catboost.
+               Moreover, all of these algorithm implementations deal
+              reasonable well even with unbalanced datasets and colinearity. So <strong>why should I care about</strong> simpler (and older) <strong>regression models?</strong>
+            </p>
+            <p>
+              It's very healthy to never stop learning, and questioning ourselves everything. But, since a pragmatic and utilitaristic point of view...
+              is it really worth the time to review the fundamentals of linear and logistic regression
+              in details?
+            </p>
+            <figure>
+            <img src="img/linear_regression_bro.jpeg" alt="Linear Regression concept in Layman Term" style="border:1px solid black; width:70%;margin:auto;display:block">
+            <figcaption style="text-align:center" ><small>Source: https://medium.com/@sarawritezz
+              <a href="https://medium.com/swlh/this-is-how-i-explain-linear-regression-to-12-year-old-boy-using-sklearn-python-library-d4bb06a649cc">
+                This is how I explain Linear Regression to 12-Year-old Boy</a></small>
+            </figcaption>
+            </figure>
+            <br/>
+            <p>
+              My opinion is that it's not crucial to know implementation details of algorithms to get reasonable accurate predictions
+              on your validation and test sets, but... accurate predictions, out of Kaggle, many times are not the main point.
+              And our search for "accuracy" often hides the requirement of generating <strong>actionable knowledge</strong>,
+              that is, getting insights to make useful interventions in the <i>real world</i>.
+              For this purpose it's preferable to understand our problem in terms of <strong>associations and causality</strong>.
+              And be prepared to answer <i>"what if"</i> questions?
+            </p>
+            <p>
+              Thus... <i>what if</i> I tried to infer causal knowledge about a particular problem by using simple regressions?
+          </p>
+
+          <br/><h4>Life expectancy vs Health expenditure: Linear Regression models for Longitudinal data.</h4>
+
+          <blockquote style='display: block;margin-top: 1em;margin-bottom: 1em;margin-left: 40px;margin-right: 40px; border:1px; content: open-quote;'>
+            <p><i>Sometimes...You can't see the forest for the (Gradient Boosted) trees</i></p></blockquote>
+          <p>
+            After realizing I could have not really understand some benefits and relevant aspects of linear models because of the great advantages of
+            <i>xgboost</i> I tried to compare different linear regression implementations.
+            My goal was to model the main variables that affect <strong>life expectancy</strong>.
+            And trying to isolate the effect of multiple collinearities and interdependences expected between the different explanatory variables.
+          </p>
+          <p>As this goal was quite ambitious I started by using only
+          the <strong>health expenditure</strong> per capita as explanatory variable. For this purpose
+            I obtained the data from the <a href="http://apps.who.int/nha/database/Home/IndicatorsDownload/en">
+              WHO's Global Health Expenditure Database (GHED)</a>.
+              Source for Life Expectancy estimates was <a href="https://ourworldindata.org/grapher/life-expectancy?time=..&country=~OWID_WRL">
+                OurWorldInData</a>. More details in my <a href="https://github.com/muoten/life-expectancy/blob/master/life_expectancy_vs_health_expenditure_linear_regression.ipynb">
+                  Jupyter Notebook on github</a>.
+          </p>
+          <figure>
+          <img src="img/health_expenditure_and_life_expectancy.png"
+          alt="Health Expenditure and Life Expectancy" style="border:1px solid black;width:70%;margin:auto;display:block">
+          <figcaption style="text-align:center"><small>Source: <a href="https://github.com/muoten/life-expectancy/blob/master/life_expectancy_vs_health_expenditure_linear_regression.ipynb">
+            muoten.github.io</a>. With data from <a href="https://ourworldindata.org/grapher/life-expectancy?time=..&country=~OWID_WRL">
+            OurWorldIndata</a> and <a href="http://apps.who.int/nha/database/Home/IndicatorsDownload/en">
+              WHO's Global Health Expenditure Database</a>
+          </small>
+          </figcaption>
+          </figure>
+          <br/>
+
+            <p>
+              Both datasets correspond to multi-dimensional data involving "measurements"
+              over time. This kind of data is usually referred in statistics and econometrics,
+              as <strong>longitudinal</strong> or also <strong>panel data</strong>.
+            </p>
+            <p>In Python there are at least 3 different packages we could use to apply linear models to our data.
+              So I've compared the implementations of the following:
+            </p>
+              <ul>
+                <li><pre>scikitlearn</pre></li>
+                <li><pre>statsmodels</pre></li>
+                <li><pre>linearmodels</pre></li>
+              </ul>
+
+            <p>First of all, after preparing and exploring the data, I decide to transform Health Expenditure variable by applying the natural logarithm.
+            </p>
+            <figure>
+            <img src="img/life_expectancy_and_health_expenditure_log.png"
+            alt="Health Expenditure and Life Expectancy (log)">
+            <figcaption style="text-align:center"><small>Source: <a href="https://github.com/muoten/life-expectancy/blob/master/life_expectancy_vs_health_expenditure_linear_regression.ipynb">
+              muoten.github.io</a>
+            </small>
+            </figcaption>
+            </figure>
+            <br/>
+            <p>Finally we can compare the different implementations of Ordinary Least Squares.
+              In the next figures, the statsmodel implementation, with a constant term (the intercept).
+              Resulting in a coefficient value (beta) of <math><mn>4,32</mn></math> for the explanatory variable, with standard error of <math><mn>0,33</mn></math>.
+              Assuming that <i>the covariance matrix of the errors is correctly specified</i>, as indicated in the output.
+            </p>
+            <figure>
+            <img src="img/ols_regression_life_expectancy_vs_health_expenditure_log_metrics.png" style="border:1px solid black;width:70%;margin:auto;display:block"
+            alt="Ordinary Least Squares (statsmodel): Life Expectancy vs Health Expenditure (log)">
+            <figcaption style="text-align:center"><small>Source: <a href="https://github.com/muoten/life-expectancy/blob/master/life_expectancy_vs_health_expenditure_linear_regression.ipynb">
+              muoten.github.io</a> Ordinary Least Squares (statsmodel): Life Expectancy vs Health Expenditure (log)
+            </small>
+            </figcaption>
+            </figure>
+            <br/>
+            <figure>
+            <img src="img/ols_regression_life_expectancy_vs_health_expenditure_log.png" style="border:1px solid black;width:70%;margin:auto;display:block"
+            alt="Ordinary Least Squares (statsmodel): Life Expectancy vs Health Expenditure (log)">
+            <figcaption style="text-align:center"><small>Source: <a href="https://github.com/muoten/life-expectancy/blob/master/life_expectancy_vs_health_expenditure_linear_regression.ipynb">
+              muoten.github.io</a> Ordinary Least Squares (statsmodel): Life Expectancy vs Health Expenditure (log)
+            </small>
+            </figcaption>
+            </figure>
+            <br/>
+
+            <p>According to our simple model the life expectancy for Spain in 2017 could be roughly estimated as
+              <math><mn>79.6</mn></math><math><mo>&PlusMinus;</mo><mn>0.8</mn></math> years.
+           <!--(<math><mrow><mo>=</mo>46.0 <mo>+</mo> 4.3<mo>·</mo>log(2500)</mrow></math>).
+              Assuming standard errors in the margin of <math>+-0.8</math>.
+            -->
+              Actually life expectancy in Spain is even higher,
+              as it is one of the highest in the world. Concretely, the value in our dataset for 2017 was <math><mn>83.3</mn></math> years.
+              Anyway not so bad taking into account that is a single variable simple model.
+            </p>
+
+            <p>Furthermore, in the notebook they are more details about the Coefficient of Determination calculation,
+              or the relation and differences between different configurations of Linear Regression models for longitudinal (panel) data.
+              Finally this first analysis have limited to Ordinary Least Squares,
+              with <a href="http://statmath.wu.ac.at/~hauser/LVs/FinEtricsQF/FEtrics_Chp5.pdf">Fixed Effect and Random Effect variants</a>,
+                supported by
+              <a href="https://bashtage.github.io/linearmodels/doc/panel/mathematical-formula.html#panel-mathematical-notation">
+                linearmodels package.</a>, with the names of PanelOLS and RandomEffects, respectively.
+              Other alternatives, as Lasso (L1) and Ridge (L2) regularizations have been excluded from the scope, at the moment.
+          </p>
+
+
+          <br/>
+          <h4>Linear regression. Recycling the residuals</h4>
+          <p>
+            The residuals in a linear regression model are the differences between the estimates and the true values.
+            Besides to optimize them in order to be as small as possible, it's important to check these residuals are independent.
+          </p>
+          <p>
+            Non random patterns in the residuals reveal our model is not good enough.
+            Further, in the OLS context, random errors are assumed to produce residuals that are
+            normally distributed and centered in zero. Moreover, the residuals should not be correlated with another variable, and adjacent residuals should not be correlated with each other (autocorrelation)
+    <a href="https://blog.minitab.com/blog/adventures-in-statistics-2/why-you-need-to-check-your-residual-plots-for-regression-analysis">
+    Reference</a>
+            </p>
+            <p>
+              The python package <a href="https://www.scikit-yb.org/en/latest/api/regressor/residuals.html">
+                yellowbrick</a> includes oneline methods to visualize ResidualPlots of a scikit-learn model.
+                By plotting the residuals for the Life Expectancy vs Health Expenditure (log) LinearRegression Model of the previous example
+                we can see there is indeed a pattern.
+            </p>
+            <figure>
+            <img src="img/residuals_plot.png" style="border:1px solid black;width:70%;margin:auto;display:block"
+            alt="Residuals for LinerRegression Model">
+            <figcaption style="text-align:center"><small>Source: <a href="https://github.com/muoten/life-expectancy/blob/master/life_expectancy_vs_health_expenditure_linear_regression.ipynb">
+              muoten.github.io</a> Residuals for Life Expectancy vs Health Expenditure (log) LinerRegression Model
+            </small>
+            </figcaption>
+            </figure>
+            <br/>
+
+            <h4>Regression by dependence minimization. And causal discovery</h4>
+            <p>
+              After reading
+            <a href="https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&cad=rja&uact=8&ved=2ahUKEwicpOi5v_rqAhVFC2MBHfD6BvgQFjABegQIBBAB&url=http%3A%2F%2Fis.tuebingen.mpg.de%2Ffileadmin%2Fuser_upload%2Ffiles%2Fpublications%2FICML2009-Mooij_%5B0%5D.pdf">
+              "Regression by dependence minimization and its application to causal inference in additive noise models"</a>
+              by Mooij et al, even simple regression models seem less uncool.
+              And looking into the residuals becomes even more interesting.
+            </p>
+            <p>Anyhow, we have to be cautious, as Judea Pearl says, no matter how sophisticated an algorithm is,
+              you can not infer causality by only looking to the data. Some previous assumptions are required.
+              Application of this "cool" algorithms don't get results for free. To move Data Science from
+              "data fitting" direction to "data-intensive Causal Science".
+              Or as I'd rephrase, from being fully data-driven to be model-driven but data-supported.
+              Or in <a href="https://twitter.com/_miguelhernan/status/897918662514024448?lang=es">
+                @_MiguelHernan</a> words: "draw your assumptions before your conclusions".
+            </p>
+            <blockquote class="twitter-tweet"><p lang="en" dir="ltr">Contesting the Soul of Data-Science. Below, an introduction to the Spanish translation of <a href="https://twitter.com/hashtag/Bookofwhy?src=hash&amp;ref_src=twsrc%5Etfw">#Bookofwhy</a>:<a href="https://t.co/gWpMQEIWhX">https://t.co/gWpMQEIWhX</a>. It expresses my conviction that the data-fitting direction taken by “Data Science” is temporary, soon to be replaced by &quot;Data-intensive Causal Science&quot;</p>&mdash; Judea Pearl (@yudapearl) <a href="https://twitter.com/yudapearl/status/1280791406894694410?ref_src=twsrc%5Etfw">July 8, 2020</a></blockquote> <script async src="https://platform.twitter.com/widgets.js"  ></script>
+            <p>
+              To be continued...
+            </p>
+
+<!--
+            <h4>Regression, confounding and selection bias</h4>
+            <p>
+              or example, in longitudinal studies with time-varying treatments,
+              identifying the structure allows us to detect situations inwhich
+              adjustmentfor confounding via stratification would introduce selection bias (see Part III).
+              In those cases, g-methods are a better alternative. Source: https://cdn1.sph.harvard.edu/wp-content/uploads/sites/1268/2020/02/ci_hernanrobins_21feb20.pdf
+
+            </p>
+-->
+
+          </div>
+        </div>
+      </div>
+    </section>
 
 
     <section class="resume-section p-3 p-lg-5 d-flex justify-content-center" id="covid19">
@@ -185,7 +400,7 @@ $(document).ready(function() {
           <p>Anyway report warns these results have to be considered <strong>provisional</strong> as they don't include yet complete information on immunoassays.
           So these estimates have to be read with caution.
         </p>
-        <blockquote class="twitter-tweet"><p lang="en" dir="ltr">A new report today from Spain showing intra-country heterogeneity of seroprevalence but overall 5%; very similar to projected in France <a href="https://twitter.com/datadista?ref_src=twsrc%5Etfw">@datadista</a> <a href="https://t.co/VUzsRPFoLu">https://t.co/VUzsRPFoLu</a><br>&quot;Only 2.3 million Spaniards have been infected w/ the coronavirus&quot;<a href="https://t.co/v09Ht86omj">https://t.co/v09Ht86omj</a> via <a href="https://twitter.com/Prodigi0_1?ref_src=twsrc%5Etfw">@Prodigi0_1</a></p>&mdash; Eric Topol (@EricTopol) <a href="https://twitter.com/EricTopol/status/1260666412164542465?ref_src=twsrc%5Etfw">May 13, 2020</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+        <blockquote class="twitter-tweet"><p lang="en" dir="ltr">A new report today from Spain showing intra-country heterogeneity of seroprevalence but overall 5%; very similar to projected in France <a href="https://twitter.com/datadista?ref_src=twsrc%5Etfw">@datadista</a> <a href="https://t.co/VUzsRPFoLu">https://t.co/VUzsRPFoLu</a><br>&quot;Only 2.3 million Spaniards have been infected w/ the coronavirus&quot;<a href="https://t.co/v09Ht86omj">https://t.co/v09Ht86omj</a> via <a href="https://twitter.com/Prodigi0_1?ref_src=twsrc%5Etfw">@Prodigi0_1</a></p>&mdash; Eric Topol (@EricTopol) <a href="https://twitter.com/EricTopol/status/1260666412164542465?ref_src=twsrc%5Etfw">May 13, 2020</a></blockquote> <script async src="https://platform.twitter.com/widgets.js"  ></script>
 
           <p>
           In summary, for this <i>serosurvey</i> approximately 60000 participants were recruited. Actually 60983 from a list of 81613, as 14549 refused to participate.
@@ -259,16 +474,17 @@ $(document).ready(function() {
           And there is often some unbalance between their corresponding error rates.
           For clinical diagnoses these unbalance can be even desirable, as both type of errors don't have in general the same impact.
         </p>
-        <blockquote class="twitter-tweet"><p lang="en" dir="ltr">I’m not sure who made this, but I might have to stick above my desk because it’s the only way I seem to be able remember the difference between type 1 and type 2 error! <a href="https://t.co/bmk9DI30Jw">pic.twitter.com/bmk9DI30Jw</a></p>&mdash; Dr Ellen Grimås (@EllenGrimas) <a href="https://twitter.com/EllenGrimas/status/1171002176551956480?ref_src=twsrc%5Etfw">September 9, 2019</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+        <blockquote class="twitter-tweet"><p lang="en" dir="ltr">I’m not sure who made this, but I might have to stick above my desk because it’s the only way I seem to be able remember the difference between type 1 and type 2 error! <a href="https://t.co/bmk9DI30Jw">pic.twitter.com/bmk9DI30Jw</a></p>&mdash; Dr Ellen Grimås (@EllenGrimas) <a href="https://twitter.com/EllenGrimas/status/1171002176551956480?ref_src=twsrc%5Etfw">September 9, 2019</a></blockquote> <script async src="https://platform.twitter.com/widgets.js"  ></script>
         <p>
           But in order to quantify prevalences it's preferable that both errors compensate.
           Or making posterior adjustments if this unbalance is significant and can't be tuned.
         </p>
+        <p>
           When undetected false negatives are not compensated with false positives there is <strong>misclasification bias</strong>, a kind of measure or information bias,
           depending on the taxonomy or scientific literature being consulted.
           Anyhow, independently of terminological considerations it should be adjusted in a similar way as other biases, like selection bias.
         </p>
-      </p>
+      <p>
           Details of an applied <strong>statistical methodology</strong> to adjust a particular study similar to ENECOVID can be consulted on
           a
           <a href="https://www.medrxiv.org/content/10.1101/2020.04.14.20062463v1.full.pdf">recent paper by E. Bendavid et al</a> (April 11 2020),
@@ -277,7 +493,7 @@ $(document).ready(function() {
             describing the procedure followed to measure the seroprevalence of antibodies to SARS-CoV-2 in Santa Clara County (California).
             I found this study via <a href="https://www.datanalytics.com/2020/04/27/muestreo-sensibilidad-y-especificidad/">@datanalytics</a>,
             soon accompanied by a
-            <a href="https://www.datanalytics.com/2020/05/21/analisis-bayesiano-de-pruebas-con-sensibilidad-especificidad-desconocida"/>critical opinion</a>
+            <a href="https://www.datanalytics.com/2020/05/21/analisis-bayesiano-de-pruebas-con-sensibilidad-especificidad-desconocida">critical opinion</a>
             to usual improper (or lack of) methods to <strong>propagate uncertainty</strong> on the parameter estimates.
               A challenge undertaken with a
               <a href="https://bob-carpenter.github.io/diagnostic-testing/reports/specificity.pdf">
@@ -289,37 +505,43 @@ $(document).ready(function() {
   <a href="http://www.med.mcgill.ca/epidemiology/joseph/publications/Methodological/speybroeck2012.pdf">Speybroeck et al</a> (2012)</i> or
             <a href="https://www.nature.com/articles/srep11861">M.L. Bermingham et al</a> (2015).
 
-
         </p>
+
          <h6>What about ENECOVID methodology?</h6>
         <p>
           Regarding the Spain's ENE-Covid19 serosurvey, the report with preliminary results briefly describes its technical approach to compensate for selection bias:
         </p>
+        <figure>
         <img src="img/seroprevalence_and_bias_0.png" alt="Seroprevalence methodology. Method to compensate selection bias" style="border:1px solid black">
         <figcaption><small>Source: ENE-COVID19: First Round. <a href="https://www.mscbs.gob.es/ciudadanos/ene-covid/docs/ESTUDIO_ENE-COVID19_PRIMERA_RONDA_INFORME_PRELIMINAR.pdf">Preliminary results</a></small>
         </figcaption>
+        </figure>
         <br/>
         <!--
         <p>
           Though I don't find any details regarding measurement adjustment... and it seems I'm not the only one...
         </p>
-        <blockquote class="twitter-tweet"><p lang="es" dir="ltr">Tampoco he visto el el informe INE/ISCIII que se mencione la corrección de las estimaciones por la especificidad. Más al respecto, (incluyendo código para compensar por una especificidad &lt; 100%) aquí: <a href="https://t.co/Bsvoq6KFtC">https://t.co/Bsvoq6KFtC</a></p>&mdash; Carlos Gil Bellosta (@gilbellosta) <a href="https://twitter.com/gilbellosta/status/1260669385670307846?ref_src=twsrc%5Etfw">May 13, 2020</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+        <blockquote class="twitter-tweet"><p lang="es" dir="ltr">Tampoco he visto el el informe INE/ISCIII que se mencione la corrección de las estimaciones por la especificidad. Más al respecto, (incluyendo código para compensar por una especificidad &lt; 100%) aquí: <a href="https://t.co/Bsvoq6KFtC">https://t.co/Bsvoq6KFtC</a></p>&mdash; Carlos Gil Bellosta (@gilbellosta) <a href="https://twitter.com/gilbellosta/status/1260669385670307846?ref_src=twsrc%5Etfw">May 13, 2020</a></blockquote> <script async src="https://platform.twitter.com/widgets.js"  ></script>
       -->
       <p>Furthermore an adjustment method to compensate possible misclassification bias due to test errors, similar to <a href="https://www.medrxiv.org/content/medrxiv/suppl/2020/04/17/2020.04.14.20062463.DC1/2020.04.14.20062463-1.pdf">Santa Clara's statistical approach</a>, is also detailed
         in Annex 3 of <a href="https://portalcne.isciii.es/enecovid19/documentos/ene_covid19_dis.pdf">ENECOVID study design</a>
       </p>
+      <figure>
       <img src="img/seroprevalence_and_bias_4.png" alt="Seroprevalence methodology. Method to compensate misclassification bias" style="border:1px solid black">
       <figcaption><small>Source: ENE-COVID19 <a href="https://portalcne.isciii.es/enecovid19/documentos/ene_covid19_dis.pdf">study design</a></small>
       </figcaption>
+      </figure>
       <br/>
         <p>
         However the report with preliminary results warns that results are provisional because of the lack of combination with immunoassay.
         And also mentions in future tense that the combination of rapid tests and immunoassay will correct the minor sensitivity of the former
         with the results of the latter to maximize the representativity and the information quality.
       </p>
+        <figure>
         <img src="img/seroprevalence_and_bias_1.png" alt="Seroprevalence methodology to compensate lower sensitivity" style="border:1px solid black">
         <figcaption><small>Source: ENE-COVID19: First Round. <a href="https://www.mscbs.gob.es/ciudadanos/ene-covid/docs/ESTUDIO_ENE-COVID19_PRIMERA_RONDA_INFORME_PRELIMINAR.pdf">Preliminary report</a></small>
         </figcaption>
+        </figure>
 
         <br/>
         <p>
@@ -332,54 +554,65 @@ $(document).ready(function() {
         Reliability studies performed by ENE-COVID19 documented 79% sensitivity and 100% specificity for IgG.
 
       </p>
+      <figure>
       <img src="img/seroprevalence_and_bias_2.png" alt="Seroprevalence methodology. Estimated specificity and sensitivity of rapid tests" style="border:1px solid black">
       <figcaption><small>Source: ENE-COVID19: First Round. <a href="https://www.mscbs.gob.es/ciudadanos/ene-covid/docs/ESTUDIO_ENE-COVID19_PRIMERA_RONDA_INFORME_PRELIMINAR.pdf">Preliminary results</a></small>
       </figcaption>
+      </figure>
       <br/>
       <p>Annex 1 of study design provides more detail on these reliability studies. So we know 150 PCR samples were used to evaluate the rapid test, being 97 PCR+ and 53 PCR-.
       Under this benchmark global sensitivity for IgG+ was 79.4% and specificity 100%. But due to the small size of evaluated test samples
       we could provide
-      more conservative estimations. For specificity our uncertainty margin could be in the interval <math>[98.1% (=53/54), 100%]</math>.
+      more conservative estimations. For specificity our uncertainty margin could be in the interval <math><mtext>[98.1% (=53/54), 100%]</mtext></math>.
       Whereas for sensitivity we could infer that 77 true positives were detected by IgG,
       <!--so the uncertainty margin would be <math>[78.6% (=77/98), 80.4% (=78/97)]</math>,-->
       and we could estimate also a
-      <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3661219/figure/F3/">95% confidence interval</a> of <math>[71.4%, 87.4%]</math>.
+      <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3661219/figure/F3/">95% confidence interval</a> of <math><mtext>[71.4%, 87.4%]</mtext></math>.
 
     </p>
+      <figure>
       <img src="img/test_reliability_study.png" alt="Seroprevalence methodology. Reliability study to evaluate specificity and sensitivity of rapid tests" style="border:1px solid black">
       <figcaption><small>Source: ENE-COVID19 <a href="https://portalcne.isciii.es/enecovid19/documentos/ene_covid19_dis.pdf">study design</a></small>
       </figcaption>
+      </figure>
       <br/>
       <h6>Assumptions: 100% specificity, lower sensitivity</h6>
       <p>
         With 100% specificity there would be no false positives.
-        And with sensitivity of 79%, for a prevalence of 5% there would be 5% of true positives and approximately 1.3% <math>(= 0.21 x 0.05 / 0.79)</math> of false negatives.
+        And with sensitivity of 79%, for a prevalence of 5% there would be 5% of true positives and approximately 1.3% <math><mtext>(= 0.21 x 0.05 / 0.79)</mtext></math> of false negatives.
         So seroprevalence should rise to 6.3%.
         but slightly higher than preliminary 5% estimate, and also not bounded to the provided 95% confidence interval of 4.7% and 5.4%.
         </p>
         <p>I've detailed the calculation with intermediate steps on false positives and false negatives estimations. But we could use directly the expression from the previous annex:
         </p>
-        <p>
+
+        <p style="text-align:center">
         <math>
+        <mtext>
           Prevalence* = (Prevalence - (1 - Specificity)) / (Sensitivity - (1 - Specificity)) = 0.05 / 0.79 = 6.3%
+        </mtext>
         </math>
+        </p>
 
         <p>
           Moreover, the study refers to coherence between immunoassay, considered as "ground truth", and IgG rapid test results,
           being 97.3% for 16953 analysed samples. But... if "ground truth" was 100% reliable, specificity for IgG was 100%
            and prevalence less than 5.4% then sould be 94.6% of true negatives perfectly detected.
            So for the reminder 4.7% to 5.4% the accuracy of IgG rapid test would be approximately
-          between 50% <math>(= (0.973 - 0.946) / 0.054)</math> and 42.6% <math>(= (0.973 - 0.953) / 0.047)</math>.
+          between 50% <math><mtext>(= (0.973 - 0.946) / 0.054)</mtext></math> and 42.6%
+          <math><mtext>(= (0.973 - 0.953) / 0.047)</mtext></math>.
         </p>
         <p>In the worst case, considering the more pessimistic sensitivity for IgG being only 42.6%, or rounding down, <a href="https://www.theguardian.com/books/2011/feb/03/douglas-adams-42-hitchhiker?INTCMP=SRCH">42</a>%,
           which is unlikely, false negatives could approximate to 6.9% <!--(= 0.58 x 0.05 / 0.42),-->
           and estimated seroprevalence would rise to near 12%.
         </p>
-        <p>Furthermore, from 247 participants with PCR+, IgG antibodies were detected on 83% <math>(76.2 - 88.2 IC 95%)</math>, as presented in the next table.
+        <p>Furthermore, from 247 participants with PCR+, IgG antibodies were detected on 83% <math><mtext>(76.2 - 88.2 IC 95%)</mtext></math>, as presented in the next table.
         </p>
+        <figure>
         <img src="img/seroprevalence_and_bias_3.png" alt="Seroprevalence methodology. IgG detection vs PCR" style="border:1px solid black">
         <figcaption><small>Source: ENE-COVID19: First Round. <a href="https://www.mscbs.gob.es/ciudadanos/ene-covid/docs/ESTUDIO_ENE-COVID19_PRIMERA_RONDA_INFORME_PRELIMINAR.pdf">Preliminary report</a></small>
         </figcaption>
+        </figure>
         <br/>
       <p>
           Assuming 100% reliability on PCR+ and 100% specificity of rapid test, IgG sensitivity could be on the interval between 76.2% and 88.2%.
@@ -391,7 +624,7 @@ $(document).ready(function() {
         <p>
           Considering even the most optimistic scenario with 100% specificity and 97% sensitivity reported by the manufacturer,
           false negatives could approximate to 0.1% <!--(=0.03 x 0.05 / 0.97)-->.
-          And 5.1% seroprevalence would be in the current provided 95% Interval of Confidence <math>(4.7%, 5.4%)</math>.
+          And 5.1% seroprevalence would be in the current provided 95% Interval of Confidence <math><mtext>(4.7%, 5.4%)</mtext></math>.
           However, with analogous calculation, if sensitivity was lower than 92%,
           seroprevalence would rise above the current provided 5.4% upper bound.
         </p>
@@ -725,7 +958,7 @@ could be related with interregional demographics. Maybe many residents in Madrid
         <br/>
           <!--<p>-->
             Additional related information, though less updated:
-            <blockquote class="twitter-tweet"><p lang="en" dir="ltr">Here is a distribution of recorded Covid-19 cases in Iceland (which tests broadly, even people with no symptoms) and the Netherlands (which tests narrowly, only those with severe symptoms) <a href="https://t.co/v92fVvOHrT">pic.twitter.com/v92fVvOHrT</a></p>&mdash; Alexandre Afonso (@alexandreafonso) <a href="https://twitter.com/alexandreafonso/status/1243557013759700997?ref_src=twsrc%5Etfw">March 27, 2020</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+            <blockquote class="twitter-tweet"><p lang="en" dir="ltr">Here is a distribution of recorded Covid-19 cases in Iceland (which tests broadly, even people with no symptoms) and the Netherlands (which tests narrowly, only those with severe symptoms) <a href="https://t.co/v92fVvOHrT">pic.twitter.com/v92fVvOHrT</a></p>&mdash; Alexandre Afonso (@alexandreafonso) <a href="https://twitter.com/alexandreafonso/status/1243557013759700997?ref_src=twsrc%5Etfw">March 27, 2020</a></blockquote> <script async src="https://platform.twitter.com/widgets.js"  ></script>
 
         <br/>
             Germany vs South Korea vs Italy, published on March 13th in Medium by
