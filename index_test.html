@@ -101,13 +101,9 @@ $(document).ready(function() {
       <div class="w-100">
         <h4 style="font-family:'Arial Narrow';margin-bottom: 1.5rem">Data <small>(&amp;)</small> Science <small>(&amp;)</small> ...
         </h4>
-<!--
-        <div class="subheading mb-4">Data <small>(&amp;)</small> Science <small>(&amp;)</small> ...
-        </div>
--->
+
         <p class="lead mb-1">personal projects and recommended links, considering that...
         </p>
-      <!--  <p>-->
         <ul>
           <li>
           <i>"essentially all models are wrong, but some are useful".</i> <a href="https://rss.onlinelibrary.wiley.com/doi/pdf/10.1111/j.1740-9713.2010.00442.x">Box G.</a> et al.
@@ -119,7 +115,6 @@ $(document).ready(function() {
           </i>
           </li>
         </ul>
-        <!--</p>-->
         <p class="lead mb-5">I expect models being wrong, but their assumptions explicit.
        </p>
        <p><i>Last update</i>: <a href="#uncool">Uncool Data Science (I): Regression to Linear Regression</a><sup><small>(14/7/2020)</small></sup></p>
@@ -128,13 +123,10 @@ $(document).ready(function() {
           <ul>
 
             <li>
-              Context on <!--<a href="#covid19-ref-tweets">articles</a>,-->
+              Context on
               <a href="#covid19-estimates">confirmed cases vs estimates</a><sup><small>(17/05/2020)</small></sup>, <a href="#covid19-estimates-deaths">mortality</a><i><sup><small>(10/04/2020)</small></sup></i>
             </li>
-            <!--<li>
-            Simulations with <a href="#covid19-epcalc">Epidemic Calculator</a>
-            </li>
-          -->
+
             <li><i><!--<u>Last updates</u>:-->
               <a href="#covid19-seroprevalence-bias">seroprevalence bias analysis</a><sup><small>(21/05/2020)</small></sup>,
               <a href="#covid19-data">data sources</a><sup><small>(21/05/2020)</small></sup>
@@ -173,18 +165,15 @@ $(document).ready(function() {
 
     <section class="resume-section p-3 p-lg-5 d-flex align-items-center" id="uncool">
       <div class="w-100">
-      <!--  <h2 class="mb-5">Data &amp; Opinions</h2>-->
 
         <div class="resume-item d-flex flex-column flex-md-row justify-content-between mb-5">
           <div class="resume-content">
-            <!--<h3 class="mb-0">Regression to Linear Regression</h3>
-            <div class="subheading mb-3">From Ordinary Least Squares to Causal Discovery</div>
-          -->
+
           <h3 class="mb-0">Uncool Data Science</h3>
           <div id="linear-models" class="subheading mb-3">Regression to Linear Regression</div>
 
 
-            <h6>(14/7/2020)</h6>
+            <h6>(2/8/2020)</h6>
 
             <p>
               Sometimes we can feel we know the basics and it's time to move on to something else.
@@ -216,190 +205,6 @@ $(document).ready(function() {
             </p>
             <p>
               Thus... <i>what if</i> I tried to infer causal knowledge about a particular problem by using simple regressions?
-              <!--And <i>what if</i> I removed the regressions and tried to compare conclusions with tree based regression algorithms?
-              And <i>what if</i> then I removed my knowledge about regressions and tried to compare conclusions?
-            </p>
-              <i>Spoiler</i>: At this point linear regression could be even more powerful than xgboost, at the moment...
-              and in the next posts(/sections) I'll try to justify my point of view based on public data I'll review
-              and some assumptions I'll try to make explicit.
-            </p>
-
-            <br/>
-            <h4>Linear Regression: Ordinary Least Squares, Ridge and Lasso</h4>
-            Let's scikit-learn.org documentation explain linear regression much better than me:
-            <img src="img/ols_regression.png" alt="scikit-learn.org. Linear Regression: Ordinary Least Squares" style="border:1px solid black">
-            <figcaption><small>Source: scikit-learn.org <a href="https://scikit-learn.org/stable/modules/linear_model.html#ordinary-least-squares">Ordinary Least Squares</a></small>
-            </figcaption>
-            <br/>
-            <p>
-              Furthermore, to deal with the problem of colinearity (and overfitting) there are different approaches.
-              Mainly L1 (norm 1) and L2 (norm 2) regularization:
-            </p>
-              <img src="img/regularization.png" alt="scikit-learn.org. Linear Regression: Ordinary Least Squares" style="border:1px solid black">
-              <figcaption><small>Source: http://bjlkeng.github.io <a href="http://bjlkeng.github.io/posts/probabilistic-interpretation-of-regularization/">A Probabilistic Interpretation of Regularization</a></small>
-              </figcaption>
-
-            <br/>
-            <br/>
-            <h4>Modeling Life Expectancy in times of Coronavirus</h4>
-            <p>
-              At the beginning of February 2020, when COVID19 was an emerging concern that already had affected China
-              and started to expand all over the world.
-
-              I decided to analyze statistical data related to <strong>causes of death</strong> in different countries and world regions
-              over time. To better understand the <strong>risk factors</strong> related to early deaths or longer
-              <strong>life expectancies</strong>.
-              I was inspired by reading <a href="https://ourworldindata.org/causes-of-death">https://ourworldindata.org/causes-of-death</a>.
-
-            </p>
-            <iframe src="https://ourworldindata.org/grapher/annual-number-of-deaths-by-cause" loading="lazy" style="width: 100%; height: 600px; border: 0px none;"></iframe>
-
-            <p>
-              With this goal, I collected some data from death statistics and health expenditure per country.
-
-              Actually my vision was a bit deeper (and probably too much ambicious), though anyway...
-               think big, start small... and iterate, learn, persevere... I began with a simple (& crappy) analysis in a <a href="https://github.com/muoten/life-expectancy/blob/master/life-expectancy.ipynb">Jupyter Notebook in github</a>.
-          </p>
-            <p>
-              At that time, in 2 February 2020, the first death related to Sars-Cov-2 was reported
-              out of continental China, in Philipinas. On 6 February the 3rd COVID-19 confirmed case was
-              diagnosed in Italy. 1 month later, on March 11th, the World Health Organization declared COVID-19 as a pandemy.
-              Then we sadly learnt about the danger of <a href="https://medium.com/incerto/the-masks-masquerade-7de897b517b7">
-                exponential and nonlinear risks or the "absence of evidence" vs "evidence of absence" debate</a>. And also
-              the <a href="https://bostonreview.net/science-nature/marc-lipsitch-good-science-good-science">tradeoffs between
-                "evidence-based" medicine and urgent decisions under uncertainty</a>
-              or the difficulties and importance to <a href="https://ourworldindata.org/covid-sources-comparison">
-                monitor and publish data with quality and proper language</a>.
-            </p>
-            <p>
-              I wrote also a few <a href="#covid19">personal analysis contextualizing some of these problems</a>.
-              Anyway, beyond the scope of this post on linear regression and causal discovery,
-              I strongly recommend to explore <a href="https://twitter.com/ourworldindata">@ourworldindata</a>
-              interactive content and reports, on any topic beyond the context on death causes and COVID-19.
-            </p>
-
-            <br/>
-            <h4>What if...</h4>
-            What if we could model <strong>counterfactuals</strong> of personal decisions and public policies in terms of statistical impact in life expectation?
-            <ul>
-              <li>
-              What if USA make masks mandatory?
-            </li>
-            <li>
-              What if Angola increases yearly health expenditure on 100$ per capita.
-            </li>
-              <li>
-              What if I donate 100$ that are employed in health expenditure in Angola, or in Spain.
-            </li>
-            <li>
-              How could this affect to the life expectancy, and even to the <i><a href="https://www.who.int/healthinfo/global_burden_disease/metrics_daly/en/">
-                Disability-Adjusted Life Year (DALY)</a></i>
-              of a country, a region, a random citizen of a given region or myself?
-            </li>
-            <li>
-              What if looking for pleasure, comfort or economic growth I'm continuously taking actions
-              on a daily basis that are shortening my own life, my neighbour's or people from other countries all over the world.
-            </li>
-            <li>
-              What if I could find some evidences that could help to take more informed actions and policies?
-            </li>
-            <li>
-              What if I stop to drink beer or eating processed meat?
-            </li>
-            <li>
-              What if other countries follow Germany initiative to <a href="https://pubs.acs.org/doi/10.1021/es3051197">
-                phase out nuclear power?</a>
-            </li>
-            <li>
-              What if I left Madrid with its high pollution but higher job opportunities and salaries
-              and move to less contaminated environment with lower salaries and need to stop donating 100$ per capita to NGO's improving Angola's lifes?
-            </li>
-            <li>What if I don't find any useful evidences that could help to drive my life or other lifes
-              but contribute to clean and make more accesible relevant data
-            </li>
-            </ul>
-            </p>
-            <img src="img/what_if.png" alt="wikimedia. What if?" style="border:1px solid black;width:50%;margin:auto;display:block">
-            <figcaption style="text-align:center"><small>Source: wikimedia.org <a href="http://bjlkeng.ghttps://commons.wikimedia.org/wiki/File:What_if_I_ask_for_help.JPG">What if</a></small>
-            </figcaption>
-            <br/>
-            <p>
-              Life is a complex and dynamic system, full of constraints, interdependences, conflicts of interest and trade-offs.
-              Sometimes we have not enough information to take informed actions.
-              Sometimes we have the information and prefer to optimize different metrics.
-              And sometimes we think we've taken an informed decision and we could fail to our purposes anyway...
-              Informed decisions and public policies are very complex, so it's life.
-            </p>
-            <p>
-              But what if we try to apply what we can learn from books on causal inference,
-              as <i>The Book of Why</i> by Pearl J and Mackenzie D, or The publicly available
-              <a href="https://cdn1.sph.harvard.edu/wp-content/uploads/sites/1268/2020/02/ci_hernanrobins_21feb20.pdf"><i>"Causal Inference: What If"</i></a> by Hernan MA and Robins JM?
-            </p>
-            <p>
-              And what if we move on beyond the <strong>correlation is not causation</strong> mantra, and start to talk about the
-              4 different <strong>causes of</strong> observable <strong>association</strong> between two variables (let's say, A and B):
-            </p>
-              <ul>
-                <li>
-                  Chance
-                </li>
-                <li>Being cause and effect. A causes B or B causes A
-                </li>
-                <li>Both having a common cause: A and B being caused by C
-                </li>
-                <li>
-                  Having a common effect, if we are observing or being conditioned to this common effect
-                </li>
-              </ul>
-            <p>
-              I recommend the explanations of Miguel Hernan's EDX course <a href="https://www.edx.org/course/causal-diagrams-draw-your-assumptions-before-your">
-                 Causal Graphs: Draw Your Assumptions Before your Conclusions</a>. Or the examples on the web <a href="https://catalogofbias.org/2019/03/05/association-or-causation-how-do-we-ever-know/">catalogofbias.org</a>
-            </p>
-
-            <br/>
-            <h4>Global Burden of Disease (I): Longitudinal vs Pooled Cross-Sectional Data</h4>
-            <p>
-              The <a href="https://www.who.int/healthinfo/global_burden_disease/about/en/">Global Burden of Disease (GDB)</a>
-               project is a framework for integrating, analysing and disseminating information
-              to assess the comparative importance of diseases, injuries and risk factors in causing premature death,
-              loss of health and disability in different populations.
-              It is the result of the collaboration of the Institute of Health Metrics and Evaluation (IHME) and other academic partners.
-              The IHME has developed a standardized approach to the attribution of deaths to specific causes
-              http://ghdx.healthdata.org/gbd-results-tool
-            </p>
-            <img src="img/gdb_treemap.png" alt="Global Disease Burden Compare (IMHE Viz Hub)" style="border:1px solid black">
-            <figcaption><small>Source: healthdata.org <a href="https://vizhub.healthdata.org/gbd-compare/">Global Disease Burden Compare (IMHE Viz Hub)</a></small>
-            </figcaption>
-
-            <br/>
-            <p>
-              IMHE provides data made available for download by non-commercial users via the Open Data Commons Attribution
-              <a href="http://www.healthdata.org/about/terms-and-conditions">License</a>.
-              They are estimations per country with ranges of uncertainty, for years 1990 to 2017.
-              Hereafter I'll assume these GBD from IMHE estimations can be considered as <i>measures</i>.
-              Ignoring at the moment the phylosophical and linguistic debate between the difference
-              or limit between <i>measures</i> and </i>estimations</i>.
-            </p>
-            <p>
-              So this kind of multidimensional data involving "measurements"
-              over time is usually referred in statistics and econometrics,
-              as <strong>longitudinal</strong> or also <strong>panel data</strong>.
-            </p>
-            <p>
-            Otherwise, a <strong>cross-sectional</strong> dataset consists of a sample of metrics for individuals, countries
-            or any other entity taken at a given point in time.
-            Thus, time series and cross-sectional data can be thought of as special cases of panel data that are in one dimension only
-            (one panel member or individual for the former, one time point for the latter).
-          </p>
-          <p>Finally, being a <strong>pooled cross-sectional</strong> time series analysis
-            when the time dimension is not considered in a special way, or it's directly ignored.
-            For instance, because the data on all units do not correspond to precisely the same time period (unbalanced panel).
-            because single univariate time series are too short,
-            or even because pooling of series across sections increase the sample size and we assume time differences could be ignored.
-          Moreover,  constant association across sections would benefit from pooling data simply by
-          increasing the number of observations and therefore increasing the reliability and stability of estimates. <a href="https://www.zora.uzh.ch/id/eprint/94617/1/50730.pdf">
-            In addition, it could be tested whether such an assumption of a constant association holds.</a>
--->
           </p>
 
           <br/><h4>Life expectancy vs Health expenditure: Linear Regression models for Longitudinal data.</h4>
@@ -562,7 +367,6 @@ $(document).ready(function() {
 
             </p>
 -->
-
 
           </div>
         </div>
