@@ -69,15 +69,7 @@ $(document).ready(function() {
         <li class="nav-item">
           <a class="nav-link js-scroll-trigger" href="#covid19-estimates">Context, analysis & simulations</a>
         </li>
-        <!--
-        <li class="nav-item">
-          <a class="nav-link js-scroll-trigger" href="#covid19-ages">Analysis & Simulations</a>
-        </li>
-      -->
-        <!--<li class="nav-item">
-          <a class="nav-link js-scroll-trigger" href="#covid19-epcalc">Simulations</a>
-        </li>
-      -->
+
         <li class="nav-item">
           <a class="nav-link js-scroll-trigger" href="#covid19-data">References</a>
         </li>
@@ -296,9 +288,7 @@ $(document).ready(function() {
 
             <p>According to our simple model the life expectancy for Spain in 2017 could be roughly estimated as
               <math><mn>79.6</mn></math><math><mo>&PlusMinus;</mo><mn>0.8</mn></math> years.
-           <!--(<math><mrow><mo>=</mo>46.0 <mo>+</mo> 4.3<mo>·</mo>log(2500)</mrow></math>).
-              Assuming standard errors in the margin of <math>+-0.8</math>.
-            -->
+
               Actually life expectancy in Spain is even higher,
               as it is one of the highest in the world. Concretely, the value in our dataset for 2017 was <math><mn>83.3</mn></math> years.
               Not bad for a single variable simple model.
@@ -365,17 +355,6 @@ $(document).ready(function() {
               To be continued...
             </p>
 
-<!--
-            <h4>Regression, confounding and selection bias</h4>
-            <p>
-              or example, in longitudinal studies with time-varying treatments,
-              identifying the structure allows us to detect situations inwhich
-              adjustmentfor confounding via stratification would introduce selection bias (see Part III).
-              In those cases, g-methods are a better alternative. Source: https://cdn1.sph.harvard.edu/wp-content/uploads/sites/1268/2020/02/ci_hernanrobins_21feb20.pdf
-
-            </p>
--->
-
           </div>
         </div>
       </div>
@@ -392,17 +371,14 @@ $(document).ready(function() {
           <div class="resume-content">
             <h3 class="mb-0">Estimates and Context. Analysis and Simulations. Language matters</h3>
 
-            <!--
-            #############
-            -->
+<!--
+#############
+-->
             <br/>
             <div class="subheading mb-3" id="covid19-seroprevalence-bias">ENECOVID (II): Test error estimates and (my) simplified bias analysis on preliminary results
 
             </div>
-            <!--
-                    <h4 id="covid19-seroprevalence-bias">Test error estimates and (my) simplified bias analysis on ENECOVID preliminary results</h4>
-            -->
-                     <h6>(Updated 21/05/2020)</h6>
+              <h6>(Updated 21/05/2020)</h6>
                     <p>
                       Tests used to detect antibodies, as other kind of clinical measures don't have to be perfect to be useful.
                       Generally 2 characteristics define this kind of imperfections: <strong>specificity</strong> (true negative rate) and <strong>sensitivity</strong> (true positive rate or <i>recall</i>).
@@ -457,12 +433,7 @@ $(document).ready(function() {
                     </figcaption>
                     </figure>
                     <br/>
-                    <!--
-                    <p>
-                      Though I don't find any details regarding measurement adjustment... and it seems I'm not the only one...
-                    </p>
-                    <blockquote class="twitter-tweet"><p lang="es" dir="ltr">Tampoco he visto el el informe INE/ISCIII que se mencione la corrección de las estimaciones por la especificidad. Más al respecto, (incluyendo código para compensar por una especificidad &lt; 100%) aquí: <a href="https://t.co/Bsvoq6KFtC">https://t.co/Bsvoq6KFtC</a></p>&mdash; Carlos Gil Bellosta (@gilbellosta) <a href="https://twitter.com/gilbellosta/status/1260669385670307846?ref_src=twsrc%5Etfw">May 13, 2020</a></blockquote> <script async src="https://platform.twitter.com/widgets.js"  ></script>
-                  -->
+
                   <p>Furthermore an adjustment method to compensate possible misclassification bias due to test errors, similar to <a href="https://www.medrxiv.org/content/medrxiv/suppl/2020/04/17/2020.04.14.20062463.DC1/2020.04.14.20062463-1.pdf">Santa Clara's statistical approach</a>, is also detailed
                     in Annex 3 of <a href="https://portalcne.isciii.es/enecovid19/documentos/ene_covid19_dis.pdf">ENECOVID study design</a>
                   </p>
@@ -505,7 +476,6 @@ $(document).ready(function() {
                   we could provide
                   more conservative estimations. For specificity our uncertainty margin could be in the interval <math><mtext>[98.1% (=53/54), 100%]</mtext></math>.
                   Whereas for sensitivity we could infer that 77 true positives were detected by IgG,
-                  <!--so the uncertainty margin would be <math>[78.6% (=77/98), 80.4% (=78/97)]</math>,-->
                   and we could estimate also a
                   <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3661219/figure/F3/">95% confidence interval</a> of <math><mtext>[71.4%, 87.4%]</mtext></math>.
 
@@ -557,7 +527,6 @@ $(document).ready(function() {
                   <p>
                       Assuming 100% reliability on PCR+ and 100% specificity of rapid test, IgG sensitivity could be on the interval between 76.2% and 88.2%.
                       For the higher bound, 88.2%, false negatives could approximate to 0.7%
-                      <!--(=0.118 x 0.05 / 0.882)-->
                       and seroprevalence would be around 5.7%.
                     </p>
 
@@ -581,8 +550,6 @@ $(document).ready(function() {
                       we would get 1 false positive due to imperfect specificity.
                       And boths effects would compensate each other for an expected prevalence near to 5%.
                     </p>
-                    <!--<img src="https://media.giphy.com/media/SV0kYmJBeXm6Fndmxn/giphy.gif" alt="Rick &nbsp; What's the point giphy" style="width:50%">-->
-
 
                     <h6>Conclusions</h6>
                     <p>While we wait for the immunoassays to be completed to "fine tune" the preliminary ENECOVID seroprevalence estimate,
@@ -608,9 +575,7 @@ $(document).ready(function() {
                       for a baseline raw estimate of 5%
                     </p>
                     <img src="img/sensitivity_specificity_adjustment.png" alt="Sensitivity vs Specificity adjustment" style="width: 80%;">
-                    <!--<figcaption><small>Adjusted seroprevalence estimates for different values of sensitivity and specificity.</small>
-                    </figcaption>
-                  -->
+
                   <br/>
 
                   <p>
@@ -633,9 +598,9 @@ $(document).ready(function() {
 
                         <br/>
             <hr/>
-            <!--
-            #############
-            -->
+<!--
+#############
+-->
           <div class="subheading mb-3" id="covid19-seroprevalence-spain">ENECOVID (I): Preliminary results of Spain's seroprevalence study
           </div>
           <h6>(Updated 17/05/2020)</h6>
@@ -720,12 +685,6 @@ $(document).ready(function() {
 </div>
 <h6>(Updated 26/04/2020)</h6>
 
-<!--
-<div class="resume-item d-flex flex-column flex-md-row justify-content-between mb-5" >
-  <div class="resume-content">
-    <h3 class="mb-0" id="covid19-ages">Analysis: Confirmed Cases by Age Groups </h3>
-    <div class="subheading mb-3">Spain vs Germany (updated 26-04-2020)</div>
--->
     <p>The number of confirmed cases in Germany at April 26th is around 157K people, whereas there are around 226K confirmed cases in Spain
       (<a href="https://www.arcgis.com/apps/opsdashboard/index.html#/85320e2ea5424dfaaa75ae62e5c06e61">Johns Hopkins University</a>,
       <a href="https://www.worldometers.info/coronavirus/#countries">worldometer</a>). But relative lethality estimates by COVID-19 on Germany seems below 4% (<i>confirmed deaths / confirmed cases</i>). Much lower than figures in Spain (10%)
@@ -765,7 +724,7 @@ $(document).ready(function() {
     <p>
     Related chart, considering both age and sex groups in Spain:
     </p>
-<!--          <p>-->
+
     <a href="https://www.isciii.es/QueHacemos/Servicios/VigilanciaSaludPublicaRENAVE/EnfermedadesTransmisibles/Documents/INFORMES/Informes%20COVID-19/Informe%20n%C2%BA%2025.%20Situaci%C3%B3n%20de%20COVID-19%20en%20Espa%C3%B1a%20a%2023%20de%20abril%20de%202020.pdf">
 <figure>
 <img src="img/covid19_by_age_and_sex_spain.png"  alt="COVID-19 by age and sex in Spain"/>
@@ -773,7 +732,7 @@ $(document).ready(function() {
 </figcaption>
 </figure>
     </a>
-<!--          </p>-->
+
   <br/>
   <p>
       At the begining of the crisis South Korea was the country with a higher number of tests performed
@@ -792,7 +751,7 @@ $(document).ready(function() {
       Though these estimations have to be read also with caution as the effect of false positives should be taked into account.
   </p>
   <br/>
-    <!--<p>-->
+
       Additional related information, though less updated:
       <blockquote class="twitter-tweet"><p lang="en" dir="ltr">Here is a distribution of recorded Covid-19 cases in Iceland (which tests broadly, even people with no symptoms) and the Netherlands (which tests narrowly, only those with severe symptoms) <a href="https://t.co/v92fVvOHrT">pic.twitter.com/v92fVvOHrT</a></p>&mdash; Alexandre Afonso (@alexandreafonso) <a href="https://twitter.com/alexandreafonso/status/1243557013759700997?ref_src=twsrc%5Etfw">March 27, 2020</a></blockquote> <script async src="https://platform.twitter.com/widgets.js"  ></script>
 
@@ -803,17 +762,9 @@ $(document).ready(function() {
       <a href="https://medium.com/@andreasbackhausab/coronavirus-why-its-so-deadly-in-italy-c4200a15a7bf">
       <figure>
       <img src="https://miro.medium.com/max/1400/1*7UiMwZS1ibeerKx-LfanEA.png"  alt="Coronavirus: why it's so deadly in Italy"/>
-    <!--  <figcaption><small>Source: https://medium.com/@andreasbackhausab/coronavirus-why-its-so-deadly-in-italy-c4200a15a7bf</small>
-    </figcaption>-->
+
       </figure>
     </a>
-
-  <!--</p>-->
-  <!--
-  </div>
-</div>
--->
-
 
 <br/>
 <hr/>
@@ -824,16 +775,8 @@ $(document).ready(function() {
 </div>
 <h6>(Updated 26/04/2020)</h6>
 
-<!--
-  <div class="resume-item d-flex flex-column flex-md-row justify-content-between mb-5" >
-    <div class="resume-content">
-      <h3 class="mb-0" id="covid19-epcalc">Simulation: Epidemic Calculator</h3>
-      <div class="subheading mb-3">SEIR Model applied to Madrid</div>
-    -->
 <p>
-        <!--
-        <a href="https://gabgoh.github.io/COVID/index.html?p_num_ind=300000&CFR=0.01&D_hospital_lag=5&D_incbation=5.2&D_infectious=2.9&D_recovery_mild=11.1&D_recovery_severe=28.6&I0=1&InterventionAmt=0.33333333333333337&InterventionTime=100&P_SEVERE=0.2&R0=2.2&Time_to_death=32&logN=15.761420707019587">Simulation of COVID-19 evolution on Region of Madrid (Spain)
-      </a> -->
+
       This <a href="https://gabgoh.github.io/COVID/index.html?CFR=0.01&D_hospital_lag=5&D_incbation=5.2&D_infectious=10&D_recovery_mild=11.1&D_recovery_severe=28.6&I0=1&InterventionAmt=0.26&InterventionTime=94.4&P_SEVERE=0.2&R0=3.9&Time_to_death=32&logN=15.761420707019587">simulator</a> implements a classical infectious disease model:
       <i>SEIR (Susceptible → Exposed → Infected → Removed)</i> [<a href="https://www.thelancet.com/journals/lancet/article/PIIS0140-6736(20)30260-9/fulltext">Wu, et. al</a>, Kucharski et. al].
       The model uses 13 parameters, including <i>Mortality statistics</i> and the <i>Basic Reproduction Number (R0)</i> before and after the <i>Intervention</i> day.
@@ -841,14 +784,9 @@ $(document).ready(function() {
 <p>
 I tried to adjust the evolution of confirmed deaths (<i>Fatalities</i>) in the Region of Madrid since the day this number was over N=10.
 Displacing <i>Intervention</i> day relatively to this reference. And ignoring the <i>Day 0</i> as time origin.
-<!--I expect that following trends of confirmed fatalities would propagate less uncertainty
-and provide more reliable estimates than starting from the first confirmed case.-->
+
 </p>
 
-
-<!--
-<a href="https://gabgoh.github.io/COVID/index.html?p_num_ind=300000&CFR=0.01&D_hospital_lag=5&D_incbation=5.2&D_infectious=2.9&D_recovery_mild=11.1&D_recovery_severe=28.6&I0=1&InterventionAmt=0.33333333333333337&InterventionTime=100&P_SEVERE=0.2&R0=2.2&Time_to_death=32&logN=15.761420707019587">
--->
 <a href="https://gabgoh.github.io/COVID/index.html?CFR=0.01&D_hospital_lag=5&D_incbation=5.2&D_infectious=10&D_recovery_mild=11.1&D_recovery_severe=28.6&I0=1&InterventionAmt=0.26&InterventionTime=94.4&P_SEVERE=0.2&R0=3.9&Time_to_death=32&logN=15.761420707019587">
 <img src="img/epcalc_madrid.png"  alt="Epidemic Calculator"/>
 </a>
@@ -863,7 +801,7 @@ and 1.0 after the intervention.
 </p>
 <p>
 I think the model is useful to have an idea of the interconnected variables and effects.
-<!--And trying to fit the different parameters according to the last knowledge available.-->
+
 But results from this model should be read with caution.
 Moreover, appart from the uncertainty introduced by many different estimated parameters and hidden variables,
 this implementation of SEIR ignores the effect of the healthcare capacity system,
@@ -871,14 +809,6 @@ and the possibility on mortality increase due to ICU bed shortage.
 </p>
       <p>Thanks to <a href="https://github.com/gabgoh/epcalc">Gabriel Goh epcalc</a> project.
       </p>
-
-<!--
-    </div>
-    <div class="resume-date text-md-right">
-      <span class="text-primary">26/4/2020</span>
-    </div>
-  </div>
--->
 
 <br/>
 <hr/>
@@ -888,7 +818,7 @@ and the possibility on mortality increase due to ICU bed shortage.
 -->
             <div class="subheading mb-3" id="covid19-estimates-deaths">Reported deaths vs estimates of actual deaths</div>
             <h6>(Updated 10/04/2020)</h6>
-              <!--MoMo: Monitoring of Excess Mortality-->
+
               <p>
                 The number of confirmed and notified deaths is also an estimation of actual deaths caused by the virus.
                 And specially in some countries/regions this value could be highly underestimated.
@@ -899,8 +829,6 @@ and the possibility on mortality increase due to ICU bed shortage.
                 (<a href="https://www.euromomo.eu/outputs/images/z-score_lightbox.fw.png">z-scores</a>)
                  from week 1 of 2010 up until today. And charts with disaggregated <a href="https://www.euromomo.eu/outputs/zscore_country_total.html">
                 data by country and age range</a> for the past 4½ years.
-                <!--In a following section there are some <a href="#covid19-momo-spain">examples extracted from Spanish MoMo Reports 2020</a>
--->
               </p>
                 <p>
               <a href="https://www.euromomo.eu">
@@ -957,9 +885,6 @@ and the possibility on mortality increase due to ICU bed shortage.
   In some regions latency on notification would be higher than usual due to saturated Civil Registers.
 Curiously, the excess mortality estimated by MoMo at April 5th (12940) approximates a lot the 12418 COVID-19
 confirmed deaths at country level at the same date.
-<!--If this trend consolidates, one possible hypothesis for underestimates and overestimates at region level
-could be related with interregional demographics. Maybe many residents in Madrid originary from Castilla y Leon and Castilla La Mancha could have been registered
-  as deaths in their regions of birth.-->
 </p>
 
 <br/>
@@ -977,13 +902,7 @@ could be related with interregional demographics. Maybe many residents in Madrid
                 With the aggravating circumstance of saturating healthcare systems
                 and increasing even more the number of direct and indirect deaths caused.
               </p>
-              <!--<p>
-                Both confirmed cases and notified deaths have limitations,
-                specially when read on a static basis they don't reveal the actual magnitude of the disease.
-                Though, while the protocols don't change for a given series of data,
-                they allow to follow trends and monitor the exponential/geometrical growth.
-                A critical factor on the expansion of the virus.
-              </p>-->
+
               <p>
               In <a href="https://www.mscbs.gob.es/profesionales/saludPublica/ccayes/alertasActual/nCov-China/documentos/20200404_ITCoronavirus.pdf">
                 April 4th report by CCAES</a> (Center of Alert Coordination and Healthcare Emergencies),
@@ -1231,23 +1150,6 @@ could be related with interregional demographics. Maybe many residents in Madrid
             <span class="text-primary">17/5/2020</span>
           </div>
         </div>
-
-
-        <!--
-        <div class="resume-item d-flex flex-column flex-md-row justify-content-between mb-5">
-          <div class="resume-content">
-            <h3 class="mb-0">Number of cases and tests per country</h3>
-            <div class="subheading mb-3">Demo</div>
-            <p>Interactive simple <a href='https://covid-19-data-streamlit.herokuapp.com/'>demo</a>
-            </p>
-            <p>Thanks to Heroku, streamlit, worldometer...
-            </p>
-          </div>
-          <div class="resume-date text-md-right">
-            <span class="text-primary">March 2020</span>
-          </div>
-        </div>
-      -->
 
       </div>
 
