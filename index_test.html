@@ -168,6 +168,63 @@
           <div class="resume-content">
 
             <h3 class="mb-0">Uncool Data Science</h3>
+
+            <div id="causal-inference" class="subheading mb-3">No free lunch in automatic causal discovery</div>
+
+            <h6>(13/9/2020)</h6>
+
+            <p>
+              Judea Pearl usually warns that no matter how sophisticated your method is,
+              you will not have an automatic way to certainly infer causality from data only.
+
+              Though, as Heisemberg's Uncertainty Principle, I wonder if this an epistemic limit
+              that applies only at some level of knowledge (like micro-universe physics),
+              but that we could circumvent for practical reasons at other levels (like macro-world physics).
+            </p>
+            <p>
+              After reading Bernhard Schölkopf research on <a href="http://webdav.tuebingen.mpg.de/causality/">
+                Causal inference at the Max-Planck-Institute for Intelligent Systems Tübingen
+              </a>,
+              and results on the benchmark data set for causal discovery algorithms, I was quite optimistic about the possibilities of this kind of methods.
+              Taking into account that Scholkopf and his team of coworkers don't ignore Pearl research.
+              And anyway, they still are presenting advances on their field.
+            </p>
+
+            <p>
+              So I started by testing some features from the
+              <a href="https://fentechsolutions.github.io/CausalDiscoveryToolbox/html/index.html">
+                Causal Discovery Toolbox
+              </a>, in words of their creators is an
+              "open-source Python package including many state-of-the-art causal modeling algorithms
+              (most of which are imported from R)".
+            </p>
+            <p> I'll try to publish further conclusions on my first "adventure".
+              Spoiler: the first results were a little disappointing.
+            </p>
+            <p>More details in the following
+              <a href="https://github.com/muoten/causal-discovery-playground/blob/master/boston_dataset_causal_inference_playground.ipynb">
+              Jupyter Notebook
+            </a> where I play with the
+            <a href="https://www.cs.toronto.edu/~delve/data/boston/bostonDetail.html">
+              Boston Dataset
+            </a>.
+          </p>
+            <p>Curiously, I didn't know the origin of this dataset: a paper by David Harrison Jr. and Daniel L. Rubinfeld,
+              published on 1978 on the Journal of Environmental Economics and Management,
+              called
+              <a href="https://deepblue.lib.umich.edu/handle/2027.42/22636">
+                Hedonic housing prices and the demand for clean air
+              </a>
+            </p>
+
+
+            <br/>
+            <hr/>
+            <!--
+            #############
+          -->
+
+
             <div id="linear-models" class="subheading mb-3">Regression to Linear Regression</div>
 
 
