@@ -56,6 +56,9 @@ $(document).ready(function() {
           <li class="nav-item">
             <a class="nav-link js-scroll-trigger" href="#linear-models">Linear models</a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="#linear-models">Causal inference</a>
+          </li>
         </ul>
         </li>
         <li class="nav-item">
@@ -64,14 +67,17 @@ $(document).ready(function() {
         <li>
         <ul>
         <li class="nav-item">
-          <a class="nav-link js-scroll-trigger" href="#covid19-estimates">Context</a>
+          <a class="nav-link js-scroll-trigger" href="#covid19-estimates">Context, analysis & simulations</a>
         </li>
+        <!--
         <li class="nav-item">
-          <a class="nav-link js-scroll-trigger" href="#covid19-ages">Analysis</a>
+          <a class="nav-link js-scroll-trigger" href="#covid19-ages">Analysis & Simulations</a>
         </li>
-        <li class="nav-item">
+      -->
+        <!--<li class="nav-item">
           <a class="nav-link js-scroll-trigger" href="#covid19-epcalc">Simulations</a>
         </li>
+      -->
         <li class="nav-item">
           <a class="nav-link js-scroll-trigger" href="#covid19-data">References</a>
         </li>
@@ -124,7 +130,7 @@ $(document).ready(function() {
 
             <li>
               Context on
-              <a href="#covid19-estimates">confirmed cases vs estimates</a><sup><small>(17/05/2020)</small></sup>, <a href="#covid19-estimates-deaths">mortality</a><i><sup><small>(10/04/2020)</small></sup></i>
+              <a href="#covid19-estimates-cases">confirmed cases vs estimates</a><sup><small>(17/05/2020)</small></sup>, <a href="#covid19-estimates-deaths">mortality</a><i><sup><small>(10/04/2020)</small></sup></i>
             </li>
 
             <li><i><!--<u>Last updates</u>:-->
@@ -178,7 +184,8 @@ $(document).ready(function() {
             <p>
               Sometimes we can feel we know the basics and it's time to move on to something else.
              If <strong>gradient boosted trees are good enough to fit my tabular data</strong>,
-               but xgboost implementation seems not efficient and accurate enough to my needs, I could try lightgbm or catboost.
+               but <a href="https://xgboost.readthedocs.io/en/latest/">xgboost</a> implementation seems not efficient and accurate enough to my needs,
+               I could try <a href="https://github.com/microsoft/LightGBM">lightgbm</a> or <a href="https://catboost.ai/">catboost</a>.
                Moreover, all of these algorithm implementations deal
               reasonable well even with unbalanced datasets and colinearity. So <strong>why should I care about</strong> simpler (and older) <strong>regression models?</strong>
             </p>
@@ -212,10 +219,11 @@ $(document).ready(function() {
           <blockquote style='display: block;margin-top: 1em;margin-bottom: 1em;margin-left: 40px;margin-right: 40px; border:1px; content: open-quote;'>
             <p><i>Sometimes...You can't see the forest for the (Gradient Boosted) trees</i></p></blockquote>
           <p>
-            After realizing I could have not really understand some benefits and relevant aspects of linear models because of the great advantages of
-            <i>xgboost</i> I tried to compare different linear regression implementations.
+            The great performance of <i>xgboost</i> might cause that I didn't really understand and value
+            some benefits and relevant aspects of linear models.
+            To better understand linear regression I've tried to compare different implementations.
             My goal was to model the main variables that affect <strong>life expectancy</strong>.
-            And trying to isolate the effect of multiple collinearities and interdependences expected between the different explanatory variables.
+            Attempting to isolate the effect of multiple collinearities and interdependences expected between the explanatory variables.
           </p>
           <p>As this goal was quite ambitious I started by using only
           the <strong>health expenditure</strong> per capita as explanatory variable. For this purpose
@@ -293,12 +301,12 @@ $(document).ready(function() {
             -->
               Actually life expectancy in Spain is even higher,
               as it is one of the highest in the world. Concretely, the value in our dataset for 2017 was <math><mn>83.3</mn></math> years.
-              Anyway not so bad taking into account that is a single variable simple model.
+              Not bad for a single variable simple model.
             </p>
 
             <p>Furthermore, in the notebook they are more details about the Coefficient of Determination calculation,
               or the relation and differences between different configurations of Linear Regression models for longitudinal (panel) data.
-              Finally this first analysis have limited to Ordinary Least Squares,
+              Finally this first analysis has been limited to Ordinary Least Squares,
               with <a href="http://statmath.wu.ac.at/~hauser/LVs/FinEtricsQF/FEtrics_Chp5.pdf">Fixed Effect and Random Effect variants</a>,
                 supported by
               <a href="https://bashtage.github.io/linearmodels/doc/panel/mathematical-formula.html#panel-mathematical-notation">
@@ -341,13 +349,13 @@ $(document).ready(function() {
               After reading
             <a href="https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&cad=rja&uact=8&ved=2ahUKEwicpOi5v_rqAhVFC2MBHfD6BvgQFjABegQIBBAB&url=http%3A%2F%2Fis.tuebingen.mpg.de%2Ffileadmin%2Fuser_upload%2Ffiles%2Fpublications%2FICML2009-Mooij_%5B0%5D.pdf">
               "Regression by dependence minimization and its application to causal inference in additive noise models"</a>
-              by Mooij et al, even simple regression models seem less uncool.
+              by Mooij et al, even simple regression models seem more <i>cool</i>.
               And looking into the residuals becomes even more interesting.
             </p>
             <p>Anyhow, we have to be cautious, as Judea Pearl says, no matter how sophisticated an algorithm is,
-              you can not infer causality by only looking to the data. Some previous assumptions are required.
-              Application of this "cool" algorithms don't get results for free. To move Data Science from
-              "data fitting" direction to "data-intensive Causal Science".
+              you can not infer causality by only looking to the data.
+              Application of this "cool" algorithms don't get "causality" for free.
+              Some previous assumptions are required to move Data Science from "data fitting" direction to "data-intensive Causal Science".
               Or as I'd rephrase, from being fully data-driven to be model-driven but data-supported.
               Or in <a href="https://twitter.com/_miguelhernan/status/897918662514024448?lang=es">
                 @_MiguelHernan</a> words: "draw your assumptions before your conclusions".
@@ -382,10 +390,250 @@ $(document).ready(function() {
 
         <div class="resume-item d-flex flex-column flex-md-row justify-content-between mb-5" id="covid19-estimates">
           <div class="resume-content">
-            <h3 class="mb-0">Estimates and Context. Language matters</h3>
+            <h3 class="mb-0">Estimates and Context. Analysis and Simulations. Language matters</h3>
+
+            <!-------------------------------------------------------------------->
+            <br/>
+            <div class="subheading mb-3" id="covid19-seroprevalence-bias">ENECOVID (II): Test error estimates and (my) simplified bias analysis on preliminary results
+
+            </div>
+            <!--
+                    <h4 id="covid19-seroprevalence-bias">Test error estimates and (my) simplified bias analysis on ENECOVID preliminary results</h4>
+            -->
+                     <h6>(Updated 21/05/2020)</h6>
+                    <p>
+                      Tests used to detect antibodies, as other kind of clinical measures don't have to be perfect to be useful.
+                      Generally 2 characteristics define this kind of imperfections: <strong>specificity</strong> (true negative rate) and <strong>sensitivity</strong> (true positive rate or <i>recall</i>).
+                      Let's say, they relate to the ability to avoid
+                      <strong>false positives</strong> and <strong>false negatives</strong> respectively.
+                    </p>
+                    <p>
+                      These two kind of errors are also known in statistics as <i>type 1</i> and <i>type 2</i> errors.
+                      And there is often some unbalance between their corresponding error rates.
+                      For clinical diagnoses these unbalance can be even desirable, as both type of errors don't have in general the same impact.
+                    </p>
+                    <blockquote class="twitter-tweet"><p lang="en" dir="ltr">I’m not sure who made this, but I might have to stick above my desk because it’s the only way I seem to be able remember the difference between type 1 and type 2 error! <a href="https://t.co/bmk9DI30Jw">pic.twitter.com/bmk9DI30Jw</a></p>&mdash; Dr Ellen Grimås (@EllenGrimas) <a href="https://twitter.com/EllenGrimas/status/1171002176551956480?ref_src=twsrc%5Etfw">September 9, 2019</a></blockquote> <script async src="https://platform.twitter.com/widgets.js"  ></script>
+                    <p>
+                      But in order to quantify prevalences it's preferable that both errors compensate.
+                      Or making posterior adjustments if this unbalance is significant and can't be tuned.
+                    </p>
+                    <p>
+                      When undetected false negatives are not compensated with false positives there is <strong>misclasification bias</strong>, a kind of measure or information bias,
+                      depending on the taxonomy or scientific literature being consulted.
+                      Anyhow, independently of terminological considerations it should be adjusted in a similar way as other biases, like selection bias.
+                    </p>
+                  <p>
+                      Details of an applied <strong>statistical methodology</strong> to adjust a particular study similar to ENECOVID can be consulted on
+                      a
+                      <a href="https://www.medrxiv.org/content/10.1101/2020.04.14.20062463v1.full.pdf">recent paper by E. Bendavid et al</a> (April 11 2020),
+                      and its <a href="https://www.medrxiv.org/content/medrxiv/suppl/2020/04/17/2020.04.14.20062463.DC1/2020.04.14.20062463-1.pdf">
+                        statistical appendix</a>
+                        describing the procedure followed to measure the seroprevalence of antibodies to SARS-CoV-2 in Santa Clara County (California).
+                        I found this study via <a href="https://www.datanalytics.com/2020/04/27/muestreo-sensibilidad-y-especificidad/">@datanalytics</a>,
+                        soon accompanied by a
+                        <a href="https://www.datanalytics.com/2020/05/21/analisis-bayesiano-de-pruebas-con-sensibilidad-especificidad-desconocida">critical opinion</a>
+                        to usual improper (or lack of) methods to <strong>propagate uncertainty</strong> on the parameter estimates.
+                          A challenge undertaken with a
+                          <a href="https://bob-carpenter.github.io/diagnostic-testing/reports/specificity.pdf">
+                            bayesian analysis by A. Gelman et al (May 20 2020)</a>.
+                            A <strong>complex</strong> task I'm gonna ignore for my first simplified analysis.
+                          Though I hope to address in a near future.
+
+                      <i>Besides, further (and harder) related information can be read on the following scientific reports by
+              <a href="http://www.med.mcgill.ca/epidemiology/joseph/publications/Methodological/speybroeck2012.pdf">Speybroeck et al</a> (2012)</i> or
+                        <a href="https://www.nature.com/articles/srep11861">M.L. Bermingham et al</a> (2015).
+
+                    </p>
+
+                     <h6>What about ENECOVID methodology?</h6>
+                    <p>
+                      Regarding the Spain's ENE-Covid19 serosurvey, the report with preliminary results briefly describes its technical approach to compensate for selection bias:
+                    </p>
+                    <figure>
+                    <img src="img/seroprevalence_and_bias_0.png" alt="Seroprevalence methodology. Method to compensate selection bias" style="border:1px solid black">
+                    <figcaption><small>Source: ENE-COVID19: First Round. <a href="https://www.mscbs.gob.es/ciudadanos/ene-covid/docs/ESTUDIO_ENE-COVID19_PRIMERA_RONDA_INFORME_PRELIMINAR.pdf">Preliminary results</a></small>
+                    </figcaption>
+                    </figure>
+                    <br/>
+                    <!--
+                    <p>
+                      Though I don't find any details regarding measurement adjustment... and it seems I'm not the only one...
+                    </p>
+                    <blockquote class="twitter-tweet"><p lang="es" dir="ltr">Tampoco he visto el el informe INE/ISCIII que se mencione la corrección de las estimaciones por la especificidad. Más al respecto, (incluyendo código para compensar por una especificidad &lt; 100%) aquí: <a href="https://t.co/Bsvoq6KFtC">https://t.co/Bsvoq6KFtC</a></p>&mdash; Carlos Gil Bellosta (@gilbellosta) <a href="https://twitter.com/gilbellosta/status/1260669385670307846?ref_src=twsrc%5Etfw">May 13, 2020</a></blockquote> <script async src="https://platform.twitter.com/widgets.js"  ></script>
+                  -->
+                  <p>Furthermore an adjustment method to compensate possible misclassification bias due to test errors, similar to <a href="https://www.medrxiv.org/content/medrxiv/suppl/2020/04/17/2020.04.14.20062463.DC1/2020.04.14.20062463-1.pdf">Santa Clara's statistical approach</a>, is also detailed
+                    in Annex 3 of <a href="https://portalcne.isciii.es/enecovid19/documentos/ene_covid19_dis.pdf">ENECOVID study design</a>
+                  </p>
+                  <figure>
+                  <img src="img/seroprevalence_and_bias_4.png" alt="Seroprevalence methodology. Method to compensate misclassification bias" style="border:1px solid black">
+                  <figcaption><small>Source: ENE-COVID19 <a href="https://portalcne.isciii.es/enecovid19/documentos/ene_covid19_dis.pdf">study design</a></small>
+                  </figcaption>
+                  </figure>
+                  <br/>
+                    <p>
+                    However the report with preliminary results warns that results are provisional because of the lack of combination with immunoassay.
+                    And also mentions in future tense that the combination of rapid tests and immunoassay will correct the minor sensitivity of the former
+                    with the results of the latter to maximize the representativity and the information quality.
+                  </p>
+                    <figure>
+                    <img src="img/seroprevalence_and_bias_1.png" alt="Seroprevalence methodology to compensate lower sensitivity" style="border:1px solid black">
+                    <figcaption><small>Source: ENE-COVID19: First Round. <a href="https://www.mscbs.gob.es/ciudadanos/ene-covid/docs/ESTUDIO_ENE-COVID19_PRIMERA_RONDA_INFORME_PRELIMINAR.pdf">Preliminary report</a></small>
+                    </figcaption>
+                    </figure>
+
+                    <br/>
+                    <p>
+                      So I assume according to this claim that adjustment on sensitivity was not yet applied, and I'll try to infer in a simplified way how we could approximate the
+                      adjusted seroprevalence according to the current provided numbers.
+                    </p>
+                    <p>
+                    According to the report, rapid tests Orient GeneIgM/IgG were used, from company ZhejiangOrient Gene Biotech. Due to the difficulty of reading IgM band all the results refer to IgG.
+                    Manufacturer-reported sensitivity and specificity for serological detection of IgG is 97% and 100%. But these values are probably too optimistic.
+                    Reliability studies performed by ENE-COVID19 documented 79% sensitivity and 100% specificity for IgG.
+
+                  </p>
+                  <figure>
+                  <img src="img/seroprevalence_and_bias_2.png" alt="Seroprevalence methodology. Estimated specificity and sensitivity of rapid tests" style="border:1px solid black">
+                  <figcaption><small>Source: ENE-COVID19: First Round. <a href="https://www.mscbs.gob.es/ciudadanos/ene-covid/docs/ESTUDIO_ENE-COVID19_PRIMERA_RONDA_INFORME_PRELIMINAR.pdf">Preliminary results</a></small>
+                  </figcaption>
+                  </figure>
+                  <br/>
+                  <p>Annex 1 of study design provides more detail on these reliability studies. So we know 150 PCR samples were used to evaluate the rapid test, being 97 PCR+ and 53 PCR-.
+                  Under this benchmark global sensitivity for IgG+ was 79.4% and specificity 100%. But due to the small size of evaluated test samples
+                  we could provide
+                  more conservative estimations. For specificity our uncertainty margin could be in the interval <math><mtext>[98.1% (=53/54), 100%]</mtext></math>.
+                  Whereas for sensitivity we could infer that 77 true positives were detected by IgG,
+                  <!--so the uncertainty margin would be <math>[78.6% (=77/98), 80.4% (=78/97)]</math>,-->
+                  and we could estimate also a
+                  <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3661219/figure/F3/">95% confidence interval</a> of <math><mtext>[71.4%, 87.4%]</mtext></math>.
+
+                </p>
+                  <figure>
+                  <img src="img/test_reliability_study.png" alt="Seroprevalence methodology. Reliability study to evaluate specificity and sensitivity of rapid tests" style="border:1px solid black">
+                  <figcaption><small>Source: ENE-COVID19 <a href="https://portalcne.isciii.es/enecovid19/documentos/ene_covid19_dis.pdf">study design</a></small>
+                  </figcaption>
+                  </figure>
+                  <br/>
+                  <h6>Assumptions: 100% specificity, lower sensitivity</h6>
+                  <p>
+                    With 100% specificity there would be no false positives.
+                    And with sensitivity of 79%, for a prevalence of 5% there would be 5% of true positives and approximately 1.3% <math><mtext>(= 0.21 x 0.05 / 0.79)</mtext></math> of false negatives.
+                    So seroprevalence should rise to 6.3%.
+                    but slightly higher than preliminary 5% estimate, and also not bounded to the provided 95% confidence interval of 4.7% and 5.4%.
+                    </p>
+                    <p>I've detailed the calculation with intermediate steps on false positives and false negatives estimations. But we could use directly the expression from the previous annex:
+                    </p>
+
+                    <p style="text-align:center">
+                    <math>
+                    <mtext>
+                      Prevalence* = (Prevalence - (1 - Specificity)) / (Sensitivity - (1 - Specificity)) = 0.05 / 0.79 = 6.3%
+                    </mtext>
+                    </math>
+                    </p>
+
+                    <p>
+                      Moreover, the study refers to coherence between immunoassay, considered as "ground truth", and IgG rapid test results,
+                      being 97.3% for 16953 analysed samples. But... if "ground truth" was 100% reliable, specificity for IgG was 100%
+                       and prevalence less than 5.4% then sould be 94.6% of true negatives perfectly detected.
+                       So for the reminder 4.7% to 5.4% the accuracy of IgG rapid test would be approximately
+                      between 50% <math><mtext>(= (0.973 - 0.946) / 0.054)</mtext></math> and 42.6%
+                      <math><mtext>(= (0.973 - 0.953) / 0.047)</mtext></math>.
+                    </p>
+                    <p>In the worst case, considering the more pessimistic sensitivity for IgG being only 42.6%, or rounding down, <a href="https://www.theguardian.com/books/2011/feb/03/douglas-adams-42-hitchhiker?INTCMP=SRCH">42</a>%,
+                      which is unlikely, false negatives could approximate to 6.9% <!--(= 0.58 x 0.05 / 0.42),-->
+                      and estimated seroprevalence would rise to near 12%.
+                    </p>
+                    <p>Furthermore, from 247 participants with PCR+, IgG antibodies were detected on 83% <math><mtext>(76.2 - 88.2 IC 95%)</mtext></math>, as presented in the next table.
+                    </p>
+                    <figure>
+                    <img src="img/seroprevalence_and_bias_3.png" alt="Seroprevalence methodology. IgG detection vs PCR" style="border:1px solid black">
+                    <figcaption><small>Source: ENE-COVID19: First Round. <a href="https://www.mscbs.gob.es/ciudadanos/ene-covid/docs/ESTUDIO_ENE-COVID19_PRIMERA_RONDA_INFORME_PRELIMINAR.pdf">Preliminary report</a></small>
+                    </figcaption>
+                    </figure>
+                    <br/>
+                  <p>
+                      Assuming 100% reliability on PCR+ and 100% specificity of rapid test, IgG sensitivity could be on the interval between 76.2% and 88.2%.
+                      For the higher bound, 88.2%, false negatives could approximate to 0.7%
+                      <!--(=0.118 x 0.05 / 0.882)-->
+                      and seroprevalence would be around 5.7%.
+                    </p>
+
+                    <p>
+                      Considering even the most optimistic scenario with 100% specificity and 97% sensitivity reported by the manufacturer,
+                      false negatives could approximate to 0.1% <!--(=0.03 x 0.05 / 0.97)-->.
+                      And 5.1% seroprevalence would be in the current provided 95% Interval of Confidence <math><mtext>(4.7%, 5.4%)</mtext></math>.
+                      However, with analogous calculation, if sensitivity was lower than 92%,
+                      seroprevalence would rise above the current provided 5.4% upper bound.
+                    </p>
+                    <h6>Assumptions: 99% specificity, 79% sensitivity</h6>
+                    <p>All the previous calculations based on the assumption that specificity for IgG detection was truly 100%
+                      as manufacturer claims and reliability studies made for ENE-COVID seemingly registered. But what if this specificity was 99%, for instance?
+                    </p>
+                    <p>
+                      In this case, maintaining the assumption of 79% sensitivity, true positives would have been 4.1%
+                      with the remainder 0.9% bein false positives, and approximately 1.1% false negatives.
+                      So actual prevalence would be around 5.2%, between the margins of the provided 95% IC.
+                      Curiously, as previously said, a worse specificity, undesirable for clinical purposes, would produce
+                      better raw estimates of prevalence. As long as for each 20 false negatives due to low sensitivity
+                      we would get 1 false positive due to imperfect specificity.
+                      And boths effects would compensate each other for an expected prevalence near to 5%.
+                    </p>
+                    <!--<img src="https://media.giphy.com/media/SV0kYmJBeXm6Fndmxn/giphy.gif" alt="Rick &nbsp; What's the point giphy" style="width:50%">-->
 
 
-          <div class="subheading mb-3" id="covid19-seroprevalence-spain">Preliminary results of Spain's seroprevalence study ENECOVID19
+                    <h6>Conclusions</h6>
+                    <p>While we wait for the immunoassays to be completed to "fine tune" the preliminary ENECOVID seroprevalence estimate,
+                      we could get some rules of thumb (or <i>cuentas de la vieja</i>) for the effects
+                      of expected test errors on the 5% provided average value.
+                      In particular, due to the relation between actual specificity and sensitivity for IgG detection
+                      with the rapid test Orient Gene Biotech.
+                    </p>
+                    <p>
+                      <u>If sensitivity and specificity for IgG were 100% and 97% as reported by the manufacturer, there would be no significant misclasification bias</u>.
+                    </p>
+                    <p>
+                      Otherwise, if these values approximate to those reported by reliability studies to ENECOVID, we could expect bias.
+                      Concretely, if sensitivity was 79%, false negative would rise the actual seroprevalence above the provided confidence interval margins.
+                      Unless this effect was compensated with posterior adjustment or specificity being closer to 99% instead of 100%.
+                    </p>
+                    <p>
+                       And particularly, <u>if specificity of rapid test was indeed 100% and sensitivity for IgG 79%, my (educated?) guess would be
+                         actual seroprevalence closer to 6.3%</u>. Additionally, a more conservative range of sensitivity estimates between (very pesimistic) 42% and (very optimistic) 97%,
+                         would broaden the interval of possible seroprevalence between 5.1% and 12%.
+                    </p>
+                    <p>The following chart is intended to represent adjusted seroprevalence estimates depending on the relation of specificity and sensitivity,
+                      for a baseline raw estimate of 5%
+                    </p>
+                    <img src="img/sensitivity_specificity_adjustment.png" alt="Sensitivity vs Specificity adjustment" style="width: 80%;">
+                    <!--<figcaption><small>Adjusted seroprevalence estimates for different values of sensitivity and specificity.</small>
+                    </figcaption>
+                  -->
+                  <br/>
+
+                  <p>
+                  As a limitation of the previous analysis, all the calculations presented here have been applied assuming
+                  that specificity and sensitivity remain independent of sex, age or presence of symptoms.
+                  As it's not clear if this assumption is going to be fulfilled, <a href="https://portalcne.isciii.es/enecovid19/documentos/ene_covid19_dis.pdf">ENECOVID study design</a> refers to this issue in its
+                  Annex 3, describing how a proper adjustment should be done. First of all, the procedure should estimate both sensitivity and specificity
+                  at subgroups. Subsequently, the prevalence adjustment should be applied at subgroup level before results are promediated.
+                </p>
+
+                    <p>In any case, despite this possible unadjusted bias, according to the previous (quick & dirty) calculations, actual average seroprevalence in Spain would be still far from remote possibility of "herd immunity",
+                      though it could affect to Infection Fatality Rate estimates, for instance. And as it was mentioned in the referred preliminary ENECOVID report,
+                      and also remarked here just a few paragraphs before,
+                      <u>this sensitivity/specificity bias is expected to be corrected in the next round of results by the combination of estimates from immunoassay</u>.
+                    </p>
+                    <p>
+                    <i>Anyway, my provisionally inferred simplified numbers could be significantly wrong or I could be missing the point.
+                      In this case, or for any other comment, please, <a href="https://twitter.com/eoteromuras">feedback/criticism is welcome :)</a></i>
+                    </p>
+
+                        <br/>
+            <hr/>
+            <!----------------------------------------------------------------------------->
+
+          <div class="subheading mb-3" id="covid19-seroprevalence-spain">ENECOVID (I): Preliminary results of Spain's seroprevalence study
           </div>
           <h6>(Updated 17/05/2020)</h6>
           <p>
@@ -460,322 +708,183 @@ $(document).ready(function() {
           </li>
         </ul>
 
+            <br/>
+<hr/>
+<!----------------------------------------------------------->
+
+<div class="subheading mb-3" id="covid19-ages">Confirmed cases by age groups: Spain vs Germany
+</div>
+<h6>(Updated 26/04/2020)</h6>
+
+<!--
+<div class="resume-item d-flex flex-column flex-md-row justify-content-between mb-5" >
+  <div class="resume-content">
+    <h3 class="mb-0" id="covid19-ages">Analysis: Confirmed Cases by Age Groups </h3>
+    <div class="subheading mb-3">Spain vs Germany (updated 26-04-2020)</div>
+-->
+    <p>The number of confirmed cases in Germany at April 26th is around 157K people, whereas there are around 226K confirmed cases in Spain
+      (<a href="https://www.arcgis.com/apps/opsdashboard/index.html#/85320e2ea5424dfaaa75ae62e5c06e61">Johns Hopkins University</a>,
+      <a href="https://www.worldometers.info/coronavirus/#countries">worldometer</a>). But relative lethality estimates by COVID-19 on Germany seems below 4% (<i>confirmed deaths / confirmed cases</i>). Much lower than figures in Spain (10%)
+      or Italy (13%).
+    </p>
+    <p>
+
+      There are several aspects than could explain this big difference.
+      But I will focus on the representativity of the sample of confirmed tests in relation to the overall population.
+      If we compare the distribution of confirmed cases by age groups in Spain and Germany we can see that:
+    </p>
+      <ul>
+        <li>
+      In Spain confirmed cases are biased to ranges of older people. While young people would be underrepresented.
+    </li>
+    <li>
+      In Germany we have just the opposite effect. Though their distribution of confirmed cases is more similar to the overall distribution, people from 60 to 79 would be slightly underrepresented, while age group of 35 to 59 would be overrepresented among confirmed cases.
+    </li>
+  </ul>
+
+
+<p>
+  <a href="spain_covid19_by_age.html">
+<img class="covid_by_age" src="img/Spain_covid19_by_age.gif" style="width:350px" alt="Spain: covid-19 confirmed cases by age groups">
+</a>
+<a href="germany_covid19_by_age.html">
+<img class="covid_by_age" src="img/Germany_covid19_by_age.gif" style="width:350px" alt="Germany: covid-19 confirmed cases by age groups">
+</a>
+</p>
+    <p>  <a href="https://github.com/muoten/life-expectancy/blob/master/covid-19/covid19_distribution_by_age.ipynb">Code</a>.
+    </p>
+    <p>
+      Thanks to <a href="https://github.com/datadista">datadista</a>,
+      <a href="https://npgeo-corona-npgeo-de.hub.arcgis.com/app/478220a4c454480e823b17327b2bf1d4">
+      Robert Koch</a> Institute and plotly.
+    </p>
+    <p>
+    Related chart, considering both age and sex groups in Spain:
+    </p>
+<!--          <p>-->
+    <a href="https://www.isciii.es/QueHacemos/Servicios/VigilanciaSaludPublicaRENAVE/EnfermedadesTransmisibles/Documents/INFORMES/Informes%20COVID-19/Informe%20n%C2%BA%2025.%20Situaci%C3%B3n%20de%20COVID-19%20en%20Espa%C3%B1a%20a%2023%20de%20abril%20de%202020.pdf">
+<figure>
+<img src="img/covid19_by_age_and_sex_spain.png"  alt="COVID-19 by age and sex in Spain"/>
+<figcaption><small>Source: Red Nacional de Vigilancia Epidemiológica (RENAVE). Instituto de Salud Carlos III (ISCIII)</small>
+</figcaption>
+</figure>
+    </a>
+<!--          </p>-->
+  <br/>
+  <p>
+      At the begining of the crisis South Korea was the country with a higher number of tests performed
+      and a more representative sample in terms of age distribution. Currently,
+      according to Our World in Data, Iceland has performed much more tests per capita.
+      Furthermore is a reference on <a href="https://www.covid.is/english">data transparency</a>.
+      <iframe src="https://ourworldindata.org/grapher/full-list-cumulative-total-tests-per-thousand?time=latest&country=ECU+EST+ISL+IND+IDN+ITA+NOR+SEN+SGP+ZAF+KOR+CHE+TWN+TUR+GBR+USA+VNM" style="width: 100%; height: 600px; border: 0px none;"></iframe>
+  </p>
+  <p>
+      According to the number of confirmed cases and deaths with COVID-19 on Iceland,
+      relative lethality for those tested positive could be below 1%.
+      Actually at the time of writing is only around 0.5% in that country.
+      Moreover, data from Iceland is helping to get more educated guesses on the proportion of asymptomatic infected people.
+      Estimates published on April 14th on <a href="https://www.nejm.org/doi/full/10.1056/NEJMoa2006100">Spread of SARS-CoV-2 in the Icelandic Population</a>,
+      report that "43% of the participants who tested positive reported having no symptoms, although symptoms almost certainly developed later in some of them.".
+      Though these estimations have to be read also with caution as the effect of false positives should be taked into account.
+  </p>
+  <br/>
+    <!--<p>-->
+      Additional related information, though less updated:
+      <blockquote class="twitter-tweet"><p lang="en" dir="ltr">Here is a distribution of recorded Covid-19 cases in Iceland (which tests broadly, even people with no symptoms) and the Netherlands (which tests narrowly, only those with severe symptoms) <a href="https://t.co/v92fVvOHrT">pic.twitter.com/v92fVvOHrT</a></p>&mdash; Alexandre Afonso (@alexandreafonso) <a href="https://twitter.com/alexandreafonso/status/1243557013759700997?ref_src=twsrc%5Etfw">March 27, 2020</a></blockquote> <script async src="https://platform.twitter.com/widgets.js"  ></script>
+
+  <br/>
+      Germany vs South Korea vs Italy, published on March 13th in Medium by
+      <a href="https://medium.com/@andreasbackhausab/coronavirus-why-its-so-deadly-in-italy-c4200a15a7bf">
+      Andreas Backhaus</a>:
+      <a href="https://medium.com/@andreasbackhausab/coronavirus-why-its-so-deadly-in-italy-c4200a15a7bf">
+      <figure>
+      <img src="https://miro.medium.com/max/1400/1*7UiMwZS1ibeerKx-LfanEA.png"  alt="Coronavirus: why it's so deadly in Italy"/>
+    <!--  <figcaption><small>Source: https://medium.com/@andreasbackhausab/coronavirus-why-its-so-deadly-in-italy-c4200a15a7bf</small>
+    </figcaption>-->
+      </figure>
+    </a>
+
+  <!--</p>-->
+  <!--
+  </div>
+</div>
+-->
+
+
 <br/>
-        <h4 id="covid19-seroprevalence-bias">Test error estimates and (my) simplified bias analysis on ENECOVID preliminary results</h4>
-         <h6>(21/05/2020, Work in progress)</h6>
-        <p>
-          Tests used to detect antibodies, as other kind of clinical measures don't have to be perfect to be useful.
-          Generally 2 characteristics define this kind of imperfections: <strong>specificity</strong> (true negative rate) and <strong>sensitivity</strong> (true positive rate or <i>recall</i>).
-          Let's say, they relate to the ability to avoid
-          <strong>false positives</strong> and <strong>false negatives</strong> respectively.
-        </p>
-        <p>
-          These two kind of errors are also known in statistics as <i>type 1</i> and <i>type 2</i> errors.
-          And there is often some unbalance between their corresponding error rates.
-          For clinical diagnoses these unbalance can be even desirable, as both type of errors don't have in general the same impact.
-        </p>
-        <blockquote class="twitter-tweet"><p lang="en" dir="ltr">I’m not sure who made this, but I might have to stick above my desk because it’s the only way I seem to be able remember the difference between type 1 and type 2 error! <a href="https://t.co/bmk9DI30Jw">pic.twitter.com/bmk9DI30Jw</a></p>&mdash; Dr Ellen Grimås (@EllenGrimas) <a href="https://twitter.com/EllenGrimas/status/1171002176551956480?ref_src=twsrc%5Etfw">September 9, 2019</a></blockquote> <script async src="https://platform.twitter.com/widgets.js"  ></script>
-        <p>
-          But in order to quantify prevalences it's preferable that both errors compensate.
-          Or making posterior adjustments if this unbalance is significant and can't be tuned.
-        </p>
-        <p>
-          When undetected false negatives are not compensated with false positives there is <strong>misclasification bias</strong>, a kind of measure or information bias,
-          depending on the taxonomy or scientific literature being consulted.
-          Anyhow, independently of terminological considerations it should be adjusted in a similar way as other biases, like selection bias.
-        </p>
-      <p>
-          Details of an applied <strong>statistical methodology</strong> to adjust a particular study similar to ENECOVID can be consulted on
-          a
-          <a href="https://www.medrxiv.org/content/10.1101/2020.04.14.20062463v1.full.pdf">recent paper by E. Bendavid et al</a> (April 11 2020),
-          and its <a href="https://www.medrxiv.org/content/medrxiv/suppl/2020/04/17/2020.04.14.20062463.DC1/2020.04.14.20062463-1.pdf">
-            statistical appendix</a>
-            describing the procedure followed to measure the seroprevalence of antibodies to SARS-CoV-2 in Santa Clara County (California).
-            I found this study via <a href="https://www.datanalytics.com/2020/04/27/muestreo-sensibilidad-y-especificidad/">@datanalytics</a>,
-            soon accompanied by a
-            <a href="https://www.datanalytics.com/2020/05/21/analisis-bayesiano-de-pruebas-con-sensibilidad-especificidad-desconocida">critical opinion</a>
-            to usual improper (or lack of) methods to <strong>propagate uncertainty</strong> on the parameter estimates.
-              A challenge undertaken with a
-              <a href="https://bob-carpenter.github.io/diagnostic-testing/reports/specificity.pdf">
-                bayesian analysis by A. Gelman et al (May 20 2020)</a>.
-                A <strong>complex</strong> task I'm gonna ignore for my first simplified analysis.
-              Though I hope to address in a near future.
+<hr/>
+<!----------------------------------------------------------->
 
-          <i>Besides, further (and harder) related information can be read on the following scientific reports by
-  <a href="http://www.med.mcgill.ca/epidemiology/joseph/publications/Methodological/speybroeck2012.pdf">Speybroeck et al</a> (2012)</i> or
-            <a href="https://www.nature.com/articles/srep11861">M.L. Bermingham et al</a> (2015).
+<div class="subheading mb-3" id="covid19-epcalc">Epidemic simulator: SEIR model applied to Madrid
+</div>
+<h6>(Updated 26/04/2020)</h6>
 
-        </p>
-
-         <h6>What about ENECOVID methodology?</h6>
-        <p>
-          Regarding the Spain's ENE-Covid19 serosurvey, the report with preliminary results briefly describes its technical approach to compensate for selection bias:
-        </p>
-        <figure>
-        <img src="img/seroprevalence_and_bias_0.png" alt="Seroprevalence methodology. Method to compensate selection bias" style="border:1px solid black">
-        <figcaption><small>Source: ENE-COVID19: First Round. <a href="https://www.mscbs.gob.es/ciudadanos/ene-covid/docs/ESTUDIO_ENE-COVID19_PRIMERA_RONDA_INFORME_PRELIMINAR.pdf">Preliminary results</a></small>
-        </figcaption>
-        </figure>
-        <br/>
+<!--
+  <div class="resume-item d-flex flex-column flex-md-row justify-content-between mb-5" >
+    <div class="resume-content">
+      <h3 class="mb-0" id="covid19-epcalc">Simulation: Epidemic Calculator</h3>
+      <div class="subheading mb-3">SEIR Model applied to Madrid</div>
+    -->
+<p>
         <!--
-        <p>
-          Though I don't find any details regarding measurement adjustment... and it seems I'm not the only one...
-        </p>
-        <blockquote class="twitter-tweet"><p lang="es" dir="ltr">Tampoco he visto el el informe INE/ISCIII que se mencione la corrección de las estimaciones por la especificidad. Más al respecto, (incluyendo código para compensar por una especificidad &lt; 100%) aquí: <a href="https://t.co/Bsvoq6KFtC">https://t.co/Bsvoq6KFtC</a></p>&mdash; Carlos Gil Bellosta (@gilbellosta) <a href="https://twitter.com/gilbellosta/status/1260669385670307846?ref_src=twsrc%5Etfw">May 13, 2020</a></blockquote> <script async src="https://platform.twitter.com/widgets.js"  ></script>
-      -->
-      <p>Furthermore an adjustment method to compensate possible misclassification bias due to test errors, similar to <a href="https://www.medrxiv.org/content/medrxiv/suppl/2020/04/17/2020.04.14.20062463.DC1/2020.04.14.20062463-1.pdf">Santa Clara's statistical approach</a>, is also detailed
-        in Annex 3 of <a href="https://portalcne.isciii.es/enecovid19/documentos/ene_covid19_dis.pdf">ENECOVID study design</a>
+        <a href="https://gabgoh.github.io/COVID/index.html?p_num_ind=300000&CFR=0.01&D_hospital_lag=5&D_incbation=5.2&D_infectious=2.9&D_recovery_mild=11.1&D_recovery_severe=28.6&I0=1&InterventionAmt=0.33333333333333337&InterventionTime=100&P_SEVERE=0.2&R0=2.2&Time_to_death=32&logN=15.761420707019587">Simulation of COVID-19 evolution on Region of Madrid (Spain)
+      </a> -->
+      This <a href="https://gabgoh.github.io/COVID/index.html?CFR=0.01&D_hospital_lag=5&D_incbation=5.2&D_infectious=10&D_recovery_mild=11.1&D_recovery_severe=28.6&I0=1&InterventionAmt=0.26&InterventionTime=94.4&P_SEVERE=0.2&R0=3.9&Time_to_death=32&logN=15.761420707019587">simulator</a> implements a classical infectious disease model:
+      <i>SEIR (Susceptible → Exposed → Infected → Removed)</i> [<a href="https://www.thelancet.com/journals/lancet/article/PIIS0140-6736(20)30260-9/fulltext">Wu, et. al</a>, Kucharski et. al].
+      The model uses 13 parameters, including <i>Mortality statistics</i> and the <i>Basic Reproduction Number (R0)</i> before and after the <i>Intervention</i> day.
+</p>
+<p>
+I tried to adjust the evolution of confirmed deaths (<i>Fatalities</i>) in the Region of Madrid since the day this number was over N=10.
+Displacing <i>Intervention</i> day relatively to this reference. And ignoring the <i>Day 0</i> as time origin.
+<!--I expect that following trends of confirmed fatalities would propagate less uncertainty
+and provide more reliable estimates than starting from the first confirmed case.-->
+</p>
+
+
+<!--
+<a href="https://gabgoh.github.io/COVID/index.html?p_num_ind=300000&CFR=0.01&D_hospital_lag=5&D_incbation=5.2&D_infectious=2.9&D_recovery_mild=11.1&D_recovery_severe=28.6&I0=1&InterventionAmt=0.33333333333333337&InterventionTime=100&P_SEVERE=0.2&R0=2.2&Time_to_death=32&logN=15.761420707019587">
+-->
+<a href="https://gabgoh.github.io/COVID/index.html?CFR=0.01&D_hospital_lag=5&D_incbation=5.2&D_infectious=10&D_recovery_mild=11.1&D_recovery_severe=28.6&I0=1&InterventionAmt=0.26&InterventionTime=94.4&P_SEVERE=0.2&R0=3.9&Time_to_death=32&logN=15.761420707019587">
+<img src="img/epcalc_madrid.png"  alt="Epidemic Calculator"/>
+</a>
+<p> Concretely, the number of reported deaths on the Region of Madrid at 14th March, when the Spanish Government decreeted
+the state of Alarm, was 213. While only 7 days before, the number was 16. And 3 weeks later this number increased from 213 to
+5136, according to <a href="https://covid19.isciii.es/resources/serie_historica_acumulados.csv">covid19.iscii.es data</a>.
+</p>
+<p>
+I used 1% as <i>Mortality Statistics</i> and 10 days for <i>T<small>inf</small> (Duration patient is infectious)</i>.
+And in order to fit the evolution of confirmed deaths R0 was established to 3.9 before the intervention
+and 1.0 after the intervention.
+</p>
+<p>
+I think the model is useful to have an idea of the interconnected variables and effects.
+<!--And trying to fit the different parameters according to the last knowledge available.-->
+But results from this model should be read with caution.
+Moreover, appart from the uncertainty introduced by many different estimated parameters and hidden variables,
+this implementation of SEIR ignores the effect of the healthcare capacity system,
+and the possibility on mortality increase due to ICU bed shortage.
+</p>
+      <p>Thanks to <a href="https://github.com/gabgoh/epcalc">Gabriel Goh epcalc</a> project.
       </p>
-      <figure>
-      <img src="img/seroprevalence_and_bias_4.png" alt="Seroprevalence methodology. Method to compensate misclassification bias" style="border:1px solid black">
-      <figcaption><small>Source: ENE-COVID19 <a href="https://portalcne.isciii.es/enecovid19/documentos/ene_covid19_dis.pdf">study design</a></small>
-      </figcaption>
-      </figure>
-      <br/>
-        <p>
-        However the report with preliminary results warns that results are provisional because of the lack of combination with immunoassay.
-        And also mentions in future tense that the combination of rapid tests and immunoassay will correct the minor sensitivity of the former
-        with the results of the latter to maximize the representativity and the information quality.
-      </p>
-        <figure>
-        <img src="img/seroprevalence_and_bias_1.png" alt="Seroprevalence methodology to compensate lower sensitivity" style="border:1px solid black">
-        <figcaption><small>Source: ENE-COVID19: First Round. <a href="https://www.mscbs.gob.es/ciudadanos/ene-covid/docs/ESTUDIO_ENE-COVID19_PRIMERA_RONDA_INFORME_PRELIMINAR.pdf">Preliminary report</a></small>
-        </figcaption>
-        </figure>
 
-        <br/>
-        <p>
-          So I assume according to this claim that adjustment on sensitivity was not yet applied, and I'll try to infer in a simplified way how we could approximate the
-          adjusted seroprevalence according to the current provided numbers.
-        </p>
-        <p>
-        According to the report, rapid tests Orient GeneIgM/IgG were used, from company ZhejiangOrient Gene Biotech. Due to the difficulty of reading IgM band all the results refer to IgG.
-        Manufacturer-reported sensitivity and specificity for serological detection of IgG is 97% and 100%. But these values are probably too optimistic.
-        Reliability studies performed by ENE-COVID19 documented 79% sensitivity and 100% specificity for IgG.
-
-      </p>
-      <figure>
-      <img src="img/seroprevalence_and_bias_2.png" alt="Seroprevalence methodology. Estimated specificity and sensitivity of rapid tests" style="border:1px solid black">
-      <figcaption><small>Source: ENE-COVID19: First Round. <a href="https://www.mscbs.gob.es/ciudadanos/ene-covid/docs/ESTUDIO_ENE-COVID19_PRIMERA_RONDA_INFORME_PRELIMINAR.pdf">Preliminary results</a></small>
-      </figcaption>
-      </figure>
-      <br/>
-      <p>Annex 1 of study design provides more detail on these reliability studies. So we know 150 PCR samples were used to evaluate the rapid test, being 97 PCR+ and 53 PCR-.
-      Under this benchmark global sensitivity for IgG+ was 79.4% and specificity 100%. But due to the small size of evaluated test samples
-      we could provide
-      more conservative estimations. For specificity our uncertainty margin could be in the interval <math><mtext>[98.1% (=53/54), 100%]</mtext></math>.
-      Whereas for sensitivity we could infer that 77 true positives were detected by IgG,
-      <!--so the uncertainty margin would be <math>[78.6% (=77/98), 80.4% (=78/97)]</math>,-->
-      and we could estimate also a
-      <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3661219/figure/F3/">95% confidence interval</a> of <math><mtext>[71.4%, 87.4%]</mtext></math>.
-
-    </p>
-      <figure>
-      <img src="img/test_reliability_study.png" alt="Seroprevalence methodology. Reliability study to evaluate specificity and sensitivity of rapid tests" style="border:1px solid black">
-      <figcaption><small>Source: ENE-COVID19 <a href="https://portalcne.isciii.es/enecovid19/documentos/ene_covid19_dis.pdf">study design</a></small>
-      </figcaption>
-      </figure>
-      <br/>
-      <h6>Assumptions: 100% specificity, lower sensitivity</h6>
-      <p>
-        With 100% specificity there would be no false positives.
-        And with sensitivity of 79%, for a prevalence of 5% there would be 5% of true positives and approximately 1.3% <math><mtext>(= 0.21 x 0.05 / 0.79)</mtext></math> of false negatives.
-        So seroprevalence should rise to 6.3%.
-        but slightly higher than preliminary 5% estimate, and also not bounded to the provided 95% confidence interval of 4.7% and 5.4%.
-        </p>
-        <p>I've detailed the calculation with intermediate steps on false positives and false negatives estimations. But we could use directly the expression from the previous annex:
-        </p>
-
-        <p style="text-align:center">
-        <math>
-        <mtext>
-          Prevalence* = (Prevalence - (1 - Specificity)) / (Sensitivity - (1 - Specificity)) = 0.05 / 0.79 = 6.3%
-        </mtext>
-        </math>
-        </p>
-
-        <p>
-          Moreover, the study refers to coherence between immunoassay, considered as "ground truth", and IgG rapid test results,
-          being 97.3% for 16953 analysed samples. But... if "ground truth" was 100% reliable, specificity for IgG was 100%
-           and prevalence less than 5.4% then sould be 94.6% of true negatives perfectly detected.
-           So for the reminder 4.7% to 5.4% the accuracy of IgG rapid test would be approximately
-          between 50% <math><mtext>(= (0.973 - 0.946) / 0.054)</mtext></math> and 42.6%
-          <math><mtext>(= (0.973 - 0.953) / 0.047)</mtext></math>.
-        </p>
-        <p>In the worst case, considering the more pessimistic sensitivity for IgG being only 42.6%, or rounding down, <a href="https://www.theguardian.com/books/2011/feb/03/douglas-adams-42-hitchhiker?INTCMP=SRCH">42</a>%,
-          which is unlikely, false negatives could approximate to 6.9% <!--(= 0.58 x 0.05 / 0.42),-->
-          and estimated seroprevalence would rise to near 12%.
-        </p>
-        <p>Furthermore, from 247 participants with PCR+, IgG antibodies were detected on 83% <math><mtext>(76.2 - 88.2 IC 95%)</mtext></math>, as presented in the next table.
-        </p>
-        <figure>
-        <img src="img/seroprevalence_and_bias_3.png" alt="Seroprevalence methodology. IgG detection vs PCR" style="border:1px solid black">
-        <figcaption><small>Source: ENE-COVID19: First Round. <a href="https://www.mscbs.gob.es/ciudadanos/ene-covid/docs/ESTUDIO_ENE-COVID19_PRIMERA_RONDA_INFORME_PRELIMINAR.pdf">Preliminary report</a></small>
-        </figcaption>
-        </figure>
-        <br/>
-      <p>
-          Assuming 100% reliability on PCR+ and 100% specificity of rapid test, IgG sensitivity could be on the interval between 76.2% and 88.2%.
-          For the higher bound, 88.2%, false negatives could approximate to 0.7%
-          <!--(=0.118 x 0.05 / 0.882)-->
-          and seroprevalence would be around 5.7%.
-        </p>
-
-        <p>
-          Considering even the most optimistic scenario with 100% specificity and 97% sensitivity reported by the manufacturer,
-          false negatives could approximate to 0.1% <!--(=0.03 x 0.05 / 0.97)-->.
-          And 5.1% seroprevalence would be in the current provided 95% Interval of Confidence <math><mtext>(4.7%, 5.4%)</mtext></math>.
-          However, with analogous calculation, if sensitivity was lower than 92%,
-          seroprevalence would rise above the current provided 5.4% upper bound.
-        </p>
-        <h6>Assumptions: 99% specificity, 79% sensitivity</h6>
-        <p>All the previous calculations based on the assumption that specificity for IgG detection was truly 100%
-          as manufacturer claims and reliability studies made for ENE-COVID seemingly registered. But what if this specificity was 99%, for instance?
-        </p>
-        <p>
-          In this case, maintaining the assumption of 79% sensitivity, true positives would have been 4.1%
-          with the remainder 0.9% bein false positives, and approximately 1.1% false negatives.
-          So actual prevalence would be around 5.2%, between the margins of the provided 95% IC.
-          Curiously, as previously said, a worse specificity, undesirable for clinical purposes, would produce
-          better raw estimates of prevalence. As long as for each 20 false negatives due to low sensitivity
-          we would get 1 false positive due to imperfect specificity.
-          And boths effects would compensate each other for an expected prevalence near to 5%.
-        </p>
-        <!--<img src="https://media.giphy.com/media/SV0kYmJBeXm6Fndmxn/giphy.gif" alt="Rick &nbsp; What's the point giphy" style="width:50%">-->
-
-
-        <h6>Conclusions</h6>
-        <p>While we wait for the immunoassays to be completed to "fine tune" the preliminary ENECOVID seroprevalence estimate,
-          we could get some rules of thumb (or <i>cuentas de la vieja</i>) for the effects
-          of expected test errors on the 5% provided average value.
-          In particular, due to the relation between actual specificity and sensitivity for IgG detection
-          with the rapid test Orient Gene Biotech.
-        </p>
-        <p>
-          <u>If sensitivity and specificity for IgG were 100% and 97% as reported by the manufacturer, there would be no significant misclasification bias</u>.
-        </p>
-        <p>
-          Otherwise, if these values approximate to those reported by reliability studies to ENECOVID, we could expect bias.
-          Concretely, if sensitivity was 79%, false negative would rise the actual seroprevalence above the provided confidence interval margins.
-          Unless this effect was compensated with posterior adjustment or specificity being closer to 99% instead of 100%.
-        </p>
-        <p>
-           And particularly, <u>if specificity of rapid test was indeed 100% and sensitivity for IgG 79%, my (educated?) guess would be
-             actual seroprevalence closer to 6.3%</u>. Additionally, a more conservative range of sensitivity estimates between (very pesimistic) 42% and (very optimistic) 97%,
-             would broaden the interval of possible seroprevalence between 5.1% and 12%.
-        </p>
-        <p>The following chart is intended to represent adjusted seroprevalence estimates depending on the relation of specificity and sensitivity,
-          for a baseline raw estimate of 5%
-        </p>
-        <img src="img/sensitivity_specificity_adjustment.png" alt="Sensitivity vs Specificity adjustment" style="width: 80%;">
-        <!--<figcaption><small>Adjusted seroprevalence estimates for different values of sensitivity and specificity.</small>
-        </figcaption>
-      -->
-      <br/>
-
-      <p>
-      As a limitation of the previous analysis, all the calculations presented here have been applied assuming
-      that specificity and sensitivity remain independent of sex, age or presence of symptoms.
-      As it's not clear if this assumption is going to be fulfilled, <a href="https://portalcne.isciii.es/enecovid19/documentos/ene_covid19_dis.pdf">ENECOVID study design</a> refers to this issue in its
-      Annex 3, describing how a proper adjustment should be done. First of all, the procedure should estimate both sensitivity and specificity
-      at subgroups. Subsequently, the prevalence adjustment should be applied at subgroup level before results are promediated.
-    </p>
-
-        <p>In any case, despite this possible unadjusted bias, according to the previous (quick & dirty) calculations, actual average seroprevalence in Spain would be still far from remote possibility of "herd immunity",
-          though it could affect to Infection Fatality Rate estimates, for instance. And as it was mentioned in the referred preliminary ENECOVID report,
-          and also remarked here just a few paragraphs before,
-          <u>this sensitivity/specificity bias is expected to be corrected in the next round of results by the combination of estimates from immunoassay</u>.
-        </p>
-        <p>
-        <i>Anyway, my provisionally inferred simplified numbers could be significantly wrong or I could be missing the point.
-          In this case, or for any other comment, please, <a href="https://twitter.com/eoteromuras">feedback/criticism is welcome :)</a></i>
-        </p>
-
-            <br/>
-            <br/>
-
-            <div class="subheading mb-3">Confirmed cases vs. estimates of actual infections (Updated 5/04/2020)</div>
-            <p> <strong>Confirmed cases</strong> are only a (generally small and biased) subsample of actual infections.
-
-              How small and how biased?
-              It depends on the <strong>testing</strong> resources and protocols applied in each country/region.
-            </p>
-
-          <p>
-            How many people could be actually infected all around?
-            Estimations have been done by different models and analysts.
-            For instance, the following values have been reported by the
-            <a href="https://www.imperial.ac.uk/media/imperial-college/medicine/mrc-gida/2020-04-03-COVID19-Report-14.pdf">
-              Imperial College London COVID-19 Response Team
-            <img src="img/imperial_college_estimates.png"  alt="Estimates by Imperial College COVID-19 Response Team">
-          </a>
-        </p>
-          <p>
-          According to this model, Spain could have around 15% of infected population as of March 28th.
-          But the 95% credible interval provided was between 3.7% and 41%. So the <strong>uncertainty</strong> is still huge!
-          However, even the lower bound of the estimation corresponded to almost 2 million people.
-          Almost 30 times higher than the number of confirmed cases in Spain at that date (72K).
-        </p>
-        <p><a href="https://twitter.com/kikollan">Kiko Llaneras</a> et al also published at
-          <a href="https://elpais.com/sociedad/2020/03/17/actualidad/1584436648_230452.html">elpais.com
-          </a>
-          4 different calculations, from different researchers and models, ranging from 150K to 900K expected infections
-          in Spain at March 24th. When confirmed cases were below 40K according to Spanish government.
-        </p>
-            <blockquote class="twitter-tweet">
-              <p lang="es" dir="ltr">🔎¿Cuántos infectados hay realmente en España?
-              Seguramente cientos de miles. Repaso cuatro cálculos sencillos pero orientativos que arrojan cifras
-              del orden de 300.000 o 900.000 casos: <a href="https://t.co/cACMrd9MHY">https://t.co/cACMrd9MHY</a>
-            </p>&mdash; Kiko Llaneras (@kikollan)
-            <a href="https://twitter.com/kikollan/status/1242759416446926848?ref_src=twsrc%5Etfw">March 25, 2020</a>
-          </blockquote>
-          <script async src="https://platform.twitter.com/widgets.js">
-          </script>
-        <p>
-
-          While the estimations of Imperial College have been broadly communicated in mass media, often ignoring
-          the main <strong>assumptions</strong> and confidence intervals underlying the gross numbers,
-          I think data team at <i>elpais.com</i>, and specially Llaneras is doing a god job on communicating the numbers
-          but also contextualizing assumptions under these numbers.
-        </p>
-            <p>
-              Anyhow, numbers from confirmed cases and notified deaths per country, and alternative
-              <strong>estimates</strong> of actual infections and deaths
-              infered by different studies and models
-              should be understood under their <strong>context</strong>.
-              Language should be used rigourously to avoid <i>misinformation</i>.
-            </p>
-
-
-
-
-            <p> I personally recommend analysis and data curated by <a href="https://ourworldindata.org/coronavirus">Our World in Data</a>. Thanks to <a href="https://twitter.com/MaxCRoser">Max Roser</a> et al.
-                I also appreciate their effort to persuade general press to use adequate terms. And to promote curated analysis from different sources:
-            </p>
-                <blockquote class="twitter-tweet">
-                  <p lang="en" dir="ltr">The study from Timothy Russell and coauthors estimates that only 5.8% of all symptomatic cases in Italy are reported.<a href="https://t.co/d5eRoOltBj">https://t.co/d5eRoOltBj</a>
-                    <br><br>Let’s hope Italy is bending the curve.<br><br>But reported cases don’t tell us much when they are likely only a small fraction of the total.
-                    <a href="https://t.co/QvvRtzyzVA">pic.twitter.com/QvvRtzyzVA</a></p>&mdash; Max Roser (@MaxCRoser)
-                    <a href="https://twitter.com/MaxCRoser/status/1245464450997649411?ref_src=twsrc%5Etfw">April 1, 2020</a>
-                  </blockquote>
-                  <script async src="https://platform.twitter.com/widgets.js"></script>
-
-
-            <p> Additional info (Spanish):
-            </p>
-              <blockquote class="twitter-tweet"><p lang="es" dir="ltr">Como veo que hay mucho lío con las cifras de casos y muertes por coronavirus, (&quot;vamos mejor o peor que X país&quot;, &quot;el gobierno de X país miente&quot;, etc.), abro hilo explicativo para intentar que se entiendan mejor los conceptos.
-                <a href="https://twitter.com/hashtag/COVID19?src=hash&amp;ref_src=twsrc%5Etfw">#COVID19</a>
-                <a href="https://t.co/T2CllkjbUV">pic.twitter.com/T2CllkjbUV</a></p>&mdash; Carlos Fernández (Mejor Prevenir) (@pezcharles)
-                <a href="https://twitter.com/pezcharles/status/1244643827060703232?ref_src=twsrc%5Etfw">March 30, 2020</a>
-              </blockquote> <script async src="https://platform.twitter.com/widgets.js"></script>
+<!--
+    </div>
+    <div class="resume-date text-md-right">
+      <span class="text-primary">26/4/2020</span>
+    </div>
+  </div>
+-->
 
 <br/>
-<br/>
+<hr/>
 
-            <div class="subheading mb-3" id="covid19-estimates-deaths">Reported deaths vs estimates of actual deaths (updated 10-04-2020)</div>
+  <!----------------------------------------------------------------------------->
+
+            <div class="subheading mb-3" id="covid19-estimates-deaths">Reported deaths vs estimates of actual deaths</div>
+            <h6>Updated 10/04/2020</h6>
               <!--MoMo: Monitoring of Excess Mortality-->
               <p>
-                Moreover the number of confirmed and notified deaths is also an estimation of actual deaths caused by the virus.
+                The number of confirmed and notified deaths is also an estimation of actual deaths caused by the virus.
                 And specially in some countries/regions this value could be highly underestimated.
                 Statistics on mortality monitoring on all causes, as project <a href="https://www.euromomo.eu">EuroMomo</a> does,
                 can be useful to infer alternative (and better) estimates based on excess mortality.
@@ -848,8 +957,11 @@ could be related with interregional demographics. Maybe many residents in Madrid
 </p>
 
 <br/>
-<br/>
+<hr/>
+<!----------------------------------------------------------------------------->
+
               <div class="subheading mb-3" id="covid19-momo-spain">Reported case fatality rates vs estimates of actual fatality rates.</div>
+              <h6>Updated 6/04/2020</h6>
 
               <p>
                 It seems that COVID-19 virus (SARS-CoV-2) could be less lethal in relative terms than current figures we get in Italy or Spain
@@ -878,6 +990,91 @@ could be related with interregional demographics. Maybe many residents in Madrid
                 </a> in Wuhan, dated January 23th.
             </p>
 
+            <!----------------------------------------------------------->
+        <br/>
+        <hr/>
+
+
+                        <div class="subheading mb-3" id=covid19-estimates-cases>Confirmed cases vs. estimates of actual infections</div>
+                        <h6>(Updated 5/04/2020)</h6>
+
+                        <p> <strong>Confirmed cases</strong> are only a (generally small and biased) subsample of actual infections.
+
+                          How small and how biased?
+                          It depends on the <strong>testing</strong> resources and protocols applied in each country/region.
+                        </p>
+
+                      <p>
+                        How many people could be actually infected all around?
+                        Estimations have been done by different models and analysts.
+                        For instance, the following values have been reported by the
+                        <a href="https://www.imperial.ac.uk/media/imperial-college/medicine/mrc-gida/2020-04-03-COVID19-Report-14.pdf">
+                          Imperial College London COVID-19 Response Team
+                        <img src="img/imperial_college_estimates.png"  alt="Estimates by Imperial College COVID-19 Response Team">
+                      </a>
+                    </p>
+                      <p>
+                      According to this model, Spain could have around 15% of infected population as of March 28th.
+                      But the 95% credible interval provided was between 3.7% and 41%. So the <strong>uncertainty</strong> is still huge!
+                      However, even the lower bound of the estimation corresponded to almost 2 million people.
+                      Almost 30 times higher than the number of confirmed cases in Spain at that date (72K).
+                    </p>
+                    <p><a href="https://twitter.com/kikollan">Kiko Llaneras</a> et al also published at
+                      <a href="https://elpais.com/sociedad/2020/03/17/actualidad/1584436648_230452.html">elpais.com
+                      </a>
+                      4 different calculations, from different researchers and models, ranging from 150K to 900K expected infections
+                      in Spain at March 24th. When confirmed cases were below 40K according to Spanish government.
+                    </p>
+                        <blockquote class="twitter-tweet">
+                          <p lang="es" dir="ltr">🔎¿Cuántos infectados hay realmente en España?
+                          Seguramente cientos de miles. Repaso cuatro cálculos sencillos pero orientativos que arrojan cifras
+                          del orden de 300.000 o 900.000 casos: <a href="https://t.co/cACMrd9MHY">https://t.co/cACMrd9MHY</a>
+                        </p>&mdash; Kiko Llaneras (@kikollan)
+                        <a href="https://twitter.com/kikollan/status/1242759416446926848?ref_src=twsrc%5Etfw">March 25, 2020</a>
+                      </blockquote>
+                      <script async src="https://platform.twitter.com/widgets.js">
+                      </script>
+                    <p>
+
+                      While the estimations of Imperial College have been broadly communicated in mass media, often ignoring
+                      the main <strong>assumptions</strong> and confidence intervals underlying the gross numbers,
+                      I think data team at <i>elpais.com</i>, and specially Llaneras is doing a god job on communicating the numbers
+                      but also contextualizing assumptions under these numbers.
+                    </p>
+                        <p>
+                          Anyhow, numbers from confirmed cases and notified deaths per country, and alternative
+                          <strong>estimates</strong> of actual infections and deaths
+                          infered by different studies and models
+                          should be understood under their <strong>context</strong>.
+                          Language should be used rigourously to avoid <i>misinformation</i>.
+                        </p>
+
+
+
+
+                        <p> I personally recommend analysis and data curated by <a href="https://ourworldindata.org/coronavirus">Our World in Data</a>. Thanks to <a href="https://twitter.com/MaxCRoser">Max Roser</a> et al.
+                            I also appreciate their effort to persuade general press to use adequate terms. And to promote curated analysis from different sources:
+                        </p>
+                            <blockquote class="twitter-tweet">
+                              <p lang="en" dir="ltr">The study from Timothy Russell and coauthors estimates that only 5.8% of all symptomatic cases in Italy are reported.<a href="https://t.co/d5eRoOltBj">https://t.co/d5eRoOltBj</a>
+                                <br><br>Let’s hope Italy is bending the curve.<br><br>But reported cases don’t tell us much when they are likely only a small fraction of the total.
+                                <a href="https://t.co/QvvRtzyzVA">pic.twitter.com/QvvRtzyzVA</a></p>&mdash; Max Roser (@MaxCRoser)
+                                <a href="https://twitter.com/MaxCRoser/status/1245464450997649411?ref_src=twsrc%5Etfw">April 1, 2020</a>
+                              </blockquote>
+                              <script async src="https://platform.twitter.com/widgets.js"></script>
+
+
+                        <p> Additional info (Spanish):
+                        </p>
+                          <blockquote class="twitter-tweet"><p lang="es" dir="ltr">Como veo que hay mucho lío con las cifras de casos y muertes por coronavirus, (&quot;vamos mejor o peor que X país&quot;, &quot;el gobierno de X país miente&quot;, etc.), abro hilo explicativo para intentar que se entiendan mejor los conceptos.
+                            <a href="https://twitter.com/hashtag/COVID19?src=hash&amp;ref_src=twsrc%5Etfw">#COVID19</a>
+                            <a href="https://t.co/T2CllkjbUV">pic.twitter.com/T2CllkjbUV</a></p>&mdash; Carlos Fernández (Mejor Prevenir) (@pezcharles)
+                            <a href="https://twitter.com/pezcharles/status/1244643827060703232?ref_src=twsrc%5Etfw">March 30, 2020</a>
+                          </blockquote> <script async src="https://platform.twitter.com/widgets.js"></script>
+
+                          <br/>
+              <hr/>
+
 
             </div>
 
@@ -885,150 +1082,7 @@ could be related with interregional demographics. Maybe many residents in Madrid
 
 
 
-      <div class="resume-item d-flex flex-column flex-md-row justify-content-between mb-5" >
-        <div class="resume-content">
-          <h3 class="mb-0" id="covid19-ages">Analysis: Confirmed Cases by Age Groups </h3>
-          <div class="subheading mb-3">Spain vs Germany (updated 26-04-2020)</div>
 
-          <p>The number of confirmed cases in Germany at April 26th is around 157K people, whereas there are around 226K confirmed cases in Spain
-            (<a href="https://www.arcgis.com/apps/opsdashboard/index.html#/85320e2ea5424dfaaa75ae62e5c06e61">Johns Hopkins University</a>,
-            <a href="https://www.worldometers.info/coronavirus/#countries">worldometer</a>). But relative lethality estimates by COVID-19 on Germany seems below 4% (<i>confirmed deaths / confirmed cases</i>). Much lower than figures in Spain (10%)
-            or Italy (13%).
-          </p>
-          <p>
-
-            There are several aspects than could explain this big difference.
-            But I will focus on the representativity of the sample of confirmed tests in relation to the overall population.
-            If we compare the distribution of confirmed cases by age groups in Spain and Germany we can see that:
-          </p>
-            <ul>
-              <li>
-            In Spain confirmed cases are biased to ranges of older people. While young people would be underrepresented.
-          </li>
-          <li>
-            In Germany we have just the opposite effect. Though their distribution of confirmed cases is more similar to the overall distribution, people from 60 to 79 would be slightly underrepresented, while age group of 35 to 59 would be overrepresented among confirmed cases.
-          </li>
-        </ul>
-
-
-      <p>
-        <a href="spain_covid19_by_age.html">
-      <img class="covid_by_age" src="img/Spain_covid19_by_age.gif" style="width:350px" alt="Spain: covid-19 confirmed cases by age groups">
-    </a>
-    <a href="germany_covid19_by_age.html">
-      <img class="covid_by_age" src="img/Germany_covid19_by_age.gif" style="width:350px" alt="Germany: covid-19 confirmed cases by age groups">
-    </a>
-      </p>
-          <p>  <a href="https://github.com/muoten/life-expectancy/blob/master/covid-19/covid19_distribution_by_age.ipynb">Code</a>.
-          </p>
-          <p>
-            Thanks to <a href="https://github.com/datadista">datadista</a>,
-            <a href="https://npgeo-corona-npgeo-de.hub.arcgis.com/app/478220a4c454480e823b17327b2bf1d4">
-            Robert Koch</a> Institute and plotly.
-          </p>
-          <p>
-          Related chart, considering both age and sex groups in Spain:
-          </p>
-<!--          <p>-->
-          <a href="https://www.isciii.es/QueHacemos/Servicios/VigilanciaSaludPublicaRENAVE/EnfermedadesTransmisibles/Documents/INFORMES/Informes%20COVID-19/Informe%20n%C2%BA%2025.%20Situaci%C3%B3n%20de%20COVID-19%20en%20Espa%C3%B1a%20a%2023%20de%20abril%20de%202020.pdf">
-<figure>
-<img src="img/covid19_by_age_and_sex_spain.png"  alt="COVID-19 by age and sex in Spain"/>
-<figcaption><small>Source: Red Nacional de Vigilancia Epidemiológica (RENAVE). Instituto de Salud Carlos III (ISCIII)</small>
-</figcaption>
-</figure>
-          </a>
-<!--          </p>-->
-        <br/>
-        <p>
-            At the begining of the crisis South Korea was the country with a higher number of tests performed
-            and a more representative sample in terms of age distribution. Currently,
-            according to Our World in Data, Iceland has performed much more tests per capita.
-            Furthermore is a reference on <a href="https://www.covid.is/english">data transparency</a>.
-            <iframe src="https://ourworldindata.org/grapher/full-list-cumulative-total-tests-per-thousand?time=latest&country=ECU+EST+ISL+IND+IDN+ITA+NOR+SEN+SGP+ZAF+KOR+CHE+TWN+TUR+GBR+USA+VNM" style="width: 100%; height: 600px; border: 0px none;"></iframe>
-        </p>
-        <p>
-            According to the number of confirmed cases and deaths with COVID-19 on Iceland,
-            relative lethality for those tested positive could be below 1%.
-            Actually at the time of writing is only around 0.5% in that country.
-            Moreover, data from Iceland is helping to get more educated guesses on the proportion of asymptomatic infected people.
-            Estimates published on April 14th on <a href="https://www.nejm.org/doi/full/10.1056/NEJMoa2006100">Spread of SARS-CoV-2 in the Icelandic Population</a>,
-            report that "43% of the participants who tested positive reported having no symptoms, although symptoms almost certainly developed later in some of them.".
-            Though these estimations have to be read also with caution as the effect of false positives should be taked into account.
-        </p>
-        <br/>
-          <!--<p>-->
-            Additional related information, though less updated:
-            <blockquote class="twitter-tweet"><p lang="en" dir="ltr">Here is a distribution of recorded Covid-19 cases in Iceland (which tests broadly, even people with no symptoms) and the Netherlands (which tests narrowly, only those with severe symptoms) <a href="https://t.co/v92fVvOHrT">pic.twitter.com/v92fVvOHrT</a></p>&mdash; Alexandre Afonso (@alexandreafonso) <a href="https://twitter.com/alexandreafonso/status/1243557013759700997?ref_src=twsrc%5Etfw">March 27, 2020</a></blockquote> <script async src="https://platform.twitter.com/widgets.js"  ></script>
-
-        <br/>
-            Germany vs South Korea vs Italy, published on March 13th in Medium by
-            <a href="https://medium.com/@andreasbackhausab/coronavirus-why-its-so-deadly-in-italy-c4200a15a7bf">
-            Andreas Backhaus</a>:
-            <a href="https://medium.com/@andreasbackhausab/coronavirus-why-its-so-deadly-in-italy-c4200a15a7bf">
-            <figure>
-            <img src="https://miro.medium.com/max/1400/1*7UiMwZS1ibeerKx-LfanEA.png"  alt="Coronavirus: why it's so deadly in Italy"/>
-          <!--  <figcaption><small>Source: https://medium.com/@andreasbackhausab/coronavirus-why-its-so-deadly-in-italy-c4200a15a7bf</small>
-          </figcaption>-->
-            </figure>
-          </a>
-
-        <!--</p>-->
-        </div>
-      </div>
-
-
-
-        <div class="resume-item d-flex flex-column flex-md-row justify-content-between mb-5" >
-          <div class="resume-content">
-            <h3 class="mb-0" id="covid19-epcalc">Simulation: Epidemic Calculator</h3>
-            <div class="subheading mb-3">SEIR Model applied to Madrid</div>
-<p>
-              <!--
-              <a href="https://gabgoh.github.io/COVID/index.html?p_num_ind=300000&CFR=0.01&D_hospital_lag=5&D_incbation=5.2&D_infectious=2.9&D_recovery_mild=11.1&D_recovery_severe=28.6&I0=1&InterventionAmt=0.33333333333333337&InterventionTime=100&P_SEVERE=0.2&R0=2.2&Time_to_death=32&logN=15.761420707019587">Simulation of COVID-19 evolution on Region of Madrid (Spain)
-            </a> -->
-            This <a href="https://gabgoh.github.io/COVID/index.html?CFR=0.01&D_hospital_lag=5&D_incbation=5.2&D_infectious=10&D_recovery_mild=11.1&D_recovery_severe=28.6&I0=1&InterventionAmt=0.26&InterventionTime=94.4&P_SEVERE=0.2&R0=3.9&Time_to_death=32&logN=15.761420707019587">simulator</a> implements a classical infectious disease model:
-            <i>SEIR (Susceptible → Exposed → Infected → Removed)</i> [<a href="https://www.thelancet.com/journals/lancet/article/PIIS0140-6736(20)30260-9/fulltext">Wu, et. al</a>, Kucharski et. al].
-            The model uses 13 parameters, including <i>Mortality statistics</i> and the <i>Basic Reproduction Number (R0)</i> before and after the <i>Intervention</i> day.
-</p>
-<p>
-I tried to adjust the evolution of confirmed deaths (<i>Fatalities</i>) in the Region of Madrid since the day this number was over N=10.
-Displacing <i>Intervention</i> day relatively to this reference. And ignoring the <i>Day 0</i> as time origin.
-<!--I expect that following trends of confirmed fatalities would propagate less uncertainty
-and provide more reliable estimates than starting from the first confirmed case.-->
-</p>
-
-
-<!--
-<a href="https://gabgoh.github.io/COVID/index.html?p_num_ind=300000&CFR=0.01&D_hospital_lag=5&D_incbation=5.2&D_infectious=2.9&D_recovery_mild=11.1&D_recovery_severe=28.6&I0=1&InterventionAmt=0.33333333333333337&InterventionTime=100&P_SEVERE=0.2&R0=2.2&Time_to_death=32&logN=15.761420707019587">
--->
-<a href="https://gabgoh.github.io/COVID/index.html?CFR=0.01&D_hospital_lag=5&D_incbation=5.2&D_infectious=10&D_recovery_mild=11.1&D_recovery_severe=28.6&I0=1&InterventionAmt=0.26&InterventionTime=94.4&P_SEVERE=0.2&R0=3.9&Time_to_death=32&logN=15.761420707019587">
-  <img src="img/epcalc_madrid.png"  alt="Epidemic Calculator"/>
-</a>
-  <p> Concretely, the number of reported deaths on the Region of Madrid at 14th March, when the Spanish Government decreeted
-    the state of Alarm, was 213. While only 7 days before, the number was 16. And 3 weeks later this number increased from 213 to
-    5136, according to <a href="https://covid19.isciii.es/resources/serie_historica_acumulados.csv">covid19.iscii.es data</a>.
-  </p>
-  <p>
-    I used 1% as <i>Mortality Statistics</i> and 10 days for <i>T<small>inf</small> (Duration patient is infectious)</i>.
-    And in order to fit the evolution of confirmed deaths R0 was established to 3.9 before the intervention
-    and 1.0 after the intervention.
-  </p>
-  <p>
-    I think the model is useful to have an idea of the interconnected variables and effects.
-    <!--And trying to fit the different parameters according to the last knowledge available.-->
-    But results from this model should be read with caution.
-    Moreover, appart from the uncertainty introduced by many different estimated parameters and hidden variables,
-    this implementation of SEIR ignores the effect of the healthcare capacity system,
-    and the possibility on mortality increase due to ICU bed shortage.
-  </p>
-            <p>Thanks to <a href="https://github.com/gabgoh/epcalc">Gabriel Goh epcalc</a> project.
-            </p>
-
-          </div>
-          <div class="resume-date text-md-right">
-            <span class="text-primary">26/4/2020</span>
-          </div>
-        </div>
 
         <div class="resume-item d-flex flex-column flex-md-row justify-content-between mb-5" id="covid19-data">
           <div class="resume-content">
