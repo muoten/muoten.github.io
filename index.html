@@ -57,7 +57,7 @@
               <a class="nav-link js-scroll-trigger" href="#linear-models">Linear models</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link js-scroll-trigger" href="#linear-models">Causal inference</a>
+              <a class="nav-link js-scroll-trigger" href="#causal-inference">Causal inference</a>
             </li>
           </ul>
         </li>
@@ -115,7 +115,7 @@
             </ul>
             <p class="lead mb-5">I expect models being wrong, but their assumptions explicit.
             </p>
-            <p><i>Last update</i>: <a href="#uncool">Uncool Data Science (I): Regression to Linear Regression</a><sup><small>(2/8/2020)</small></sup></p>
+            <p><i>Last update</i>: <a href="#linear-models">Uncool Data Science (I): Regression to Linear Regression</a><sup><small>(2/8/2020)</small></sup></p>
             <p>Moreover <a href="#covid19">COVID-19 sections</a>, with:
             </p>
             <ul>
@@ -171,23 +171,59 @@
 
             <div id="causal-inference" class="subheading mb-3">No free lunch in automatic causal discovery</div>
 
-            <h6>(13/9/2020)</h6>
+            <h6>(18/9/2020)</h6>
+
+            <!--<h4>Regression by dependence minimization. And causal discovery</h4>-->
+            <p>
+              After reading
+              <a href="https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&cad=rja&uact=8&ved=2ahUKEwicpOi5v_rqAhVFC2MBHfD6BvgQFjABegQIBBAB&url=http%3A%2F%2Fis.tuebingen.mpg.de%2Ffileadmin%2Fuser_upload%2Ffiles%2Fpublications%2FICML2009-Mooij_%5B0%5D.pdf">
+                "Regression by dependence minimization and its application to causal inference in additive noise models"</a>
+                by Mooij et al, even regression models seem more <i>cool</i>.
+                Though this kind of regression is not exactly our old well known <a href="#linear-models">linear regression</a>, it's based on similar principles.
+              </p>
+              <p>Summarizing this approach, they combine regression methods and independence tests.
+                Inspired by a previous research from the same group, that used
+                <a href="http://webdav.tuebingen.mpg.de/causality/NIPS2008-Hoyer.pdf">
+                  Gaussian Process Regression
+                </a> and the
+                <a href="https://www.jmlr.org/papers/volume6/gretton05a/gretton05a.pdf">
+                  Hilbert-Schmidt Independence Criterion (HSIC)
+                </a>.
+In the new approach, to avoid making additional assumptions about the noise distribution, as the Gaussian Process Regression does,
+the authors directly propose the HSIC estimator as measure of dependence between residuals and regressors,
+as the regression "loss function".
+
+</p>
+              <p>Published results seem promising. Anyhow, we have to be cautious, as Judea Pearl says,
+                no matter how sophisticated an algorithm is,
+                you will not have an automatic way to certainly infer causality from data only.
+                <!--you can not infer causality by only looking to the data.-->
+                Application of this "cool" algorithms don't get "causality" for free.
+                Some previous assumptions are required to move Data Science from "data fitting" direction to "data-intensive Causal Science".
+                Or as I'd rephrase, from being fully data-driven to be model-driven but data-supported.
+                Or in <a href="https://twitter.com/_miguelhernan/status/897918662514024448?lang=es">
+                  @_MiguelHernan</a> words: "draw your assumptions before your conclusions".
+                </p>
+                <blockquote class="twitter-tweet"><p lang="en" dir="ltr">Contesting the Soul of Data-Science. Below, an introduction to the Spanish translation of <a href="https://twitter.com/hashtag/Bookofwhy?src=hash&amp;ref_src=twsrc%5Etfw">#Bookofwhy</a>:<a href="https://t.co/gWpMQEIWhX">https://t.co/gWpMQEIWhX</a>. It expresses my conviction that the data-fitting direction taken by “Data Science” is temporary, soon to be replaced by &quot;Data-intensive Causal Science&quot;</p>&mdash; Judea Pearl (@yudapearl) <a href="https://twitter.com/yudapearl/status/1280791406894694410?ref_src=twsrc%5Etfw">July 8, 2020</a></blockquote> <script async src="https://platform.twitter.com/widgets.js"  ></script>
 
             <p>
-              Judea Pearl usually warns that no matter how sophisticated your method is,
-              you will not have an automatic way to certainly infer causality from data only.
-
-              Though, as Heisemberg's Uncertainty Principle, I wonder if this epistemic limit
+              Moreover I wonder if this epistemic limit warned by Pearl
+                applies only at some deep level of knowledge but we could circumvent it in some practical scenarios.
+                As Heisemberg's Uncertainty Principle applies at the micro-universe physics but it
+                can be ignored with no much penalty at the macro-world physics.
+            <!--  Moreover, as Heisemberg's Uncertainty Principle, I wonder if this epistemic limit warned by Pearl
               applies only at some level of knowledge (like micro-universe physics),
               and it could be circumvented for practical reasons at other levels (like macro-world physics).
+            -->
             </p>
             <p>
-              After reading Bernhard Schölkopf research on <a href="http://webdav.tuebingen.mpg.de/causality/">
+              Several of the articles previously referred come from the research group lead by Bernhard Schölkopf at
+              <a href="http://webdav.tuebingen.mpg.de/causality/">
                 Causal inference at the Max-Planck-Institute for Intelligent Systems Tübingen
-              </a>,
-              and results on the benchmark data set for causal discovery algorithms, I was quite optimistic about the possibilities of this kind of methods.
-              Taking into account that Scholkopf and his team of coworkers don't ignore Pearl research.
-              And anyway, they still are presenting advances on their field.
+              </a>.
+              Reading these papers made me feel quite optimistic about the possibilities of this kind of methods.
+              Particularly considering that Scholkopf and his team are aware of Pearl's work,
+              and anyway they still present advances on their field.
             </p>
 
             <p>
@@ -201,6 +237,17 @@
             <p> I'll try to publish further conclusions on my first "adventure".
               Spoiler: the first results were a little disappointing.
             </p>
+            <figure>
+              <img src="img/cdt_experiment1.png" alt="causal discovery with cdt and boston dataset" style="border:1px solid black; width:100%;margin:auto;display:block">
+              <figcaption style="text-align:center" >
+                <small>Source: muoten.github.io
+                  <a href="https://github.com/muoten/causal-discovery-playground/blob/master/boston_dataset_causal_inference_playground.ipynb">
+                    https://github.com/muoten/causal-discovery-playground
+                  </a>
+
+                </small>
+              </figcaption>
+            </figure>
             <p>More details in the following
               <a href="https://github.com/muoten/causal-discovery-playground/blob/master/boston_dataset_causal_inference_playground.ipynb">
               Jupyter Notebook
@@ -260,11 +307,13 @@
               And our search for "accuracy" often hides the requirement of generating <strong>actionable knowledge</strong>,
               that is, getting insights to make useful interventions in the <i>real world</i>.
               For this purpose it's preferable to understand our problem in terms of <strong>associations and causality</strong>.
-              And be prepared to answer <i>"what if"</i> questions?
+              And be prepared to answer <i>"what if"</i> questions.
             </p>
+            <!--
             <p>
               Thus... <i>what if</i> I tried to infer causal knowledge about a particular problem by using simple regressions?
             </p>
+          -->
 
             <br/><h4>Life expectancy vs Health expenditure: Linear Regression models for Longitudinal data.</h4>
 
@@ -414,26 +463,7 @@
     </figure>
     <br/>
 
-    <h4>Regression by dependence minimization. And causal discovery</h4>
-    <p>
-      After reading
-      <a href="https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&cad=rja&uact=8&ved=2ahUKEwicpOi5v_rqAhVFC2MBHfD6BvgQFjABegQIBBAB&url=http%3A%2F%2Fis.tuebingen.mpg.de%2Ffileadmin%2Fuser_upload%2Ffiles%2Fpublications%2FICML2009-Mooij_%5B0%5D.pdf">
-        "Regression by dependence minimization and its application to causal inference in additive noise models"</a>
-        by Mooij et al, even simple regression models seem more <i>cool</i>.
-        And looking into the residuals becomes even more interesting.
-      </p>
-      <p>Anyhow, we have to be cautious, as Judea Pearl says, no matter how sophisticated an algorithm is,
-        you can not infer causality by only looking to the data.
-        Application of this "cool" algorithms don't get "causality" for free.
-        Some previous assumptions are required to move Data Science from "data fitting" direction to "data-intensive Causal Science".
-        Or as I'd rephrase, from being fully data-driven to be model-driven but data-supported.
-        Or in <a href="https://twitter.com/_miguelhernan/status/897918662514024448?lang=es">
-          @_MiguelHernan</a> words: "draw your assumptions before your conclusions".
-        </p>
-        <blockquote class="twitter-tweet"><p lang="en" dir="ltr">Contesting the Soul of Data-Science. Below, an introduction to the Spanish translation of <a href="https://twitter.com/hashtag/Bookofwhy?src=hash&amp;ref_src=twsrc%5Etfw">#Bookofwhy</a>:<a href="https://t.co/gWpMQEIWhX">https://t.co/gWpMQEIWhX</a>. It expresses my conviction that the data-fitting direction taken by “Data Science” is temporary, soon to be replaced by &quot;Data-intensive Causal Science&quot;</p>&mdash; Judea Pearl (@yudapearl) <a href="https://twitter.com/yudapearl/status/1280791406894694410?ref_src=twsrc%5Etfw">July 8, 2020</a></blockquote> <script async src="https://platform.twitter.com/widgets.js"  ></script>
-        <p>
-          To be continued...
-        </p>
+
 
       </div>
     </div>
