@@ -115,7 +115,7 @@
             </ul>
             <p class="lead mb-5">I expect models being wrong, but their assumptions explicit.
             </p>
-            <p><i>Last update</i>: <a href="#linear-models">Uncool Data Science (I): Regression to Linear Regression</a><sup><small>(2/8/2020)</small></sup></p>
+            <p><i>Last update</i>: <a href="#causal-inference">Uncool Data Science: No free lunch in automatic causal discovery</a><sup><small>(19/8/2020)</small></sup></p>
             <p>Moreover <a href="#covid19">COVID-19 sections</a>, with:
             </p>
             <ul>
@@ -171,9 +171,8 @@
 
             <div id="causal-inference" class="subheading mb-3">No free lunch in automatic causal discovery</div>
 
-            <h6>(18/9/2020)</h6>
+            <h6>(19/9/2020)</h6>
 
-            <!--<h4>Regression by dependence minimization. And causal discovery</h4>-->
             <p>
               After reading
               <a href="https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&cad=rja&uact=8&ved=2ahUKEwicpOi5v_rqAhVFC2MBHfD6BvgQFjABegQIBBAB&url=http%3A%2F%2Fis.tuebingen.mpg.de%2Ffileadmin%2Fuser_upload%2Ffiles%2Fpublications%2FICML2009-Mooij_%5B0%5D.pdf">
@@ -189,7 +188,8 @@
                 <a href="https://www.jmlr.org/papers/volume6/gretton05a/gretton05a.pdf">
                   Hilbert-Schmidt Independence Criterion (HSIC)
                 </a>.
-In the new approach, to avoid making additional assumptions about the noise distribution, as the Gaussian Process Regression does,
+In the new approach, to avoid making additional assumptions about the noise distribution of the residuals,
+as Gaussian Process Regression does,
 the authors directly propose the HSIC estimator as measure of dependence between residuals and regressors,
 as the regression "loss function".
 
@@ -210,7 +210,9 @@ as the regression "loss function".
               Moreover I wonder if this epistemic limit warned by Pearl
                 applies only at some deep level of knowledge but we could circumvent it in some practical scenarios.
                 As Heisemberg's Uncertainty Principle applies at the micro-world but it
-                can be ignored with no much penalty at the macro-world physics.
+                can be ignored with no much penalty at the macro-world physics (with some
+                <a href="https://phys.org/news/2013-02-heisenberg-uncertainty-principle-macro.html">exceptions
+                </a>).
             </p>
             <p>
               Several of the previously referred articles come from the research group lead by Bernhard Schölkopf at
