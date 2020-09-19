@@ -232,33 +232,58 @@ as the regression "loss function".
               "open-source Python package including many state-of-the-art causal modeling algorithms
               (most of which are imported from R)".
             </p>
-            <p> I'll publish further conclusions on my first "adventure".
+            <p> I'll publish further conclusions on this new "adventure".
               Spoiler: the first results were a little disappointing.
             </p>
             <figure>
               <img src="img/cdt_experiment1.png" alt="causal discovery with cdt and boston dataset" style="border:1px solid black; width:100%;margin:auto;display:block">
               <figcaption style="text-align:center" >
-                <small>Source: muoten.github.io
-                  <a href="https://github.com/muoten/causal-discovery-playground/blob/master/boston_dataset_causal_inference_playground.ipynb">
+                <small>Source: <a href="https://github.com/muoten/causal-discovery-playground/blob/master/boston_dataset_causal_inference_playground.ipynb">
                     https://github.com/muoten/causal-discovery-playground
                   </a>
 
                 </small>
               </figcaption>
             </figure>
-            <p>As you can see, at least the <code>ANM</code> model from <code>cdt.causality.pairwise</code> package was unable to
-              properly determinate the cause an effect relationship between CRM and RAD variables in the
+            <p>As you can see, the <i>Additive Noise Model</i> (<code>ANM</code>) from <code>cdt.causality.pairwise</code> package was unable to
+              properly determinate the cause an effect relationship between CRIM and RAD variables in the
               <a href="https://www.cs.toronto.edu/~delve/data/boston/bostonDetail.html">
                 Boston Dataset
               </a>.
-              Considering that CRIM was the "per capita crime rate by town"
-              and RAD the "index of accesibility to radial highways", is unlikely that the former was a direct cause of the latter.
-              Being much more likely if the arrow on the generated <i>causal diagram</i> was in the opposite direction.
+              Considering that <i>CRIM</i> was the "per capita crime rate by town"
+              and <i>RAD</i> the "index of accesibility to radial highways", is unlikely that the former was a direct cause of the latter.
+              Being much more likely if the arrow on the generated causal diagram was in the opposite direction.
+            </p>
+            <p><code>BivariateFit</code> model also provided the same weird causal direction between <i>CRIM</i>
+              and <i>RAD</i>.
+              While <i>Conditional Distribution Similarity Statistic</i> (<code>CDS</code>),
+              <i>Information Geometric Causal Inference</i> (<code>IGCI</code>)
+              and <i>Regression Error based Causal Inference</i> (<code>RECI</code>) provided the more reasonable
+              opposite direction. Though all of them struggled also with other pairs as <i>NOX</i> (nitric oxides concentration
+              and <i>DIS</i> (weighted distances to five Boston employment centres),
+              with low average rate of success.
+            </p>
+            <p>Among these 5 different methods,
+              only <code>CDS</code> selected the pairwise directions that make more sense:
+              distance to radial highways causing effects on per capita crime rate (<i>RAD -> CRIM</i>),
+              and distance to employment centres causing effects on nitric oxides concentration (<i>DIS -> NOX</i>).
+            </p>
+            <figure>
+              <img src="img/cdt_experiment2.png" alt="causal discovery with cdt.causality.pairwise.CDS and boston dataset" style="width:50%;margin:auto;display:block">
+              <figcaption style="text-align:center" >
+                <small>Source: <a href="https://github.com/muoten/causal-discovery-playground/blob/master/boston_dataset_causal_inference_playground.ipynb">
+                    https://github.com/muoten/causal-discovery-playground
+                  </a>
+
+                </small>
+              </figcaption>
+            </figure>
+
             <p>More details in the following
               <a href="https://github.com/muoten/causal-discovery-playground/blob/master/boston_dataset_causal_inference_playground.ipynb">
               Jupyter Notebook
-            </a>.
-          </p>
+              </a>.
+           </p>
             <p>Curiously, I didn't know the origin of this dataset: a paper by David Harrison Jr. and Daniel L. Rubinfeld,
               published on 1978 on the Journal of Environmental Economics and Management,
               called
