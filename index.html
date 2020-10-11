@@ -172,7 +172,7 @@
             <div id="causal-inference">
             <div id="causal-discovery" class="subheading mb-3">No free lunch in automatic causal discovery</div>
 
-            <h6>(20/9/2020)</h6>
+            <h6>(Written 20/9/2020, updated 11/10/2020)</h6>
 
             <p>
               After reading
@@ -181,7 +181,7 @@
                 by Mooij et al, even regression models seem more <i>cool</i>.
                 Though this kind of regression is not exactly our old well known <a href="#linear-models">linear regression</a>, it's based on similar principles.
               </p>
-              <p>Summarizing this approach, they combine regression methods and independence tests.
+              <p>Summarizing this approach, they combine regression methods and <strong>independence tests</strong>.
                 Inspired by a previous research from the same group, that used
                 <a href="http://webdav.tuebingen.mpg.de/causality/NIPS2008-Hoyer.pdf">
                   Gaussian Process Regression
@@ -189,10 +189,10 @@
                 <a href="https://www.jmlr.org/papers/volume6/gretton05a/gretton05a.pdf">
                   Hilbert-Schmidt Independence Criterion (HSIC)
                 </a>.
-In the new approach, to avoid making additional assumptions about the noise distribution of the residuals,
+In the new approach, to avoid making additional assumptions about the noise <strong>distribution of the residuals</strong>,
 as Gaussian Process Regression does,
-the authors directly propose the HSIC estimator as measure of dependence between residuals and regressors,
-as the regression "loss function".
+the authors directly propose the HSIC estimator as regression "loss function"
+measuring dependence between residuals and regressors.
 
 </p>
               <p>Published results seem promising. Anyhow, we have to be cautious, as Judea Pearl says,
@@ -200,7 +200,7 @@ as the regression "loss function".
                 you will not have an automatic way to certainly infer causality from data only.
 
                 Application of this "cool" algorithms don't get "causality" for free.
-                Some previous assumptions are required to move Data Science from "data fitting" direction to "data-intensive Causal Science".
+                Some previous <strong>assumptions are required</strong> to move Data Science from "data fitting" direction to "data-intensive Causal Science".
                 Or as I'd rephrase, from being fully data-driven to be model-driven but data-supported.
                 Or in <a href="https://twitter.com/_miguelhernan/status/897918662514024448?lang=es">
                   @_MiguelHernan</a> words: "draw your assumptions before your conclusions".
@@ -223,6 +223,7 @@ as the regression "loss function".
               Reading these papers made me feel quite optimistic about the possibilities of this kind of methods.
               Particularly considering that Schölkopf and his team are aware of Pearl's work,
               and anyway they still present advances on their field.
+              And benchmarks where several of these methods perform <strong>better than random</strong>.
             </p>
 
             <p>
@@ -233,8 +234,8 @@ as the regression "loss function".
               "open-source Python package including many state-of-the-art causal modeling algorithms
               (most of which are imported from R)".
             </p>
-            <p> I'll publish further conclusions on this new "adventure".
-              Spoiler: the first results were a little disappointing.
+            <p> I found some of the features very interesting, though regarding to automatic causal discovery with
+              <code>cdt.causality.pairwise</code> implementations, my first results were a little disappointing.
             </p>
             <figure>
               <img src="img/cdt_experiment1.png" alt="causal discovery with cdt and boston dataset" style="border:1px solid black; width:80%;margin:auto;display:block">
@@ -246,7 +247,7 @@ as the regression "loss function".
                 </small>
               </figcaption>
             </figure>
-            <p>As you can see, the <i>Additive Noise Model</i> (<code>ANM</code>) from <code>cdt.causality.pairwise</code> package was unable to
+            <p>Seemingly, the <i>Additive Noise Model</i> (<code>ANM</code>) from <code>cdt.causality.pairwise</code> package was unable to
               properly determinate the cause & effect relationship between CRIM and RAD variables in the
               <a href="https://www.cs.toronto.edu/~delve/data/boston/bostonDetail.html">
                 Boston Dataset
