@@ -115,7 +115,7 @@
             </ul>
             <p class="lead mb-5">I expect models being wrong, but their assumptions explicit.
             </p>
-            <p><i>Last update</i>: <a href="#causal-discovery">Uncool Data Science: No free lunch in automatic causal discovery</a><sup><small>(20/9/2020)</small></sup></p>
+            <p><i>Last update</i>: <a href="#causal-discovery">Uncool Data Science: No free lunch in automatic causal discovery</a><sup><small>(22/10/2020)</small></sup></p>
             <p>Moreover <a href="#covid19">COVID-19 sections</a>, with:
             </p>
             <ul>
@@ -172,7 +172,7 @@
             <div id="causal-inference">
             <div id="causal-discovery" class="subheading mb-3">No free lunch in automatic causal discovery</div>
 
-            <h6>(Written 20/9/2020, updated 11/10/2020)</h6>
+            <h6>(Written 20/9/2020, updated 22/10/2020)</h6>
 
             <p>
               After reading
@@ -254,7 +254,7 @@ measuring dependence between residuals and regressors.
               </a>.
               Considering that <i>CRIM</i> was the "per capita crime rate by town"
               and <i>RAD</i> the "index of accesibility to radial highways", is unlikely that the former was a direct cause of the latter.
-              Being much more likely if the arrow on the generated causal diagram was in the opposite direction.
+              Being much more likely if the arrow on the generated causal diagram was reversed.
             </p>
             <p><code>BivariateFit</code> model also provided the same weird causal direction between <i>CRIM</i>
               and <i>RAD</i>.
@@ -276,7 +276,6 @@ measuring dependence between residuals and regressors.
                 <small>Source: <a href="https://github.com/muoten/causal-discovery-playground/blob/master/boston_dataset_causal_inference_playground.ipynb">
                     https://github.com/muoten/causal-discovery-playground
                   </a>
-
                 </small>
               </figcaption>
             </figure>
@@ -293,6 +292,46 @@ measuring dependence between residuals and regressors.
                 Hedonic housing prices and the demand for clean air
               </a>
             </p>
+
+            <p>
+            Finally I've tried to apply these methods to a different data set, also related to health and money,
+            but not so popular, at least in the Machine Learning field: <i>life expectancy vs health expenditure</i>.
+            As a context, I was playing around with
+            <a href="https://github.com/muoten/life-expectancy/blob/master/life_expectancy_vs_health_expenditure_linear_regression.ipynb">
+            life expectancy vs health expenditure</a> data weeks ago, using
+            <a href="https://ourworldindata.org/grapher/life-expectancy?time=..&country=~OWID_WRL">Our World in Data</a> and
+            WHO's <a href="http://apps.who.int/nha/database/Home/IndicatorsDownload/en">Global Health Expenditure Database (GHED)</a> as data sources.
+          </p>
+          <p>
+            My first surprise now when applying to this data the previous 5 methods from <code>cdt.causality.pairwise</code>
+            was that none of them was able to infer that
+            <code>health_expenditure_log</code> was directly related to <code>health_expenditure</code>, despite the former was a calculated field by applying logarithm to the latter.
+            Anyway, ignoring this point and focusing on the
+            <code>health_expenditure</code> vs. <code>life_expectancy</code> relationship, only 2 of the 5 previous methods inferred the direction that I think makes more sense:
+            health expenditure as cause of life expectancy.
+            More details in the following <a href="https://github.com/muoten/life-expectancy/blob/master/life_expectancy_vs_health_expenditure_pairwise_causal_discovery.ipynb">
+              notebook
+            </a>.
+          </p>
+          <figure>
+            <img src="img/life_expectancy_and_health_expenditure_pairwise.png" alt="causal discovery with cdt.causality.pairwise.CDS and life expectancy vs health expenditure data">
+            <figcaption style="text-align:center" >
+              <small>Source: <a href="https://github.com/muoten/life-expectancy/blob/master/life_expectancy_vs_health_expenditure_pairwise_causal_discovery.ipynb">
+                  https://github.com/muoten/life-expectancy
+                </a>
+              </small>
+            </figcaption>
+          </figure>
+
+          <p>
+            Summarizing my first (failed) adventure on automatic causal discovery: 3 causal directions to infer, 5 tested methods,
+            and only 1 of 5 succeeded for all 3 of them. By coin flipping or random guessing we would expect 1 of 8 hits.
+            Getting 1 of 5 is slightly better than random. Not so bad to abandon hope,
+            specially for <i>Conditional Distribution Similarity Statistic</i> (<code>CDS</code>) implementation,
+            that in this little experiment succeeded as our best coin flipper. Though not so good to go deeper on this adventure by the moment.
+            </p>
+
+            <p>Still <i>no free lunch</i>... as usually.</p>
 
           </div>
             <br/>
