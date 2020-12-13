@@ -219,8 +219,7 @@
               </figure>
 
               <p>
-                   Pearl postulates
-                  that in the three-level hierarchy (or ladder of causation), <i>"questions at level i (i =
+                   Pearl postulates that <i>"questions at level i (i =
 1, 2, 3) can be answered only if information from level j (j > i) is available".</i>
 So we only can answer questions about interventions if we have information about counterfactuals.
 And counterfactuals are necessarily based on human imagination and subjective domain assumptions.
@@ -228,7 +227,7 @@ And counterfactuals are necessarily based on human imagination and subjective do
 <p>Since this point of view, the impossibility of answering causal queries without assumptions
   that encode causal information
   is true in a logical sense, like a theorem derived of the previous postulate or axiom.
-  So, it comes the controversial claim, when Pearl states limits on Machine Learning, no matter how sophisticated it is:
+  So, it comes the controversial claim, when Pearl states hard limits on Machine Learning, no matter how sophisticated it is:
 </p>
   <blockquote style='display: block;margin-top: 1em;margin-bottom: 1em;margin-left: 40px;margin-right: 40px; border:1px; content: open-quote;'>
   <i>"This three-level hierarchy, and the
@@ -239,8 +238,10 @@ And counterfactuals are necessarily based on human imagination and subjective do
   experiments, and causal explanations."</i>
   </blockquote>
 <p>
-  The question is... despite this logical (or mathematical) impossibility...
+  The question is... despite this logical infeasibility...
   is it possible in a practical way to infer causality based on data and other kind of mild assumptions?
+</p>
+<p>
   Without making this context explicit, any kind of polarized discussion on this issue becomes little productive.
   Otherwise, flame begins, and the provocative writing style of Pearl doesn't help to find bridges.
 </p>
@@ -250,12 +251,10 @@ And counterfactuals are necessarily based on human imagination and subjective do
 
 <p>Part of Gelman's reply:</p>
   <blockquote style='display: block;margin-top: 1em;margin-bottom: 1em;margin-left: 40px;margin-right: 40px; border:1px; content: open-quote;'>
-<i>"On page 66 of the book, Pearl and Mackenzie write that statistics “became a model-blind data reduction enterprise.”
+<i>"Pearl and Mackenzie write that statistics “became a model-blind data reduction enterprise.”
 Hey! What the hell are you talking about?? I’m a statistician, I’ve been doing statistics for 30 years,
  working in areas ranging from politics to toxicology. “Model-blind data reduction”? That’s just bullshit.
- We use models all the time. There are some statisticians who avoid models, or at least there used to be—I
- used to work in the same department with some of them—but that’s really a minority view within the field.
- Statisticians use models all the time, statistics textbooks are full of models, and so forth."</i>
+ We use models all the time"</i>
   </blockquote>
 
   <figure>
@@ -272,6 +271,7 @@ Hey! What the hell are you talking about?? I’m a statistician, I’ve been doi
 or any kind of qualitative model that <strong>encodes causal information</strong> in a transparent and testable way.
 Qualitative models that, as Gelman recognises, are not usual in staticians work.
 </p>
+<!--
 <p>
 <i>Note: moreover, is anything "obvious" or "evident" in our lifes? I guess these terms and their synonims
   are quite useless, or even harmful,
@@ -281,6 +281,7 @@ to their interlocutors to speak the same language. And he seems not able to find
   "transparency", explicit knowledge, and subtleties of different notation and languages.
  </i>
 </p>
+-->
 <p>
 Otherwise, maybe the more sensible statement from Gelman's response to Pearl, at least in my opinion is that:
 </p>
@@ -291,7 +292,7 @@ but focus on the quantitative nuts and bolts. We need both."
 </blockquote>
 
             <p>
-              Moreover Pearl refers to (Automatic) Causal Discovery (Tool 7) as follows:
+              Additionally, Pearl refers to (Automatic) Causal Discovery (<i>Tool 7</i>) as follows:
             </p>
                 <blockquote style='display: block;margin-top: 1em;margin-bottom: 1em;margin-left: 40px;margin-right: 40px; border:1px; content: open-quote;'>
                 The d-separation criterion described earlier enables machines
@@ -336,8 +337,9 @@ but focus on the quantitative nuts and bolts. We need both."
                    First of all it performed as the best "coin flipper" in my blind first approach better.
                    Furthermore is was also part of the Jarfo model that scored 2nd place in the cause-effect Kaggle challenge in 2013.
                  </li>
+            <!--
                <figure>
-              <!--
+
                  <img src="img/kaggle_cause_effect.png" alt="kaggle cause-effect challenge" style="border:1px solid black; width:80%;margin:auto;display:block">
                  <figcaption style="text-align:center" >
                    <small>Source: <a href="https://www.kaggle.com/c/cause-effect-pairs/overview">Kaggle
