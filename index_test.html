@@ -302,14 +302,16 @@ but focus on the quantitative nuts and bolts. We need both."
                 in certain circumstances, can prune the set of compatible models significantly to the point
                 where causal queries can be estimated directly from that set.
               </blockquote>
-            <p>Surprising? The apparently denier of Machine Learning methods being able to perform causal reasoning open the door to
+            <p>Surprising? The apparent denier of Machine Learning to perform causal reasoning opens the door to
               "systematic searches" under "certain circumstances" and "mild assumptions".
             </p>
-            <p>Besides, Pearl even worked year ago in the Inductive Causation (IC) method of structure learning,
-              and he refers also to the method (Shimizu et al, 2006) to discover causal directionality
+            <p>Besides, Pearl even worked years ago with T.S. Verma in the <a href="https://arxiv.org/pdf/1303.5435.pdf">
+              Inductive Causation (IC) algorithm</a> of structure learning.
+              And he also refers in his <a href="https://ftp.cs.ucla.edu/pub/stat_ser/r481-reprint.pdf">
+                7 Tools of Causal Inference</a> to the method by Shimizu et al (2006) to discover causal directionality
               based on functional decomposition in linear model with nonGaussian distributions. This method is known as
               <a href="https://www.jmlr.org/papers/volume7/shimizu06a/shimizu06a.pdf">
-                 LiNGAM: linear non-Gaussian acyclic model for causal discovery
+                 LiNGAM: linear non-Gaussian acyclic model for causal discovery.
                </a>
             </p>
             <p>So... let's do it!
@@ -327,7 +329,7 @@ but focus on the quantitative nuts and bolts. We need both."
              <p>After my first (a little disappointing) adventures in automatic
                <a href="#causal-discovery">causal discovery with CDT package
                </a>
-               I tried to make new experiments and try to understand better the methods and assumptions.
+               I performed new experiments. This time trying to understand better the involved methods and assumptions.
              </p>
              <p>
               I focused on 2 methods:
@@ -381,7 +383,7 @@ but focus on the quantitative nuts and bolts. We need both."
             <a href="https://github.com/muoten/causal-discovery-playground/blob/master/automatic_pairwise_causal_discovery_via_pnl.ipynb">Notebook 2 with experiments on Post-Nonlinear Causal Model</a>
           </li>
         </ul>
-        <p>To be continued:
+        <p>To be continued...
         </p>
           <figure>
             <img src="img/cds_score_example_1.png" alt="conditional distribution similarity score" style="border:1px solid black; width:80%;margin:auto;display:block">
