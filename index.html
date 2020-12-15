@@ -183,9 +183,10 @@
                 Judea Pearl insists, there is no way to infer causality with certainty based on observed data only.
                 We need to make assumptions. Assumptions that depend on our domain knowledge.
               </p>
-              <p>As there is some consensus in relation to the need of assumptions, things start to become tricky
-                regarding how different fields, families and researchers understand the kind of assumptions that are required.
-                And, according to my opinion, also the language or kind of notation more appropriate to express these assumptions.
+              <p>As there is some consensus in relation to the need of assumptions,
+                things get tricky about the kind of assumptions that are required.
+                Even researchers from different fields have diverse opinions on the preferible
+                ways to express these assumptions: languages, notations, diagrams...
               </p>
               <p>In <a href="https://ftp.cs.ucla.edu/pub/stat_ser/r481-reprint.pdf">
                 The Seven Tools of Causal Inference, with Reflections on Machine Learning]
@@ -195,13 +196,10 @@
                 <blockquote style='display: block;margin-top: 1em;margin-bottom: 1em;margin-left: 40px;margin-right: 40px; border:1px; content: open-quote;'>
                   <i>"Advances in graphical models have made compact encoding feasible.
                   Their transparency stems naturally from the fact that all assumptions are encoded qualitatively
-                  in graphical form, mirroring the way researchers perceive causeeffect relationships in the domain;
-                  judgments of counterfactual or statistical dependencies are not required,
-                  since such dependencies can be read off the structure of the graph.
+                  in graphical form, mirroring the way researchers perceive cause-effect relationships in the domain;
+                  [...]
                   Testability is facilitated through a graphical criterion called <i>d-separation</i>
-                  that provides the fundamental connection between causes and probabilities.
-                  It tells us, for any given pattern of paths in the model, what pattern of dependencies
-                  we should expect to find in the data."</i>
+                  that provides the fundamental connection between causes and probabilities."</i>
                 </blockquote>
                 <p>
                 Moreover, Pearl's approach of causal inference hardly can be understood without mention to the
@@ -222,7 +220,7 @@
                    Pearl postulates that <i>"questions at level i (i =
 1, 2, 3) can be answered only if information from level j (j > i) is available".</i>
 So we only can answer questions about interventions if we have information about counterfactuals.
-And counterfactuals are necessarily based on human imagination and subjective domain assumptions.
+But counterfactuals are necessarily based on human imagination and subjective domain assumptions.
 </p>
 <p>Since this point of view, the impossibility of answering causal queries without assumptions
   that encode causal information
@@ -239,10 +237,10 @@ And counterfactuals are necessarily based on human imagination and subjective do
   </blockquote>
 <p>
   The question is... despite this logical infeasibility...
-  is it possible in a practical way to infer causality based on data and other kind of mild assumptions?
+  is it possible in a practical way to infer causality based on data and some mild assumptions, in the absence of a predefined causal model?
 </p>
 <p>
-  Without making this context explicit, any kind of polarized discussion on this issue becomes little productive.
+  Without making this context explicit, any discussion on this issue becomes little productive.
   Otherwise, flame begins, and the provocative writing style of Pearl doesn't help to find bridges.
 </p>
 <p>
@@ -268,7 +266,7 @@ Hey! What the hell are you talking about?? I’m a statistician, I’ve been doi
 
 <p>It's probably not obvious that the <strong>"models"</strong> Pearl is refering to are "causal models",
   preferible <strong>causal diagrams (DAGs)</strong>,
-or any kind of qualitative model that <strong>encodes causal information</strong> in a transparent and testable way.
+or any type of qualitative model that <strong>encodes causal information</strong> in a transparent and testable way.
 Qualitative models that, as Gelman recognises, are not usual in staticians work.
 </p>
 <!--
