@@ -115,7 +115,7 @@
             </ul>
             <p class="lead mb-5">I expect models being wrong, but their assumptions explicit.
             </p>
-            <p><i>Last update</i>: <a href="#causal-discovery">Uncool Data Science: No free lunch in automatic causal discovery</a><sup><small>(22/10/2020)</small></sup></p>
+            <p><i>Last update</i>: <a href="#causal-discovery-2">Causal wars: assumptions strikes back</a><sup><small>(22/12/2020)</small></sup></p>
             <p>Moreover <a href="#covid19">COVID-19 sections</a>, with:
             </p>
             <ul>
@@ -171,41 +171,35 @@
 
             <div id="causal-inference">
 
-              <!--<div id="causal-discovery-2" class="subheading mb-3">Automatic causal discovery (part II): some <i>cheap<i> lunch?
-              </div>-->
-
-              <div id="causal-discovery-2" class="subheading mb-3">Causal Inference Wars: episode II (or V?) - Machine Learning Strikes Back
+              <div id="causal-discovery-2" class="subheading mb-3">Causal Wars: episode II (or V?) - Assumptions Strikes Back
               </div>
 
-              <h6>(Written 13/12/2020, work in progress...)</h6>
+              <h6>(Written 13/12/2020, updated 22/12/2020)</h6>
 
+              <p>After my first (somewhat disappointing) adventures in automatic
+                <a href="#causal-discovery">causal discovery with CDT package</a>, I go back to the topic with new experiments. This time trying to understand better the involved methods and <strong>assumptions</strong>.
+              </p>
+              <!--
               <p>
                 Judea Pearl insists, there is no way to infer causality with certainty based on observed data only.
-                We need to make assumptions. Assumptions that depend on our domain knowledge.
-              </p>
-              <p>As there is some consensus in relation to the need of assumptions,
+                We need to make <strong>assumptions</strong> that depend on our domain knowledge.
+              </p>-->
+              <p>As there is some consensus on the need of assumptions to infer causality based on observational data,
                 things get tricky about the kind of assumptions that are required.
                 Even researchers from different fields have diverse opinions on the preferible
-                ways to express these assumptions: languages, notations, diagrams...
+                ways to express the requirements and limitations of the different methodologies: languages, notations, diagrams...
+              For instance, Lauritzen on <a href="https://onlinelibrary.wiley.com/doi/10.1111/j.1467-9469.2004.03-200A.x">Discussion in Causality</a>
+                identifies up to 4 different formalisms or <i>causal languages</i>:
+                structural equations, graphical models, counterfactual random variables and potential outcomes
               </p>
-              <p>In <a href="https://ftp.cs.ucla.edu/pub/stat_ser/r481-reprint.pdf">
-                The Seven Tools of Causal Inference, with Reflections on Machine Learning]
-              </a>, Pearl remarks the importance of <strong>Transparency</strong> and <strong>Testability</strong> when
-                encoding causal assumptions (referred as Tool 1).
-              </p>
-                <blockquote style='display: block;margin-top: 1em;margin-bottom: 1em;margin-left: 40px;margin-right: 40px; border:1px; content: open-quote;'>
-                  <i>"Advances in graphical models have made compact encoding feasible.
-                  Their transparency stems naturally from the fact that all assumptions are encoded qualitatively
-                  in graphical form, mirroring the way researchers perceive cause-effect relationships in the domain;
-                  [...]
-                  Testability is facilitated through a graphical criterion called <i>d-separation</i>
-                  that provides the fundamental connection between causes and probabilities."</i>
-                </blockquote>
-                <p>
-                Moreover, Pearl's approach of causal inference hardly can be understood without mention to the
+              <p>
+               Pearl's approach of causal inference describes a
                     <strong>three-level hierarchy</strong>, or "ladder of causation".
-                </p>
-
+                    And postulates that <i>"questions at level i (i =
+      1, 2, 3) can be answered only if information from level j (j > i) is available".</i>
+      So we need information about counterfactuals to answer questions about interventions.
+      But counterfactuals are based on human imagination and subjective domain knowledge.
+      </p>
               <figure>
                 <img src="img/7_tools_causal_inference.png" alt="7 tools of causal inference" style="border:1px solid black; width:80%;margin:auto;display:block">
                 <figcaption style="text-align:center" >
@@ -216,16 +210,8 @@
                 </figcaption>
               </figure>
 
-              <p>
-                   Pearl postulates that <i>"questions at level i (i =
-1, 2, 3) can be answered only if information from level j (j > i) is available".</i>
-So we only can answer questions about interventions if we have information about counterfactuals.
-But counterfactuals are necessarily based on human imagination and subjective domain assumptions.
-</p>
-<p>Since this point of view, the impossibility of answering causal queries without assumptions
-  that encode causal information
-  is true in a logical sense, like a theorem derived of the previous postulate or axiom.
-  So, it comes the controversial claim, when Pearl states hard limits on Machine Learning, no matter how sophisticated it is:
+
+<p>Consequently, according to Pearl:
 </p>
   <blockquote style='display: block;margin-top: 1em;margin-bottom: 1em;margin-left: 40px;margin-right: 40px; border:1px; content: open-quote;'>
   <i>"This three-level hierarchy, and the
@@ -237,23 +223,22 @@ But counterfactuals are necessarily based on human imagination and subjective do
   </blockquote>
 <p>
   The question is... despite this logical infeasibility...
-  is it possible in a practical way to infer causality based on data and some mild assumptions, in the absence of a predefined causal model?
+  is it possible in practice to infer causality based on data and some <i>soft</i> assumptions that are not explicitly encoding a causal model?
 </p>
+<div class="subheading mb-2">May the graphical models be with you
+</div>
 <p>
-  Without making this context explicit, any discussion on this issue becomes little productive.
-  Otherwise, flame begins, and the provocative writing style of Pearl doesn't help to find bridges.
-</p>
-<p>
-  As an example, the reply of Andrew Gelman to Pearl's controversial statements in the Book of Why:
-  <blockquote class="twitter-tweet"><p lang="en" dir="ltr">“The Book of Why” by Pearl and Mackenzie <a href="https://t.co/hEMzlDa4wU">https://t.co/hEMzlDa4wU</a></p>&mdash; Andrew Gelman (@StatModeling) <a href="https://twitter.com/StatModeling/status/1082639137780498432?ref_src=twsrc%5Etfw">January 8, 2019</a></blockquote> <script async src="https://platform.twitter.com/widgets.js"></script>
+  So, first of all, we should disambiguate the different meanings of "causal inference", "reasoning about causal explanations"... and even a (causal) "model".
+  Language ambiguity is a source of misunderstandings, even between the most brilliant people. As an example,
+  the reply of Andrew Gelman to Pearl's controversial statements in the Book of Why:
 
-<p>Part of Gelman's reply:</p>
   <blockquote style='display: block;margin-top: 1em;margin-bottom: 1em;margin-left: 40px;margin-right: 40px; border:1px; content: open-quote;'>
 <i>"Pearl and Mackenzie write that statistics “became a model-blind data reduction enterprise.”
 Hey! What the hell are you talking about?? I’m a statistician, I’ve been doing statistics for 30 years,
  working in areas ranging from politics to toxicology. “Model-blind data reduction”? That’s just bullshit.
  We use models all the time"</i>
   </blockquote>
+<blockquote class="twitter-tweet"><p lang="en" dir="ltr">“The Book of Why” by Pearl and Mackenzie <a href="https://t.co/hEMzlDa4wU">https://t.co/hEMzlDa4wU</a></p>&mdash; Andrew Gelman (@StatModeling) <a href="https://twitter.com/StatModeling/status/1082639137780498432?ref_src=twsrc%5Etfw">January 8, 2019</a></blockquote> <script async src="https://platform.twitter.com/widgets.js"></script>
 
   <figure>
     <img src="img/sabres.gif" alt="the empire strikes back gif" style="border:1px solid black; width:80%;margin:auto;display:block">
@@ -264,31 +249,54 @@ Hey! What the hell are you talking about?? I’m a statistician, I’ve been doi
     </figcaption>
   </figure>
 
-<p>It's probably not obvious that the <strong>"models"</strong> Pearl is refering to are "causal models",
+<p>It's probably not obvious that <strong>"models"</strong> Pearl refers to are "causal models",
   preferible <strong>causal diagrams (DAGs)</strong>,
-or any type of qualitative model that <strong>encodes causal information</strong> in a transparent and testable way.
-Qualitative models that, as Gelman recognises, are not usual in staticians work.
-</p>
-<!--
-<p>
-<i>Note: moreover, is anything "obvious" or "evident" in our lifes? I guess these terms and their synonims
-  are quite useless, or even harmful,
-  but that's my opinion and another story. Furthermore, maybe a problem with Pearl's discussions is the requirement
-to their interlocutors to speak the same language. And he seems not able to find any common "lingua franca" that
-  makes it possible. Quite ironic, taking into account the importance that Pearl assigns to
-  "transparency", explicit knowledge, and subtleties of different notation and languages.
- </i>
-</p>
--->
-<p>
-Otherwise, maybe the more sensible statement from Gelman's response to Pearl, at least in my opinion is that:
-</p>
-<blockquote style='display: block;margin-top: 1em;margin-bottom: 1em;margin-left: 40px;margin-right: 40px; border:1px; content: open-quote;'>
-<i>"Pearl and Mackenzie’s book is pretty much all about qualitative models; statistics textbooks such as my own have a bit on qualitative models
-but focus on the quantitative nuts and bolts. We need both."
-</i>
-</blockquote>
+or any type of <strong>qualitative model that encodes causal information</strong> in a transparent and testable way.
 
+These graphical models
+express sets of conditional independence assumptions via graph structure.
+And given <a href="https://jmlr.csail.mit.edu/papers/volume11/spirtes10a/spirtes10a.pdf">Markov and Faithfulness</a> hipothesis hold,
+a DAG describes every conditional dependence and independence between the represented variables.
+
+
+</p>
+
+<div class="subheading mb-2">identifiability criteria for causal effects from observable data
+</div>
+
+<p>An effect is identifiable if it can be estimated from data, given a set of assumptions.
+  Though <a href="https://arxiv.org/abs/1904.02826">causal estimators can be unstable</a> in general.
+  Anyway, in case of (Conditional) Average (Treatement) Effects,
+  the required assumptions for identifiability, to my understanding are:</p>
+  <ul>
+    <li>
+      Conditional <strong>exchangeability</strong>. <i>Maybe the hypothesis with more possible enunciates and ambiguity I found.
+        I recognize myself still unable to identify subtle differences between de following terms: ignorability, unconfoundness, selection on observables,
+        conditional independence, exogeneity, causal sufficiency... are all them exchangeable?</i>
+    </li>
+    <li>
+      <strong>Consistency</strong> (of treatment). Or SUTVA (Stable Unit Treatment Value Assumption) in potential outcomes.
+    </li>
+    <li>
+      <strong>Positivity</strong>. Or existence of all posible values of treatment and outcome.
+    </li>
+  </ul>
+<p>
+  Given the previous assumptions hold, graphical models would not be strictly required to get quantitative estimates of "causal" average effects,
+  according to Gelman, or Rubin's framework of potential outcomes. <a href="https://psyarxiv.com/b3fkw">Neither conterfactuals</a>, in case we are
+  not interested on individual effects. However, it's hard to know if exchangeability criteria can be fulfilled without the help of causal DAGs and
+    <strong>d-separation</strong> to apply the <i>back-door</i> or the <i>front-door</i> criterion.
+</p>
+  <p>
+     As Gelman recognises in the previously refered post, qualitative models (as DAGs) are less usual in staticians work, and "we need both".
+  </p>
+
+  <!--These graphical models
+  express sets of conditional independence assumptions via graph structure. And given Markov and Faithfulness hipothesis hold,
+  a DAG describes every conditional dependence and independence between the represented variables. Adding causal interpretation, we can use
+
+
+<!--
             <p>
               Additionally, Pearl refers to (Automatic) Causal Discovery (<i>Tool 7</i>) as follows:
             </p>
@@ -300,14 +308,17 @@ but focus on the quantitative nuts and bolts. We need both."
                 in certain circumstances, can prune the set of compatible models significantly to the point
                 where causal queries can be estimated directly from that set.
               </blockquote>
-            <p>Surprising? The apparent denier of Machine Learning to perform causal reasoning opens the door to
-              "systematic searches" under "certain circumstances" and "mild assumptions".
-            </p>
-            <p>Besides, Pearl even worked years ago with T.S. Verma in the <a href="https://arxiv.org/pdf/1303.5435.pdf">
+-->
+<div class="subheading mb-2">Automatic causal discovery
+</div>
+            <p>Otherwise, Pearl, apparent denier of Machine Learning to perform causal reasoning, also opens the possibility to
+              (automatic) <strong>causal discovery</strong>. In his <a href="https://ftp.cs.ucla.edu/pub/stat_ser/r481-reprint.pdf">
+                7 Tools of Causal Inference</a> he proposes
+              "systematic searches" under "certain circumstances" and "mild assumptions". Besides, he worked years ago with T.S. Verma
+              in the <a href="https://arxiv.org/pdf/1303.5435.pdf">
               Inductive Causation (IC) algorithm</a> of structure learning.
-              And he also refers in his <a href="https://ftp.cs.ucla.edu/pub/stat_ser/r481-reprint.pdf">
-                7 Tools of Causal Inference</a> to the method by Shimizu et al (2006) to discover causal directionality
-              based on functional decomposition in linear model with nonGaussian distributions. This method is known as
+              And he also refers to the method by Shimizu et al (2006) to discover causal directionality
+              based on functional decomposition in linear model with nonGaussian distributions. A method known as
               <a href="https://www.jmlr.org/papers/volume7/shimizu06a/shimizu06a.pdf">
                  LiNGAM: linear non-Gaussian acyclic model for causal discovery.
                </a>
@@ -323,14 +334,8 @@ but focus on the quantitative nuts and bolts. We need both."
                  </figcaption>
                </figure>
 
-
-             <p>After my first (a little disappointing) adventures in automatic
-               <a href="#causal-discovery">causal discovery with CDT package
-               </a>
-               I performed new experiments. This time trying to understand better the involved methods and assumptions.
-             </p>
              <p>
-              I focused on 2 methods:
+              I focused on 2 methods for the bivariate case:
              </p>
                <ul>
                  <li><strong>Conditional Similarity Distribution</strong>: as it seemed the best candidate from an empirical point of view.
@@ -349,7 +354,7 @@ but focus on the quantitative nuts and bolts. We need both."
                </figure>
              -->
                  <li><strong>Post-Nonlinear Causal Model</strong>: as it seems the more solid from an analytical point of view.
-                   It even tries to explain the 5 situations in which their assumptions don't hold and it would fail.
+                   It even tries to explain the 5 circumstances in which their assumptions don't hold and it would fail.
                    Published by <a href="https://arxiv.org/pdf/1205.2599.pdf">Zhang et al, in 2009
                    </a>, it can be considered as a generalization of the so-called
                    <a href="https://papers.nips.cc/paper/2008/file/f7664060cc52bc6f3d620bcedc94a4b6-Paper.pdf">
