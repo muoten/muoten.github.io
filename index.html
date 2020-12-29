@@ -115,7 +115,7 @@
             </ul>
             <p class="lead mb-5">I expect models being wrong, but their assumptions explicit.
             </p>
-            <p><i>Last update</i>: <a href="#causal-discovery-2">Causal wars: assumptions strikes back</a><sup><small>(22/12/2020)</small></sup></p>
+            <p><i>Last update</i>: <a href="#causal-discovery-2">Causal wars: assumptions strikes back</a><sup><small>(30/12/2020)</small></sup></p>
             <p>Moreover <a href="#covid19">COVID-19 sections</a>, with:
             </p>
             <ul>
@@ -174,28 +174,48 @@
               <div id="causal-discovery-2" class="subheading mb-3">Causal Wars: episode II (or V?) - Assumptions Strikes Back
               </div>
 
-              <h6>(Written 13/12/2020, updated 22/12/2020)</h6>
+              <h6>(Written 13/12/2020, updated 30/12/2020)</h6>
 
               <p>After my first (somewhat disappointing) adventures in automatic
-                <a href="#causal-discovery">causal discovery with CDT package</a>, I go back to the topic with new experiments. This time trying to understand better the involved methods and <strong>assumptions</strong>.
+                <a href="#causal-discovery">causal discovery with CDT package</a>, I go back to the topic with new experiments. Trying to get a better understanding of the following:
               </p>
+              <ul>
+                <li>
+                  the theoretical and practical limits of automatic causal discovery
+                </li>
+                <li>
+                  its relation with main <strong>assumptions</strong> required to estimate causal effects from observable data, with and without graphical models
+                </li>
+                <li>
+                and the involved methods and specifics for the bivariate example.
+                </li>
+              </ul>
               <!--
               <p>
                 Judea Pearl insists, there is no way to infer causality with certainty based on observed data only.
                 We need to make <strong>assumptions</strong> that depend on our domain knowledge.
               </p>-->
               <p>As there is some consensus on the need of assumptions to infer causality based on observational data,
-                things get tricky about the kind of assumptions that are required.
+                things get tricky about the details.
                 Even researchers from different fields have diverse opinions on the preferible
                 ways to express the requirements and limitations of the different methodologies: languages, notations, diagrams...
               For instance, Lauritzen on <a href="https://onlinelibrary.wiley.com/doi/10.1111/j.1467-9469.2004.03-200A.x">Discussion in Causality</a>
                 identifies up to 4 different formalisms or <i>causal languages</i>:
                 structural equations, graphical models, counterfactual random variables and potential outcomes
               </p>
-              <p>
-               Pearl's approach of causal inference describes a
-                    <strong>three-level hierarchy</strong>, or "ladder of causation".
-                    And postulates that <i>"questions at level i (i =
+              <p>It is also in question if it is possible to infer causality based on data and some automated algorithm. According to Judea Pearl:
+              </p>
+              <blockquote style='display: block;margin-top: 1em;margin-bottom: 1em;margin-left: 40px;margin-right: 40px; border:1px; content: open-quote;'>
+              <i>"<!--[The] three-level hierarchy, and the
+              formal restrictions it entails, explains
+              why
+            -->[...] machine learning systems, based
+              only on associations, are prevented
+              from reasoning about (novel) actions,
+              experiments, and causal explanations."</i>
+              </blockquote>
+               Pearl postulates a
+                    <strong>three-level hierarchy</strong>, or "ladder of causation", where <i>"questions at level i (i =
       1, 2, 3) can be answered only if information from level j (j > i) is available".</i>
       So we need information about counterfactuals to answer questions about interventions.
       But counterfactuals are based on human imagination and subjective domain knowledge.
@@ -211,24 +231,16 @@
               </figure>
 
 
-<p>Consequently, according to Pearl:
-</p>
-  <blockquote style='display: block;margin-top: 1em;margin-bottom: 1em;margin-left: 40px;margin-right: 40px; border:1px; content: open-quote;'>
-  <i>"This three-level hierarchy, and the
-  formal restrictions it entails, explains
-  why machine learning systems, based
-  only on associations, are prevented
-  from reasoning about (novel) actions,
-  experiments, and causal explanations."</i>
-  </blockquote>
 <p>
-  The question is... despite this logical infeasibility...
-  is it possible in practice to infer causality based on data and some <i>soft</i> assumptions that are not explicitly encoding a causal model?
+  The logical consequence of Pearl's postulates is that automatic causal discovery is not feasible in general. In other words, or formalisms,
+  causal estimators are unstable and not asymptotically correct. But...
+  is it possible in practice to infer causality automatically based on data and some <i>soft</i> assumptions that are not explicitly predefining a causal model?
 </p>
 <div class="subheading mb-2">May the graphical models be with you
 </div>
 <p>
-  So, first of all, we should disambiguate the different meanings of "causal inference", "reasoning about causal explanations"... and even a (causal) "model".
+  To answer properly the question we should, first of all, disambiguate the different meanings of "causal inference", "reasoning about causal explanations"...
+  and even a (causal) "model".
   Language ambiguity is a source of misunderstandings, even between the most brilliant people. As an example,
   the reply of Andrew Gelman to Pearl's controversial statements in the Book of Why:
 
