@@ -115,7 +115,7 @@
             </ul>
             <p class="lead mb-5">I expect models being wrong, but their assumptions explicit.
             </p>
-            <p><i>Last update</i>: <a href="#causal-discovery-2">Causal wars: assumptions strikes back</a><sup><small>(30/12/2020)</small></sup></p>
+            <p><i>Last update</i>: <a href="#causal-discovery-2">Causal wars: assumptions strike back</a><sup><small>(06/01/2021)</small></sup></p>
             <p>Moreover <a href="#covid19">COVID-19 sections</a>, with:
             </p>
             <ul>
@@ -171,23 +171,23 @@
 
             <div id="causal-inference">
 
-              <div id="causal-discovery-2" class="subheading mb-3">Causal Wars: episode II (or V?) - Assumptions Strikes Back
+              <div id="causal-discovery-2" class="subheading mb-3">Causal Wars: episode II (or V?) - Assumptions Strike Back
               </div>
 
-              <h6>(Written 13/12/2020, updated 30/12/2020)</h6>
+              <h6>(Written 13/12/2020, updated 06/01/2021)</h6>
 
               <p>After my first (somewhat disappointing) adventures in automatic
                 <a href="#causal-discovery">causal discovery with CDT package</a>, I go back to the topic with new experiments. Trying to get a better understanding of the following:
               </p>
               <ul>
                 <li>
-                  the theoretical and practical limits of automatic causal discovery
+                  the theoretical and practical <strong>limits</strong> of <strong>automatic causal discovery</strong>
                 </li>
                 <li>
-                  its relation with main <strong>assumptions</strong> required to estimate causal effects from observable data, with and without graphical models
+                  its relation with main <strong>assumptions</strong> required to estimate causal effects from observable data, with and without <strong>graphical models</strong>
                 </li>
                 <li>
-                and the involved methods and specifics for the bivariate example.
+                and the involved <strong>methods</strong> and specifics for the <strong>bivariate example</strong>.
                 </li>
               </ul>
               <!--
@@ -233,13 +233,16 @@
 
 <p>
   The logical consequence of Pearl's postulates is that automatic causal discovery is not feasible in general. In other words, or formalisms,
-  causal estimators are unstable and not asymptotically correct. But...
-  is it possible in practice to infer causality automatically based on data and some <i>soft</i> assumptions that are not explicitly predefining a causal model?
+  according to <a href="https://arxiv.org/abs/1904.02826">Maclaren's et al</a>, causal estimators may be unstable, and
+  "lack of stability implies that [...] an achievable statistical estimation target may prove impossible".
+  But, <i>could automatic causal discovery be epistemically impossible in theory but useful in practice under any circumstances?</i>
+  In other words, is it possible to infer causality based on observable data, an algorithm and some <i>soft</i> assumptions
+  that are not explicitly predefining a causal model?
 </p>
 <div class="subheading mb-2">May the graphical models be with you
 </div>
 <p>
-  To answer properly the question we should, first of all, disambiguate the different meanings of "causal inference", "reasoning about causal explanations"...
+  To answer properly the question we should, first of all, disambiguate the different meanings of "causal inference", "causal explanations"...
   and even a (causal) "model".
   Language ambiguity is a source of misunderstandings, even between the most brilliant people. As an example,
   the reply of Andrew Gelman to Pearl's controversial statements in the Book of Why:
@@ -261,24 +264,40 @@ Hey! What the hell are you talking about?? I’m a statistician, I’ve been doi
     </figcaption>
   </figure>
 
-<p>It's probably not obvious that <strong>"models"</strong> Pearl refers to are "causal models",
+<p>It's probably not obvious that <strong>"models"</strong> referred by Pearl are "causal models",
   preferible <strong>causal diagrams (DAGs)</strong>,
 or any type of <strong>qualitative model that encodes causal information</strong> in a transparent and testable way.
-
-These graphical models
-express sets of conditional independence assumptions via graph structure.
-And given <a href="https://jmlr.csail.mit.edu/papers/volume11/spirtes10a/spirtes10a.pdf">Markov and Faithfulness</a> hipothesis hold,
-a DAG describes every conditional dependence and independence between the represented variables.
-
-
 </p>
+<p>
+There are several types of graphical models that express sets of conditional independence assumptions via graph structure, including Directed Acyclic Graphs (DAGs)
+known as <a href="https://ftp.cs.ucla.edu/pub/stat_ser/R246.pdf">bayesian networks</a>.
+DAGs can describe every conditional dependence and independence between the represented variables
+if <a href="https://jmlr.csail.mit.edu/papers/volume11/spirtes10a/spirtes10a.pdf">Markov and Faithfulness</a> hipothesis hold.
+And benefit from expressiveness and <a href="https://arxiv.org/pdf/1304.1505.pdf">d-separation</a>, a criteria that involves checking
+whether a set of vertices Z blocks all connections of a certain type between X and Y in a graph G.
+</p>
+<p>
+But we still need stronger assumptions beyond Markov condition, faithfulness and d-separation to have a causal model.
+In <a href="https://www.cmu.edu/dietrich/philosophy/docs/scheines/introtocausalinference.pdf">Scheines's</a> words:
+</p>
+              <blockquote style='display: block;margin-top: 1em;margin-bottom: 1em;margin-left: 40px;margin-right: 40px; border:1px; content: open-quote;'>
+<i><!--"If taken no further, d-separation and the Markov condition are just mathematics connecting DAGs and probability distributions and need not involve causation at all.
+One might be content to  use  this  mathematical  theory  solely  to  produce  compact  and  elegant  representations  of  independence  structures,
+or-->"one  might  take  a  further  step  by  assuming  that  when  DAGs  are  interpreted  causally  the  Markov  condition  and  d-separation  are  in  fact  the  correct  connection  between  causal  structure  and  probabilistic  independence.
+We  call  the  latter  assumption  the  Causal Markov condition"
+<!--, and it is a stronger assumption than the Markov condition."-->
+</i>
+</blockquote>
+
 
 <div class="subheading mb-2">identifiability criteria for causal effects from observable data
 </div>
 
 <p>An effect is identifiable if it can be estimated from data, given a set of assumptions.
+  <!--
   Though <a href="https://arxiv.org/abs/1904.02826">causal estimators can be unstable</a> in general.
-  Anyway, in case of (Conditional) Average (Treatement) Effects,
+  Anyway,
+-->In case of (Conditional) Average (Treatement) Effects,
   the required assumptions for identifiability, to my understanding are:</p>
   <ul>
     <li>
@@ -296,8 +315,9 @@ a DAG describes every conditional dependence and independence between the repres
 <p>
   Given the previous assumptions hold, graphical models would not be strictly required to get quantitative estimates of "causal" average effects,
   according to Gelman, or Rubin's framework of potential outcomes. <a href="https://psyarxiv.com/b3fkw">Neither conterfactuals</a>, in case we are
-  not interested on individual effects. However, it's hard to know if exchangeability criteria can be fulfilled without the help of causal DAGs and
-    <strong>d-separation</strong> to apply the <i>back-door</i> or the <i>front-door</i> criterion.
+  not interested on individual effects. So, as stated by <a href="https://arxiv.org/pdf/1907.07271.pdf">Guido Imbens</a>, "the Potential Outcome
+  framework is more apprehensive about definite answers to such questions that depend delicately on individual-level heterogeneity". However, it's hard to know if exchangeability criteria can be fulfilled without the help of causal DAGs and
+    <i>d-separation</i> to apply the <strong>back-door</strong> or the <strong>front-door criterion</strong>.
 </p>
   <p>
      As Gelman recognises in the previously refered post, qualitative models (as DAGs) are less usual in staticians work, and "we need both".
@@ -351,7 +371,7 @@ a DAG describes every conditional dependence and independence between the repres
              </p>
                <ul>
                  <li><strong>Conditional Similarity Distribution</strong>: as it seemed the best candidate from an empirical point of view.
-                   First of all it performed as the best "coin flipper" in my blind first approach better.
+                   Because it performed as a better "coin flipper" than the alternatives in my previous quick experiment.
                    Furthermore is was also part of the Jarfo model that scored 2nd place in the cause-effect Kaggle challenge in 2013.
                  </li>
             <!--
