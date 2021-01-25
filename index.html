@@ -115,7 +115,7 @@
             </ul>
             <p class="lead mb-5">I expect models being wrong, but their assumptions explicit.
             </p>
-            <p><i>Last update</i>: <a href="#causal-discovery-2">Causal wars: assumptions strike back</a><sup><small>(06/01/2021)</small></sup></p>
+            <p><i>Last update</i>: <a href="#causal-discovery-2">Causal wars: assumptions strike back</a><sup><small>(25/01/2021)</small></sup></p>
             <p>Moreover <a href="#covid19">COVID-19 sections</a>, with:
             </p>
             <ul>
@@ -174,7 +174,7 @@
               <div id="causal-discovery-2" class="subheading mb-3">Causal Wars: episode II (or V?) - Assumptions Strike Back
               </div>
 
-              <h6>(Written 13/12/2020, updated 06/01/2021)</h6>
+              <h6>(Written 13/12/2020, updated 25/01/2021)</h6>
 
               <p>After my first (somewhat disappointing) adventures in automatic
                 <a href="#causal-discovery">causal discovery with CDT package</a>, I go back to the topic with new experiments. Trying to get a better understanding of the following:
@@ -318,10 +318,22 @@ We  call  the  latter  assumption  the  Causal Markov condition"
   according to Gelman, or Rubin's framework of potential outcomes. <a href="https://psyarxiv.com/b3fkw">Neither conterfactuals</a>, in case we are
   not interested on individual effects. So, as stated by <a href="https://arxiv.org/pdf/1907.07271.pdf">Guido Imbens</a>, "the Potential Outcome
   framework is more apprehensive about definite answers to such questions that depend delicately on individual-level heterogeneity". However, it's hard to know if exchangeability criteria can be fulfilled without the help of causal DAGs and
-    <i>d-separation</i> to apply the <strong>back-door</strong> or the <strong>front-door criterion</strong>.
+    <i>d-separation</i> to apply the <strong>back-door</strong> or the <strong>front-door criterion</strong>. In Pearl's words:
 </p>
-  <p>
-     As Gelman recognises in the previously refered post, qualitative models (as DAGs) are less usual in staticians work, and "we need both".
+  <blockquote style='display: block;margin-top: 1em;margin-bottom: 1em;margin-left: 40px;margin-right: 40px; border:1px; content: open-quote;'>
+<i>
+    "it is always possible to replace assumptions made in SCM [Structural Causal Model] with equivalent,
+    albeit cumbersome assumptions in PO [Potential Outcomes] language,
+    and eventually come to the correct conclusions." But "rejection of graphs and structural models
+    leaves investigators with no process-model guidance and, not surprisingly,
+    it has resulted in a number of blunders which the PO community is not very proud of"
+</i>
+  </blockquote>
+<p>
+    As an example of these "blunders" or difficulties, Rubin, cocreator of Potential Outcomes framework, in relation to the concept of collider or M-bias,
+    claimed that <i>"to avoid conditioning on some observed covariates... is [...] nonscientific ad hockery"</i>.
+More details on a <a href="https://statmodeling.stat.columbia.edu/2020/01/27/causal-inference-in-ai-expressing-potential-outcomes-in-a-graphical-modeling-framework-that-can-be-fit-using-stan/#comment-1242930">David Rohde's comment</a> on Gelman's blog.
+Anyway, as Gelman recognises in the post refered on the previous section, qualitative models (as DAGs) are less usual in staticians work, and "we need both".
   </p>
 
 <div class="subheading mb-2">Automatic causal discovery
