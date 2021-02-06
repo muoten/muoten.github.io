@@ -115,7 +115,7 @@
             </ul>
             <p class="lead mb-5">I expect models being wrong, but their assumptions explicit.
             </p>
-            <p><i>Last update</i>: <a href="#causal-discovery-2">Causal wars: assumptions strike back</a><sup><small>(25/01/2021)</small></sup></p>
+            <p><i>Last update</i>: <a href="#causal-discovery-2">Causal wars: assumptions strike back</a><sup><small>(06/02/2021)</small></sup></p>
             <p>Moreover <a href="#covid19">COVID-19 sections</a>, with:
             </p>
             <ul>
@@ -174,7 +174,7 @@
               <div id="causal-discovery-2" class="subheading mb-3">Causal Wars: episode II (or V?) - Assumptions Strike Back
               </div>
 
-              <h6>(Written 13/12/2020, updated 25/01/2021)</h6>
+              <h6>(Written 13/12/2020, updated 06/02/2021)</h6>
 
               <p>After my first (somewhat disappointing) adventures in automatic
                 <a href="#causal-discovery">causal discovery with CDT package</a>, I go back to the topic with new experiments. Trying to get a better understanding of the following:
@@ -303,11 +303,38 @@ We  call  the  latter  assumption  the  Causal Markov condition"
   <ul>
     <li>
       Conditional <strong>exchangeability</strong>. <i>Maybe the hypothesis with more possible enunciates and ambiguity I found.
-        I recognize myself still unable to identify subtle differences between de following terms: ignorability, unconfoundness, selection on observables,
-        conditional independence, exogeneity, causal sufficiency... are all them exchangeable?</i>
+        I recognize myself still unable to identify subtle differences between the following terms: ignorability, unconfoundness, selection on observables,
+        conditional independence assumption (CIA), exogeneity, causal sufficiency... are all them exchangeable?
+        Thanks to Miguel Hernán et al's <a href="https://cdn1.sph.harvard.edu/wp-content/uploads/sites/1268/2021/01/ciwhatif_hernanrobins_31jan21.pdf">
+          Causal Inference Book
+        </a>
+        for shedding some light on this Tower of Babel full of synonyms and meronyms:</i>
     </li>
+
+  <blockquote style='display: block;margin-top: 1em;margin-bottom: 1em;margin-left: 40px;margin-right: 40px; border:1px; content: open-quote;'>
+<i>"[...] conditional exchangeability [...] often referred as
+“weak ignorability” or “ignorable
+treatment assignment” in statistics (Rosenbaum and Rubin, 1983),
+“selection on observables” in the
+social sciences (Barnow et al.,
+1980), and [lack of exchangeability is also known as] “ommitted variable
+bias” or “endogeneity” in econometrics (Imbens, 2004)"
+</i>
+</blockquote>
+Or these words from <a href="https://clas.ucdenver.edu/marcelo-perraillon/sites/default/files/attached-files/w2_causal_inference_perraillon_0.pdf">
+  Marcelo Perraillon's lectures</a>:
+<blockquote style='display: block;margin-top: 1em;margin-bottom: 1em;margin-left: 40px;margin-right: 40px; border:1px; content: open-quote;'>
+<i>"Jargon, jargon, jargon: This assumption comes in many names, the most
+common perhaps is no unmeasured confounders. Other names: selection
+on observables, exogeneity, conditional independence assumption (CIA),
+ignorability"
+</i>
+</blockquote>
+
+
     <li>
-      <strong>Consistency</strong> (of treatment). Or SUTVA (Stable Unit Treatment Value Assumption) in potential outcomes.
+      <strong>Consistency</strong> (of treatment). Or SUTVA (Stable Unit Treatment Value Assumption) in <a href="http://www.stat.columbia.edu/~cook/qr33.pdf">
+        potential outcomes</a>.
     </li>
     <li>
       <strong>Positivity</strong>. Or existence of all posible values of treatment and outcome.
