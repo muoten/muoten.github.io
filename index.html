@@ -115,7 +115,7 @@
             </ul>
             <p class="lead mb-5">I expect models being wrong, but their assumptions explicit.
             </p>
-            <p><i>Last update</i>: <a href="#causal-discovery-2">Causal wars: assumptions strike back</a><sup><small>(06/02/2021)</small></sup></p>
+            <p><i>Last update</i>: <a href="#causal-discovery-2">Causal wars: assumptions strike back</a><sup><small>(18/04/2021)</small></sup></p>
             <p>Moreover <a href="#covid19">COVID-19 sections</a>, with:
             </p>
             <ul>
@@ -174,17 +174,17 @@
               <div id="causal-discovery-2" class="subheading mb-3">Causal Wars: episode II (or V?) - Assumptions Strike Back
               </div>
 
-              <h6>(Written 13/12/2020, updated 06/02/2021)</h6>
+              <h6>(Written 13/12/2020, updated 18/04/2021)</h6>
 
               <p>After my first (somewhat disappointing) adventures in automatic
                 <a href="#causal-discovery">causal discovery with CDT package</a>, I go back to the topic with new experiments. Trying to get a better understanding of the following:
               </p>
               <ul>
                 <li>
-                  the theoretical and practical <strong>limits</strong> of <strong>automatic causal discovery</strong>
+                  the theoretical and practical <strong>limits</strong> of <strong>automatic causal discovery</strong> (also known as <i>structure learning</i>).
                 </li>
                 <li>
-                  its relation with main <strong>assumptions</strong> required to estimate causal effects from observable data, with and without <strong>graphical models</strong>
+                  its relation with main <strong>assumptions</strong> required to estimate causal effects from observational data, with and without <strong>graphical models</strong>
                 </li>
                 <li>
                 and the involved <strong>methods</strong> and specifics for the <strong>bivariate example</strong>.
@@ -217,14 +217,12 @@
               <p>
                Pearl postulates a
                     <strong>three-level hierarchy</strong>, or "ladder of causation", where <i>"questions at level i (i =
-      1, 2, 3) can be answered only if information from level j (j > i) is available".</i>
-      So we need information about counterfactuals to answer questions about interventions.
-      But counterfactuals are based on human imagination and subjective domain knowledge.
+      1, 2, 3) can be answered only if information from level j (j>=i) is available".</i>
       </p>
               <figure>
-                <img src="img/7_tools_causal_inference.png" alt="7 tools of causal inference" style="border:1px solid black; width:80%;margin:auto;display:block">
+                <img src="img/7_tools_causal_inference_preprint.png" alt="7 tools of causal inference" style="border:1px solid black; width:80%;margin:auto;display:block">
                 <figcaption style="text-align:center" >
-                  <small>Source: <a href="https://ftp.cs.ucla.edu/pub/stat_ser/r481-reprint.pdf">
+                  <small>Source: <a href="https://ftp.cs.ucla.edu/pub/stat_ser/r481.pdf">
                     The Seven Tools of Causal Inference, with Reflections on Machine Learning, by Judea Pearl
                     </a>
                   </small>
@@ -233,18 +231,21 @@
 
 
 <p>
-  The logical consequence of Pearl's postulates is that automatic causal discovery is not feasible in general. In other words, or formalisms,
-  according to <a href="https://arxiv.org/abs/1904.02826">Maclaren's et al</a>, causal estimators may be unstable, and
+  The logical consequence of Pearl's postulates is that automatic causal discovery based on observational data is not feasible in general.
+  In other words, as Peters et al state in <a href="https://library.oapen.org/bitstream/handle/20.500.12657/26040/11283.pdf">
+    Elements of Causal Inference</a>: "there is an ill-posed-ness due to the fact that
+  even complete knowledge of an observational distribution usually does not determine the underlying causal model".
+  Or according to <a href="https://arxiv.org/abs/1904.02826">Maclaren's et al</a>, causal estimators may be unstable, and
   "lack of stability implies that [...] an achievable statistical estimation target may prove impossible".
   But, <i>could automatic causal discovery be epistemically impossible in theory but useful in practice under any circumstances?</i>
-  In other words, is it possible to infer causality based on observable data, an algorithm and some <i>soft</i> assumptions
+  In other words, is it possible to infer causality based on observations, an algorithm and some <i>soft</i> assumptions
   that are not explicitly predefining a causal model?
 </p>
 <div class="subheading mb-2">May the graphical models be with you
 </div>
 <p>
-  To answer properly the question we should, first of all, disambiguate the different meanings of "causal inference", "causal explanations"...
-  and even a (causal) "model".
+  To answer properly the question we should, first of all, disambiguate the different meanings
+  and goals of "causal inference", and even what a (causal) "model" is.
   Language ambiguity is a source of misunderstandings, even between the most brilliant people. As an example,
   the reply of Andrew Gelman to Pearl's controversial statements in the Book of Why:
 
@@ -267,7 +268,9 @@ Hey! What the hell are you talking about?? I’m a statistician, I’ve been doi
 
 <p>It's probably not obvious that <strong>"models"</strong> referred by Pearl are "causal models",
   preferible <strong>causal diagrams (DAGs)</strong>,
-or any type of <strong>qualitative model that encodes causal information</strong> in a transparent and testable way.
+or any type of model that <strong>encodes causal information</strong> in a transparent and testable way.
+As <i><a href="https://fabiandablander.com/r/Causal-Inference.html#structural-causal-models">
+  Structured Causal Models</a></i> (SCMs) also do via assignment functions.
 </p>
 <p>
 There are several types of graphical models that express sets of conditional independence assumptions via graph structure, including Directed Acyclic Graphs (DAGs)
@@ -289,16 +292,30 @@ We  call  the  latter  assumption  the  Causal Markov condition"
 <!--, and it is a stronger assumption than the Markov condition."-->
 </i>
 </blockquote>
+<p>
+Moreover, the term "causal inference" can (ambiguously) refer both to <strong>causal learning</strong> or
+<strong>causal reasoning</strong>.
+The former being the inference of a causal model from observations or interventions. And the latter,
+estimating outcomes or effects (at individual or population level) based on a predefined causal model.
+</p>
 
+<figure>
+  <img src="img/elements_of_causal_inference_terminology.png" alt="Terminology on Elements of Causal Inference (Peters et al.)" style="border:1px solid black; width:80%;margin:auto;display:block">
+  <figcaption style="text-align:center" >
+    <small>Source: <a href="https://library.oapen.org/bitstream/handle/20.500.12657/26040/11283.pdf">Elements of Causal Inference (Peters et al.)
+      </a>
+    </small>
+  </figcaption>
+</figure>
 
-<div class="subheading mb-2">identifiability criteria for causal effects from observable data
+<div class="subheading mb-2">identifiability criteria for causal effects from observations
 </div>
 
-<p>An effect is identifiable if it can be estimated from data, given a set of assumptions.
+<p>In relation to causal reasoning, an effect is identifiable if it can be estimated from data, given a set of assumptions.
   <!--
   Though <a href="https://arxiv.org/abs/1904.02826">causal estimators can be unstable</a> in general.
   Anyway,
--->In case of (Conditional) Average (Treatement) Effects,
+-->In case of (Conditional) Average (Treatment) Effects,
   the required assumptions for identifiability, to my understanding are:</p>
   <ul>
     <li>
@@ -343,7 +360,8 @@ ignorability"
   </ul>
 <p>
   Given the previous assumptions hold, graphical models would not be strictly required to get quantitative estimates of "causal" average effects,
-  according to Gelman, or Rubin's framework of potential outcomes. <a href="https://psyarxiv.com/b3fkw">Neither conterfactuals</a>, in case we are
+  according to Gelman, or Rubin's framework of potential outcomes. <a href="https://fabiandablander.com/r/Causal-Inference.html#counterfactuals">
+    Neither counterfactuals nor SCMs</a>, in case we are
   not interested on individual effects. So, as stated by <a href="https://arxiv.org/pdf/1907.07271.pdf">Guido Imbens</a>, "the Potential Outcome
   framework is more apprehensive about definite answers to such questions that depend delicately on individual-level heterogeneity". However, it's hard to know if exchangeability criteria can be fulfilled without the help of causal DAGs and
     <i>d-separation</i> to apply the <strong>back-door</strong> or the <strong>front-door criterion</strong>. In Pearl's words:
@@ -360,18 +378,20 @@ ignorability"
 <p>
     As an example of these "blunders" or difficulties, Rubin, cocreator of Potential Outcomes framework, in relation to the concept of collider or M-bias,
     claimed that <i>"to avoid conditioning on some observed covariates... is [...] nonscientific ad hockery"</i>.
-More details on a <a href="https://statmodeling.stat.columbia.edu/2020/01/27/causal-inference-in-ai-expressing-potential-outcomes-in-a-graphical-modeling-framework-that-can-be-fit-using-stan/#comment-1242930">David Rohde's comment</a> on Gelman's blog.
+More details on a <a href="https://statmodeling.stat.columbia.edu/2020/01/27/causal-inference-in-ai-expressing-potential-outcomes-in-a-graphical-modeling-framework-that-can-be-fit-using-stan/#comment-1242930">
+  David Rohde's comment</a> on Gelman's blog and to Rohde et al article on
+  <a href="https://gradientinstitute.org/blog/6">Causal Inference with Bayes Rule</a>.
 Anyway, as Gelman recognises in the post refered on the previous section, qualitative models (as DAGs) are less usual in staticians work, and "we need both".
   </p>
 
-<div class="subheading mb-2">Automatic causal discovery
+<div class="subheading mb-2">Identifiability of causal structure
 </div>
             <p>Otherwise, Pearl, apparent denier of Machine Learning to perform causal reasoning, also opens the possibility to
               (automatic) <strong>causal discovery</strong>. In his <a href="https://ftp.cs.ucla.edu/pub/stat_ser/r481-reprint.pdf">
                 7 Tools of Causal Inference</a> he proposes
               "systematic searches" under "certain circumstances" and "mild assumptions". Besides, he worked years ago with T.S. Verma
               in the <a href="https://arxiv.org/pdf/1303.5435.pdf">
-              Inductive Causation (IC) algorithm</a> of structure learning.
+              Inductive Causation (IC) algorithm</a> of <strong>structure learning</strong>.
               And he also refers to the method by Shimizu et al (2006) to discover causal directionality
               based on functional decomposition in linear model with nonGaussian distributions. A method known as
               <a href="https://www.jmlr.org/papers/volume7/shimizu06a/shimizu06a.pdf">
