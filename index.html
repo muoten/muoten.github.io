@@ -378,8 +378,8 @@ ignorability"
 <p>
     As an example of these "blunders" or difficulties, Rubin, cocreator of Potential Outcomes framework, in relation to the concept of collider or M-bias,
     claimed that <i>"to avoid conditioning on some observed covariates... is [...] nonscientific ad hockery"</i>.
-More details on a <a href="https://statmodeling.stat.columbia.edu/2020/01/27/causal-inference-in-ai-expressing-potential-outcomes-in-a-graphical-modeling-framework-that-can-be-fit-using-stan/#comment-1242930">
-  David Rohde's comment</a> on Gelman's blog and to Rohde et al article on
+More details on <a href="https://statmodeling.stat.columbia.edu/2020/01/27/causal-inference-in-ai-expressing-potential-outcomes-in-a-graphical-modeling-framework-that-can-be-fit-using-stan/#comment-1242930">
+  David Rohde's comment</a> on Gelman's blog and Rohde et al article on
   <a href="https://gradientinstitute.org/blog/6">Causal Inference with Bayes Rule</a>.
 Anyway, as Gelman recognises in the post refered on the previous section, qualitative models (as DAGs) are less usual in statisticians' work, and "we need both".
   </p>
@@ -414,27 +414,25 @@ Anyway, as Gelman recognises in the post refered on the previous section, qualit
              </p>
                <ul>
                  <li><strong>Conditional Similarity Distribution</strong>: as it seemed the best candidate from an empirical point of view.
-                   Because it performed as a better "coin flipper" than the alternatives in my previous quick experiment.
-                   Furthermore is was also part of the Jarfo model that scored 2nd place in the cause-effect Kaggle challenge in 2013.
+                   Because it performed better than the alternatives in my <a href="#causal-discovery">first quick experiment</a>.
+                   Furthermore is was also part of the <a href="https://arxiv.org/pdf/1601.06680.pdf">Jarfo model</a> that scored 2nd place in the ChaLearn cause-effect Kaggle challenge in 2013.
+                   This method assumes that "the shape of the conditional distribution <math>p(Y(X=x))</math>
+                   tends to be very similar for different values of <math>x</math> if the random variable <math>X</math> is the cause of <math>Y</math>".
+                   It's related to the principles of <i>(physical) independence of cause and mechanism</i> (ICM) and
+                   <i>algorithmic independence of conditionals</i>.
+                   The last one states that the joint distribution has a shorter description in the true causal direction
+                   than in the anticausal. In the spirit of Occam's razor. Unfortunately, Kolmogorov complexity is uncomputable,
+                   so the Minimum Description Length in the sense of Kolmogorov "should be considered a philosophical principle
+                   rather than a method". <i>See <a href="https://library.oapen.org/bitstream/handle/20.500.12657/26040/11283.pdf?sequence=1&isAllowed=y">
+                     Elements of Causal Inference</a></i>.
                  </li>
-            <!--
-               <figure>
-
-                 <img src="img/kaggle_cause_effect.png" alt="kaggle cause-effect challenge" style="border:1px solid black; width:80%;margin:auto;display:block">
-                 <figcaption style="text-align:center" >
-                   <small>Source: <a href="https://www.kaggle.com/c/cause-effect-pairs/overview">Kaggle
-                     </a>
-                   </small>
-                 </figcaption>
-               </figure>
-             -->
                  <li><strong>Post-Nonlinear Causal Model</strong>: as it seems the more solid from an analytical point of view.
                    It even tries to explain the 5 circumstances in which their assumptions don't hold and it would fail.
                    Published by <a href="https://arxiv.org/pdf/1205.2599.pdf">Zhang et al, in 2009
                    </a>, it can be considered as a generalization of the so-called
                    <a href="https://papers.nips.cc/paper/2008/file/f7664060cc52bc6f3d620bcedc94a4b6-Paper.pdf">
-                     additive noise model (ANM)</a>, by Hoyer et al., 2009.
-                     And the latter as a special case in which the nonlinear distortion fi,2 does not exist.
+                     additive noise model (ANM)</a> by Hoyer et al. Both are based on <i>a priori restrictions of the model class</i>.
+                     For instance, assuming functions and probability densities three times differentiable.
                  </li>
                 </ul>
                 <p>
@@ -451,7 +449,7 @@ Anyway, as Gelman recognises in the post refered on the previous section, qualit
                   </figcaption>
                 </figure>
 
-          <p>Results (work in progress):
+          <p>Results:
           </p>
           <ul>
             <li>
