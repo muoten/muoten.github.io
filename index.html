@@ -115,7 +115,7 @@
             </ul>
             <p class="lead mb-5">I expect models being wrong, but their assumptions explicit.
             </p>
-            <p><i>Last update</i>: <a href="#causal-discovery-2">Causal wars: assumptions strike back</a><sup><small>(03/05/2021)</small></sup></p>
+            <p><i>Last update</i>: <a href="#causal-discovery-2">Causal wars: assumptions strike back</a><sup><small>(17/06/2021)</small></sup></p>
             <p>Moreover <a href="#covid19">COVID-19 sections</a>, with:
             </p>
             <ul>
@@ -174,7 +174,7 @@
               <div id="causal-discovery-2" class="subheading mb-3">Causal Wars: episode II (or V?) - Assumptions Strike Back
               </div>
 
-              <h6>(Written 13/12/2020, updated 03/05/2021. 10 min read)</h6>
+              <h6>(Written 13/12/2020, updated 17/06/2021. 10 min read)</h6>
 
               <p>After my first (somewhat disappointing) adventures in automatic
                 <a href="#causal-discovery">causal discovery with CDT package</a>, I go back to the topic with new experiments. Trying to get a better understanding of the following:
@@ -304,7 +304,7 @@ estimating outcomes or effects (at individual or population level) based on a pr
 </div>
 
 <p>In relation to causal reasoning, an effect is identifiable if it can be estimated from data, given a set of assumptions.
-  In case of (Conditional) Average (Treatment) Effects,
+  In case of Average Treatment Effect (ATE), also known as Average Causal Effect (ACE),
   the required assumptions for identifiability, to my understanding are:</p>
   <ul>
     <li>
@@ -340,20 +340,39 @@ ignorability"
 </ul>
 <ul>
     <li>
-      <strong>Consistency</strong> (of treatment). Or SUTVA (Stable Unit Treatment Value Assumption) in <a href="http://www.stat.columbia.edu/~cook/qr33.pdf">
-        potential outcomes</a>.
+      <strong>Consistency</strong> of treatment. And <strong>no interference</strong>.
+      Combination of consistency and no interference is also known as
+      <i>Stable Unit Treatment Value Assumption (SUTVA)</i> in (deterministic) <a href="http://www.stat.columbia.edu/~cook/qr33.pdf">
+        potential outcomes</a>. See Neal's
+        <a href="https://www.bradyneal.com/Introduction_to_Causal_Inference-Aug28_2020-Neal.pdf#page=20">Introduction to Causal Inference</a>.
     </li>
     <li>
-      <strong>Positivity</strong>. Or existence of all posible values of treatment and outcome.
+      <strong>Positivity</strong> (a.k.a. <i>overlap</i> a.k.a. <i>common support</i>). Or existence of all posible values of treatment and outcome.
     </li>
   </ul>
 <p>
-  Given the previous assumptions hold, graphical models would not be strictly required to get quantitative estimates of "causal" average effects,
-  according to Gelman, or Rubin's framework of potential outcomes. <a href="https://fabiandablander.com/r/Causal-Inference.html#counterfactuals">
-    Neither counterfactuals nor SCMs</a>, in case we are
-  not interested on individual effects. So, as stated by <a href="https://arxiv.org/pdf/1907.07271.pdf">Guido Imbens</a>, "the Potential Outcome
-  framework is more apprehensive about definite answers to such questions that depend delicately on individual-level heterogeneity". However, it's hard to know if exchangeability criteria can be fulfilled without the help of causal DAGs and
-    <i>d-separation</i> to apply the <strong>back-door</strong> or the <strong>front-door criterion</strong>. In Pearl's words:
+  Given the previous assumptions hold, several identifiability methods can be used
+  to convert our causal estimand in a statistical formula that does not contain
+  any potential outcome or do-operator notation. The most usual is standardization with the
+  <strong>adjustment formula</strong>, analogously derived as Robin's <i>g-formula</i>,
+  Spirtes's <i>manipulated distribution</i> or Pearl's <i>truncated factorization</i>, and closely related to <i>backdoor criterion</i>.
+
+  <blockquote class="twitter-tweet"><p lang="en" dir="ltr">&quot;backdoor adjustment&quot; is more than a formula. It provides two things: 1) an adjustment formula (RHS) and 2) a license (backdoor condition) to apply it. When we compare this condition to the license provided by the g-formula the key difference between the two shines brightly.</p>&mdash; Judea Pearl (@yudapearl) <a href="https://twitter.com/yudapearl/status/1024245586214539264?ref_src=twsrc%5Etfw">July 31, 2018</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+
+  Another interrelated identifiability technique is the Inverse Probability Weighting (IPW). Both standardization and IPW allow
+  generalized estimates in the entire population so they are also known as <i>G-methods</i>
+  (where "G" stands for "generalized"). Whereas matching or restriction only provide estimates for subsets of our population.
+</p>
+<p>Anyway, we can use these methods without graphical models. As we don't require
+    <a href="https://fabiandablander.com/r/Causal-Inference.html#counterfactuals">
+    neither counterfactuals nor SCMs</a>, unless we are
+  interested on individual effects.
+  <!--So, as stated by <a href="https://arxiv.org/pdf/1907.07271.pdf">Guido Imbens</a>, "the Potential Outcome
+  framework is more apprehensive about definite answers to such questions that depend delicately on individual-level heterogeneity".
+--> However, it's hard to know if exchangeability holds without the help of causal DAGs and
+    <i>d-separation</i> to apply the <strong>adjustment criterion</strong> (defined by <a href="https://arxiv.org/abs/1203.3515">Shpitser et al</a> as a generalization of Pearl's <i>backdoor criterion</i>).
+    Moreover, in Pearl's words:
 </p>
   <blockquote style='display: block;margin-top: 1em;margin-bottom: 1em;margin-left: 40px;margin-right: 40px; border:1px; content: open-quote;'>
 <i>
@@ -365,12 +384,30 @@ ignorability"
 </i>
   </blockquote>
 <p>
-    As an example of these "blunders" or difficulties, Rubin, cocreator of Potential Outcomes framework, in relation to the concept of collider or M-bias,
+    As an example of these "blunders" or difficulties, Rubin, cocreator of Potential Outcomes framework, in relation to the concept of colliders or M-bias,
     claimed that <i>"to avoid conditioning on some observed covariates... is [...] nonscientific ad hockery"</i>.
 More details on <a href="https://statmodeling.stat.columbia.edu/2020/01/27/causal-inference-in-ai-expressing-potential-outcomes-in-a-graphical-modeling-framework-that-can-be-fit-using-stan/#comment-1242930">
   David Rohde's comment</a> on Gelman's blog and Rohde et al article on
   <a href="https://gradientinstitute.org/blog/6">Causal Inference with Bayes Rule</a>.
 Anyway, as Gelman recognises in the post refered on the previous section, qualitative models (as DAGs) are less usual in statisticians' work, and "we need both".
+  </p>
+
+  <p>To be fair, apparently even <a href="https://csss.uw.edu/files/working-papers/2013/wp128.pdf#page=142">Pearl himself made mistakes</a> in his proposal of unification of DAGs and counterfactuals.
+    As Richardson's et al remarked when they proposed the <a href="https://csss.uw.edu/files/working-papers/2013/wp128.pdf">
+      Single World Intervention Graphs (SWIG)</a>, claiming that:
+    <blockquote style='display: block;margin-top: 1em;margin-bottom: 1em;margin-left: 40px;margin-right: 40px; border:1px; content: open-quote;'>
+<i>
+    We are in strong agreement with Pearl’s basic contention that directed
+graphs are a very valuable tool for reasoning about causality, and by extension, potential outcomes. If anything our criticism of the approach to
+synthesizing graphs and counterfactuals in (Pearl, 2000, 2009) is that it is
+not ‘graphical enough’ [...]
+</i>
+</blockquote>
+
+  <p>Furthermore, there exists several identifiability methods that do not exploit the assumption of conditional exchangeability to handle confounding.
+    These methods rely on alternative (also unverifiable) assumptions. Examples of these alternative methods are <i>difference-in-differences</i>, <i>instrumental variables</i> or the <i>front-door criterion</i>.
+    See Hernán's et al <a href="https://cdn1.sph.harvard.edu/wp-content/uploads/sites/1268/2021/03/ciwhatif_hernanrobins_30mar21.pdf#page=105">Causal Inference: What If</a>
+    for more details.
   </p>
 
 <div class="subheading mb-2">Identifiability of causal structure
@@ -506,14 +543,31 @@ Anyway, as Gelman recognises in the post refered on the previous section, qualit
                 Basic concepts of statistical inference for causal effects in experiments and observational studies.
                 Course material in Quantitative Reasoning.
               </li>
+
+              <li>Neal, B. (<a href="https://www.bradyneal.com/Introduction_to_Causal_Inference-Aug28_2020-Neal.pdf">2020</a>.
+                Introduction to Causal Inference from a Machine Learning Perspective.
+                Course Lecture Notes
+              </li>
+
               <li>Imbens, G.W. (<a href="https://arxiv.org/abs/1907.07271">2019</a>, 2020). Potential Outcome and Directed Acyclic Graph
 Approaches to Causality: Relevance for
 Empirical Practice in Economics. Journal of Economic Literature
               </li>
+
+              <li>Shpitser I., VanderWeele, T., Robins, J.M. (<a href="https://arxiv.org/abs/1203.3515">2012</a>). On the Validity of Covariate Adjustment for Estimating Causal Effects
+                Proceedings of the Twenty-Sixth Conference on Uncertainty in Artificial Intelligence (UAI2010).
+              </li>
+
               <li>Lattimore, F., Rohde, D.
                 (<a href="https://medium.com/gradient-institute/causal-inference-with-bayes-rule-eed8ae45fb2e">2019</a>).
                 Causal Inference with Bayes Rule. <i>Post on medium.com</i>
               </li>
+
+              <li>Richardson, T.S., Robins, J.M.
+              (<a href="https://csss.uw.edu/files/working-papers/2013/wp128.pdf">2013)
+                Single World Intervention Graphs (SWIGs): A Unification of the Counterfactual and Graphical. Approaches to Causality
+              </li>
+
               <li>Verma, T., Pearl, J. (1992, <a href="https://arxiv.org/abs/1303.5435">2013</a>). An Algorithm for Deciding if a Set of Observed Independencies
 Has a Causal Explanation.  Proceedings of the Eighth Conference on Uncertainty in Artificial Intelligence.
               </li>
