@@ -1,0 +1,14 @@
+{
+  "embeddings": [
+    {
+      "tensorName": "Chromaprint2vec",
+      "tensorShape": [
+        122,
+        20
+      ],
+      "tensorPath": "data/vectors.csv",
+      "metadataPath": "data/metadata.csv",
+      "bookmarksPath": "data/bookmarks.json"
+    }
+  ]
+}
