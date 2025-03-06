@@ -73,7 +73,7 @@
             <li>
               <ul>
                  <li class="nav-item">
-                  <a class="nav-link js-scroll-trigger" href="#audio2vec">Audio Fingerprints</a>
+                  <a class="nav-link js-scroll-trigger" href="#audio2vec">Music Embeddings & Fingerprints</a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link js-scroll-trigger" href="#computervision">Computer Vision</a>
@@ -110,7 +110,7 @@
             </ul>
             <p class="lead mb-5">I expect models being wrong, but their assumptions explicit.
             </p>
-            <p><i>Last update</i>: <a href="#audio2vec">Audio fingerprints</a><sup><small>(15/09/2024)</small></sup></p>
+            <p><i>Last update</i>: <a href="#audio2vec">Music embeddings & fingerprints</a><sup><small>(15/09/2024)</small></sup></p>
             <p>And previously...</p>
           <ul>
           <li><a href="#causal-discovery-2">Causal wars: assumptions strike back</a><!--<sup><small>(17/06/2021)</small></sup>--></li>
@@ -1785,12 +1785,15 @@ measuring dependence between residuals and regressors.
 
     <div class="resume-item d-flex flex-column flex-md-row justify-content-between mb-5" id="audio2vec">
       <div class="resume-content">
-        <h3 class="mb-0">Chromaprint2vec</h3>
-        <div class="subheading mb-3">Audio fingerprints: similarity between songs</div>
+        <h3 class="mb-0">Music2vec</h3>
+        <div class="subheading mb-3">Music embeddings & fingerprints: similarity between songs</div>
          <p>
-          Based on <a href="https://acoustid.org/chromaprint">Acoustid Chromaprint</a> and the <a href="https://musicbrainz.org/">MusicBrainz database</a>
+          First iteration: <b>Chromaprint2Vec</b> (<a href="https://github.com/muoten/chromaprint2vec">code</a>). Based on <a href="https://acoustid.org/chromaprint">Acoustid Chromaprint</a> and the <a href="https://musicbrainz.org/">MusicBrainz database</a>
         </p>
-        <a href="https://github.com/muoten/chromaprint2vec">Code</a>
+	 <p>
+          Second iteration: <b>Harmony2Vec</b>. Based on <a href="https://github.com/alanngnet/CoverHunterMPS">CoverHunterMPS</a> and <a href="https://github.com/jesse-a-l-hamer/chord_progression_assistant">chord_progression_assistant</a>
+        </p>
+        <a href="https://github.com/muoten/harmony2vec">Code</a>
          <p>
           <a href="https://github.com/muoten/chromaprint2vec">
             <img src="img/projector_example.png"  alt="Chromaprint2vec on embedding-projector"/>
