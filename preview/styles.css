@@ -21,3 +21,5 @@ h1 s{color:var(--muted);text-decoration-thickness:2px;text-decoration-color:var(
 .project-image img{height:auto;object-fit:contain;background:#111315}.browser-strip{background:#202226;border-color:#34363b}.browser-strip span{color:#bec1bd}
 
 .archive-visual{margin:25px 0 28px}.archive-visual>a{display:block;background:#fff;border:1px solid var(--line);border-radius:4px;overflow:hidden}.archive-visual img{display:block;width:100%;height:auto;max-height:380px;object-fit:contain}.archive-visual figcaption{font-size:11px;color:var(--muted);margin-top:9px;line-height:1.5}.archive-visual a:hover{border-color:var(--accent)}@media(max-width:620px){.archive-visual img{max-height:300px}}
+
+.era-copy,.archive-entry>div{min-width:0}.archive-visual img{max-width:100%}
