@@ -24,11 +24,10 @@
 
 <h2>1. Wake Up</h2>
 <p>As a rule of thumb, I expect more computation and better frontier models to solve many of today’s technical puzzles (Sutton’s <a class="inline-link" href="http://www.incompleteideas.net/IncIdeas/BitterLesson.html">Bitter Lesson</a>), whether in six months, two years or longer.</p>
-<p>But solving a puzzle is different from resolving a trade-off. Better models may change what is possible and at what cost, but we still have to decide which balance of accuracy, latency, cost and coverage serves the user.</p>
-<p>So I see part of engineering as sorting problems: which to solve ourselves, which to wait out, and which will still need judgment as the technology improves.</p>
-<p class="post-pull" lang="es">Más vale maña que fuerza.</p>
+<p>But solving a puzzle is different from resolving a trade-off. Better models may change what is possible and at what cost, but we still have to make decisions.</p>
+<p>So part of engineering is knowing which puzzles to solve now and which to leave to better models.</p>
 <p>Sometimes the best option is not to build at all. I didn’t test this, but for a small document collection and occasional internal use, uploading the documents to an existing assistant may be enough. If the assistant accesses documents through a search tool or an MCP server, retrieval still happens somewhere. You have changed who implements and maintains it.</p>
-<p>In my project, the clearest case for maña came surprisingly late:</p>
+<p>In my project, the clearest puzzle to solve now came surprisingly late:</p>
 <p class="post-pull">What documents had actually been ingested?</p>
 <p>I only asked it on the third day, after tuning retrieval. A parser bug meant the pipeline found 14 of 207 Section I documents on 50 sampled days. No better model in my pipeline would have fixed that.</p>
 <p>Scale matters too. A retrieval score only holds for the collection it was measured on. Doubling my corpus raised memory and slightly lowered ranking quality. I estimate the full BOE would be about ten times larger, and I haven’t tested that.</p>
@@ -42,6 +41,7 @@
 <p>The cross-encoder was not a consistent improvement either. On an earlier corpus, it improved ranking on the small gold set but worsened results on the silver and norm-reference sets, while adding latency. Because those experiments used a different corpus, their scores cannot simply be compared with the current production figures.</p>
 <p>More machinery had not earned an automatic place in production.</p>
 <p>This is not evidence that BM25 always beats embeddings or that reranking is unnecessary. It is evidence that the answer depends on the corpus, questions, model and constraints.</p>
+<p class="post-pull" lang="es">Más vale maña que fuerza.</p>
 <p>Efficiency also extended beyond inference cost. An inexpensive model call did not compensate for a slow cold start. Keeping an instance warm could improve responsiveness but increase the bill. Expanding coverage increased memory requirements and made retrieval more demanding.</p>
 <p>Accuracy, latency, cost and coverage had to be measured together.</p>
 
