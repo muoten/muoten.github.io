@@ -23,15 +23,14 @@
 <p>Building from scratch can be a good way to learn and an inefficient way to deliver. This time, I started from <a class="inline-link" href="https://github.com/gonzalonao/boe-rag-assistant">boe-rag-assistant</a>, an open-source project by Gonzalo López Crespo, then used Claude Code to help me investigate, deploy and iterate on it.</p>
 
 <h2>1. Wake Up</h2>
-<p>Before choosing a vector database, ask whether you need to build a retrieval system yourself.</p>
-<p>I didn’t test this, but for a small document collection and occasional internal use, uploading the documents to an existing assistant may be enough. If the assistant accesses documents through a search tool or an MCP server, retrieval still happens somewhere. You have changed who implements and maintains it.</p>
-<p>In my project, the first important question turned out to be more basic:</p>
+<p>As a rule of thumb, I expect more computation and better frontier models to eventually solve much of what is an engineering challenge today (Sutton’s <a class="inline-link" href="http://www.incompleteideas.net/IncIdeas/BitterLesson.html">Bitter Lesson</a>). I don’t know if that means six months or two years.</p>
+<p>So I see engineering as telling two kinds of problem apart: those where the latest established model or solution is the no-brainer, and those where maña still beats fuerza.</p>
+<p class="post-pull" lang="es">Más vale maña que fuerza.</p>
+<p>Sometimes the no-brainer is not to build at all. I didn’t test this, but for a small document collection and occasional internal use, uploading the documents to an existing assistant may be enough. If the assistant accesses documents through a search tool or an MCP server, retrieval still happens somewhere. You have changed who implements and maintains it.</p>
+<p>In my project, the clearest case for maña came surprisingly late:</p>
 <p class="post-pull">What documents had actually been ingested?</p>
-<p>The retriever achieved roughly 95% Recall@5 on its small, manually curated benchmark. An ingestion audit nevertheless exposed substantial gaps in the corpus.</p>
-<p>There was no contradiction. The benchmark tested whether the retriever found the passages labeled as supporting each answer. It could not expose every question made unanswerable by documents that had never entered the system.</p>
-<p>High retrieval recall did not establish broad coverage of the BOE.</p>
-<p>The distinction matters because a convincing answer can hide the absence of the document the user actually needed. A law might appear in the corpus only because another document mentions it. Finding that mention does not mean the system has the law’s full text, exceptions or subsequent amendments.</p>
-<p>My first lesson was simple: audit the collection before celebrating the retriever.</p>
+<p>I only asked it on the third day, after tuning retrieval. A parser bug meant the pipeline found 14 of 207 Section I documents on 50 sampled days. No better model in my pipeline would have fixed that.</p>
+<p>Scale matters too. A retrieval score only holds for the collection it was measured on. Doubling my corpus raised memory and slightly lowered ranking quality. I estimate the full BOE would be about ten times larger, and I haven’t tested that.</p>
 
 <h2>2. Bulls on Parade</h2>
 <p>Once the pipeline worked, I compared retrieval approaches.</p>
@@ -42,9 +41,6 @@
 <p>The cross-encoder was not a consistent improvement either. On an earlier corpus, it improved ranking on the small gold set but worsened results on the silver and norm-reference sets, while adding latency. Because those experiments used a different corpus, their scores cannot simply be compared with the current production figures.</p>
 <p>More machinery had not earned an automatic place in production.</p>
 <p>This is not evidence that BM25 always beats embeddings or that reranking is unnecessary. It is evidence that the answer depends on the corpus, questions, model and constraints.</p>
-<p>Sutton’s <a class="inline-link" href="http://www.incompleteideas.net/IncIdeas/BitterLesson.html">Bitter Lesson</a> concerns the long-term power of general methods that scale with computation. It does not tell me which retriever to deploy this afternoon.</p>
-<p class="post-pull" lang="es">Más vale maña que fuerza.</p>
-<p>For this application, the useful engineering skill was choosing experiments that could show whether additional computation helped.</p>
 <p>Efficiency also extended beyond inference cost. An inexpensive model call did not compensate for a slow cold start. Keeping an instance warm could improve responsiveness but increase the bill. Expanding coverage increased memory requirements and made retrieval more demanding.</p>
 <p>Accuracy, latency, cost and coverage had to be measured together.</p>
 
