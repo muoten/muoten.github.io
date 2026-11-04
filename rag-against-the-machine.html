@@ -23,10 +23,11 @@
 <p>Building from scratch can be a good way to learn and an inefficient way to deliver. This time, I started from <a class="inline-link" href="https://github.com/gonzalonao/boe-rag-assistant">boe-rag-assistant</a>, an open-source project by Gonzalo López Crespo, then used Claude Code to help me investigate, deploy and iterate on it.</p>
 
 <h2>1. Wake Up</h2>
-<p>As a rule of thumb, I expect more computation and better frontier models to eventually solve much of what is an engineering challenge today (Sutton’s <a class="inline-link" href="http://www.incompleteideas.net/IncIdeas/BitterLesson.html">Bitter Lesson</a>). I don’t know if that means six months or two years.</p>
-<p>So I see engineering as telling two kinds of problem apart: those where the latest established model or solution is the no-brainer, and those where maña still beats fuerza.</p>
+<p>As a rule of thumb, I expect more computation and better frontier models to solve many of today’s technical puzzles (Sutton’s <a class="inline-link" href="http://www.incompleteideas.net/IncIdeas/BitterLesson.html">Bitter Lesson</a>), whether in six months, two years or longer.</p>
+<p>But solving a puzzle is different from resolving a trade-off. Better models may change what is possible and at what cost, but we still have to decide which balance of accuracy, latency, cost and coverage serves the user.</p>
+<p>So I see part of engineering as sorting problems: which to solve ourselves, which to wait out, and which will still need judgment as the technology improves.</p>
 <p class="post-pull" lang="es">Más vale maña que fuerza.</p>
-<p>Sometimes the no-brainer is not to build at all. I didn’t test this, but for a small document collection and occasional internal use, uploading the documents to an existing assistant may be enough. If the assistant accesses documents through a search tool or an MCP server, retrieval still happens somewhere. You have changed who implements and maintains it.</p>
+<p>Sometimes the best option is not to build at all. I didn’t test this, but for a small document collection and occasional internal use, uploading the documents to an existing assistant may be enough. If the assistant accesses documents through a search tool or an MCP server, retrieval still happens somewhere. You have changed who implements and maintains it.</p>
 <p>In my project, the clearest case for maña came surprisingly late:</p>
 <p class="post-pull">What documents had actually been ingested?</p>
 <p>I only asked it on the third day, after tuning retrieval. A parser bug meant the pipeline found 14 of 207 Section I documents on 50 sampled days. No better model in my pipeline would have fixed that.</p>
