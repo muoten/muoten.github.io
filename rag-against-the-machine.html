@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Building a RAG got cheaper. Evaluating its accuracy and efficiency remains challenging.">
+<title>RAG Against the Machine — Enrique Otero Muras</title>
+<link rel="stylesheet" href="styles.css?v=20261104-post4">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="shell"><a class="site-name" href="/" aria-label="Enrique Otero Muras home">Enrique Otero Muras</a><nav aria-label="Main navigation"><a href="https://github.com/muoten">GitHub ↗</a><a class="nav-contact" href="https://www.linkedin.com/in/enrique-otero-muras-0aab1a133/">LinkedIn ↗</a></nav></header>
+<main id="main">
+<article class="shell post"><div class="post-body">
+<p class="eyebrow">RAG / Evaluation · Nov 2026</p>
+<h1>RAG Against the Machine</h1>
+<p class="post-deck">Building a RAG got cheaper. Evaluating its accuracy and efficiency remains challenging.</p>
+
+<p>AI-assisted coding makes it increasingly easy to build something that looks like a working product. Two questions remain harder: is it useful, and how do we know how well it works?</p>
+<p>I’m leaving the business case aside. Sales and monetization are different questions. Here, I’ll focus on answer quality, efficiency and the engineering trade-offs behind them.</p>
+<p>During the RAG hype, I was working on more classical problems: supervised learning on tabular data, pipeline automation, observability and A/B testing. I was a Machine Learning Engineer, but open-ended question answering wasn’t my field.</p>
+<p>Then 2026 arrived, and RAG expertise seemed to have become part of the job description. My side projects had mostly explored music, so I had some catching up to do.</p>
+<p>I’m still learning. What I can share is a three-day side project answering questions about documents from the Boletín Oficial del Estado, Spain’s official state gazette. The app runs on Azure. You can <a class="inline-link" href="https://muoten.github.io/boe-rag-assistant/">try it here</a>.</p>
+<p>Building from scratch can be a good way to learn and an inefficient way to deliver. This time, I started from Gonzalo López Crespo’s <a class="inline-link" href="https://github.com/gonzalonao/boe-rag-assistant">boe-rag-assistant</a>, then used Claude Code to help me investigate, deploy and iterate on it.</p>
+
+<h2>1. Wake Up</h2>
+<p>Before choosing a vector database, ask whether you need to build a retrieval system yourself.</p>
+<p>For a small document collection and occasional internal use, uploading the documents to an existing assistant may be enough. If the assistant accesses documents through a search tool or an MCP server, retrieval still happens somewhere—you have changed who implements and maintains it.</p>
+<p>In my project, the first important question turned out to be more basic:</p>
+<p class="post-pull">What documents had actually been ingested?</p>
+<p>The retriever achieved roughly 95% Recall@5 on its small, manually curated benchmark. An ingestion audit nevertheless exposed substantial gaps in the corpus.</p>
+<p>There was no contradiction. The benchmark tested whether the retriever found the passages labeled as supporting each answer. It could not expose every question made unanswerable by documents that had never entered the system.</p>
+<p>High retrieval recall did not establish broad coverage of the BOE.</p>
+<p>The distinction matters because a convincing answer can hide the absence of the document the user actually needed. A law might appear in the corpus only because another document mentions it. Finding that mention does not mean the system has the law’s full text, exceptions or subsequent amendments.</p>
+<p>My first lesson was simple: audit the collection before celebrating the retriever.</p>
+
+<h2>2. Bulls on Parade</h2>
+<p>Once the pipeline worked, I compared retrieval approaches.</p>
+<p>Dense embeddings, hybrid retrieval, reciprocal rank fusion, a cross-encoder reranker. Each component had a plausible justification. Each needed to demonstrate a benefit.</p>
+<p>The production hybrid combined BM25 and dense retrieval. On the 20-question gold set, its Recall@5 was 95%, compared with 85% for either method alone.</p>
+<p>But the result changed with the questions.</p>
+<p>For 14 questions asking what a particular law or regulation covered, BM25 found the labeled supporting passage in the top five every time. The served hybrid did so for 9 questions.</p>
+<p>The cross-encoder was not a consistent improvement either. On an earlier corpus, it improved ranking on the small gold set but worsened results on the silver and norm-reference sets, while adding latency. Because those experiments used a different corpus, their scores cannot simply be compared with the current production figures.</p>
+<p>More machinery had not earned an automatic place in production.</p>
+<p>This is not evidence that BM25 always beats embeddings or that reranking is unnecessary. It is evidence that the answer depends on the corpus, questions, model and constraints.</p>
+<p>Sutton’s <a class="inline-link" href="http://www.incompleteideas.net/IncIdeas/BitterLesson.html">Bitter Lesson</a> concerns the long-term power of general methods that scale with computation. It does not tell me which retriever to deploy this afternoon.</p>
+<p class="post-pull" lang="es">Más vale maña que fuerza.</p>
+<p>For this application, the useful engineering skill was choosing experiments that could show whether additional computation helped.</p>
+<p>Efficiency also extended beyond inference cost. An inexpensive model call did not compensate for a slow cold start. Keeping an instance warm could improve responsiveness but increase the bill. Expanding coverage increased memory requirements and made retrieval more demanding.</p>
+<p>Accuracy, latency, cost and coverage had to be measured together.</p>
+
+<h2>3. Testify</h2>
+<p>Evaluation produced the most interesting questions.</p>
+<p>What does “correct” mean? Correct according to the retrieved fragments? According to a reference answer? Complete enough to address the question? Supported by the particular source being cited?</p>
+<p>I found it useful to separate three checks:</p>
+<ul>
+<li><strong>Retrieval:</strong> did the system find the labeled supporting evidence?</li>
+<li><strong>Groundedness:</strong> does the retrieved evidence support the generated answer?</li>
+<li><strong>Correctness:</strong> does the answer satisfy the expected facts and requirements?</li>
+</ul>
+<p>These checks overlap, but none replaces the others. An answer can be grounded in the retrieved evidence while addressing the wrong question, repeat an error in a source, or provide the right answer without supporting retrieved evidence.</p>
+<p>Abstention belongs in this picture too. If the available evidence cannot answer the question, acknowledging that limitation can be the correct response. Refusing an answerable question is a different failure.</p>
+<p>A correctness evaluation can cover both cases, provided the references and rubric specify the expected behavior. I would still report them separately to distinguish excessive refusal from unsupported answering.</p>
+<p>My existing evaluation also taught me to read percentages carefully. Its 90.5% “corrección” was an average of judge-assigned ratings, including partial credit. It did not mean that exactly 90.5% of answers passed a binary test. Likewise, 98% fidelity was not a count of individually verified claims.</p>
+<p>An LLM judge made scoring easier to automate. It did not make the scoring objective. References still needed validation, partial-credit ratings needed a clearer rubric, and judge behavior needed checking.</p>
+<p>There was another limitation: the project’s existing answer-quality evaluation dated from July, before my retrieval changes. Reproducible historical measurements were useful, but they were not measurements of today’s complete system.</p>
+<p>The next dimension I want to investigate is concision.</p>
+<p class="post-pull" lang="es">Lo bueno, si breve, dos veces bueno.</p>
+<p>Short answers reduce reading effort and leave fewer opportunities to introduce unsupported claims. But omitting an exception can make a legal answer misleading.</p>
+<p>The goal is the shortest answer that remains correct and complete, preserving the relevant conditions, exceptions and supporting citations.</p>
+<p>Concision is hard. I probably failed to produce a Minimum Viable Post here.</p>
+<p class="post-back"><a class="text-link" href="/#year-2026">← Back to the timeline</a></p>
+</div></article>
+</main>
+<footer class="shell"><div><a class="wordmark" href="/">eo<span>.</span></a><span>Enrique Otero Muras</span></div><div><a href="https://github.com/muoten">GitHub ↗</a><a href="https://www.linkedin.com/in/enrique-otero-muras-0aab1a133/">LinkedIn ↗</a><a href="https://muoten.github.io/archive/">Original site ↗</a></div></footer>
+</body>
+</html>
