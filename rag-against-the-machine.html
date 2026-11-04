@@ -3,27 +3,28 @@
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="Building a RAG got cheaper. Evaluating its accuracy and efficiency remains challenging.">
-<title>RAG Against the Machine — Enrique Otero Muras</title>
-<link rel="stylesheet" href="styles.css?v=20261104-post4">
+<title>RAG Against the Machine | Enrique Otero Muras</title>
+<link rel="stylesheet" href="styles.css?v=20261104-post5">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
 <header class="shell"><a class="site-name" href="/" aria-label="Enrique Otero Muras home">Enrique Otero Muras</a><nav aria-label="Main navigation"><a href="https://github.com/muoten">GitHub ↗</a><a class="nav-contact" href="https://www.linkedin.com/in/enrique-otero-muras-0aab1a133/">LinkedIn ↗</a></nav></header>
 <main id="main">
 <article class="shell post"><div class="post-body">
-<p class="eyebrow">RAG / Evaluation · Nov 2026</p>
+<p class="eyebrow">RAG / Evaluation</p>
 <h1>RAG Against the Machine</h1>
 <p class="post-deck">Building a RAG got cheaper. Evaluating its accuracy and efficiency remains challenging.</p>
+<p class="post-meta">(Written 04/11/2026. 5 min read)</p>
 
 <p>AI-assisted coding makes it increasingly easy to build something that looks like a working product. Two questions remain harder: is it useful, and how do we know how well it works?</p>
 <p>I’m leaving the business case aside. Here, I’ll focus on answer quality, efficiency and the engineering trade-offs behind them.</p>
 <p>During the RAG hype, I was a Machine Learning Engineer working on more classical problems: supervised learning on tabular data, pipelines, A/B testing. Then 2026 arrived, and RAG expertise seemed to have become part of the job description. My side projects had mostly explored music, so I had some catching up to do.</p>
 <p>I’m still learning. What I can share is a three-day side project answering questions about documents from the Boletín Oficial del Estado, Spain’s official state gazette. The app runs on Azure. You can <a class="inline-link" href="https://muoten.github.io/boe-rag-assistant/">try it here</a>.</p>
-<p>Building from scratch can be a good way to learn and an inefficient way to deliver. This time, I started from Gonzalo López Crespo’s <a class="inline-link" href="https://github.com/gonzalonao/boe-rag-assistant">boe-rag-assistant</a>, then used Claude Code to help me investigate, deploy and iterate on it.</p>
+<p>Building from scratch can be a good way to learn and an inefficient way to deliver. This time, I started from <a class="inline-link" href="https://github.com/gonzalonao/boe-rag-assistant">boe-rag-assistant</a>, an open-source project by Gonzalo López Crespo, then used Claude Code to help me investigate, deploy and iterate on it.</p>
 
 <h2>1. Wake Up</h2>
 <p>Before choosing a vector database, ask whether you need to build a retrieval system yourself.</p>
-<p>For a small document collection and occasional internal use, uploading the documents to an existing assistant may be enough. If the assistant accesses documents through a search tool or an MCP server, retrieval still happens somewhere—you have changed who implements and maintains it.</p>
+<p>I didn’t test this, but for a small document collection and occasional internal use, uploading the documents to an existing assistant may be enough. If the assistant accesses documents through a search tool or an MCP server, retrieval still happens somewhere. You have changed who implements and maintains it.</p>
 <p>In my project, the first important question turned out to be more basic:</p>
 <p class="post-pull">What documents had actually been ingested?</p>
 <p>The retriever achieved roughly 95% Recall@5 on its small, manually curated benchmark. An ingestion audit nevertheless exposed substantial gaps in the corpus.</p>
