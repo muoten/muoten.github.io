@@ -14,7 +14,7 @@
 <p class="eyebrow">RAG / Evaluation</p>
 <h1>RAG Against the Machine</h1>
 <p class="post-deck">Building a RAG got cheaper. Evaluating its accuracy and efficiency remains challenging.</p>
-<p class="post-meta">(Written 04/11/2026. 8 min read)</p>
+<p class="post-meta">(Written 04/11/2026. 9 min read)</p>
 
 <p>AI-assisted coding makes it increasingly easy to build something that looks like a working product. Two questions remain harder: is it useful, and how do we know how well it works?</p>
 <p>I’m leaving the business case aside. Here, I’ll focus on answer quality, efficiency and the engineering trade-offs behind them.</p>
@@ -66,6 +66,7 @@
 <p><strong>Interesting results emerged from disagreements between the checks.</strong> One answer retrieved the right article but gave only 1 of its 3 measures, and it claimed the passages contained no concrete details, although another retrieved passage did. It omitted required information and misrepresented the evidence, so both judges rejected it, while Recall counted it as a success.</p>
 <p>Hans Rosling wrote that the world cannot be understood without numbers, nor with numbers alone. The same goes for evaluation: scores told me where to look, and reading the answers told me why.</p>
 <p>These judges have limits too. Correctness checks whether the expected facts are present, but it does not guarantee that every additional claim is supported. Judges can also disagree with themselves: 3 of the 50 questions got split votes.</p>
+<p>On my test set, the app reached 94% correctness with no wrong refusals. Then I typed my own open questions, and it refused six of seven. Sending 20 passages instead of 5 rescued none of them. The test questions were written from known passages, so they never measured this.</p>
 <p>Concision is the dimension I’m least happy with. Answers that passed both judges had a <strong>median of 22 extra words</strong> over the reference answer (the references are terse, so this is a rough measure).</p>
 <p class="post-pull" lang="es">Lo bueno, si breve, dos veces bueno.</p>
 <p>Short answers reduce reading effort and leave fewer opportunities to introduce unsupported claims. But omitting an exception can make a legal answer misleading.</p>
