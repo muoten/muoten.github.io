@@ -14,7 +14,7 @@
 <p class="eyebrow">RAG / Evaluation</p>
 <h1>RAG Against the Machine</h1>
 <p class="post-deck">Building a RAG got cheaper. Evaluating its accuracy and efficiency remains challenging.</p>
-<p class="post-meta">(Written 04/11/2026. 5 min read)</p>
+<p class="post-meta">(Written 04/11/2026. 7 min read)</p>
 
 <p>AI-assisted coding makes it increasingly easy to build something that looks like a working product. Two questions remain harder: is it useful, and how do we know how well it works?</p>
 <p>I’m leaving the business case aside. Here, I’ll focus on answer quality, efficiency and the engineering trade-offs behind them.</p>
@@ -44,12 +44,15 @@
 </ul>
 <p>These checks overlap, but none replaces the others. An answer can be grounded in the retrieved evidence while addressing the wrong question, repeat an error in a source, or provide the right answer without supporting retrieved evidence.</p>
 <p>Retrieval scores also have blind spots. They only hold for the collection they were measured on, and they can’t see what is missing from it, because the questions only cover documents already in the corpus. My app holds a sample for cost reasons: 26 of the 207 Section I documents I checked across 50 sampled days.</p>
-<p>Abstention belongs in this picture too. If the available evidence cannot answer the question, acknowledging that limitation can be the correct response. Refusing an answerable question is a different failure.</p>
+<p>Refusal belongs in this picture too. If the available evidence cannot answer the question, acknowledging that limitation can be the correct response. Refusing an answerable question is a different failure.</p>
 <p>A correctness evaluation can cover both cases, provided the references and rubric specify the expected behavior. I would still report them separately to distinguish excessive refusal from unsupported answering.</p>
-<p>My existing evaluation also taught me to read percentages carefully. Its 90.5% “corrección” was an average of judge-assigned ratings, including partial credit. It did not mean that exactly 90.5% of answers passed a binary test. Likewise, 98% fidelity was not a count of individually verified claims.</p>
+<p>The project’s existing evaluation also taught me to read percentages carefully. Its 90.5% “corrección” was an average of judge-assigned ratings, including partial credit. It did not mean that exactly 90.5% of answers passed a binary test. Likewise, 98% fidelity was not a count of individually verified claims. It also measured a different system: it dated from July and used dense-only retrieval, not the system I serve today.</p>
 <p>An LLM judge made scoring easier to automate. It did not make the scoring objective. References still needed validation, partial-credit ratings needed a clearer rubric, and judge behavior needed checking.</p>
-<p>There was another limitation: the project’s existing answer-quality evaluation dated from July, before my retrieval changes. Reproducible historical measurements were useful, but they were not measurements of today’s complete system.</p>
-<p>The next dimension I want to investigate is concision.</p>
+<p>So I replaced those scores with two of MLflow’s built-in judges: RetrievalGroundedness, to catch claims the passages don’t support, and Correctness, to check answers against a list of expected facts. Each gives a yes or no per answer rather than partial credit. For questions the corpus cannot answer, I set the expected response to the refusal.</p>
+<p>On 50 questions (10 of them unanswerable), with GPT-6 Luna as judge and three votes per answer, Correctness was 94% and groundedness 92.5% of answered questions. There were no wrong refusals and no wrong answers to unanswerable questions. Treat these as provisional: it was one run, and the labels still need a full audit.</p>
+<p>The most useful result was not a score. One answer retrieved the right article, gave only 1 of its 3 measures, and said the passages had no concrete details, although another retrieved passage did. Nothing was invented, yet both judges rejected it, and Recall counted it as a success.</p>
+<p>These judges have limits too. Correctness checks the expected facts but ignores extra claims, and judges can disagree with themselves: 3 of the 50 questions got split votes.</p>
+<p>Concision is the dimension I’m least happy with. Answers that passed both judges had a median of 22 extra words over the reference answer (the references are terse, so this is a rough measure).</p>
 <p class="post-pull" lang="es">Lo bueno, si breve, dos veces bueno.</p>
 <p>Short answers reduce reading effort and leave fewer opportunities to introduce unsupported claims. But omitting an exception can make a legal answer misleading.</p>
 <p>The goal is the shortest answer that remains correct and complete, preserving the relevant conditions, exceptions and supporting citations.</p>
