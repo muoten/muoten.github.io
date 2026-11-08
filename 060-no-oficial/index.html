@@ -21,11 +21,14 @@
   body { margin: 0; background: var(--bg); color: var(--ink);
          font: 16px/1.55 system-ui, -apple-system, "Segoe UI", sans-serif; }
   main { max-width: 720px; margin: 0 auto; padding: 24px 16px 64px; }
-  .top { display: flex; justify-content: flex-end; margin-bottom: 8px; }
+  .top { display: flex; justify-content: flex-end; gap: 8px; margin-bottom: 8px; }
   .top button { background: transparent; color: var(--accent); border: 1px solid var(--line); padding: 4px 10px; font-size: .85rem; }
   h1 { font-size: 1.6rem; line-height: 1.25; margin: 0 0 6px; }
-  .badge { display: inline-block; font-size: .8rem; font-weight: 600; letter-spacing: .02em; color: var(--ink);
-           background: var(--note); border: 1px solid var(--line); border-radius: 999px; padding: 2px 10px; margin-bottom: 8px; }
+  .about { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 4px 16px 12px;
+           font-size: .92rem; margin-bottom: 20px; }
+  .about h2 { font-size: 1rem; margin: 14px 0 4px; }
+  .about p, .about ul { margin: 0 0 6px; }
+  .about ul { padding-left: 20px; }
   .lead { color: var(--muted); margin: 0 0 16px; }
   .disclaimer { background: var(--note); border: 1px solid var(--line); border-radius: 8px;
                 padding: 10px 12px; font-size: .9rem; margin-bottom: 20px; }
@@ -54,10 +57,10 @@
 </head>
 <body>
 <main>
-  <div class="top"><button id="lang" type="button"></button></div>
-  <span class="badge" data-t="badge"></span>
+  <div class="top"><button id="info" type="button" aria-expanded="false" aria-controls="about"></button><button id="lang" type="button"></button></div>
   <h1 data-t="title"></h1>
   <p class="lead" data-t="lead"></p>
+  <section class="about" id="about" hidden data-t="about"></section>
   <div class="disclaimer">
     <p data-t="disclaimer"></p>
     <p class="storage" data-t="storage"></p>
@@ -75,14 +78,22 @@
 <script>
   const API = new URLSearchParams(location.search).get("api") || "https://webchat060.icyfield-0b37f951.northeurope.azurecontainerapps.io";
   const PAG = '<a href="https://administracion.gob.es/">Punto de Acceso General</a>';
+  const GUIDES = [
+    ["Cómo realizar trámites", "realizar-un-tramite-nuevo"],
+    ["Relacionarte electrónicamente con la Administración", "relacionarte-electronicamente-administracion"],
+    ["Identificación Electrónica", "identificacion-electronica"],
+    ["Notificaciones", "notificaciones"],
+    ["Registrarte en Cl@ve", "servicioselectronicosfrecuentes/necesito-registrarme-en-clave"],
+    ["Obtención del Certificado Electrónico de la FNMT", "servicioselectronicosfrecuentes/obtencion-certificado-electronico-fnmt"],
+  ].map(([title, path]) => `<li><a href="https://administracion.gob.es/tramites-electronicos/${path}" target="_blank" rel="noopener">${title}</a></li>`).join("");
   const TEXT = {
     es: {
-      badge: "Demo no oficial", title: "Asistente de trámites con la Administración española",
+      title: "Asistente de trámites con la Administración española",
       lead: "Resuelve dudas sobre cómo hacer trámites con la Administración pública en España: identificación electrónica, Cl@ve, certificado digital y notificaciones.",
-      disclaimer: `<strong>Demo no oficial.</strong> No es el Webchat 060 ni un servicio de la Administración. Responde solo con seis guías del ${PAG}, cita la que usa y puede equivocarse: comprueba la información en la fuente.`,
+      disclaimer: `<strong><em>Demo no oficial.</em></strong> No es el Webchat 060 ni un servicio de la Administración. Responde solo con seis guías del ${PAG}, cita la que usa y puede equivocarse: comprueba la información en la fuente.`,
       storage: "Guardamos el texto de las preguntas durante 90 días, sin datos de conexión, para mejorar el asistente. <strong>No incluyas datos personales</strong> (si escribes un DNI, un teléfono o un correo, se borran antes de guardar).",
       placeholder: "Por ejemplo: ¿cuánto cuesta el certificado digital? (sin datos personales)",
-      send: "Preguntar", switchTo: "English", docTitle: "Asistente de trámites con la Administración española (demo)",
+      send: "Preguntar", switchTo: "English", info: "Acerca de", infoClose: "Cerrar información", docTitle: "Asistente de trámites con la Administración española (demo)",
       examples: ["¿Cuánto cuesta el certificado digital?", "¿Qué diferencia hay entre Cl@ve PIN y Cl@ve Permanente?",
                  "¿Dónde veo una notificación electrónica?", "¿Se puede firmar con Cl@ve?"],
       thinking: "Consultando las guías…",
@@ -90,15 +101,29 @@
       refusal: "No tengo información suficiente para responder.",
       sources: "Fuentes", helpful: "¿Te ha servido?", yes: "👍 Sí", no: "👎 No", thanks: "Gracias.",
       error: "No se ha podido responder: {e}. Si es la primera pregunta en un rato, el servidor puede estar arrancando; inténtalo de nuevo.",
-      footer: 'Fuente: guías de <a href="https://administracion.gob.es/">administracion.gob.es</a>, capturadas el 8 de noviembre de 2026. Las preguntas se procesan con GPT-6 Luna en Azure y se guardan 90 días, sin datos de conexión.',
+      about: `<h2>Qué es</h2>
+        <p>Un experimento personal e independiente: probar si un asistente puede resolver dudas de trámites respondiendo solo con fuentes oficiales y citándolas. Nace de la idea de mejorar el Webchat 060, pero no tiene relación con la Administración ni con el servicio 060.</p>
+        <h2>De dónde salen las respuestas</h2>
+        <p>Solo de estas seis guías del ${PAG}, capturadas el 8 de noviembre de 2026. Si una guía cambia después, la respuesta puede estar desactualizada.</p>
+        <ul>${GUIDES}</ul>
+        <p>Las propias guías no siempre coinciden: una explica Cl@ve Firma y otra dice que Cl@ve no permite firmar. El asistente intenta avisar cuando ocurre, pero no siempre lo consigue.</p>
+        <h2>Cómo responde</h2>
+        <p>Cada pregunta se envía, junto con las seis guías completas, a GPT-6 Luna en Microsoft Azure. Debe citar el fragmento que usa; si no lo cita, o si las guías no tratan el tema, contesta que no tiene información suficiente. No consulta tus datos ni hace trámites por ti.</p>
+        <h2>Qué no cubre</h2>
+        <p>Prestaciones, ayudas, impuestos o trámites concretos de cada organismo (por ejemplo, cómo pedir el paro). Para eso, consulta la sede del organismo o los canales oficiales de atención, como el 060.</p>
+        <h2>Privacidad</h2>
+        <p>Guardamos el texto de cada pregunta, si se respondió o no, qué guías citó y tu valoración (👍/👎), durante 90 días, para encontrar lo que falta. Antes de guardar se borran DNI, NIE, teléfonos, correos, IBAN y números largos. No guardamos tu IP ni ningún identificador tuyo.</p>
+        <h2>Autoría</h2>
+        <p>Hecho por <a href="https://muoten.github.io/">muoten</a>. Sigue el enfoque de <a href="https://muoten.github.io/rag-against-the-machine.html">RAG against the machine</a>.</p>`,
+      footer: 'Fuente: guías de <a href="https://administracion.gob.es/">administracion.gob.es</a>, capturadas el 8 de noviembre de 2026. Las preguntas se procesan con GPT-6 Luna en Azure y se guardan 90 días, sin datos de conexión. Más detalles en «Acerca de».',
     },
     en: {
-      badge: "Unofficial demo", title: "Assistant for procedures with the Spanish public administration",
+      title: "Assistant for procedures with the Spanish public administration",
       lead: "Answers questions about dealing with Spain's public administration: electronic identification, Cl@ve, the digital certificate and official notifications.",
-      disclaimer: `<strong>Unofficial demo.</strong> This is not the Webchat 060 or a government service. It answers only from six guides of Spain's ${PAG} (in Spanish), cites the one it uses and can be wrong: check the source.`,
+      disclaimer: `<strong><em>Unofficial demo.</em></strong> This is not the Webchat 060 or a government service. It answers only from six guides of Spain's ${PAG} (in Spanish), cites the one it uses and can be wrong: check the source.`,
       storage: "We keep the text of questions for 90 days, without connection data, to improve the assistant. <strong>Do not include personal data</strong> (ID numbers, phone numbers and e-mail addresses are removed before storing).",
       placeholder: "For example: how much does the digital certificate cost? (no personal data)",
-      send: "Ask", switchTo: "Español", docTitle: "Assistant for procedures with the Spanish administration (demo)",
+      send: "Ask", switchTo: "Español", info: "About", infoClose: "Close information", docTitle: "Assistant for procedures with the Spanish administration (demo)",
       examples: ["How much does the digital certificate cost?", "What is the difference between Cl@ve PIN and Cl@ve Permanente?",
                  "Where can I see an electronic notification?", "Can I sign documents with Cl@ve?"],
       thinking: "Checking the guides…",
@@ -106,7 +131,21 @@
       refusal: "I don't have enough information to answer.",
       sources: "Sources (in Spanish)", helpful: "Was this helpful?", yes: "👍 Yes", no: "👎 No", thanks: "Thank you.",
       error: "Could not answer: {e}. If this is the first question in a while, the server may be starting; please try again.",
-      footer: 'Source: guides from <a href="https://administracion.gob.es/">administracion.gob.es</a>, captured on 8 November 2026. Questions are processed with GPT-6 Luna on Azure and kept for 90 days, without connection data.',
+      about: `<h2>What this is</h2>
+        <p>A personal, independent experiment: testing whether an assistant can answer questions about procedures using only official sources, and citing them. It grew out of the idea of improving the Webchat 060, but it has no connection with the Spanish administration or the 060 service.</p>
+        <h2>Where answers come from</h2>
+        <p>Only from these six guides of Spain's ${PAG} (in Spanish), captured on 8 November 2026. If a guide has changed since, an answer may be out of date.</p>
+        <ul>${GUIDES}</ul>
+        <p>The guides themselves do not always agree: one explains Cl@ve Firma and another says Cl@ve cannot sign. The assistant tries to point this out, but does not always manage to.</p>
+        <h2>How it answers</h2>
+        <p>Each question is sent, together with the six full guides, to GPT-6 Luna on Microsoft Azure. It must cite the passage it uses; if it cites none, or the guides do not cover the topic, it says it does not have enough information. It does not look up your data or carry out procedures for you.</p>
+        <h2>What it does not cover</h2>
+        <p>Benefits, grants, taxes or the specific procedures of each body (for example, how to claim unemployment benefit). For those, check that body's website or the official help channels, such as the 060.</p>
+        <h2>Privacy</h2>
+        <p>We keep the text of each question, whether it was answered, which guides were cited and your rating (👍/👎) for 90 days, to find what is missing. ID numbers, phone numbers, e-mail addresses, IBANs and long numbers are removed before storing. We do not keep your IP address or any identifier of yours.</p>
+        <h2>Author</h2>
+        <p>Made by <a href="https://muoten.github.io/">muoten</a>. It follows the approach of <a href="https://muoten.github.io/rag-against-the-machine.html">RAG against the machine</a>.</p>`,
+      footer: 'Source: guides from <a href="https://administracion.gob.es/">administracion.gob.es</a>, captured on 8 November 2026. Questions are processed with GPT-6 Luna on Azure and kept for 90 days, without connection data. More details under “About”.',
     },
   };
   const out = document.getElementById("out"), q = document.getElementById("q"), send = document.getElementById("send");
@@ -129,6 +168,9 @@
     for (const node of document.querySelectorAll("[data-t]")) node.innerHTML = t(node.dataset.t);
     q.placeholder = t("placeholder");
     document.getElementById("lang").textContent = t("switchTo");
+    const about = document.getElementById("about"), info = document.getElementById("info");
+    info.textContent = about.hidden ? t("info") : t("infoClose");
+    info.setAttribute("aria-expanded", String(!about.hidden));
     const examples = document.getElementById("examples");
     examples.replaceChildren(...t("examples").map(text => el("button", {type: "button", textContent: text,
       onclick: () => { q.value = text; ask(text); }})));
@@ -186,6 +228,11 @@
     lang = lang === "es" ? "en" : "es";
     try { localStorage.setItem("lang", lang); } catch (_) { /* the choice just won't be remembered */ }
     out.replaceChildren();
+    render();
+  });
+  document.getElementById("info").addEventListener("click", () => {
+    const about = document.getElementById("about");
+    about.hidden = !about.hidden;
     render();
   });
   document.getElementById("ask").addEventListener("submit", e => { e.preventDefault(); ask(q.value.trim()); });
