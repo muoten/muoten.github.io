@@ -41,7 +41,7 @@
   button:disabled { opacity: .6; cursor: wait; }
   .examples { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0 24px; }
   .examples button { background: var(--surface); color: var(--ink); border: 1px solid var(--line);
-                     padding: 6px 10px; font-size: .9rem; }
+                     padding: 6px 10px; font-size: .9rem; text-align: left; }
   .answer { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 16px; }
   .answer p { margin: 0 0 8px; white-space: pre-wrap; }
   .sources { margin-top: 12px; border-top: 1px solid var(--line); padding-top: 8px; font-size: .9rem; }
@@ -92,7 +92,7 @@
       lead: "Resuelve dudas sobre cómo hacer trámites con la Administración pública en España: identificación electrónica, Cl@ve, certificado digital y notificaciones.",
       disclaimer: `<strong><em>Demo no oficial.</em></strong> No es el Webchat 060 ni un servicio de la Administración. Responde solo con seis guías del ${PAG}, cita la que usa y puede equivocarse: comprueba la información en la fuente.`,
       storage: "Guardamos el texto de las preguntas durante 90 días, sin datos de conexión, para mejorar el asistente. <strong>No incluyas datos personales</strong> (si escribes un DNI, un teléfono o un correo, se borran antes de guardar).",
-      placeholder: "Por ejemplo: ¿cuánto cuesta el certificado digital? (sin datos personales)",
+      placeholder: "Escribe tu pregunta (sin datos personales)",
       send: "Preguntar", switchTo: "English", info: "Acerca de", infoClose: "Cerrar información", docTitle: "Asistente de trámites con la Administración española (demo)",
       examples: ["¿Cuánto cuesta el certificado digital?", "¿Qué diferencia hay entre Cl@ve PIN y Cl@ve Permanente?",
                  "¿Dónde veo una notificación electrónica?", "¿Se puede firmar con Cl@ve?"],
@@ -122,7 +122,7 @@
       lead: "Answers questions about dealing with Spain's public administration: electronic identification, Cl@ve, the digital certificate and official notifications.",
       disclaimer: `<strong><em>Unofficial demo.</em></strong> This is not the Webchat 060 or a government service. It answers only from six guides of Spain's ${PAG} (in Spanish), cites the one it uses and can be wrong: check the source.`,
       storage: "We keep the text of questions for 90 days, without connection data, to improve the assistant. <strong>Do not include personal data</strong> (ID numbers, phone numbers and e-mail addresses are removed before storing).",
-      placeholder: "For example: how much does the digital certificate cost? (no personal data)",
+      placeholder: "Type your question (no personal data)",
       send: "Ask", switchTo: "Español", info: "About", infoClose: "Close information", docTitle: "Assistant for procedures with the Spanish administration (demo)",
       examples: ["How much does the digital certificate cost?", "What is the difference between Cl@ve PIN and Cl@ve Permanente?",
                  "Where can I see an electronic notification?", "Can I sign documents with Cl@ve?"],
@@ -217,6 +217,8 @@
         el("button", {type: "button", textContent: t("yes"), onclick: rate(true)}),
         el("button", {type: "button", textContent: t("no"), onclick: rate(false)}), thanks]));
       out.replaceChildren(box);
+      // On a phone the answer lands below the fold; bring it into view.
+      if (box.getBoundingClientRect().top > window.innerHeight * 0.6) box.scrollIntoView({behavior: "smooth", block: "start"});
     } catch (err) {
       out.replaceChildren(el("p", {className: "meta", textContent: t("error").replace("{e}", err.message)}));
     } finally {
