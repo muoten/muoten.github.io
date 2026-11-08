@@ -120,7 +120,8 @@
       slowHint: "Está tardando más de lo normal; sigue en marcha.",
       asking: "Preguntando…", retry: "Reintentar",
       timeout: "No ha llegado respuesta en 90 segundos. Puede que el servidor esté arrancando o muy ocupado.",
-      serverWaking: "Arrancando el servidor… (unos 25 s)", serverReady: "Listo para responder", serverDown: "El servidor no responde ahora mismo",
+      serverWaking: s => s > 0 ? `Arrancando el servidor… listo en ~${s} s` : "Arrancando el servidor… tarda más de lo normal",
+      serverRetry: "El servidor no responde; reintentando…", serverReady: "Listo para responder", serverDown: "El servidor no responde ahora mismo",
       refused: 'Las guías incluidas no cubren esta pregunta. Puedes consultarla llamando al <a href="https://administracion.gob.es/informacion/formas-recibir-orientacion/canales-atencion/060" target="_blank" rel="noopener">060</a>, por el <a href="https://administracion.gob.es/informacion/formas-recibir-orientacion/canales-atencion/buzon" target="_blank" rel="noopener">buzón de atención</a> o en una <a href="https://administracion.gob.es/informacion/buscador-de-oficinas/oficinas-de-informacion-y-atencion-a-la-ciudadania/oficinas-informacion-administracion-general-estado" target="_blank" rel="noopener">oficina de información</a>.',
       refusal: "No tengo información suficiente para responder.",
       sources: "Fuentes", helpful: "¿Te ha servido?", yes: "👍 Sí", no: "👎 No", thanks: "Gracias.",
@@ -132,7 +133,7 @@
         <ul>${GUIDES}</ul>
         <p>Las propias guías no siempre coinciden: una explica Cl@ve Firma y otra dice que Cl@ve no permite firmar. El asistente intenta avisar cuando ocurre, pero no siempre lo consigue.</p>
         <h2>Cómo responde</h2>
-        <p>Cada pregunta se envía, junto con las seis guías completas, a GPT-6 Luna en Microsoft Azure. Debe citar el fragmento que usa; si no lo cita, o si las guías no tratan el tema, contesta que no tiene información suficiente. No consulta tus datos ni hace trámites por ti.</p>
+        <p>Cada pregunta se envía, junto con las seis guías completas, a GPT-6 Luna en Microsoft Azure, dentro de la Unión Europea. Debe citar el fragmento que usa; si no lo cita, o si las guías no tratan el tema, contesta que no tiene información suficiente. No consulta tus datos ni hace trámites por ti.</p>
         <h2>Qué no cubre</h2>
         <p>Prestaciones, ayudas, impuestos o trámites concretos de cada organismo (por ejemplo, cómo pedir el paro). Para eso, consulta la sede del organismo o los canales oficiales de atención, como el 060.</p>
         <h2>Cómo se evalúa</h2>
@@ -141,7 +142,7 @@
         <p>Guardamos el texto de cada pregunta, si se respondió o no, qué guías citó y tu valoración (👍/👎), durante 90 días, para encontrar lo que falta. Antes de guardar se borran DNI, NIE, teléfonos, correos, IBAN y números largos. No guardamos tu IP ni ningún identificador tuyo.</p>
         <h2>Autoría</h2>
         <p>Hecho por <a href="https://muoten.github.io/">muoten</a>. Sigue el enfoque de <a href="https://muoten.github.io/rag-against-the-machine.html">RAG against the machine</a>.</p>`,
-      footer: 'Fuente: guías de <a href="https://administracion.gob.es/">administracion.gob.es</a>, capturadas el 8 de noviembre de 2026. Las preguntas se procesan con GPT-6 Luna en Azure y se guardan 90 días, sin datos de conexión. Más detalles en «Acerca de».',
+      footer: 'Fuente: guías de <a href="https://administracion.gob.es/">administracion.gob.es</a>, capturadas el 8 de noviembre de 2026. Las preguntas se procesan con GPT-6 Luna en centros de datos de Microsoft en la UE y se guardan 90 días, sin datos de conexión. Más detalles en «Acerca de».',
     },
     en: {
       title: "Assistant for procedures with the Spanish public administration",
@@ -158,7 +159,8 @@
       slowHint: "It is taking longer than usual; still working.",
       asking: "Asking…", retry: "Try again",
       timeout: "No answer arrived within 90 seconds. The server may be starting or very busy.",
-      serverWaking: "Starting the server… (about 25 s)", serverReady: "Ready to answer", serverDown: "The server is not responding right now",
+      serverWaking: s => s > 0 ? `Starting the server… ready in ~${s} s` : "Starting the server… taking longer than usual",
+      serverRetry: "The server is not responding; retrying…", serverReady: "Ready to answer", serverDown: "The server is not responding right now",
       refused: 'The guides included do not cover this question. You can ask it by calling <a href="https://administracion.gob.es/informacion/formas-recibir-orientacion/canales-atencion/060" target="_blank" rel="noopener">060</a>, through the <a href="https://administracion.gob.es/informacion/formas-recibir-orientacion/canales-atencion/buzon" target="_blank" rel="noopener">help mailbox</a> or at an <a href="https://administracion.gob.es/informacion/buscador-de-oficinas/oficinas-de-informacion-y-atencion-a-la-ciudadania/oficinas-informacion-administracion-general-estado" target="_blank" rel="noopener">information office</a> (in Spanish).',
       refusal: "I don't have enough information to answer.",
       sources: "Sources (in Spanish)", helpful: "Was this helpful?", yes: "👍 Yes", no: "👎 No", thanks: "Thank you.",
@@ -170,7 +172,7 @@
         <ul>${GUIDES}</ul>
         <p>The guides themselves do not always agree: one explains Cl@ve Firma and another says Cl@ve cannot sign. The assistant tries to point this out, but does not always manage to.</p>
         <h2>How it answers</h2>
-        <p>Each question is sent, together with the six full guides, to GPT-6 Luna on Microsoft Azure. It must cite the passage it uses; if it cites none, or the guides do not cover the topic, it says it does not have enough information. It does not look up your data or carry out procedures for you.</p>
+        <p>Each question is sent, together with the six full guides, to GPT-6 Luna on Microsoft Azure, within the European Union. It must cite the passage it uses; if it cites none, or the guides do not cover the topic, it says it does not have enough information. It does not look up your data or carry out procedures for you.</p>
         <h2>What it does not cover</h2>
         <p>Benefits, grants, taxes or the specific procedures of each body (for example, how to claim unemployment benefit). For those, check that body's website or the official help channels, such as the 060.</p>
         <h2>How it is evaluated</h2>
@@ -179,7 +181,7 @@
         <p>We keep the text of each question, whether it was answered, which guides were cited and your rating (👍/👎) for 90 days, to find what is missing. ID numbers, phone numbers, e-mail addresses, IBANs and long numbers are removed before storing. We do not keep your IP address or any identifier of yours.</p>
         <h2>Author</h2>
         <p>Made by <a href="https://muoten.github.io/">muoten</a>. It follows the approach of <a href="https://muoten.github.io/rag-against-the-machine.html">RAG against the machine</a>.</p>`,
-      footer: 'Source: guides from <a href="https://administracion.gob.es/">administracion.gob.es</a>, captured on 8 November 2026. Questions are processed with GPT-6 Luna on Azure and kept for 90 days, without connection data. More details under “About”.',
+      footer: 'Source: guides from <a href="https://administracion.gob.es/">administracion.gob.es</a>, captured on 8 November 2026. Questions are processed with GPT-6 Luna in Microsoft data centres in the EU and kept for 90 days, without connection data. More details under “About”.',
     },
   };
   const out = document.getElementById("out"), q = document.getElementById("q"), send = document.getElementById("send");
@@ -223,7 +225,8 @@
     out.replaceChildren(el("div", {className: "waiting", role: "status"}, [
       el("div", {className: "row"}, [el("span", {className: "dots", ariaHidden: "true"}, [el("span"), el("span"), el("span")]), label, elapsed]),
       hint, el("div", {className: "bar", ariaHidden: "true"}, [fill])]));
-    const expected = cold ? 30 : 6;
+    // A cold server needs what is left of its start-up, plus the answer itself.
+    const expected = cold ? Math.max(5, wakeRemaining()) + 5 : 6;
     const started = Date.now();
     const tick = setInterval(() => {
       const s = Math.round((Date.now() - started) / 1000);
@@ -301,20 +304,40 @@
   document.getElementById("ask").addEventListener("submit", e => { e.preventDefault(); ask(q.value.trim()); });
   // Wake the API while the visitor reads and types: after a quiet spell it takes ~25 s
   // to start, so the page says so before anyone asks.
-  let server = "waking";
+  // Measured cold start: about 25 s from the first request to a ready container.
+  const COLD_START_S = 25, RETRY_S = 5, GIVE_UP_S = 120;
+  let server = "waking", wakeStarted = Date.now(), retrying = false;
+  const wakeElapsed = () => Math.round((Date.now() - wakeStarted) / 1000);
+  const wakeRemaining = () => Math.max(0, COLD_START_S - wakeElapsed());
   function setServer(state) {
     server = state;
-    document.getElementById("server").className = `server ${state}`;
+    paintServer();
+  }
+  function paintServer() {
+    const label = server === "waking" ? (retrying ? t("serverRetry") : t("serverWaking")(wakeRemaining()))
+      : t({ready: "serverReady", down: "serverDown"}[server]);
+    document.getElementById("server").className = `server ${server}`;
     document.getElementById("server-text").textContent =
-      t({waking: "serverWaking", ready: "serverReady", down: "serverDown"}[state]);
+      server === "waking" && wakeRemaining() === 0 && !retrying ? `${label} (${wakeElapsed()} s)` : label;
+  }
+  // The countdown repaints every second while the server is starting.
+  const countdown = setInterval(() => { if (server === "waking") paintServer(); else clearInterval(countdown); }, 1000);
+  // One request wakes the container; if it fails, try again every few seconds.
+  function wake() {
+    const attempt = new AbortController();
+    setTimeout(() => attempt.abort(), 60000);
+    fetch(API + "/health", {signal: attempt.signal})
+      .then(res => { if (!res.ok) throw new Error(res.status); setServer("ready"); })
+      .catch(() => {
+        if (server === "ready") return;
+        if (wakeElapsed() >= GIVE_UP_S) { setServer("down"); return; }
+        retrying = true; paintServer();
+        setTimeout(() => { retrying = false; wake(); }, RETRY_S * 1000);
+      });
   }
   render();
   setServer("waking");
-  const warm = new AbortController();
-  setTimeout(() => warm.abort(), 90000);
-  fetch(API + "/health", {signal: warm.signal})
-    .then(res => setServer(res.ok ? "ready" : "down"))
-    .catch(() => { if (server !== "ready") setServer("down"); });
+  wake();
 </script>
 </body>
 </html>
