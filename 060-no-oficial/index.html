@@ -98,7 +98,7 @@
                  "¿Dónde veo una notificación electrónica?", "¿Se puede firmar con Cl@ve?"],
       thinking: "Consultando las guías…",
       waking: "El servidor estaba en reposo y está arrancando; la primera respuesta puede tardar unos 30 segundos…",
-      refused: "Las guías incluidas no responden a esta pregunta. Prueba con otra sobre identificación, Cl@ve, certificados o notificaciones.",
+      refused: 'Las guías incluidas no cubren esta pregunta. Puedes consultarla llamando al <a href="https://administracion.gob.es/informacion/formas-recibir-orientacion/canales-atencion/060" target="_blank" rel="noopener">060</a>, por el <a href="https://administracion.gob.es/informacion/formas-recibir-orientacion/canales-atencion/buzon" target="_blank" rel="noopener">buzón de atención</a> o en una <a href="https://administracion.gob.es/informacion/buscador-de-oficinas/oficinas-de-informacion-y-atencion-a-la-ciudadania/oficinas-informacion-administracion-general-estado" target="_blank" rel="noopener">oficina de información</a>.',
       refusal: "No tengo información suficiente para responder.",
       sources: "Fuentes", helpful: "¿Te ha servido?", yes: "👍 Sí", no: "👎 No", thanks: "Gracias.",
       error: "No se ha podido responder: {e}. Si es la primera pregunta en un rato, el servidor puede estar arrancando; inténtalo de nuevo.",
@@ -131,7 +131,7 @@
                  "Where can I see an electronic notification?", "Can I sign documents with Cl@ve?"],
       thinking: "Checking the guides…",
       waking: "The server was idle and is starting up; the first answer can take about 30 seconds…",
-      refused: "The guides included do not answer this question. Try one about identification, Cl@ve, certificates or notifications.",
+      refused: 'The guides included do not cover this question. You can ask it by calling <a href="https://administracion.gob.es/informacion/formas-recibir-orientacion/canales-atencion/060" target="_blank" rel="noopener">060</a>, through the <a href="https://administracion.gob.es/informacion/formas-recibir-orientacion/canales-atencion/buzon" target="_blank" rel="noopener">help mailbox</a> or at an <a href="https://administracion.gob.es/informacion/buscador-de-oficinas/oficinas-de-informacion-y-atencion-a-la-ciudadania/oficinas-informacion-administracion-general-estado" target="_blank" rel="noopener">information office</a> (in Spanish).',
       refusal: "I don't have enough information to answer.",
       sources: "Sources (in Spanish)", helpful: "Was this helpful?", yes: "👍 Yes", no: "👎 No", thanks: "Thank you.",
       error: "Could not answer: {e}. If this is the first question in a while, the server may be starting; please try again.",
@@ -196,7 +196,7 @@
       // The service's refusal is in Spanish; show it in the page's language.
       const box = el("div", {className: "answer"}, [el("p", {textContent: body.refused ? t("refusal") : body.answer})]);
       if (body.refused) {
-        box.append(el("p", {className: "meta", textContent: t("refused")}));
+        box.append(el("p", {className: "meta", innerHTML: t("refused")}));
       } else if (body.sources.length) {
         // One entry per guide, with the cited passages of that guide inside.
         const guides = new Map();
