@@ -31,7 +31,7 @@
   .about ul { padding-left: 20px; }
   .lead { color: var(--muted); margin: 0 0 16px; }
   .disclaimer { background: var(--note); border: 1px solid var(--line); border-radius: 8px;
-                padding: 10px 12px; font-size: .9rem; margin-bottom: 20px; }
+                padding: 8px 12px; font-size: .88rem; margin-bottom: 16px; }
   .disclaimer p { margin: 0; }
   form { display: flex; gap: 8px; }
   input { flex: 1; min-width: 0; padding: 12px; font: inherit; color: var(--ink);
@@ -50,7 +50,7 @@
   details div { color: var(--muted); white-space: pre-wrap; margin: 6px 0 0 16px; }
   .meta { color: var(--muted); font-size: .85rem; margin-top: 8px; }
   footer { color: var(--muted); font-size: .85rem; margin-top: 32px; }
-  .storage { font-size: .85rem; color: var(--muted); margin-top: 8px !important; }
+  .storage { font-size: .85rem; color: var(--muted); margin-top: 2px !important; }
   .feedback { display: flex; align-items: center; gap: 8px; margin-top: 12px; font-size: .9rem; color: var(--muted); }
   .feedback button { background: var(--surface); color: var(--ink); border: 1px solid var(--line); padding: 4px 10px; }
 </style>
@@ -89,10 +89,10 @@
   const TEXT = {
     es: {
       title: "Asistente de trámites con la Administración española",
-      lead: "Resuelve dudas sobre cómo hacer trámites con la Administración pública en España: identificación electrónica, Cl@ve, certificado digital y notificaciones.",
-      disclaimer: `<strong><em>Demo no oficial.</em></strong> No es el Webchat 060 ni un servicio de la Administración. Responde solo con seis guías del ${PAG}, cita la que usa y puede equivocarse: comprueba la información en la fuente.`,
-      storage: "Guardamos el texto de las preguntas durante 90 días, sin datos de conexión, para mejorar el asistente. <strong>No incluyas datos personales</strong> (si escribes un DNI, un teléfono o un correo, se borran antes de guardar).",
-      placeholder: "Escribe tu pregunta (sin datos personales)",
+      lead: "Dudas sobre identificación electrónica, Cl@ve, certificado digital y notificaciones.",
+      disclaimer: `<strong><em>Demo no oficial.</em></strong> No es el Webchat 060. Responde con guías del ${PAG} y puede equivocarse.`,
+      storage: "Guardamos las preguntas 90 días para mejorarlo. <strong>No incluyas datos personales.</strong>",
+      placeholder: "Escribe tu pregunta",
       send: "Preguntar", switchTo: "English", info: "Acerca de", infoClose: "Cerrar información", docTitle: "Asistente de trámites con la Administración española (demo)",
       examples: ["¿Cuánto cuesta el certificado digital?", "¿Qué diferencia hay entre Cl@ve PIN y Cl@ve Permanente?",
                  "¿Dónde veo una notificación electrónica?", "¿Se puede firmar con Cl@ve?"],
@@ -119,10 +119,10 @@
     },
     en: {
       title: "Assistant for procedures with the Spanish public administration",
-      lead: "Answers questions about dealing with Spain's public administration: electronic identification, Cl@ve, the digital certificate and official notifications.",
-      disclaimer: `<strong><em>Unofficial demo.</em></strong> This is not the Webchat 060 or a government service. It answers only from six guides of Spain's ${PAG} (in Spanish), cites the one it uses and can be wrong: check the source.`,
-      storage: "We keep the text of questions for 90 days, without connection data, to improve the assistant. <strong>Do not include personal data</strong> (ID numbers, phone numbers and e-mail addresses are removed before storing).",
-      placeholder: "Type your question (no personal data)",
+      lead: "Questions about electronic identification, Cl@ve, the digital certificate and notifications.",
+      disclaimer: `<strong><em>Unofficial demo.</em></strong> Not the Webchat 060. It answers from guides of Spain's ${PAG} and can be wrong.`,
+      storage: "We keep questions for 90 days to improve it. <strong>Do not include personal data.</strong>",
+      placeholder: "Type your question",
       send: "Ask", switchTo: "Español", info: "About", infoClose: "Close information", docTitle: "Assistant for procedures with the Spanish administration (demo)",
       examples: ["How much does the digital certificate cost?", "What is the difference between Cl@ve PIN and Cl@ve Permanente?",
                  "Where can I see an electronic notification?", "Can I sign documents with Cl@ve?"],
