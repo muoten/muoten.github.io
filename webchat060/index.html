@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Asistente de trámites (demo)</title>
+<meta name="description" content="Demo no oficial de un asistente que responde dudas sobre trámites con la Administración citando las guías del Punto de Acceso General.">
+<style>
+  :root {
+    --bg: #f7f7f5; --surface: #ffffff; --ink: #1d1d1b; --muted: #5f5f5a; --line: #deded8;
+    --accent: #1f5fa8; --accent-ink: #ffffff; --note: #fff7e0;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #161615; --surface: #1f1f1d; --ink: #ececea; --muted: #a5a59f; --line: #34342f;
+      --accent: #7fb0ea; --accent-ink: #101010; --note: #2d2818;
+    }
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--ink);
+         font: 16px/1.55 system-ui, -apple-system, "Segoe UI", sans-serif; }
+  main { max-width: 720px; margin: 0 auto; padding: 32px 16px 64px; }
+  h1 { font-size: 1.6rem; margin: 0 0 4px; }
+  .lead { color: var(--muted); margin: 0 0 16px; }
+  .disclaimer { background: var(--note); border: 1px solid var(--line); border-radius: 8px;
+                padding: 10px 12px; font-size: .9rem; margin-bottom: 20px; }
+  form { display: flex; gap: 8px; }
+  input { flex: 1; min-width: 0; padding: 12px; font: inherit; color: var(--ink);
+          background: var(--surface); border: 1px solid var(--line); border-radius: 8px; }
+  button { padding: 12px 18px; font: inherit; border: 0; border-radius: 8px; cursor: pointer;
+           background: var(--accent); color: var(--accent-ink); }
+  button:disabled { opacity: .6; cursor: wait; }
+  .examples { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0 24px; }
+  .examples button { background: var(--surface); color: var(--ink); border: 1px solid var(--line);
+                     padding: 6px 10px; font-size: .9rem; }
+  .answer { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 16px; }
+  .answer p { margin: 0 0 8px; white-space: pre-wrap; }
+  .sources { margin-top: 12px; border-top: 1px solid var(--line); padding-top: 8px; font-size: .9rem; }
+  .sources a { color: var(--accent); }
+  details { margin: 6px 0; } summary { cursor: pointer; }
+  details div { color: var(--muted); white-space: pre-wrap; margin: 6px 0 0 16px; }
+  .meta { color: var(--muted); font-size: .85rem; margin-top: 8px; }
+  footer { color: var(--muted); font-size: .85rem; margin-top: 32px; }
+  footer a { color: var(--accent); }
+</style>
+</head>
+<body>
+<main>
+  <h1>Asistente de trámites</h1>
+  <p class="lead">Pregunta sobre cómo hacer trámites: identificación electrónica, Cl@ve, certificado digital, notificaciones.</p>
+  <div class="disclaimer"><strong>Demo no oficial.</strong> No es el Webchat 060 ni un servicio de la Administración.
+    Responde solo con seis guías del <a href="https://administracion.gob.es/">Punto de Acceso General</a>, cita la que usa
+    y puede equivocarse: comprueba la información en la fuente.</div>
+
+  <form id="ask">
+    <input id="q" name="q" maxlength="500" autocomplete="off" placeholder="Por ejemplo: ¿cuánto cuesta el certificado digital?" required>
+    <button id="send" type="submit">Preguntar</button>
+  </form>
+  <div class="examples" id="examples"></div>
+  <section id="out" aria-live="polite"></section>
+
+  <footer>Fuente: guías de <a href="https://administracion.gob.es/">administracion.gob.es</a>, capturadas el
+    <span id="captured">8 de noviembre de 2026</span>. Las preguntas se procesan con GPT-6 Luna en Azure y no se guardan.</footer>
+</main>
+<script>
+  const API = new URLSearchParams(location.search).get("api") || "https://webchat060.icyfield-0b37f951.northeurope.azurecontainerapps.io";
+  const EXAMPLES = ["¿Cuánto cuesta el certificado digital?", "¿Qué diferencia hay entre Cl@ve PIN y Cl@ve Permanente?",
+                    "¿Dónde veo una notificación electrónica?", "¿Se puede firmar con Cl@ve?"];
+  const out = document.getElementById("out"), q = document.getElementById("q"), send = document.getElementById("send");
+
+  function el(tag, props = {}, children = []) {
+    const node = Object.assign(document.createElement(tag), props);
+    node.append(...children);
+    return node;
+  }
+
+  async function ask(question) {
+    send.disabled = true;
+    out.replaceChildren(el("p", {className: "meta", textContent: "Consultando las guías…"}));
+    try {
+      const res = await fetch(API + "/ask", {method: "POST", headers: {"Content-Type": "application/json"},
+                                             body: JSON.stringify({question})});
+      const body = await res.json();
+      if (!res.ok) throw new Error(body.detail || "Error " + res.status);
+      const box = el("div", {className: "answer"}, [el("p", {textContent: body.answer})]);
+      if (body.refused) {
+        box.append(el("p", {className: "meta", textContent:
+          "Las guías incluidas no responden a esta pregunta. Prueba con otra sobre identificación, Cl@ve, certificados o notificaciones."}));
+      } else if (body.sources.length) {
+        const list = el("div", {className: "sources"}, [el("strong", {textContent: "Fuentes"})]);
+        for (const s of body.sources) {
+          list.append(el("details", {}, [
+            el("summary", {}, [`[${s.n}] `, el("a", {href: s.url, target: "_blank", rel: "noopener", textContent: s.title})]),
+            el("div", {textContent: s.text})]));
+        }
+        box.append(list);
+      }
+      out.replaceChildren(box);
+    } catch (err) {
+      out.replaceChildren(el("p", {className: "meta", textContent:
+        "No se ha podido responder: " + err.message + ". Si es la primera pregunta en un rato, el servidor puede estar arrancando; inténtalo de nuevo."}));
+    } finally {
+      send.disabled = false;
+    }
+  }
+
+  for (const text of EXAMPLES) {
+    document.getElementById("examples").append(el("button", {type: "button", textContent: text,
+      onclick: () => { q.value = text; ask(text); }}));
+  }
+  document.getElementById("ask").addEventListener("submit", e => { e.preventDefault(); ask(q.value.trim()); });
+</script>
+</body>
+</html>
