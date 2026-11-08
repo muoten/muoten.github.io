@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Asistente de trámites con la Administración española (demo)</title>
+<meta name="description" content="Demo no oficial de un asistente que responde dudas sobre trámites con la Administración española citando las guías del Punto de Acceso General.">
+<style>
+  :root {
+    --bg: #f7f7f5; --surface: #ffffff; --ink: #1d1d1b; --muted: #5f5f5a; --line: #deded8;
+    --accent: #1f5fa8; --accent-ink: #ffffff; --note: #fff7e0;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #161615; --surface: #1f1f1d; --ink: #ececea; --muted: #a5a59f; --line: #34342f;
+      --accent: #7fb0ea; --accent-ink: #101010; --note: #2d2818;
+    }
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--ink);
+         font: 16px/1.55 system-ui, -apple-system, "Segoe UI", sans-serif; }
+  main { max-width: 720px; margin: 0 auto; padding: 24px 16px 64px; }
+  .top { display: flex; justify-content: flex-end; margin-bottom: 8px; }
+  .top button { background: transparent; color: var(--accent); border: 1px solid var(--line); padding: 4px 10px; font-size: .85rem; }
+  h1 { font-size: 1.6rem; line-height: 1.25; margin: 0 0 6px; }
+  .badge { display: inline-block; font-size: .8rem; font-weight: 600; letter-spacing: .02em; color: var(--ink);
+           background: var(--note); border: 1px solid var(--line); border-radius: 999px; padding: 2px 10px; margin-bottom: 8px; }
+  .lead { color: var(--muted); margin: 0 0 16px; }
+  .disclaimer { background: var(--note); border: 1px solid var(--line); border-radius: 8px;
+                padding: 10px 12px; font-size: .9rem; margin-bottom: 20px; }
+  .disclaimer p { margin: 0; }
+  form { display: flex; gap: 8px; }
+  input { flex: 1; min-width: 0; padding: 12px; font: inherit; color: var(--ink);
+          background: var(--surface); border: 1px solid var(--line); border-radius: 8px; }
+  button { padding: 12px 18px; font: inherit; border: 0; border-radius: 8px; cursor: pointer;
+           background: var(--accent); color: var(--accent-ink); }
+  button:disabled { opacity: .6; cursor: wait; }
+  .examples { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0 24px; }
+  .examples button { background: var(--surface); color: var(--ink); border: 1px solid var(--line);
+                     padding: 6px 10px; font-size: .9rem; }
+  .answer { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 16px; }
+  .answer p { margin: 0 0 8px; white-space: pre-wrap; }
+  .sources { margin-top: 12px; border-top: 1px solid var(--line); padding-top: 8px; font-size: .9rem; }
+  a { color: var(--accent); }
+  details { margin: 6px 0; } summary { cursor: pointer; }
+  details div { color: var(--muted); white-space: pre-wrap; margin: 6px 0 0 16px; }
+  .meta { color: var(--muted); font-size: .85rem; margin-top: 8px; }
+  footer { color: var(--muted); font-size: .85rem; margin-top: 32px; }
+  .storage { font-size: .85rem; color: var(--muted); margin-top: 8px !important; }
+  .feedback { display: flex; align-items: center; gap: 8px; margin-top: 12px; font-size: .9rem; color: var(--muted); }
+  .feedback button { background: var(--surface); color: var(--ink); border: 1px solid var(--line); padding: 4px 10px; }
+</style>
+</head>
+<body>
+<main>
+  <div class="top"><button id="lang" type="button"></button></div>
+  <span class="badge" data-t="badge"></span>
+  <h1 data-t="title"></h1>
+  <p class="lead" data-t="lead"></p>
+  <div class="disclaimer">
+    <p data-t="disclaimer"></p>
+    <p class="storage" data-t="storage"></p>
+  </div>
+
+  <form id="ask">
+    <input id="q" name="q" maxlength="500" autocomplete="off" required>
+    <button id="send" type="submit" data-t="send"></button>
+  </form>
+  <div class="examples" id="examples"></div>
+  <section id="out" aria-live="polite"></section>
+
+  <footer data-t="footer"></footer>
+</main>
+<script>
+  const API = new URLSearchParams(location.search).get("api") || "https://webchat060.icyfield-0b37f951.northeurope.azurecontainerapps.io";
+  const PAG = '<a href="https://administracion.gob.es/">Punto de Acceso General</a>';
+  const TEXT = {
+    es: {
+      badge: "Demo no oficial", title: "Asistente de trámites con la Administración española",
+      lead: "Resuelve dudas sobre cómo hacer trámites con la Administración pública en España: identificación electrónica, Cl@ve, certificado digital y notificaciones.",
+      disclaimer: `<strong>Demo no oficial.</strong> No es el Webchat 060 ni un servicio de la Administración. Responde solo con seis guías del ${PAG}, cita la que usa y puede equivocarse: comprueba la información en la fuente.`,
+      storage: "Guardamos el texto de las preguntas durante 90 días, sin datos de conexión, para mejorar el asistente. <strong>No incluyas datos personales</strong> (si escribes un DNI, un teléfono o un correo, se borran antes de guardar).",
+      placeholder: "Por ejemplo: ¿cuánto cuesta el certificado digital? (sin datos personales)",
+      send: "Preguntar", switchTo: "English", docTitle: "Asistente de trámites con la Administración española (demo)",
+      examples: ["¿Cuánto cuesta el certificado digital?", "¿Qué diferencia hay entre Cl@ve PIN y Cl@ve Permanente?",
+                 "¿Dónde veo una notificación electrónica?", "¿Se puede firmar con Cl@ve?"],
+      thinking: "Consultando las guías…",
+      refused: "Las guías incluidas no responden a esta pregunta. Prueba con otra sobre identificación, Cl@ve, certificados o notificaciones.",
+      refusal: "No tengo información suficiente para responder.",
+      sources: "Fuentes", helpful: "¿Te ha servido?", yes: "👍 Sí", no: "👎 No", thanks: "Gracias.",
+      error: "No se ha podido responder: {e}. Si es la primera pregunta en un rato, el servidor puede estar arrancando; inténtalo de nuevo.",
+      footer: 'Fuente: guías de <a href="https://administracion.gob.es/">administracion.gob.es</a>, capturadas el 8 de noviembre de 2026. Las preguntas se procesan con GPT-6 Luna en Azure y se guardan 90 días, sin datos de conexión.',
+    },
+    en: {
+      badge: "Unofficial demo", title: "Assistant for procedures with the Spanish public administration",
+      lead: "Answers questions about dealing with Spain's public administration: electronic identification, Cl@ve, the digital certificate and official notifications.",
+      disclaimer: `<strong>Unofficial demo.</strong> This is not the Webchat 060 or a government service. It answers only from six guides of Spain's ${PAG} (in Spanish), cites the one it uses and can be wrong: check the source.`,
+      storage: "We keep the text of questions for 90 days, without connection data, to improve the assistant. <strong>Do not include personal data</strong> (ID numbers, phone numbers and e-mail addresses are removed before storing).",
+      placeholder: "For example: how much does the digital certificate cost? (no personal data)",
+      send: "Ask", switchTo: "Español", docTitle: "Assistant for procedures with the Spanish administration (demo)",
+      examples: ["How much does the digital certificate cost?", "What is the difference between Cl@ve PIN and Cl@ve Permanente?",
+                 "Where can I see an electronic notification?", "Can I sign documents with Cl@ve?"],
+      thinking: "Checking the guides…",
+      refused: "The guides included do not answer this question. Try one about identification, Cl@ve, certificates or notifications.",
+      refusal: "I don't have enough information to answer.",
+      sources: "Sources (in Spanish)", helpful: "Was this helpful?", yes: "👍 Yes", no: "👎 No", thanks: "Thank you.",
+      error: "Could not answer: {e}. If this is the first question in a while, the server may be starting; please try again.",
+      footer: 'Source: guides from <a href="https://administracion.gob.es/">administracion.gob.es</a>, captured on 8 November 2026. Questions are processed with GPT-6 Luna on Azure and kept for 90 days, without connection data.',
+    },
+  };
+  const out = document.getElementById("out"), q = document.getElementById("q"), send = document.getElementById("send");
+  let lang = new URLSearchParams(location.search).get("lang");
+  if (!TEXT[lang]) {
+    try { lang = localStorage.getItem("lang"); } catch (_) { lang = null; }
+    if (!TEXT[lang]) lang = (navigator.language || "es").toLowerCase().startsWith("es") ? "es" : "en";
+  }
+  const t = key => TEXT[lang][key];
+
+  function el(tag, props = {}, children = []) {
+    const node = Object.assign(document.createElement(tag), props);
+    node.append(...children);
+    return node;
+  }
+
+  function render() {
+    document.documentElement.lang = lang;
+    document.title = t("docTitle");
+    for (const node of document.querySelectorAll("[data-t]")) node.innerHTML = t(node.dataset.t);
+    q.placeholder = t("placeholder");
+    document.getElementById("lang").textContent = t("switchTo");
+    const examples = document.getElementById("examples");
+    examples.replaceChildren(...t("examples").map(text => el("button", {type: "button", textContent: text,
+      onclick: () => { q.value = text; ask(text); }})));
+  }
+
+  async function ask(question) {
+    send.disabled = true;
+    out.replaceChildren(el("p", {className: "meta", textContent: t("thinking")}));
+    try {
+      const res = await fetch(API + "/ask", {method: "POST", headers: {"Content-Type": "application/json"},
+                                             body: JSON.stringify({question})});
+      const body = await res.json();
+      if (!res.ok) throw new Error(body.detail || "Error " + res.status);
+      // The service's refusal is in Spanish; show it in the page's language.
+      const box = el("div", {className: "answer"}, [el("p", {textContent: body.refused ? t("refusal") : body.answer})]);
+      if (body.refused) {
+        box.append(el("p", {className: "meta", textContent: t("refused")}));
+      } else if (body.sources.length) {
+        // One entry per guide, with the cited passages of that guide inside.
+        const guides = new Map();
+        for (const s of body.sources) {
+          if (!guides.has(s.url)) guides.set(s.url, {title: s.title, passages: []});
+          guides.get(s.url).passages.push(s);
+        }
+        const list = el("div", {className: "sources"}, [el("strong", {textContent: t("sources")})]);
+        for (const [url, g] of guides) {
+          const marks = g.passages.map(s => `[${s.n}]`).join("");
+          list.append(el("details", {}, [
+            el("summary", {}, [`${marks} `, el("a", {href: url, target: "_blank", rel: "noopener", textContent: g.title})]),
+            ...g.passages.map(s => el("div", {textContent: `[${s.n}] ${s.text}`}))]));
+        }
+        box.append(list);
+      }
+      const thanks = el("span");
+      const rate = helpful => async () => {
+        for (const b of box.querySelectorAll(".feedback button")) b.disabled = true;
+        thanks.textContent = t("thanks");
+        try {
+          await fetch(API + "/feedback", {method: "POST", headers: {"Content-Type": "application/json"},
+                                          body: JSON.stringify({id: body.id, helpful})});
+        } catch (_) { /* feedback is optional */ }
+      };
+      box.append(el("div", {className: "feedback"}, [t("helpful"),
+        el("button", {type: "button", textContent: t("yes"), onclick: rate(true)}),
+        el("button", {type: "button", textContent: t("no"), onclick: rate(false)}), thanks]));
+      out.replaceChildren(box);
+    } catch (err) {
+      out.replaceChildren(el("p", {className: "meta", textContent: t("error").replace("{e}", err.message)}));
+    } finally {
+      send.disabled = false;
+    }
+  }
+
+  document.getElementById("lang").addEventListener("click", () => {
+    lang = lang === "es" ? "en" : "es";
+    try { localStorage.setItem("lang", lang); } catch (_) { /* the choice just won't be remembered */ }
+    out.replaceChildren();
+    render();
+  });
+  document.getElementById("ask").addEventListener("submit", e => { e.preventDefault(); ask(q.value.trim()); });
+  render();
+</script>
+</body>
+</html>
