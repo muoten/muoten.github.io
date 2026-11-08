@@ -49,6 +49,23 @@
   details { margin: 6px 0; } summary { cursor: pointer; }
   details div { color: var(--muted); white-space: pre-wrap; margin: 6px 0 0 16px; }
   .meta { color: var(--muted); font-size: .85rem; margin-top: 8px; }
+  .server { display: flex; align-items: center; gap: 8px; color: var(--muted); font-size: .85rem; margin: 8px 0 0; min-height: 1.4em; }
+  .dot { width: 9px; height: 9px; border-radius: 50%; background: var(--muted); flex: none; }
+  .server.ready .dot { background: #2f9e5b; }
+  .server.waking .dot { background: var(--accent); animation: pulse 1.2s ease-in-out infinite; }
+  .server.down .dot { background: #c0392b; }
+  .waiting { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 16px; }
+  .waiting .row { display: flex; align-items: center; gap: 12px; }
+  .waiting .elapsed { margin-left: auto; color: var(--muted); font-variant-numeric: tabular-nums; }
+  .waiting .hint { color: var(--muted); font-size: .85rem; margin: 8px 0 0; }
+  .dots { display: inline-flex; gap: 4px; }
+  .dots span { width: 7px; height: 7px; border-radius: 50%; background: var(--accent); animation: bounce 1s ease-in-out infinite; }
+  .dots span:nth-child(2) { animation-delay: .15s; } .dots span:nth-child(3) { animation-delay: .3s; }
+  .bar { height: 3px; border-radius: 3px; background: var(--line); overflow: hidden; margin-top: 12px; }
+  .bar i { display: block; height: 100%; width: 0; background: var(--accent); transition: width 1s linear; }
+  @keyframes pulse { 50% { opacity: .3; } }
+  @keyframes bounce { 0%, 80%, 100% { transform: scale(.6); opacity: .5; } 40% { transform: scale(1); opacity: 1; } }
+  @media (prefers-reduced-motion: reduce) { .dots span, .server.waking .dot { animation: none; } .bar i { transition: none; } }
   footer { color: var(--muted); font-size: .85rem; margin-top: 32px; }
   .storage { font-size: .85rem; color: var(--muted); margin-top: 2px !important; }
   .feedback { display: flex; align-items: center; gap: 8px; margin-top: 12px; font-size: .9rem; color: var(--muted); }
@@ -70,6 +87,7 @@
     <input id="q" name="q" maxlength="500" autocomplete="off" required>
     <button id="send" type="submit" data-t="send"></button>
   </form>
+  <p class="server" id="server" aria-live="polite"><span class="dot"></span><span id="server-text"></span></p>
   <div class="examples" id="examples"></div>
   <section id="out" aria-live="polite"></section>
 
@@ -97,7 +115,12 @@
       examples: ["¿Cuánto cuesta el certificado digital?", "¿Qué diferencia hay entre Cl@ve PIN y Cl@ve Permanente?",
                  "¿Dónde veo una notificación electrónica?", "¿Se puede firmar con Cl@ve?"],
       thinking: "Consultando las guías…",
-      waking: "El servidor estaba en reposo y está arrancando; la primera respuesta puede tardar unos 30 segundos…",
+      waking: "Arrancando el servidor y consultando las guías…",
+      wakingHint: "El servidor estaba en reposo: la primera respuesta tarda unos 30 segundos. Las siguientes, 2 o 3.",
+      slowHint: "Está tardando más de lo normal; sigue en marcha.",
+      asking: "Preguntando…", retry: "Reintentar",
+      timeout: "No ha llegado respuesta en 90 segundos. Puede que el servidor esté arrancando o muy ocupado.",
+      serverWaking: "Arrancando el servidor… (unos 25 s)", serverReady: "Listo para responder", serverDown: "El servidor no responde ahora mismo",
       refused: 'Las guías incluidas no cubren esta pregunta. Puedes consultarla llamando al <a href="https://administracion.gob.es/informacion/formas-recibir-orientacion/canales-atencion/060" target="_blank" rel="noopener">060</a>, por el <a href="https://administracion.gob.es/informacion/formas-recibir-orientacion/canales-atencion/buzon" target="_blank" rel="noopener">buzón de atención</a> o en una <a href="https://administracion.gob.es/informacion/buscador-de-oficinas/oficinas-de-informacion-y-atencion-a-la-ciudadania/oficinas-informacion-administracion-general-estado" target="_blank" rel="noopener">oficina de información</a>.',
       refusal: "No tengo información suficiente para responder.",
       sources: "Fuentes", helpful: "¿Te ha servido?", yes: "👍 Sí", no: "👎 No", thanks: "Gracias.",
@@ -130,7 +153,12 @@
       examples: ["How much does the digital certificate cost?", "What is the difference between Cl@ve PIN and Cl@ve Permanente?",
                  "Where can I see an electronic notification?", "Can I sign documents with Cl@ve?"],
       thinking: "Checking the guides…",
-      waking: "The server was idle and is starting up; the first answer can take about 30 seconds…",
+      waking: "Starting the server and checking the guides…",
+      wakingHint: "The server was idle: the first answer takes about 30 seconds. The next ones, 2 or 3.",
+      slowHint: "It is taking longer than usual; still working.",
+      asking: "Asking…", retry: "Try again",
+      timeout: "No answer arrived within 90 seconds. The server may be starting or very busy.",
+      serverWaking: "Starting the server… (about 25 s)", serverReady: "Ready to answer", serverDown: "The server is not responding right now",
       refused: 'The guides included do not cover this question. You can ask it by calling <a href="https://administracion.gob.es/informacion/formas-recibir-orientacion/canales-atencion/060" target="_blank" rel="noopener">060</a>, through the <a href="https://administracion.gob.es/informacion/formas-recibir-orientacion/canales-atencion/buzon" target="_blank" rel="noopener">help mailbox</a> or at an <a href="https://administracion.gob.es/informacion/buscador-de-oficinas/oficinas-de-informacion-y-atencion-a-la-ciudadania/oficinas-informacion-administracion-general-estado" target="_blank" rel="noopener">information office</a> (in Spanish).',
       refusal: "I don't have enough information to answer.",
       sources: "Sources (in Spanish)", helpful: "Was this helpful?", yes: "👍 Yes", no: "👎 No", thanks: "Thank you.",
@@ -183,14 +211,32 @@
   }
 
   async function ask(question) {
+    if (!question) return;
     send.disabled = true;
-    const status = el("p", {className: "meta", textContent: t("thinking")});
-    out.replaceChildren(status);
-    // An answer usually takes a few seconds; longer means the server is starting.
-    const slow = setTimeout(() => { status.textContent = t("waking"); }, 5000);
+    send.textContent = t("asking");
+    // A cold server shows its wait from the first second; a warm one only if it drags.
+    const cold = server !== "ready";
+    const label = el("span", {textContent: cold ? t("waking") : t("thinking")});
+    const elapsed = el("span", {className: "elapsed", textContent: "0 s"});
+    const hint = el("p", {className: "hint", textContent: cold ? t("wakingHint") : ""});
+    const fill = el("i");
+    out.replaceChildren(el("div", {className: "waiting", role: "status"}, [
+      el("div", {className: "row"}, [el("span", {className: "dots", ariaHidden: "true"}, [el("span"), el("span"), el("span")]), label, elapsed]),
+      hint, el("div", {className: "bar", ariaHidden: "true"}, [fill])]));
+    const expected = cold ? 30 : 6;
+    const started = Date.now();
+    const tick = setInterval(() => {
+      const s = Math.round((Date.now() - started) / 1000);
+      elapsed.textContent = `${s} s`;
+      fill.style.width = `${Math.min(95, 100 * s / expected)}%`;
+      if (!cold && s >= 8) hint.textContent = t("slowHint");
+    }, 1000);
+    const abort = new AbortController();
+    const limit = setTimeout(() => abort.abort(), 90000);
     try {
       const res = await fetch(API + "/ask", {method: "POST", headers: {"Content-Type": "application/json"},
-                                             body: JSON.stringify({question})});
+                                             body: JSON.stringify({question}), signal: abort.signal});
+      setServer("ready");
       const body = await res.json();
       if (!res.ok) throw new Error(body.detail || "Error " + res.status);
       // The service's refusal is in Spanish; show it in the page's language.
@@ -229,10 +275,14 @@
       // On a phone the answer lands below the fold; bring it into view.
       if (box.getBoundingClientRect().top > window.innerHeight * 0.6) box.scrollIntoView({behavior: "smooth", block: "start"});
     } catch (err) {
-      out.replaceChildren(el("p", {className: "meta", textContent: t("error").replace("{e}", err.message)}));
+      const message = err.name === "AbortError" ? t("timeout") : t("error").replace("{e}", err.message.replace(/\.+$/, ""));
+      out.replaceChildren(el("div", {className: "waiting"}, [el("p", {textContent: message}),
+        el("button", {type: "button", textContent: t("retry"), onclick: () => ask(question)})]));
     } finally {
-      clearTimeout(slow);
+      clearInterval(tick);
+      clearTimeout(limit);
       send.disabled = false;
+      send.textContent = t("send");
     }
   }
 
@@ -241,6 +291,7 @@
     try { localStorage.setItem("lang", lang); } catch (_) { /* the choice just won't be remembered */ }
     out.replaceChildren();
     render();
+    setServer(server);
   });
   document.getElementById("info").addEventListener("click", () => {
     const about = document.getElementById("about");
@@ -248,9 +299,22 @@
     render();
   });
   document.getElementById("ask").addEventListener("submit", e => { e.preventDefault(); ask(q.value.trim()); });
+  // Wake the API while the visitor reads and types: after a quiet spell it takes ~25 s
+  // to start, so the page says so before anyone asks.
+  let server = "waking";
+  function setServer(state) {
+    server = state;
+    document.getElementById("server").className = `server ${state}`;
+    document.getElementById("server-text").textContent =
+      t({waking: "serverWaking", ready: "serverReady", down: "serverDown"}[state]);
+  }
   render();
-  // Wake the API while the visitor reads and types: after a quiet spell it takes ~25 s to start.
-  fetch(API + "/health").catch(() => {});
+  setServer("waking");
+  const warm = new AbortController();
+  setTimeout(() => warm.abort(), 90000);
+  fetch(API + "/health", {signal: warm.signal})
+    .then(res => setServer(res.ok ? "ready" : "down"))
+    .catch(() => { if (server !== "ready") setServer("down"); });
 </script>
 </body>
 </html>
