@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
 <title>Asistente de trámites con la Administración española (demo)</title>
-<meta name="description" content="Demo no oficial de un asistente que responde dudas sobre trámites con la Administración española citando las guías del Punto de Acceso General.">
+<meta name="description" content="Demo no oficial de un asistente que responde dudas sobre trámites con la Administración española citando las páginas del Punto de Acceso General.">
 <style>
   :root {
     --bg: #f7f7f5; --surface: #ffffff; --ink: #1d1d1b; --muted: #5f5f5a; --line: #deded8;
@@ -98,106 +98,108 @@
 <script>
   const API = new URLSearchParams(location.search).get("api") || "https://webchat060.icyfield-0b37f951.northeurope.azurecontainerapps.io";
   const PAG = '<a href="https://administracion.gob.es/">Punto de Acceso General</a>';
-  const GUIDES = [
-    ["Cómo realizar trámites", "realizar-un-tramite-nuevo"],
-    ["Relacionarte electrónicamente con la Administración", "relacionarte-electronicamente-administracion"],
-    ["Identificación Electrónica", "identificacion-electronica"],
-    ["Notificaciones", "notificaciones"],
-    ["Registrarte en Cl@ve", "servicioselectronicosfrecuentes/necesito-registrarme-en-clave"],
-    ["Obtención del Certificado Electrónico de la FNMT", "servicioselectronicosfrecuentes/obtencion-certificado-electronico-fnmt"],
-  ].map(([title, path]) => `<li><a href="https://administracion.gob.es/tramites-electronicos/${path}" target="_blank" rel="noopener">${title}</a></li>`).join("");
+  // The sections the crawl kept pages from (corpus/pag), with how many pages each.
+  const SECTIONS = [
+    ["Atención e información", "informacion", 62],
+    ["Empleo público", "empleopublico", 40],
+    ["Trámites y servicios", "tramites-electronicos", 27],
+    ["Lectura fácil", "lectura-facil", 16],
+    ["Ayudas", "ayudas", 2],
+  ];
+  const sectionList = pages => SECTIONS.map(([title, path, n]) =>
+    `<li><a href="https://administracion.gob.es/${path}" target="_blank" rel="noopener">${title}</a> (${n} ${pages})</li>`).join("");
   const TEXT = {
     es: {
       title: "Asistente de trámites con la Administración española",
-      lead: "Dudas sobre identificación electrónica, Cl@ve, certificado digital y notificaciones.",
-      disclaimer: `<strong><em>Demo no oficial.</em></strong> No es el Webchat 060. Responde con guías del ${PAG} y puede equivocarse.`,
+      lead: "Dudas sobre trámites electrónicos, Cl@ve, certificado digital, notificaciones, atención a la ciudadanía y empleo público.",
+      disclaimer: `<strong><em>Demo no oficial.</em></strong> No es el Webchat 060. Responde con páginas del ${PAG} y puede equivocarse.`,
       storage: "Guardamos las preguntas 30 días para mejorarlo, salvo que marques «No guardar mi pregunta». <strong>No incluyas datos personales.</strong>",
       noStore: "No guardar mi pregunta",
       placeholder: "Escribe tu pregunta",
       send: "Preguntar", switchTo: "English", info: "Acerca de", infoClose: "Cerrar información", docTitle: "Asistente de trámites con la Administración española (demo)",
       examples: ["¿Cuánto cuesta el certificado digital?", "¿Qué diferencia hay entre Cl@ve PIN y Cl@ve Permanente?",
                  "¿Dónde veo una notificación electrónica?", "¿Se puede firmar con Cl@ve?"],
-      thinking: "Consultando las guías…",
-      waking: "Arrancando el servidor y consultando las guías…",
+      thinking: "Consultando las páginas…",
+      waking: "Arrancando el servidor y consultando las páginas…",
       wakingHint: "El servidor estaba en reposo: la primera respuesta tarda unos 30 segundos. Las siguientes, 2 o 3.",
-      slowHint: "Está tardando más de lo normal; sigue en marcha.",
+      slowHint: "Está tardando más de lo normal, pero sigue en marcha.",
       asking: "Preguntando…", retry: "Reintentar",
       timeout: "No ha llegado respuesta en 90 segundos. Puede que el servidor esté arrancando o muy ocupado.",
       serverWaking: s => s > 0 ? `Arrancando el servidor… listo en ~${s} s` : "Arrancando el servidor… tarda más de lo normal",
-      serverRetry: "El servidor no responde; reintentando…", serverReady: "Listo para responder", serverDown: "El servidor no responde ahora mismo",
-      refused: 'Las guías incluidas no cubren esta pregunta. Puedes consultarla llamando al <a href="https://administracion.gob.es/informacion/formas-recibir-orientacion/canales-atencion/060" target="_blank" rel="noopener">060</a>, por el <a href="https://administracion.gob.es/informacion/formas-recibir-orientacion/canales-atencion/buzon" target="_blank" rel="noopener">buzón de atención</a> o en una <a href="https://administracion.gob.es/informacion/buscador-de-oficinas/oficinas-de-informacion-y-atencion-a-la-ciudadania/oficinas-informacion-administracion-general-estado" target="_blank" rel="noopener">oficina de información</a>.',
+      serverRetry: "El servidor no responde. Reintentando…", serverReady: "Listo para responder", serverDown: "El servidor no responde ahora mismo",
+      refused: 'Las páginas incluidas no parecen cubrir esta pregunta. Puedes consultarla llamando al <a href="https://administracion.gob.es/informacion/formas-recibir-orientacion/canales-atencion/060" target="_blank" rel="noopener">060</a>, por el <a href="https://administracion.gob.es/informacion/formas-recibir-orientacion/canales-atencion/buzon" target="_blank" rel="noopener">buzón de atención</a> o en una <a href="https://administracion.gob.es/informacion/buscador-de-oficinas/oficinas-de-informacion-y-atencion-a-la-ciudadania/oficinas-informacion-administracion-general-estado" target="_blank" rel="noopener">oficina de información</a>.',
       refusal: "No tengo información suficiente para responder.",
       sources: "Fuentes", helpful: "¿Te ha servido?", yes: "👍 Sí", no: "👎 No", thanks: "Gracias.",
-      error: "No se ha podido responder: {e}. Si es la primera pregunta en un rato, el servidor puede estar arrancando; inténtalo de nuevo.",
+      error: "No se ha podido responder: {e}. Si es la primera pregunta en un rato, el servidor puede estar arrancando. Inténtalo de nuevo.",
       about: `<h2>Qué es</h2>
         <p>Un experimento personal e independiente: probar si un asistente puede resolver dudas de trámites respondiendo solo con fuentes oficiales y citándolas. Nace de la idea de mejorar el Webchat 060, pero no tiene relación con la Administración ni con el servicio 060.</p>
         <h2>De dónde salen las respuestas</h2>
-        <p>Solo de estas seis guías del ${PAG}, capturadas el 8 de noviembre de 2026. Si una guía cambia después, la respuesta puede estar desactualizada.</p>
-        <ul>${GUIDES}</ul>
-        <p>Las propias guías no siempre coinciden: una explica Cl@ve Firma y otra dice que Cl@ve no permite firmar. El asistente intenta avisar cuando ocurre, pero no siempre lo consigue.</p>
+        <p>Conoce 147 de las 606 páginas que el ${PAG} incluye en su mapa web, tal como estaban el 9 de noviembre de 2026: las de atención a la ciudadanía, trámites, empleo público, ayudas y lectura fácil. No incluye las secciones sobre la Unión Europea ni sobre la organización del Estado, ni el buscador de trámites. No busca en internet. Si alguna página ha cambiado después, la respuesta puede no estar al día.</p>
+        <ul>${sectionList("páginas")}</ul>
+        <p>Las propias páginas no siempre coinciden: una explica Cl@ve Firma y otra dice que Cl@ve no permite firmar. El asistente intenta avisar cuando ocurre, pero no siempre lo consigue.</p>
         <h2>Cómo responde</h2>
-        <p>Cada pregunta se envía, junto con las seis guías completas, a GPT-6 Luna en Microsoft Azure, dentro de la Unión Europea. Debe citar el fragmento que usa; si no lo cita, o si las guías no tratan el tema, contesta que no tiene información suficiente. No consulta tus datos ni hace trámites por ti.</p>
+        <p>Para cada pregunta se buscan los 10 fragmentos de esas páginas más relacionados con ella, y se envían con la pregunta a GPT-6 Luna en Microsoft Azure, dentro de la Unión Europea. Debe citar el fragmento que usa. Si no lo cita, o si esos fragmentos no tratan el tema, contesta que no tiene información suficiente. Si la búsqueda no da con el fragmento adecuado, puede contestar eso aunque alguna página sí lo explique. No consulta tus datos ni hace trámites por ti.</p>
         <h2>Qué no cubre</h2>
-        <p>Prestaciones, ayudas, impuestos o trámites concretos de cada organismo (por ejemplo, cómo pedir el paro). Para eso, consulta la sede del organismo o los canales oficiales de atención, como el 060.</p>
+        <p>Prestaciones, ayudas, impuestos o trámites concretos de cada organismo (por ejemplo, cómo pedir el paro): el ${PAG} enlaza a sus sedes, pero no los explica. Para eso, consulta la sede del organismo o los canales oficiales de atención, como el 060.</p>
         <h2>Cómo se evalúa</h2>
-        <p>Con 32 preguntas escritas antes de leer las guías y un modelo juez que comprueba si cada respuesta es correcta y si todo lo que dice está en sus fuentes. <a href="evaluation.html">Ver los resultados y todas las respuestas</a>.</p>
+        <p>Con 32 preguntas escritas antes de leer las páginas y un modelo juez que comprueba si cada respuesta es correcta y si todo lo que dice está en sus fuentes, y con 34 ataques (instrucciones escondidas, citas falsas, premisas falsas) que debe resistir. <a href="evaluation.html">Ver los resultados y todas las respuestas</a>.</p>
         <h2>Privacidad</h2>
         <p><strong>Responsable:</strong> muoten, a título personal (no es un servicio de la Administración). Contacto: <a href="mailto:nw8bm9p6f@mozmail.com">nw8bm9p6f@mozmail.com</a>.</p>
-        <p><strong>Qué se guarda:</strong> el texto de cada pregunta, si se respondió, qué guías citó, cuánto tardó y tu valoración (👍/👎). Antes de guardarla se borran DNI, NIE, teléfonos, correos, IBAN y números largos. El borrado es automático y no detecta todo: nombres, direcciones o datos de salud que escribas quedarían guardados. No se guarda tu IP ni ningún identificador tuyo, y la página no usa cookies (solo recuerda en tu navegador el idioma elegido).</p>
+        <p><strong>Qué se guarda:</strong> el texto de cada pregunta, si se respondió, qué páginas citó, cuánto tardó y tu valoración (👍/👎). Antes de guardarla se borran DNI, NIE, teléfonos, correos, IBAN y números largos. El borrado es automático y no detecta todo: nombres, direcciones o datos de salud que escribas quedarían guardados. No se guarda tu IP ni ningún identificador tuyo, y la página no usa cookies (solo recuerda en tu navegador el idioma elegido).</p>
         <p><strong>Si no quieres que se guarde,</strong> marca «No guardar mi pregunta» antes de enviarla: se responde igual y no queda registro.</p>
         <p><strong>Para qué y por qué:</strong> para encontrar las dudas que el asistente no resuelve y mejorarlo. La base es el interés legítimo en mejorar un servicio gratuito, limitado a texto sin identificadores y con la opción de no guardarlo.</p>
-        <p><strong>Cuánto tiempo:</strong> 30 días; después se borra automáticamente.</p>
+        <p><strong>Cuánto tiempo:</strong> 30 días. Después se borra automáticamente.</p>
         <p><strong>Quién más interviene:</strong> Microsoft Azure aloja el servidor y el registro en la UE (Irlanda) y procesa las preguntas con GPT-6 Luna en países de la Unión Europea. Según Microsoft, no las usa para entrenar modelos ni las comparte con OpenAI. Su sistema contra abusos las revisa de forma automática y, si detecta un posible abuso, puede conservar una muestra para revisión por personal de Microsoft en el Espacio Económico Europeo. La página la sirve GitHub Pages, que gestiona sus propios registros de acceso.</p>
         <p><strong>Tus derechos:</strong> como no se guarda nada que te identifique, solo podemos localizar una pregunta si nos indicas su texto exacto y el día. Con eso puedes pedir que se borre. También puedes reclamar ante la Agencia Española de Protección de Datos.</p>
         <h2>Autoría</h2>
         <p>Hecho por <a href="https://muoten.github.io/">muoten</a>. Sigue el enfoque de <a href="https://muoten.github.io/rag-against-the-machine.html">RAG against the machine</a>.</p>`,
-      footer: 'Fuente: guías de <a href="https://administracion.gob.es/">administracion.gob.es</a>, capturadas el 8 de noviembre de 2026. Las preguntas se procesan con GPT-6 Luna en centros de datos de Microsoft en la UE y se guardan 30 días, sin datos de conexión, salvo que pidas lo contrario. Más detalles en «Acerca de».',
+      footer: 'Fuente: páginas de <a href="https://administracion.gob.es/">administracion.gob.es</a>, capturadas el 9 de noviembre de 2026. Las preguntas se procesan con GPT-6 Luna en centros de datos de Microsoft en la UE y se guardan 30 días, sin datos de conexión, salvo que pidas lo contrario. Más detalles en «Acerca de».',
     },
     en: {
       title: "Assistant for procedures with the Spanish public administration",
-      lead: "Questions about electronic identification, Cl@ve, the digital certificate and notifications.",
-      disclaimer: `<strong><em>Unofficial demo.</em></strong> Not the Webchat 060. It answers from guides of Spain's ${PAG} and can be wrong.`,
+      lead: "Questions about online procedures, Cl@ve, the digital certificate, notifications, public information services and public employment.",
+      disclaimer: `<strong><em>Unofficial demo.</em></strong> Not the Webchat 060. It answers from pages of Spain's ${PAG} and can be wrong.`,
       storage: "We keep questions for 30 days to improve it, unless you tick “Do not store my question”. <strong>Do not include personal data.</strong>",
       noStore: "Do not store my question",
       placeholder: "Type your question",
       send: "Ask", switchTo: "Español", info: "About", infoClose: "Close information", docTitle: "Assistant for procedures with the Spanish administration (demo)",
       examples: ["How much does the digital certificate cost?", "What is the difference between Cl@ve PIN and Cl@ve Permanente?",
                  "Where can I see an electronic notification?", "Can I sign documents with Cl@ve?"],
-      thinking: "Checking the guides…",
-      waking: "Starting the server and checking the guides…",
+      thinking: "Checking the pages…",
+      waking: "Starting the server and checking the pages…",
       wakingHint: "The server was idle: the first answer takes about 30 seconds. The next ones, 2 or 3.",
-      slowHint: "It is taking longer than usual; still working.",
+      slowHint: "It is taking longer than usual, but still working.",
       asking: "Asking…", retry: "Try again",
       timeout: "No answer arrived within 90 seconds. The server may be starting or very busy.",
       serverWaking: s => s > 0 ? `Starting the server… ready in ~${s} s` : "Starting the server… taking longer than usual",
-      serverRetry: "The server is not responding; retrying…", serverReady: "Ready to answer", serverDown: "The server is not responding right now",
-      refused: 'The guides included do not cover this question. You can ask it by calling <a href="https://administracion.gob.es/informacion/formas-recibir-orientacion/canales-atencion/060" target="_blank" rel="noopener">060</a>, through the <a href="https://administracion.gob.es/informacion/formas-recibir-orientacion/canales-atencion/buzon" target="_blank" rel="noopener">help mailbox</a> or at an <a href="https://administracion.gob.es/informacion/buscador-de-oficinas/oficinas-de-informacion-y-atencion-a-la-ciudadania/oficinas-informacion-administracion-general-estado" target="_blank" rel="noopener">information office</a> (in Spanish).',
+      serverRetry: "The server is not responding. Retrying…", serverReady: "Ready to answer", serverDown: "The server is not responding right now",
+      refused: 'The pages included do not seem to cover this question. You can ask it by calling <a href="https://administracion.gob.es/informacion/formas-recibir-orientacion/canales-atencion/060" target="_blank" rel="noopener">060</a>, through the <a href="https://administracion.gob.es/informacion/formas-recibir-orientacion/canales-atencion/buzon" target="_blank" rel="noopener">help mailbox</a> or at an <a href="https://administracion.gob.es/informacion/buscador-de-oficinas/oficinas-de-informacion-y-atencion-a-la-ciudadania/oficinas-informacion-administracion-general-estado" target="_blank" rel="noopener">information office</a> (in Spanish).',
       refusal: "I don't have enough information to answer.",
       sources: "Sources (in Spanish)", helpful: "Was this helpful?", yes: "👍 Yes", no: "👎 No", thanks: "Thank you.",
-      error: "Could not answer: {e}. If this is the first question in a while, the server may be starting; please try again.",
+      error: "Could not answer: {e}. If this is the first question in a while, the server may be starting. Please try again.",
       about: `<h2>What this is</h2>
         <p>A personal, independent experiment: testing whether an assistant can answer questions about procedures using only official sources, and citing them. It grew out of the idea of improving the Webchat 060, but it has no connection with the Spanish administration or the 060 service.</p>
         <h2>Where answers come from</h2>
-        <p>Only from these six guides of Spain's ${PAG} (in Spanish), captured on 8 November 2026. If a guide has changed since, an answer may be out of date.</p>
-        <ul>${GUIDES}</ul>
-        <p>The guides themselves do not always agree: one explains Cl@ve Firma and another says Cl@ve cannot sign. The assistant tries to point this out, but does not always manage to.</p>
+        <p>It knows 147 of the 606 pages that Spain's ${PAG} lists in its site map (in Spanish), as they were on 9 November 2026: those on public information services, procedures, public employment, grants and easy reading. It does not include the sections on the European Union or on how the State is organised, nor the procedures search. It does not search the internet. If a page has changed since, an answer may be out of date.</p>
+        <ul>${sectionList("pages")}</ul>
+        <p>The pages themselves do not always agree: one explains Cl@ve Firma and another says Cl@ve cannot sign. The assistant tries to point this out, but does not always manage to.</p>
         <h2>How it answers</h2>
-        <p>Each question is sent, together with the six full guides, to GPT-6 Luna on Microsoft Azure, within the European Union. It must cite the passage it uses; if it cites none, or the guides do not cover the topic, it says it does not have enough information. It does not look up your data or carry out procedures for you.</p>
+        <p>For each question, the 10 passages of those pages most related to it are found and sent with the question to GPT-6 Luna on Microsoft Azure, within the European Union. It must cite the passage it uses. If it cites none, or those passages do not cover the topic, it says it does not have enough information. If the search misses the right passage, it may say so even though some page does explain it. It does not look up your data or carry out procedures for you.</p>
         <h2>What it does not cover</h2>
-        <p>Benefits, grants, taxes or the specific procedures of each body (for example, how to claim unemployment benefit). For those, check that body's website or the official help channels, such as the 060.</p>
+        <p>Benefits, grants, taxes or the specific procedures of each body (for example, how to claim unemployment benefit): the ${PAG} links to their websites but does not explain them. For those, check that body's website or the official help channels, such as the 060.</p>
         <h2>How it is evaluated</h2>
-        <p>With 32 questions written before reading the guides and a judge model that checks whether each answer is correct and whether everything it says is in its sources. <a href="evaluation.html?lang=en">See the results and every answer</a>.</p>
+        <p>With 32 questions written before reading the pages and a judge model that checks whether each answer is correct and whether everything it says is in its sources, and with 34 attacks (hidden instructions, fake citations, false premises) it must resist. <a href="evaluation.html?lang=en">See the results and every answer</a>.</p>
         <h2>Privacy</h2>
         <p><strong>Controller:</strong> muoten, as a private individual (this is not a government service). Contact: <a href="mailto:nw8bm9p6f@mozmail.com">nw8bm9p6f@mozmail.com</a>.</p>
-        <p><strong>What is stored:</strong> the text of each question, whether it was answered, which guides it cited, how long it took and your rating (👍/👎). Before storing, ID numbers, phone numbers, e-mail addresses, IBANs and long numbers are removed. The removal is automatic and does not catch everything: names, addresses or health details you type would be stored. Your IP address and any identifier of yours are not stored, and the page uses no cookies (it only remembers the language you chose, in your browser).</p>
+        <p><strong>What is stored:</strong> the text of each question, whether it was answered, which pages it cited, how long it took and your rating (👍/👎). Before storing, ID numbers, phone numbers, e-mail addresses, IBANs and long numbers are removed. The removal is automatic and does not catch everything: names, addresses or health details you type would be stored. Your IP address and any identifier of yours are not stored, and the page uses no cookies (it only remembers the language you chose, in your browser).</p>
         <p><strong>If you do not want it stored,</strong> tick “Do not store my question” before sending: you get the same answer and nothing is kept.</p>
         <p><strong>Why:</strong> to find the questions the assistant cannot answer and improve it. The basis is the legitimate interest in improving a free service, limited to text without identifiers and with the option not to store it.</p>
-        <p><strong>For how long:</strong> 30 days; then it is deleted automatically.</p>
+        <p><strong>For how long:</strong> 30 days. Then it is deleted automatically.</p>
         <p><strong>Who else is involved:</strong> Microsoft Azure hosts the server and the log in the EU (Ireland) and processes questions with GPT-6 Luna in European Union countries. According to Microsoft, it does not use them to train models or share them with OpenAI. Its abuse monitoring reviews them automatically and, if it detects possible abuse, may keep a sample for review by Microsoft staff in the European Economic Area. The page is served by GitHub Pages, which keeps its own access logs.</p>
         <p><strong>Your rights:</strong> since nothing that identifies you is stored, a question can only be found if you give its exact text and the day. With that you can ask for it to be deleted. You can also complain to the Spanish Data Protection Agency (AEPD).</p>
         <h2>Author</h2>
         <p>Made by <a href="https://muoten.github.io/">muoten</a>. It follows the approach of <a href="https://muoten.github.io/rag-against-the-machine.html">RAG against the machine</a>.</p>`,
-      footer: 'Source: guides from <a href="https://administracion.gob.es/">administracion.gob.es</a>, captured on 8 November 2026. Questions are processed with GPT-6 Luna in Microsoft data centres in the EU and kept for 30 days, without connection data, unless you ask otherwise. More details under “About”.',
+      footer: 'Source: pages from <a href="https://administracion.gob.es/">administracion.gob.es</a>, captured on 9 November 2026. Questions are processed with GPT-6 Luna in Microsoft data centres in the EU and kept for 30 days, without connection data, unless you ask otherwise. More details under “About”.',
     },
   };
   const out = document.getElementById("out"), q = document.getElementById("q"), send = document.getElementById("send");
