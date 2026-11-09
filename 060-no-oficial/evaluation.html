@@ -43,14 +43,19 @@
   summary { cursor: pointer; display: flex; gap: 8px; align-items: baseline; flex-wrap: wrap; }
   summary .q { flex: 1; min-width: 200px; }
   dl { margin: 10px 0 0; } dt { font-weight: 600; font-size: .85rem; color: var(--muted); margin-top: 8px; }
-  dd { margin: 2px 0 0; white-space: pre-wrap; }
+  dd { margin: 2px 0 0; white-space: pre-wrap; overflow-wrap: anywhere; }
   ul { padding-left: 20px; }
   details.passage { background: transparent; border: 0; padding: 0; margin: 2px 0; }
   details.passage div { font-size: .9rem; }
   .reason { font-style: italic; }
   .note { border-left: 3px solid var(--accent); padding-left: 8px; }
+  .table-wrap { overflow-x: auto; }
   table.history { border-collapse: collapse; font-size: .9rem; width: 100%; }
   .history th, .history td { border-bottom: 1px solid var(--line); padding: 6px 8px; text-align: center; }
+  @media (max-width: 480px) {
+    table.history { font-size: .78rem; }
+    .history th, .history td { padding: 5px 3px; }
+  }
   .history tr > th:first-child { text-align: left; }
 </style>
 </head>
@@ -95,7 +100,7 @@
       limitsTitle: "Límites de esta evaluación",
       limits: `<ul>
         <li><strong>El juez es el mismo modelo que responde</strong>, así que puede ser indulgente con sus propios errores. Por eso las respuestas se publican enteras: se pueden leer, no solo contar.</li>
-        <li>Son ${DATA.questions.length} preguntas escritas por una persona, no preguntas reales. Las reales se irán incorporando.</li>
+        <li>Son ${DATA.questions.length} preguntas y solo una es real: las demás las escribió una persona. Las reales se irán incorporando.</li>
         <li>Solo cubre ${DATA.guides} páginas del PAG: no mide prestaciones, ayudas ni trámites concretos de cada organismo.</li>
         <li>La búsqueda de los 10 fragmentos se ha medido con estas mismas preguntas. Con preguntas muy coloquiales encuentra el fragmento adecuado con menos frecuencia.</li>
       </ul>`,
@@ -132,7 +137,7 @@
       limitsTitle: "Limits of this evaluation",
       limits: `<ul>
         <li><strong>The judge is the same model that answers</strong>, so it may be lenient with its own mistakes. That is why the answers are published in full: they can be read, not just counted.</li>
-        <li>These are ${DATA.questions.length} questions written by one person, not real ones. Real questions will be added.</li>
+        <li>Only one of the ${DATA.questions.length} questions is real: one person wrote the rest. Real questions will be added.</li>
         <li>It covers ${DATA.guides} PAG pages only: it does not measure benefits, grants or each body's specific procedures.</li>
         <li>The search for the 10 passages was measured with these same questions. With very colloquial questions it finds the right passage less often.</li>
       </ul>`,
@@ -180,7 +185,8 @@
         el("tr", {}, [el("th"), ...OUTCOMES.map(o => el("th", {className: o, textContent: t(o)[0]}))]),
         ...[["before", DATA.previous], ["now", DATA.counts]].map(([key, counts]) =>
           el("tr", {}, [el("th", {textContent: t(key)}), ...OUTCOMES.map(o => el("td", {textContent: counts[o]}))]))]);
-      history.append(el("h2", {textContent: t("historyTitle")}), el("p", {textContent: t("historyText")}), table);
+      history.append(el("h2", {textContent: t("historyTitle")}), el("p", {textContent: t("historyText")}),
+                     el("div", {className: "table-wrap"}, [table]));
     }
     const security = document.getElementById("security");
     security.replaceChildren();
