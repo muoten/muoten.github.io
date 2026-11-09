@@ -38,7 +38,10 @@
           background: var(--surface); border: 1px solid var(--line); border-radius: 8px; }
   button { padding: 12px 18px; font: inherit; border: 0; border-radius: 8px; cursor: pointer;
            background: var(--accent); color: var(--accent-ink); }
-  button:disabled { opacity: .6; cursor: wait; }
+  button:disabled { opacity: .6; cursor: default; }
+  /* Only the ask button waits; rated feedback buttons are simply done. */
+  #send:disabled { cursor: progress; }
+  .feedback button[aria-pressed="true"] { opacity: 1; outline: 2px solid var(--accent); }
   .examples { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0 24px; }
   .examples button { background: var(--surface); color: var(--ink); border: 1px solid var(--line);
                      padding: 6px 10px; font-size: .9rem; text-align: left; }
@@ -57,6 +60,7 @@
   .server.ready .dot { background: #2f9e5b; }
   .server.waking .dot { background: var(--accent); animation: pulse 1.2s ease-in-out infinite; }
   .server.down .dot { background: #c0392b; }
+  .server.asleep .dot { background: var(--muted); }
   .waiting { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 16px; }
   .waiting .row { display: flex; align-items: center; gap: 12px; }
   .waiting .elapsed { margin-left: auto; color: var(--muted); font-variant-numeric: tabular-nums; }
@@ -129,6 +133,7 @@
       timeout: "No ha llegado respuesta en 90 segundos. Puede que el servidor esté arrancando o muy ocupado.",
       serverWaking: s => s > 0 ? `Arrancando el servidor… listo en ~${s} s` : "Arrancando el servidor… tarda más de lo normal",
       serverRetry: "El servidor no responde. Reintentando…", serverReady: "Listo para responder", serverDown: "El servidor no responde ahora mismo",
+      serverAsleep: "En reposo: la próxima respuesta tardará unos 30 s",
       refused: 'Las páginas incluidas no parecen cubrir esta pregunta. Puedes consultarla llamando al <a href="https://administracion.gob.es/informacion/formas-recibir-orientacion/canales-atencion/060" target="_blank" rel="noopener">060</a>, por el <a href="https://administracion.gob.es/informacion/formas-recibir-orientacion/canales-atencion/buzon" target="_blank" rel="noopener">buzón de atención</a> o en una <a href="https://administracion.gob.es/informacion/buscador-de-oficinas/oficinas-de-informacion-y-atencion-a-la-ciudadania/oficinas-informacion-administracion-general-estado" target="_blank" rel="noopener">oficina de información</a>.',
       refusal: "No tengo información suficiente para responder.",
       sources: "Fuentes", helpful: "¿Te ha servido?", yes: "👍 Sí", no: "👎 No", thanks: "Gracias.",
@@ -175,6 +180,7 @@
       timeout: "No answer arrived within 90 seconds. The server may be starting or very busy.",
       serverWaking: s => s > 0 ? `Starting the server… ready in ~${s} s` : "Starting the server… taking longer than usual",
       serverRetry: "The server is not responding. Retrying…", serverReady: "Ready to answer", serverDown: "The server is not responding right now",
+      serverAsleep: "Idle: the next answer will take about 30 s",
       refused: 'The pages included do not seem to cover this question. You can ask it by calling <a href="https://administracion.gob.es/informacion/formas-recibir-orientacion/canales-atencion/060" target="_blank" rel="noopener">060</a>, through the <a href="https://administracion.gob.es/informacion/formas-recibir-orientacion/canales-atencion/buzon" target="_blank" rel="noopener">help mailbox</a> or at an <a href="https://administracion.gob.es/informacion/buscador-de-oficinas/oficinas-de-informacion-y-atencion-a-la-ciudadania/oficinas-informacion-administracion-general-estado" target="_blank" rel="noopener">information office</a> (in Spanish).',
       refusal: "I don't have enough information to answer.",
       sources: "Sources (in Spanish)", helpful: "Was this helpful?", yes: "👍 Yes", no: "👎 No", thanks: "Thank you.",
@@ -236,6 +242,8 @@
     if (!question) return;
     send.disabled = true;
     send.textContent = t("asking");
+    // A server gone idle starts again with this question: its countdown starts now.
+    if (server === "asleep") startWaking();
     // A cold server shows its wait from the first second; a warm one only if it drags.
     const cold = server !== "ready";
     const label = el("span", {textContent: cold ? t("waking") : t("thinking")});
@@ -259,6 +267,7 @@
     try {
       const res = await fetch(API + "/ask", {method: "POST", headers: {"Content-Type": "application/json"},
                                              body: JSON.stringify({question, store: !document.getElementById("nostore").checked}), signal: abort.signal});
+      lastContact = Date.now();
       setServer("ready");
       const body = await res.json();
       if (!res.ok) throw new Error(body.detail || "Error " + res.status);
@@ -296,8 +305,9 @@
         box.append(list);
       }
       const thanks = el("span");
-      const rate = helpful => async () => {
+      const rate = helpful => async event => {
         for (const b of box.querySelectorAll(".feedback button")) b.disabled = true;
+        event.currentTarget.setAttribute("aria-pressed", "true");
         thanks.textContent = t("thanks");
         try {
           await fetch(API + "/feedback", {method: "POST", headers: {"Content-Type": "application/json"},
@@ -335,11 +345,16 @@
     render();
   });
   document.getElementById("ask").addEventListener("submit", e => { e.preventDefault(); ask(q.value.trim()); });
-  // Wake the API while the visitor reads and types: after a quiet spell it takes ~25 s
+  // Wake the API while the visitor reads and types: after a quiet spell it takes ~30 s
   // to start, so the page says so before anyone asks.
-  // Measured cold start: about 25 s from the first request to a ready container.
-  const COLD_START_S = 25, RETRY_S = 5, GIVE_UP_S = 120;
-  let server = "waking", wakeStarted = Date.now(), retrying = false;
+  // Measured cold start on 9 November: about 30 s from the first request to an answer.
+  const COLD_START_S = 30, RETRY_S = 5, GIVE_UP_S = 120;
+  // The container scales to zero about 5 minutes after its last request. The page
+  // does not poll to keep it awake (that would keep paying for it while a tab is
+  // open); it says the server is idle a little before then, and wakes it when the
+  // visitor starts typing.
+  const ASLEEP_AFTER_S = 270;
+  let server = "waking", wakeStarted = Date.now(), retrying = false, lastContact = 0;
   const wakeElapsed = () => Math.round((Date.now() - wakeStarted) / 1000);
   const wakeRemaining = () => Math.max(0, COLD_START_S - wakeElapsed());
   function setServer(state) {
@@ -348,21 +363,31 @@
   }
   function paintServer() {
     const label = server === "waking" ? (retrying ? t("serverRetry") : t("serverWaking")(wakeRemaining()))
-      : t({ready: "serverReady", down: "serverDown"}[server]);
+      : t({ready: "serverReady", down: "serverDown", asleep: "serverAsleep"}[server]);
     document.getElementById("server").className = `server ${server}`;
     document.getElementById("server-text").textContent =
       server === "waking" && wakeRemaining() === 0 && !retrying ? `${label} (${wakeElapsed()} s)` : label;
   }
-  // The countdown repaints every second while the server is starting.
-  const countdown = setInterval(() => { if (server === "waking") paintServer(); else clearInterval(countdown); }, 1000);
+  // Every second: repaint the countdown while starting, and notice when it has gone idle.
+  setInterval(() => {
+    if (server === "waking") paintServer();
+    else if (server === "ready" && Date.now() - lastContact > ASLEEP_AFTER_S * 1000) setServer("asleep");
+  }, 1000);
+  function startWaking() {
+    wakeStarted = Date.now();
+    retrying = false;
+    setServer("waking");
+    wake();
+  }
+  q.addEventListener("input", () => { if (server === "asleep") startWaking(); });
   // One request wakes the container; if it fails, try again every few seconds.
   function wake() {
     const attempt = new AbortController();
     setTimeout(() => attempt.abort(), 60000);
     fetch(API + "/health", {signal: attempt.signal})
-      .then(res => { if (!res.ok) throw new Error(res.status); setServer("ready"); })
+      .then(res => { if (!res.ok) throw new Error(res.status); lastContact = Date.now(); setServer("ready"); })
       .catch(() => {
-        if (server === "ready") return;
+        if (server !== "waking") return;
         if (wakeElapsed() >= GIVE_UP_S) { setServer("down"); return; }
         retrying = true; paintServer();
         setTimeout(() => { retrying = false; wake(); }, RETRY_S * 1000);
