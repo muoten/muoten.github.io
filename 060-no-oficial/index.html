@@ -142,7 +142,7 @@
         <h2>Qué no cubre</h2>
         <p>Prestaciones, ayudas, impuestos o trámites concretos de cada organismo (por ejemplo, cómo pedir el paro): el ${PAG} enlaza a sus sedes, pero no los explica. Para eso, consulta la sede del organismo o los canales oficiales de atención, como el 060.</p>
         <h2>Cómo se evalúa</h2>
-        <p>Con 32 preguntas escritas antes de leer las páginas y un modelo juez que comprueba si cada respuesta es correcta y si todo lo que dice está en sus fuentes, y con 34 ataques (instrucciones escondidas, citas falsas, premisas falsas) que debe resistir. <a href="evaluation.html">Ver los resultados y todas las respuestas</a>.</p>
+        <p>Con 33 preguntas (32 escritas antes de leer las páginas y una real, hecha en la demo) y un modelo juez que comprueba si cada respuesta es correcta y si todo lo que dice está en sus fuentes, y con 34 ataques (instrucciones escondidas, citas falsas, premisas falsas) que debe resistir. <a href="evaluation.html">Ver los resultados y todas las respuestas</a>.</p>
         <h2>Privacidad</h2>
         <p><strong>Responsable:</strong> muoten, a título personal (no es un servicio de la Administración). Contacto: <a href="mailto:nw8bm9p6f@mozmail.com">nw8bm9p6f@mozmail.com</a>.</p>
         <p><strong>Qué se guarda:</strong> el texto de cada pregunta, si se respondió, qué páginas citó, cuánto tardó y tu valoración (👍/👎). Antes de guardarla se borran DNI, NIE, teléfonos, correos, IBAN y números largos. El borrado es automático y no detecta todo: nombres, direcciones o datos de salud que escribas quedarían guardados. No se guarda tu IP ni ningún identificador tuyo, y la página no usa cookies (solo recuerda en tu navegador el idioma elegido).</p>
@@ -188,7 +188,7 @@
         <h2>What it does not cover</h2>
         <p>Benefits, grants, taxes or the specific procedures of each body (for example, how to claim unemployment benefit): the ${PAG} links to their websites but does not explain them. For those, check that body's website or the official help channels, such as the 060.</p>
         <h2>How it is evaluated</h2>
-        <p>With 32 questions written before reading the pages and a judge model that checks whether each answer is correct and whether everything it says is in its sources, and with 34 attacks (hidden instructions, fake citations, false premises) it must resist. <a href="evaluation.html?lang=en">See the results and every answer</a>.</p>
+        <p>With 33 questions (32 written before reading the pages and one real, asked on the demo) and a judge model that checks whether each answer is correct and whether everything it says is in its sources, and with 34 attacks (hidden instructions, fake citations, false premises) it must resist. <a href="evaluation.html?lang=en">See the results and every answer</a>.</p>
         <h2>Privacy</h2>
         <p><strong>Controller:</strong> muoten, as a private individual (this is not a government service). Contact: <a href="mailto:nw8bm9p6f@mozmail.com">nw8bm9p6f@mozmail.com</a>.</p>
         <p><strong>What is stored:</strong> the text of each question, whether it was answered, which pages it cited, how long it took and your rating (👍/👎). Before storing, ID numbers, phone numbers, e-mail addresses, IBANs and long numbers are removed. The removal is automatic and does not catch everything: names, addresses or health details you type would be stored. Your IP address and any identifier of yours are not stored, and the page uses no cookies (it only remembers the language you chose, in your browser).</p>
@@ -276,7 +276,15 @@
           const marks = g.passages.map(s => `[${s.n}]`).join("");
           list.append(el("details", {}, [
             el("summary", {}, [`${marks} `, el("a", {href: url, target: "_blank", rel: "noopener", textContent: g.title})]),
-            ...g.passages.map(s => el("div", {textContent: `[${s.n}] ${s.text}`}))]));
+            ...g.passages.map(s => {
+              // A passage starts with its heading path, which repeats the page title above:
+              // show only the section below it, as a label.
+              const [head, ...body] = s.text.split("\n");
+              const own = head.startsWith(g.title);
+              const section = own ? head.slice(g.title.length).replace(/^\s*>\s*/, "") : "";
+              return el("div", {}, [`[${s.n}] `, ...(section ? [el("em", {textContent: section}), "\n"] : []),
+                                    own ? body.join("\n") : s.text]);
+            })]));
         }
         box.append(list);
       }
