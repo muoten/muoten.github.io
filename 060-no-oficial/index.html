@@ -136,6 +136,7 @@
       serverAsleep: "En reposo: la próxima respuesta tardará unos 30 s",
       refused: 'Las páginas incluidas no parecen cubrir esta pregunta. Puedes consultarla llamando al <a href="https://administracion.gob.es/informacion/formas-recibir-orientacion/canales-atencion/060" target="_blank" rel="noopener">060</a>, por el <a href="https://administracion.gob.es/informacion/formas-recibir-orientacion/canales-atencion/buzon" target="_blank" rel="noopener">buzón de atención</a> o en una <a href="https://administracion.gob.es/informacion/buscador-de-oficinas/oficinas-de-informacion-y-atencion-a-la-ciudadania/oficinas-informacion-administracion-general-estado" target="_blank" rel="noopener">oficina de información</a>.',
       refusal: "No tengo información suficiente para responder.",
+      caseNote: c => `Esta respuesta solo se apoya en información para un caso particular (${c}). Si no es tu caso, puedes preguntar llamando al <a href="https://administracion.gob.es/informacion/formas-recibir-orientacion/canales-atencion/060" target="_blank" rel="noopener">060</a>, por el <a href="https://administracion.gob.es/informacion/formas-recibir-orientacion/canales-atencion/buzon" target="_blank" rel="noopener">buzón de atención</a> o en una <a href="https://administracion.gob.es/informacion/buscador-de-oficinas/oficinas-de-informacion-y-atencion-a-la-ciudadania/oficinas-informacion-administracion-general-estado" target="_blank" rel="noopener">oficina de información</a>.`,
       sources: "Fuentes", helpful: "¿Te ha servido?", yes: "👍 Sí", no: "👎 No", thanks: "Gracias.",
       error: "No se ha podido responder: {e}. Si es la primera pregunta en un rato, el servidor puede estar arrancando. Inténtalo de nuevo.",
       about: `<h2>Qué es</h2>
@@ -183,6 +184,7 @@
       serverAsleep: "Idle: the next answer will take about 30 s",
       refused: 'The pages included do not seem to cover this question. You can ask it by calling <a href="https://administracion.gob.es/informacion/formas-recibir-orientacion/canales-atencion/060" target="_blank" rel="noopener">060</a>, through the <a href="https://administracion.gob.es/informacion/formas-recibir-orientacion/canales-atencion/buzon" target="_blank" rel="noopener">help mailbox</a> or at an <a href="https://administracion.gob.es/informacion/buscador-de-oficinas/oficinas-de-informacion-y-atencion-a-la-ciudadania/oficinas-informacion-administracion-general-estado" target="_blank" rel="noopener">information office</a> (in Spanish).',
       refusal: "I don't have enough information to answer.",
+      caseNote: c => `This answer only rests on information for a particular case (${c}). If that is not your case, you can ask by calling <a href="https://administracion.gob.es/informacion/formas-recibir-orientacion/canales-atencion/060" target="_blank" rel="noopener">060</a>, through the <a href="https://administracion.gob.es/informacion/formas-recibir-orientacion/canales-atencion/buzon" target="_blank" rel="noopener">help mailbox</a> or at an <a href="https://administracion.gob.es/informacion/buscador-de-oficinas/oficinas-de-informacion-y-atencion-a-la-ciudadania/oficinas-informacion-administracion-general-estado" target="_blank" rel="noopener">information office</a> (in Spanish).`,
       sources: "Sources (in Spanish)", helpful: "Was this helpful?", yes: "👍 Yes", no: "👎 No", thanks: "Thank you.",
       error: "Could not answer: {e}. If this is the first question in a while, the server may be starting. Please try again.",
       about: `<h2>What this is</h2>
@@ -303,6 +305,12 @@
             el("li", {}, [el("a", {href: l.url, target: "_blank", rel: "noopener", textContent: l.label})]))));
         }
         box.append(list);
+        // Every source is about one particular case (the DANA, say): point elsewhere too.
+        const cases = [...new Set(body.sources.map(s => s.case))];
+        if (cases.length === 1 && cases[0]) {
+          const safe = cases[0].replace(/[&<>"']/g, ch => `&#${ch.charCodeAt(0)};`);
+          box.append(el("p", {className: "meta", innerHTML: t("caseNote")(safe)}));
+        }
       }
       const thanks = el("span");
       const rate = helpful => async event => {
