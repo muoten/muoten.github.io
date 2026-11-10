@@ -366,6 +366,11 @@
     // A newer question wins: answers that arrive for an older one are dropped.
     const mine = ++turn;
     const store = !document.getElementById("nostore").checked;
+    // The address bar carries the question, so copying it shares it; not when the
+    // visitor asked not to keep it, as the address stays in the browser's history.
+    const here = new URL(location.href);
+    if (store) here.searchParams.set("q", question); else here.searchParams.delete("q");
+    history.replaceState(null, "", here);
     send.disabled = true;
     send.textContent = t("asking");
     // A server gone idle starts again with this question: its countdown starts now.
@@ -433,8 +438,7 @@
     render();
   });
   document.getElementById("ask").addEventListener("submit", e => { e.preventDefault(); ask(q.value.trim()); });
-  // A shared link fills the question in; it is answered only when the visitor asks,
-  // so a link opened by a bot or a preview costs nothing.
+  // A shared link fills the question in and asks it (see the end of the script).
   const shared = new URLSearchParams(location.search).get("q");
   if (shared) q.value = shared.slice(0, Number(q.maxLength) > 0 ? Number(q.maxLength) : 500);
 
@@ -497,6 +501,15 @@
   render();
   setServer("waking");
   wake();
+  // A shared link asks its question, but not for an automated browser (a crawler
+  // rendering the page) and not until the tab is in view, so a link opened in the
+  // background costs nothing until someone looks at it. Link previews run no script.
+  if (shared && !navigator.webdriver) {
+    const go = () => { if (document.visibilityState !== "visible") return;
+                       document.removeEventListener("visibilitychange", go); ask(q.value.trim()); };
+    document.addEventListener("visibilitychange", go);
+    go();
+  }
 </script>
 </body>
 </html>
