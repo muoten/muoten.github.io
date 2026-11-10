@@ -77,6 +77,11 @@
   .storage { font-size: .85rem; color: var(--muted); margin-top: 2px !important; }
   .feedback { display: flex; align-items: center; gap: 8px; margin-top: 12px; font-size: .9rem; color: var(--muted); }
   .feedback button { background: var(--surface); color: var(--ink); border: 1px solid var(--line); padding: 4px 10px; }
+  .further { margin-top: 16px; }
+  .further-title { font-size: 1rem; margin: 20px 0 8px; }
+  ul.go { list-style: none; margin: 4px 0 8px; padding: 0; display: grid; gap: 6px; }
+  ul.go a { display: inline-block; font-weight: 600; overflow-wrap: anywhere; }
+  ul.go .host { color: var(--muted); font-size: .85rem; }
 </style>
 </head>
 <body>
@@ -138,22 +143,27 @@
       refusal: "No tengo información suficiente para responder.",
       caseNote: c => `Esta respuesta solo se apoya en información para un caso particular (${c}). Si no es tu caso, puedes preguntar llamando al <a href="https://administracion.gob.es/informacion/formas-recibir-orientacion/canales-atencion/060" target="_blank" rel="noopener">060</a>, por el <a href="https://administracion.gob.es/informacion/formas-recibir-orientacion/canales-atencion/buzon" target="_blank" rel="noopener">buzón de atención</a> o en una <a href="https://administracion.gob.es/informacion/buscador-de-oficinas/oficinas-de-informacion-y-atencion-a-la-ciudadania/oficinas-informacion-administracion-general-estado" target="_blank" rel="noopener">oficina de información</a>.`,
       sources: "Fuentes", helpful: "¿Te ha servido?", yes: "👍 Sí", no: "👎 No", thanks: "Gracias.",
+      lookingCatalogue: "Las guías del Punto de Acceso General no lo explican del todo. Buscando en el catálogo oficial de trámites…",
+      catalogueTitle: "En el catálogo oficial de trámites:", records: "Fichas del catálogo",
+      goTo: "Ir al trámite: ", siteHome: h => `Web del organismo: ${h}`, noDirect: "(la ficha no enlaza al trámite concreto)",
+      catalogueError: "No se ha podido consultar el catálogo de trámites.",
       error: "No se ha podido responder: {e}. Si es la primera pregunta en un rato, el servidor puede estar arrancando. Inténtalo de nuevo.",
       about: `<h2>Qué es</h2>
         <p>Un experimento personal e independiente: probar si un asistente puede resolver dudas de trámites respondiendo solo con fuentes oficiales y citándolas. Nace de la idea de mejorar el Webchat 060, pero no tiene relación con la Administración ni con el servicio 060.</p>
         <h2>De dónde salen las respuestas</h2>
-        <p>Conoce 147 de las 606 páginas que el ${PAG} incluye en su mapa web, tal como estaban el 9 de noviembre de 2026: las de atención a la ciudadanía, trámites, empleo público, ayudas y lectura fácil. No incluye las secciones sobre la Unión Europea ni sobre la organización del Estado, ni el buscador de trámites. No busca en internet. Si alguna página ha cambiado después, la respuesta puede no estar al día.</p>
+        <p>Conoce 147 de las 606 páginas que el ${PAG} incluye en su mapa web, tal como estaban el 9 de noviembre de 2026: las de atención a la ciudadanía, trámites, empleo público, ayudas y lectura fácil. No incluye las secciones sobre la Unión Europea ni sobre la organización del Estado. No busca en internet. Si alguna página ha cambiado después, la respuesta puede no estar al día.</p>
         <ul>${sectionList("páginas")}</ul>
+        <p>Si esas páginas no lo explican del todo, busca también en el catálogo oficial de procedimientos de la Administración General del Estado: 8.000 fichas, exportadas el 8 de noviembre de 2026, que dicen qué trámite es, de qué ministerio depende y cómo se hace, con su enlace. No incluye los trámites de comunidades autónomas ni de ayuntamientos.</p>
         <p>Las propias páginas no siempre coinciden: una explica Cl@ve Firma y otra dice que Cl@ve no permite firmar. El asistente intenta avisar cuando ocurre, pero no siempre lo consigue.</p>
         <h2>Cómo responde</h2>
-        <p>Para cada pregunta se buscan los 10 fragmentos de esas páginas más relacionados con ella, y se envían con la pregunta a GPT-6 Luna en Microsoft Azure, dentro de la Unión Europea. Debe citar el fragmento que usa. Si no lo cita, o si esos fragmentos no tratan el tema, contesta que no tiene información suficiente. Si la búsqueda no da con el fragmento adecuado, puede contestar eso aunque alguna página sí lo explique. No consulta tus datos ni hace trámites por ti.</p>
+        <p>Para cada pregunta se buscan los 10 fragmentos de esas páginas más relacionados con ella, y se envían con la pregunta a GPT-6 Luna en Microsoft Azure, dentro de la Unión Europea. Debe citar el fragmento que usa. Si no lo cita, o si esos fragmentos no tratan el tema, contesta que no tiene información suficiente. Si la búsqueda no da con el fragmento adecuado, puede contestar eso aunque alguna página sí lo explique. Cuando busca en el catálogo, envía las 5 fichas más relacionadas en una segunda consulta, que tarda unos segundos más, y solo muestra la respuesta si alguna ficha es el trámite que buscas. No consulta tus datos ni hace trámites por ti.</p>
         <h2>Qué no cubre</h2>
-        <p>Prestaciones, ayudas, impuestos o trámites concretos de cada organismo (por ejemplo, cómo pedir el paro): el ${PAG} enlaza a sus sedes, pero no los explica. Para eso, consulta la sede del organismo o los canales oficiales de atención, como el 060.</p>
+        <p>Los pasos, requisitos y plazos de cada trámite concreto (por ejemplo, cómo pedir el paro): las páginas enlazan a la sede de cada organismo, y el catálogo dice qué trámite es y dónde se hace, pero no los explican. Para eso, consulta la sede del organismo o los canales oficiales de atención, como el 060.</p>
         <h2>Cómo se evalúa</h2>
-        <p>Con 33 preguntas (32 escritas antes de leer las páginas y una real, hecha en la demo) y un modelo juez que comprueba si cada respuesta es correcta y si todo lo que dice está en sus fuentes, y con 34 ataques (instrucciones escondidas, citas falsas, premisas falsas) que debe resistir. <a href="evaluation.html">Ver los resultados y todas las respuestas</a>.</p>
+        <p>Con 33 preguntas (32 escritas antes de leer las páginas y una real, hecha en la demo) y un modelo juez que comprueba si cada respuesta es correcta y si todo lo que dice está en sus fuentes, y con 34 ataques (instrucciones escondidas, citas falsas, premisas falsas) que debe resistir. La búsqueda en el catálogo se evalúa aparte, con 14 preguntas que las páginas no responden y los mismos 34 ataques. <a href="evaluation.html">Ver los resultados y todas las respuestas</a>.</p>
         <h2>Privacidad</h2>
         <p><strong>Responsable:</strong> muoten, a título personal (no es un servicio de la Administración). Contacto: <a href="mailto:nw8bm9p6f@mozmail.com">nw8bm9p6f@mozmail.com</a>.</p>
-        <p><strong>Qué se guarda:</strong> el texto de cada pregunta, si se respondió, qué páginas citó, cuánto tardó y tu valoración (👍/👎). Antes de guardarla se borran DNI, NIE, teléfonos, correos, IBAN y números largos. El borrado es automático y no detecta todo: nombres, direcciones o datos de salud que escribas quedarían guardados. No se guarda tu IP ni ningún identificador tuyo, y la página no usa cookies (solo recuerda en tu navegador el idioma elegido).</p>
+        <p><strong>Qué se guarda:</strong> el texto de cada pregunta, si se respondió, qué páginas o fichas citó, cuánto tardó y tu valoración (👍/👎). Antes de guardarla se borran DNI, NIE, teléfonos, correos, IBAN y números largos. El borrado es automático y no detecta todo: nombres, direcciones o datos de salud que escribas quedarían guardados. No se guarda tu IP ni ningún identificador tuyo, y la página no usa cookies (solo recuerda en tu navegador el idioma elegido).</p>
         <p><strong>Si no quieres que se guarde,</strong> marca «No guardar mi pregunta» antes de enviarla: se responde igual y no queda registro.</p>
         <p><strong>Para qué y por qué:</strong> para encontrar las dudas que el asistente no resuelve y mejorarlo. La base es el interés legítimo en mejorar un servicio gratuito, limitado a texto sin identificadores y con la opción de no guardarlo.</p>
         <p><strong>Cuánto tiempo:</strong> 30 días. Después se borra automáticamente.</p>
@@ -161,7 +171,7 @@
         <p><strong>Tus derechos:</strong> como no se guarda nada que te identifique, solo podemos localizar una pregunta si nos indicas su texto exacto y el día. Con eso puedes pedir que se borre. También puedes reclamar ante la Agencia Española de Protección de Datos.</p>
         <h2>Autoría</h2>
         <p>Hecho por <a href="https://muoten.github.io/">muoten</a>. Sigue el enfoque de <a href="https://muoten.github.io/rag-against-the-machine.html">RAG against the machine</a>.</p>`,
-      footer: 'Fuente: páginas de <a href="https://administracion.gob.es/">administracion.gob.es</a>, capturadas el 9 de noviembre de 2026. Las preguntas se procesan con GPT-6 Luna en centros de datos de Microsoft en la UE y se guardan 30 días, sin datos de conexión, salvo que pidas lo contrario. Más detalles en «Acerca de».',
+      footer: 'Fuente: páginas de <a href="https://administracion.gob.es/">administracion.gob.es</a>, capturadas el 9 de noviembre de 2026, y su catálogo de procedimientos, exportado el 8 de noviembre. Las preguntas se procesan con GPT-6 Luna en centros de datos de Microsoft en la UE y se guardan 30 días, sin datos de conexión, salvo que pidas lo contrario. Más detalles en «Acerca de».',
     },
     en: {
       title: "Assistant for procedures with the Spanish public administration",
@@ -186,22 +196,27 @@
       refusal: "I don't have enough information to answer.",
       caseNote: c => `This answer only rests on information for a particular case (${c}). If that is not your case, you can ask by calling <a href="https://administracion.gob.es/informacion/formas-recibir-orientacion/canales-atencion/060" target="_blank" rel="noopener">060</a>, through the <a href="https://administracion.gob.es/informacion/formas-recibir-orientacion/canales-atencion/buzon" target="_blank" rel="noopener">help mailbox</a> or at an <a href="https://administracion.gob.es/informacion/buscador-de-oficinas/oficinas-de-informacion-y-atencion-a-la-ciudadania/oficinas-informacion-administracion-general-estado" target="_blank" rel="noopener">information office</a> (in Spanish).`,
       sources: "Sources (in Spanish)", helpful: "Was this helpful?", yes: "👍 Yes", no: "👎 No", thanks: "Thank you.",
+      lookingCatalogue: "The Punto de Acceso General guides do not fully explain this. Searching the official catalogue of procedures…",
+      catalogueTitle: "In the official catalogue of procedures:", records: "Catalogue records (in Spanish)",
+      goTo: "Go to the procedure: ", siteHome: h => `Website of the body: ${h}`, noDirect: "(the record does not link to the procedure itself)",
+      catalogueError: "The catalogue of procedures could not be searched.",
       error: "Could not answer: {e}. If this is the first question in a while, the server may be starting. Please try again.",
       about: `<h2>What this is</h2>
         <p>A personal, independent experiment: testing whether an assistant can answer questions about procedures using only official sources, and citing them. It grew out of the idea of improving the Webchat 060, but it has no connection with the Spanish administration or the 060 service.</p>
         <h2>Where answers come from</h2>
-        <p>It knows 147 of the 606 pages that Spain's ${PAG} lists in its site map (in Spanish), as they were on 9 November 2026: those on public information services, procedures, public employment, grants and easy reading. It does not include the sections on the European Union or on how the State is organised, nor the procedures search. It does not search the internet. If a page has changed since, an answer may be out of date.</p>
+        <p>It knows 147 of the 606 pages that Spain's ${PAG} lists in its site map (in Spanish), as they were on 9 November 2026: those on public information services, procedures, public employment, grants and easy reading. It does not include the sections on the European Union or on how the State is organised. It does not search the internet. If a page has changed since, an answer may be out of date.</p>
         <ul>${sectionList("pages")}</ul>
+        <p>If those pages do not fully explain something, it also searches the official catalogue of procedures of the State administration: 8,000 records, exported on 8 November 2026, that say which procedure it is, which ministry it belongs to and how it is done, with its link. It does not include the procedures of regions or town councils.</p>
         <p>The pages themselves do not always agree: one explains Cl@ve Firma and another says Cl@ve cannot sign. The assistant tries to point this out, but does not always manage to.</p>
         <h2>How it answers</h2>
-        <p>For each question, the 10 passages of those pages most related to it are found and sent with the question to GPT-6 Luna on Microsoft Azure, within the European Union. It must cite the passage it uses. If it cites none, or those passages do not cover the topic, it says it does not have enough information. If the search misses the right passage, it may say so even though some page does explain it. It does not look up your data or carry out procedures for you.</p>
+        <p>For each question, the 10 passages of those pages most related to it are found and sent with the question to GPT-6 Luna on Microsoft Azure, within the European Union. It must cite the passage it uses. If it cites none, or those passages do not cover the topic, it says it does not have enough information. If the search misses the right passage, it may say so even though some page does explain it. When it searches the catalogue, it sends the 5 most related records in a second request, which takes a few seconds more, and only shows the answer if one of them is the procedure you are looking for. It does not look up your data or carry out procedures for you.</p>
         <h2>What it does not cover</h2>
-        <p>Benefits, grants, taxes or the specific procedures of each body (for example, how to claim unemployment benefit): the ${PAG} links to their websites but does not explain them. For those, check that body's website or the official help channels, such as the 060.</p>
+        <p>The steps, requirements and deadlines of each specific procedure (for example, how to claim unemployment benefit): the pages link to each body's website, and the catalogue says which procedure it is and where it is done, but neither explains them. For those, check that body's website or the official help channels, such as the 060.</p>
         <h2>How it is evaluated</h2>
-        <p>With 33 questions (32 written before reading the pages and one real, asked on the demo) and a judge model that checks whether each answer is correct and whether everything it says is in its sources, and with 34 attacks (hidden instructions, fake citations, false premises) it must resist. <a href="evaluation.html?lang=en">See the results and every answer</a>.</p>
+        <p>With 33 questions (32 written before reading the pages and one real, asked on the demo) and a judge model that checks whether each answer is correct and whether everything it says is in its sources, and with 34 attacks (hidden instructions, fake citations, false premises) it must resist. The catalogue search is evaluated separately, with 14 questions the pages do not answer and the same 34 attacks. <a href="evaluation.html?lang=en">See the results and every answer</a>.</p>
         <h2>Privacy</h2>
         <p><strong>Controller:</strong> muoten, as a private individual (this is not a government service). Contact: <a href="mailto:nw8bm9p6f@mozmail.com">nw8bm9p6f@mozmail.com</a>.</p>
-        <p><strong>What is stored:</strong> the text of each question, whether it was answered, which pages it cited, how long it took and your rating (👍/👎). Before storing, ID numbers, phone numbers, e-mail addresses, IBANs and long numbers are removed. The removal is automatic and does not catch everything: names, addresses or health details you type would be stored. Your IP address and any identifier of yours are not stored, and the page uses no cookies (it only remembers the language you chose, in your browser).</p>
+        <p><strong>What is stored:</strong> the text of each question, whether it was answered, which pages or records it cited, how long it took and your rating (👍/👎). Before storing, ID numbers, phone numbers, e-mail addresses, IBANs and long numbers are removed. The removal is automatic and does not catch everything: names, addresses or health details you type would be stored. Your IP address and any identifier of yours are not stored, and the page uses no cookies (it only remembers the language you chose, in your browser).</p>
         <p><strong>If you do not want it stored,</strong> tick “Do not store my question” before sending: you get the same answer and nothing is kept.</p>
         <p><strong>Why:</strong> to find the questions the assistant cannot answer and improve it. The basis is the legitimate interest in improving a free service, limited to text without identifiers and with the option not to store it.</p>
         <p><strong>For how long:</strong> 30 days. Then it is deleted automatically.</p>
@@ -209,7 +224,7 @@
         <p><strong>Your rights:</strong> since nothing that identifies you is stored, a question can only be found if you give its exact text and the day. With that you can ask for it to be deleted. You can also complain to the Spanish Data Protection Agency (AEPD).</p>
         <h2>Author</h2>
         <p>Made by <a href="https://muoten.github.io/">muoten</a>. It follows the approach of <a href="https://muoten.github.io/rag-against-the-machine.html">RAG against the machine</a>.</p>`,
-      footer: 'Source: pages from <a href="https://administracion.gob.es/">administracion.gob.es</a>, captured on 9 November 2026. Questions are processed with GPT-6 Luna in Microsoft data centres in the EU and kept for 30 days, without connection data, unless you ask otherwise. More details under “About”.',
+      footer: 'Source: pages from <a href="https://administracion.gob.es/">administracion.gob.es</a>, captured on 9 November 2026, and its catalogue of procedures, exported on 8 November. Questions are processed with GPT-6 Luna in Microsoft data centres in the EU and kept for 30 days, without connection data, unless you ask otherwise. More details under “About”.',
     },
   };
   const out = document.getElementById("out"), q = document.getElementById("q"), send = document.getElementById("send");
@@ -219,11 +234,112 @@
     if (!TEXT[lang]) lang = (navigator.language || "es").toLowerCase().startsWith("es") ? "es" : "en";
   }
   const t = key => TEXT[lang][key];
+  let turn = 0;
 
   function el(tag, props = {}, children = []) {
     const node = Object.assign(document.createElement(tag), props);
     node.append(...children);
     return node;
+  }
+
+  // Catalogue answers mark procedure names in bold, as **name**; nothing else is markup.
+  function rich(text) {
+    return text.split(/\*\*(.+?)\*\*/s).map((part, i) => i % 2 ? el("strong", {textContent: part}) : part);
+  }
+
+  // One answer with its sources, notes and rating; the catalogue's cites records, not pages.
+  function answerBox(body, catalogue) {
+    // The service's refusal is in Spanish; show it in the page's language.
+    const box = el("div", {className: "answer"}, [el("p", {}, body.refused ? [t("refusal")] : rich(body.answer))]);
+    // What saves the visitor time: the page of each cited procedure, first and in view.
+    // A record that only links to a website's home page says so.
+    if (catalogue && !body.refused) {
+      const go = body.sources.filter(s => /^https?:/.test(s.url)).map(s => {
+        const u = new URL(s.url), home = u.pathname.replace(/\/+$/, "") === "" && !u.search;
+        const text = home ? t("siteHome")(u.hostname) : t("goTo") + s.title.replace(/\.$/, "");
+        return el("li", {}, [el("a", {href: s.url, target: "_blank", rel: "noopener", textContent: text}),
+                             " ", el("span", {className: "host", textContent: home ? t("noDirect") : `(${u.hostname})`})]);
+      });
+      if (go.length) box.append(el("ul", {className: "go"}, go));
+    }
+    if (body.refused) {
+      box.append(el("p", {className: "meta", innerHTML: t("refused")}));
+    } else if (body.sources.length) {
+      // One entry per guide, with the cited passages of that guide inside.
+      const guides = new Map();
+      for (const s of body.sources) {
+        if (!guides.has(s.url)) guides.set(s.url, {title: s.title, passages: []});
+        guides.get(s.url).passages.push(s);
+      }
+      const list = el("div", {className: "sources"}, [el("strong", {textContent: t(catalogue ? "records" : "sources")})]);
+      for (const [url, g] of guides) {
+        const marks = g.passages.map(s => `[${s.n}]`).join("");
+        list.append(el("details", {}, [
+          el("summary", {}, [`${marks} `, el("a", {href: url, target: "_blank", rel: "noopener", textContent: g.title})]),
+          ...g.passages.map(s => {
+            // A passage starts with its heading path, which repeats the page title above:
+            // show only the section below it, as a label. A record's is the catalogue's
+            // name and the ministry: the ministry is the label.
+            const [head, ...body] = s.text.split("\n");
+            const own = catalogue || head.startsWith(g.title);
+            const section = catalogue ? head.split(" > ").slice(1).join(" > ")
+              : own ? head.slice(g.title.length).replace(/^\s*>\s*/, "") : "";
+            return el("div", {}, [`[${s.n}] `, ...(section ? [el("em", {textContent: section}), "\n"] : []),
+                                  own ? body.join("\n") : s.text]);
+          })]));
+        // Where the cited passages point, visible without opening them.
+        const seen = new Set();
+        const links = g.passages.flatMap(s => s.links || []).filter(l => !seen.has(l.url) && seen.add(l.url)).slice(0, 5);
+        if (links.length) list.append(el("ul", {className: "links"}, links.map(l =>
+          el("li", {}, [el("a", {href: l.url, target: "_blank", rel: "noopener", textContent: l.label})]))));
+      }
+      box.append(list);
+      // Every source is about one particular case (the DANA, say): point elsewhere too.
+      const cases = [...new Set(body.sources.map(s => s.case))];
+      if (cases.length === 1 && cases[0]) {
+        const safe = cases[0].replace(/[&<>"']/g, ch => `&#${ch.charCodeAt(0)};`);
+        box.append(el("p", {className: "meta", innerHTML: t("caseNote")(safe)}));
+      }
+    }
+    const thanks = el("span");
+    const rate = helpful => async event => {
+      for (const b of box.querySelectorAll(".feedback button")) b.disabled = true;
+      event.currentTarget.setAttribute("aria-pressed", "true");
+      thanks.textContent = t("thanks");
+      try {
+        await fetch(API + "/feedback", {method: "POST", headers: {"Content-Type": "application/json"},
+                                        body: JSON.stringify({id: body.id, helpful})});
+      } catch (_) { /* feedback is optional */ }
+    };
+    box.append(el("div", {className: "feedback"}, [t("helpful"),
+      el("button", {type: "button", textContent: t("yes"), onclick: rate(true)}),
+      el("button", {type: "button", textContent: t("no"), onclick: rate(false)}), thanks]));
+    return box;
+  }
+
+  // The second step: the guides left the question open, so ask the catalogue, saying so
+  // while it looks. A refusal adds nothing; the first answer above stays as it was.
+  async function lookFurther(question, store, mine) {
+    const note = el("div", {className: "waiting further", role: "status"}, [el("div", {className: "row"}, [
+      el("span", {className: "dots", ariaHidden: "true"}, [el("span"), el("span"), el("span")]),
+      el("span", {textContent: t("lookingCatalogue")})])]);
+    out.append(note);
+    const abort = new AbortController();
+    const limit = setTimeout(() => abort.abort(), 90000);
+    try {
+      const res = await fetch(API + "/procedures", {method: "POST", headers: {"Content-Type": "application/json"},
+                                                    body: JSON.stringify({question, store}), signal: abort.signal});
+      const body = await res.json();
+      if (mine !== turn) return;
+      if (!res.ok) throw new Error(body.detail || "Error " + res.status);
+      if (body.refused) { note.remove(); return; }
+      note.replaceWith(el("section", {className: "further"}, [
+        el("h2", {className: "further-title", textContent: t("catalogueTitle")}), answerBox(body, true)]));
+    } catch (_) {
+      if (mine === turn) note.replaceChildren(el("p", {className: "meta", textContent: t("catalogueError")}));
+    } finally {
+      clearTimeout(limit);
+    }
   }
 
   function render() {
@@ -242,6 +358,9 @@
 
   async function ask(question) {
     if (!question) return;
+    // A newer question wins: answers that arrive for an older one are dropped.
+    const mine = ++turn;
+    const store = !document.getElementById("nostore").checked;
     send.disabled = true;
     send.textContent = t("asking");
     // A server gone idle starts again with this question: its countdown starts now.
@@ -268,75 +387,30 @@
     const limit = setTimeout(() => abort.abort(), 90000);
     try {
       const res = await fetch(API + "/ask", {method: "POST", headers: {"Content-Type": "application/json"},
-                                             body: JSON.stringify({question, store: !document.getElementById("nostore").checked}), signal: abort.signal});
+                                             body: JSON.stringify({question, store}), signal: abort.signal});
       lastContact = Date.now();
       setServer("ready");
       const body = await res.json();
       if (!res.ok) throw new Error(body.detail || "Error " + res.status);
-      // The service's refusal is in Spanish; show it in the page's language.
-      const box = el("div", {className: "answer"}, [el("p", {textContent: body.refused ? t("refusal") : body.answer})]);
-      if (body.refused) {
-        box.append(el("p", {className: "meta", innerHTML: t("refused")}));
-      } else if (body.sources.length) {
-        // One entry per guide, with the cited passages of that guide inside.
-        const guides = new Map();
-        for (const s of body.sources) {
-          if (!guides.has(s.url)) guides.set(s.url, {title: s.title, passages: []});
-          guides.get(s.url).passages.push(s);
-        }
-        const list = el("div", {className: "sources"}, [el("strong", {textContent: t("sources")})]);
-        for (const [url, g] of guides) {
-          const marks = g.passages.map(s => `[${s.n}]`).join("");
-          list.append(el("details", {}, [
-            el("summary", {}, [`${marks} `, el("a", {href: url, target: "_blank", rel: "noopener", textContent: g.title})]),
-            ...g.passages.map(s => {
-              // A passage starts with its heading path, which repeats the page title above:
-              // show only the section below it, as a label.
-              const [head, ...body] = s.text.split("\n");
-              const own = head.startsWith(g.title);
-              const section = own ? head.slice(g.title.length).replace(/^\s*>\s*/, "") : "";
-              return el("div", {}, [`[${s.n}] `, ...(section ? [el("em", {textContent: section}), "\n"] : []),
-                                    own ? body.join("\n") : s.text]);
-            })]));
-          // Where the cited passages point, visible without opening them.
-          const seen = new Set();
-          const links = g.passages.flatMap(s => s.links || []).filter(l => !seen.has(l.url) && seen.add(l.url)).slice(0, 5);
-          if (links.length) list.append(el("ul", {className: "links"}, links.map(l =>
-            el("li", {}, [el("a", {href: l.url, target: "_blank", rel: "noopener", textContent: l.label})]))));
-        }
-        box.append(list);
-        // Every source is about one particular case (the DANA, say): point elsewhere too.
-        const cases = [...new Set(body.sources.map(s => s.case))];
-        if (cases.length === 1 && cases[0]) {
-          const safe = cases[0].replace(/[&<>"']/g, ch => `&#${ch.charCodeAt(0)};`);
-          box.append(el("p", {className: "meta", innerHTML: t("caseNote")(safe)}));
-        }
-      }
-      const thanks = el("span");
-      const rate = helpful => async event => {
-        for (const b of box.querySelectorAll(".feedback button")) b.disabled = true;
-        event.currentTarget.setAttribute("aria-pressed", "true");
-        thanks.textContent = t("thanks");
-        try {
-          await fetch(API + "/feedback", {method: "POST", headers: {"Content-Type": "application/json"},
-                                          body: JSON.stringify({id: body.id, helpful})});
-        } catch (_) { /* feedback is optional */ }
-      };
-      box.append(el("div", {className: "feedback"}, [t("helpful"),
-        el("button", {type: "button", textContent: t("yes"), onclick: rate(true)}),
-        el("button", {type: "button", textContent: t("no"), onclick: rate(false)}), thanks]));
+      if (mine !== turn) return;
+      const box = answerBox(body, false);
       out.replaceChildren(box);
       // On a phone the answer lands below the fold; bring it into view.
       if (box.getBoundingClientRect().top > window.innerHeight * 0.6) box.scrollIntoView({behavior: "smooth", block: "start"});
+      clearInterval(tick);
+      if (body.incomplete) await lookFurther(question, store, mine);
     } catch (err) {
+      if (mine !== turn) return;
       const message = err.name === "AbortError" ? t("timeout") : t("error").replace("{e}", err.message.replace(/\.+$/, ""));
       out.replaceChildren(el("div", {className: "waiting"}, [el("p", {textContent: message}),
         el("button", {type: "button", textContent: t("retry"), onclick: () => ask(question)})]));
     } finally {
       clearInterval(tick);
       clearTimeout(limit);
-      send.disabled = false;
-      send.textContent = t("send");
+      if (mine === turn) {
+        send.disabled = false;
+        send.textContent = t("send");
+      }
     }
   }
 
