@@ -75,7 +75,8 @@
   @media (prefers-reduced-motion: reduce) { .dots span, .server.waking .dot { animation: none; } .bar i { transition: none; } }
   footer { color: var(--muted); font-size: .85rem; margin-top: 32px; }
   .storage { font-size: .85rem; color: var(--muted); margin-top: 2px !important; }
-  .feedback { display: flex; align-items: center; gap: 8px; margin-top: 12px; font-size: .9rem; color: var(--muted); }
+  .feedback { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-top: 12px; font-size: .9rem; color: var(--muted); }
+  .feedback .share { margin-left: auto; }
   .feedback button { background: var(--surface); color: var(--ink); border: 1px solid var(--line); padding: 4px 10px; }
   .further { margin-top: 16px; }
   .further-title { font-size: 1rem; margin: 20px 0 8px; }
@@ -142,7 +143,7 @@
       refused: 'Las páginas incluidas no parecen cubrir esta pregunta. Puedes consultarla llamando al <a href="https://administracion.gob.es/informacion/formas-recibir-orientacion/canales-atencion/060" target="_blank" rel="noopener">060</a>, por el <a href="https://administracion.gob.es/informacion/formas-recibir-orientacion/canales-atencion/buzon" target="_blank" rel="noopener">buzón de atención</a> o en una <a href="https://administracion.gob.es/informacion/buscador-de-oficinas/oficinas-de-informacion-y-atencion-a-la-ciudadania/oficinas-informacion-administracion-general-estado" target="_blank" rel="noopener">oficina de información</a>.',
       refusal: "No tengo información suficiente para responder.",
       caseNote: c => `Esta respuesta solo se apoya en información para un caso particular (${c}). Si no es tu caso, puedes preguntar llamando al <a href="https://administracion.gob.es/informacion/formas-recibir-orientacion/canales-atencion/060" target="_blank" rel="noopener">060</a>, por el <a href="https://administracion.gob.es/informacion/formas-recibir-orientacion/canales-atencion/buzon" target="_blank" rel="noopener">buzón de atención</a> o en una <a href="https://administracion.gob.es/informacion/buscador-de-oficinas/oficinas-de-informacion-y-atencion-a-la-ciudadania/oficinas-informacion-administracion-general-estado" target="_blank" rel="noopener">oficina de información</a>.`,
-      sources: "Fuentes", helpful: "¿Te ha servido?", yes: "👍 Sí", no: "👎 No", thanks: "Gracias.",
+      sources: "Fuentes", helpful: "¿Te ha servido?", yes: "👍 Sí", no: "👎 No", thanks: "Gracias.", share: "Copiar enlace a la pregunta", copied: "Enlace copiado.",
       lookingCatalogue: "Las guías del Punto de Acceso General no lo explican del todo. Buscando en el catálogo oficial de trámites…",
       catalogueTitle: "En el catálogo oficial de trámites:", records: "Fichas del catálogo",
       goTo: "Ir al trámite: ", siteHome: h => `Web del organismo: ${h}`, noDirect: "(la ficha no enlaza al trámite concreto)",
@@ -195,7 +196,7 @@
       refused: 'The pages included do not seem to cover this question. You can ask it by calling <a href="https://administracion.gob.es/informacion/formas-recibir-orientacion/canales-atencion/060" target="_blank" rel="noopener">060</a>, through the <a href="https://administracion.gob.es/informacion/formas-recibir-orientacion/canales-atencion/buzon" target="_blank" rel="noopener">help mailbox</a> or at an <a href="https://administracion.gob.es/informacion/buscador-de-oficinas/oficinas-de-informacion-y-atencion-a-la-ciudadania/oficinas-informacion-administracion-general-estado" target="_blank" rel="noopener">information office</a> (in Spanish).',
       refusal: "I don't have enough information to answer.",
       caseNote: c => `This answer only rests on information for a particular case (${c}). If that is not your case, you can ask by calling <a href="https://administracion.gob.es/informacion/formas-recibir-orientacion/canales-atencion/060" target="_blank" rel="noopener">060</a>, through the <a href="https://administracion.gob.es/informacion/formas-recibir-orientacion/canales-atencion/buzon" target="_blank" rel="noopener">help mailbox</a> or at an <a href="https://administracion.gob.es/informacion/buscador-de-oficinas/oficinas-de-informacion-y-atencion-a-la-ciudadania/oficinas-informacion-administracion-general-estado" target="_blank" rel="noopener">information office</a> (in Spanish).`,
-      sources: "Sources (in Spanish)", helpful: "Was this helpful?", yes: "👍 Yes", no: "👎 No", thanks: "Thank you.",
+      sources: "Sources (in Spanish)", helpful: "Was this helpful?", yes: "👍 Yes", no: "👎 No", thanks: "Thank you.", share: "Copy a link to the question", copied: "Link copied.",
       lookingCatalogue: "The Punto de Acceso General guides do not fully explain this. Searching the official catalogue of procedures…",
       catalogueTitle: "In the official catalogue of procedures:", records: "Catalogue records (in Spanish)",
       goTo: "Go to the procedure: ", siteHome: h => `Website of the body: ${h}`, noDirect: "(the record does not link to the procedure itself)",
@@ -248,7 +249,7 @@
   }
 
   // One answer with its sources, notes and rating; the catalogue's cites records, not pages.
-  function answerBox(body, catalogue) {
+  function answerBox(body, catalogue, question) {
     // The service's refusal is in Spanish; show it in the page's language.
     const box = el("div", {className: "answer"}, [el("p", {}, body.refused ? [t("refusal")] : rich(body.answer))]);
     // What saves the visitor time: the page of each cited procedure, first and in view.
@@ -313,7 +314,8 @@
     };
     box.append(el("div", {className: "feedback"}, [t("helpful"),
       el("button", {type: "button", textContent: t("yes"), onclick: rate(true)}),
-      el("button", {type: "button", textContent: t("no"), onclick: rate(false)}), thanks]));
+      el("button", {type: "button", textContent: t("no"), onclick: rate(false)}), thanks,
+      el("button", {type: "button", className: "share", textContent: t("share"), onclick: () => share(question, thanks)})]));
     return box;
   }
 
@@ -336,7 +338,7 @@
       if (!res.ok) throw new Error(body.detail || "Error " + res.status);
       if (body.refused) { note.replaceWith(...(refusal ? [refusal] : [])); return; }
       note.replaceWith(el("section", {className: "further"}, [
-        el("h2", {className: "further-title", textContent: t("catalogueTitle")}), answerBox(body, true)]));
+        el("h2", {className: "further-title", textContent: t("catalogueTitle")}), answerBox(body, true, question)]));
     } catch (_) {
       if (mine === turn) note.replaceWith(...(refusal ? [refusal] : []),
         el("div", {className: "waiting further"}, [el("p", {className: "meta", textContent: t("catalogueError")})]));
@@ -396,7 +398,7 @@
       const body = await res.json();
       if (!res.ok) throw new Error(body.detail || "Error " + res.status);
       if (mine !== turn) return;
-      const box = answerBox(body, false);
+      const box = answerBox(body, false, question);
       const held = body.refused && body.incomplete;
       out.replaceChildren(...(held ? [] : [box]));
       // On a phone the answer lands below the fold; bring it into view.
@@ -431,6 +433,19 @@
     render();
   });
   document.getElementById("ask").addEventListener("submit", e => { e.preventDefault(); ask(q.value.trim()); });
+  // A shared link fills the question in; it is answered only when the visitor asks,
+  // so a link opened by a bot or a preview costs nothing.
+  const shared = new URLSearchParams(location.search).get("q");
+  if (shared) q.value = shared.slice(0, Number(q.maxLength) > 0 ? Number(q.maxLength) : 500);
+
+  // The link to share carries the question only, never the API or the visitor's settings.
+  async function share(question, status) {
+    const link = new URL(location.pathname, location.origin);
+    link.searchParams.set("q", question);
+    if (lang !== "es") link.searchParams.set("lang", lang);
+    try { await navigator.clipboard.writeText(link.href); status.textContent = t("copied"); }
+    catch (_) { status.textContent = link.href; }
+  }
   // Wake the API while the visitor reads and types: after a quiet spell it takes ~30 s
   // to start, so the page says so before anyone asks.
   // Measured cold start on 9 November: about 30 s from the first request to an answer.
