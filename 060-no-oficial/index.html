@@ -319,7 +319,9 @@
 
   // The second step: the guides left the question open, so ask the catalogue, saying so
   // while it looks. A refusal adds nothing; the first answer above stays as it was.
-  async function lookFurther(question, store, mine) {
+  // A first refusal waits off the page: shown only if the catalogue has nothing either,
+  // so "not enough information" never sits above an answer.
+  async function lookFurther(question, store, mine, refusal) {
     const note = el("div", {className: "waiting further", role: "status"}, [el("div", {className: "row"}, [
       el("span", {className: "dots", ariaHidden: "true"}, [el("span"), el("span"), el("span")]),
       el("span", {textContent: t("lookingCatalogue")})])]);
@@ -332,11 +334,12 @@
       const body = await res.json();
       if (mine !== turn) return;
       if (!res.ok) throw new Error(body.detail || "Error " + res.status);
-      if (body.refused) { note.remove(); return; }
+      if (body.refused) { note.replaceWith(...(refusal ? [refusal] : [])); return; }
       note.replaceWith(el("section", {className: "further"}, [
         el("h2", {className: "further-title", textContent: t("catalogueTitle")}), answerBox(body, true)]));
     } catch (_) {
-      if (mine === turn) note.replaceChildren(el("p", {className: "meta", textContent: t("catalogueError")}));
+      if (mine === turn) note.replaceWith(...(refusal ? [refusal] : []),
+        el("div", {className: "waiting further"}, [el("p", {className: "meta", textContent: t("catalogueError")})]));
     } finally {
       clearTimeout(limit);
     }
@@ -394,11 +397,12 @@
       if (!res.ok) throw new Error(body.detail || "Error " + res.status);
       if (mine !== turn) return;
       const box = answerBox(body, false);
-      out.replaceChildren(box);
+      const held = body.refused && body.incomplete;
+      out.replaceChildren(...(held ? [] : [box]));
       // On a phone the answer lands below the fold; bring it into view.
       if (box.getBoundingClientRect().top > window.innerHeight * 0.6) box.scrollIntoView({behavior: "smooth", block: "start"});
       clearInterval(tick);
-      if (body.incomplete) await lookFurther(question, store, mine);
+      if (body.incomplete) await lookFurther(question, store, mine, held ? box : null);
     } catch (err) {
       if (mine !== turn) return;
       const message = err.name === "AbortError" ? t("timeout") : t("error").replace("{e}", err.message.replace(/\.+$/, ""));
