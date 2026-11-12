@@ -152,7 +152,7 @@
       about: `<h2>Qué es</h2>
         <p>Un experimento personal e independiente: probar si un asistente puede resolver dudas de trámites respondiendo solo con fuentes oficiales y citándolas. Nace de la idea de mejorar el Webchat 060, pero no tiene relación con la Administración ni con el servicio 060.</p>
         <h2>De dónde salen las respuestas</h2>
-        <p>Conoce 147 de las 606 páginas que el ${PAG} incluye en su mapa web, tal como estaban el 9 de noviembre de 2026: las de atención a la ciudadanía, trámites, empleo público, ayudas y lectura fácil. No incluye las secciones sobre la Unión Europea ni sobre la organización del Estado. No busca en internet. Si alguna página ha cambiado después, la respuesta puede no estar al día.</p>
+        <p>Conoce 322 de las 606 páginas que el ${PAG} incluye en su mapa web, tal como estaban el 9 y el 11 de noviembre de 2026: las de atención a la ciudadanía, trámites, empleo público, ayudas, lectura fácil y «Tu espacio europeo» (derechos y trámites en la Unión Europea). No incluye la sección sobre la organización del Estado. No busca en internet. Si alguna página ha cambiado después, la respuesta puede no estar al día.</p>
         <ul>${sectionList("páginas")}</ul>
         <p>Si esas páginas no lo explican del todo, busca también en el catálogo oficial de procedimientos de la Administración General del Estado: 8.000 fichas, exportadas el 8 de noviembre de 2026, que dicen qué trámite es, de qué ministerio depende y cómo se hace, con su enlace. No incluye los trámites de comunidades autónomas ni de ayuntamientos.</p>
         <p>Las propias páginas no siempre coinciden: una explica Cl@ve Firma y otra dice que Cl@ve no permite firmar. El asistente intenta avisar cuando ocurre, pero no siempre lo consigue.</p>
@@ -172,7 +172,7 @@
         <p><strong>Tus derechos:</strong> como no se guarda nada que te identifique, solo podemos localizar una pregunta si nos indicas su texto exacto y el día. Con eso puedes pedir que se borre. También puedes reclamar ante la Agencia Española de Protección de Datos.</p>
         <h2>Autoría</h2>
         <p>Hecho por <a href="https://muoten.github.io/">muoten</a>. Sigue el enfoque de <a href="https://muoten.github.io/rag-against-the-machine.html">RAG against the machine</a>.</p>`,
-      footer: 'Fuente: páginas de <a href="https://administracion.gob.es/">administracion.gob.es</a>, capturadas el 9 de noviembre de 2026, y su catálogo de procedimientos, exportado el 8 de noviembre. Las preguntas se procesan con GPT-6 Luna en centros de datos de Microsoft en la UE y se guardan 30 días, sin datos de conexión, salvo que pidas lo contrario. Más detalles en «Acerca de».',
+      footer: 'Fuente: páginas de <a href="https://administracion.gob.es/">administracion.gob.es</a>, capturadas el 9 y el 11 de noviembre de 2026, y su catálogo de procedimientos, exportado el 8 de noviembre. Las preguntas se procesan con GPT-6 Luna en centros de datos de Microsoft en la UE y se guardan 30 días, sin datos de conexión, salvo que pidas lo contrario. Más detalles en «Acerca de».',
     },
     en: {
       title: "Assistant for procedures with the Spanish public administration",
@@ -205,7 +205,7 @@
       about: `<h2>What this is</h2>
         <p>A personal, independent experiment: testing whether an assistant can answer questions about procedures using only official sources, and citing them. It grew out of the idea of improving the Webchat 060, but it has no connection with the Spanish administration or the 060 service.</p>
         <h2>Where answers come from</h2>
-        <p>It knows 147 of the 606 pages that Spain's ${PAG} lists in its site map (in Spanish), as they were on 9 November 2026: those on public information services, procedures, public employment, grants and easy reading. It does not include the sections on the European Union or on how the State is organised. It does not search the internet. If a page has changed since, an answer may be out of date.</p>
+        <p>It knows 322 of the 606 pages that Spain's ${PAG} lists in its site map (in Spanish), as they were on 9 and 11 November 2026: those on public information services, procedures, public employment, grants, easy reading and "Tu espacio europeo" (rights and procedures in the European Union). It does not include the section on how the State is organised. It does not search the internet. If a page has changed since, an answer may be out of date.</p>
         <ul>${sectionList("pages")}</ul>
         <p>If those pages do not fully explain something, it also searches the official catalogue of procedures of the State administration: 8,000 records, exported on 8 November 2026, that say which procedure it is, which ministry it belongs to and how it is done, with its link. It does not include the procedures of regions or town councils.</p>
         <p>The pages themselves do not always agree: one explains Cl@ve Firma and another says Cl@ve cannot sign. The assistant tries to point this out, but does not always manage to.</p>
@@ -225,7 +225,7 @@
         <p><strong>Your rights:</strong> since nothing that identifies you is stored, a question can only be found if you give its exact text and the day. With that you can ask for it to be deleted. You can also complain to the Spanish Data Protection Agency (AEPD).</p>
         <h2>Author</h2>
         <p>Made by <a href="https://muoten.github.io/">muoten</a>. It follows the approach of <a href="https://muoten.github.io/rag-against-the-machine.html">RAG against the machine</a>.</p>`,
-      footer: 'Source: pages from <a href="https://administracion.gob.es/">administracion.gob.es</a>, captured on 9 November 2026, and its catalogue of procedures, exported on 8 November. Questions are processed with GPT-6 Luna in Microsoft data centres in the EU and kept for 30 days, without connection data, unless you ask otherwise. More details under “About”.',
+      footer: 'Source: pages from <a href="https://administracion.gob.es/">administracion.gob.es</a>, captured on 9 and 11 November 2026, and its catalogue of procedures, exported on 8 November. Questions are processed with GPT-6 Luna in Microsoft data centres in the EU and kept for 30 days, without connection data, unless you ask otherwise. More details under “About”.',
     },
   };
   const out = document.getElementById("out"), q = document.getElementById("q"), send = document.getElementById("send");
