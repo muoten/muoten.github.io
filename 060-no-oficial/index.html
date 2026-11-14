@@ -83,6 +83,7 @@
   ul.go { list-style: none; margin: 4px 0 8px; padding: 0; display: grid; gap: 6px; }
   ul.go a { display: inline-block; font-weight: 600; overflow-wrap: anywhere; }
   ul.go .host { color: var(--muted); font-size: .85rem; }
+  .sources .fix { color: var(--muted); font-size: .85rem; margin: 0 0 .4rem 1.4rem; }
 </style>
 </head>
 <body>
@@ -148,7 +149,7 @@
       lookingCatalogue: "Las guías del Punto de Acceso General no lo explican del todo. Buscando en el catálogo oficial de trámites…",
       catalogueTitle: "En el catálogo oficial de trámites:", records: "Fichas del catálogo",
       goTo: "Ir al trámite: ", siteHome: h => `Web del organismo: ${h}`, noDirect: "(la ficha no enlaza al trámite concreto)",
-      linkFix: "Enlace corregido: el de la ficha oficial ya no funciona. Este es el que da el ", linkFixBy: "Punto de Acceso General",
+      linkFix: h => `Enlace corregido: el del catálogo (${h}) ya no funciona. Usamos el que indica el `, linkFixBy: "Punto de Acceso General",
       catalogueError: "No se ha podido consultar el catálogo de trámites.",
       error: "No se ha podido responder: {e}. Si es la primera pregunta en un rato, el servidor puede estar arrancando. Inténtalo de nuevo.",
       about: `<h2>Qué es</h2>
@@ -203,7 +204,7 @@
       lookingCatalogue: "The Punto de Acceso General guides do not fully explain this. Searching the official catalogue of procedures…",
       catalogueTitle: "In the official catalogue of procedures:", records: "Catalogue records (in Spanish)",
       goTo: "Go to the procedure: ", siteHome: h => `Website of the body: ${h}`, noDirect: "(the record does not link to the procedure itself)",
-      linkFix: "Corrected link: the official record's own link no longer works. This one is given by the ", linkFixBy: "Punto de Acceso General",
+      linkFix: h => `Corrected link: the catalogue's (${h}) no longer works. We use the one given by the `, linkFixBy: "Punto de Acceso General",
       catalogueError: "The catalogue of procedures could not be searched.",
       error: "Could not answer: {e}. If this is the first question in a while, the server may be starting. Please try again.",
       about: `<h2>What this is</h2>
@@ -258,15 +259,17 @@
     // The service's refusal is in Spanish; show it in the page's language.
     const box = el("div", {className: "answer"}, [el("p", {}, body.refused ? [t("refusal")] : rich(body.answer))]);
     // What saves the visitor time: the page of each cited procedure, first and in view.
-    // A record that only links to a website's home page says so.
+    // A record that only links to a website's home page says so, and is left out
+    // when another record links to its procedure (it stays in the records below).
     if (catalogue && !body.refused) {
-      const go = body.sources.filter(s => /^https?:/.test(s.url)).map(s => {
-        const u = new URL(s.url), home = u.pathname.replace(/\/+$/, "") === "" && !u.search;
+      const isHome = u => u.pathname.replace(/\/+$/, "") === "" && !u.search;
+      const links = body.sources.filter(s => /^https?:/.test(s.url)).map(s => [s, new URL(s.url)]);
+      const direct = links.some(([, u]) => !isHome(u));
+      const go = links.filter(([, u]) => !direct || !isHome(u)).map(([s, u]) => {
+        const home = isHome(u);
         const text = home ? t("siteHome")(u.hostname) : t("goTo") + s.title.replace(/\.$/, "");
         return el("li", {}, [el("a", {href: s.url, target: "_blank", rel: "noopener", textContent: text}),
-                             " ", el("span", {className: "host", textContent: home ? t("noDirect") : `(${u.hostname})`}),
-                             ...(s.link_fix ? [el("div", {className: "host"}, [t("linkFix"),
-                               el("a", {href: s.link_fix.evidence, target: "_blank", rel: "noopener", textContent: t("linkFixBy")}), "."])] : [])]);
+                             " ", el("span", {className: "host", textContent: home ? t("noDirect") : `(${u.hostname})`})]);
       });
       if (go.length) box.append(el("ul", {className: "go"}, go));
     }
@@ -295,6 +298,11 @@
             return el("div", {}, [`[${s.n}] `, ...(section ? [el("em", {textContent: section}), "\n"] : []),
                                   own ? body.join("\n") : s.text]);
           })]));
+        // A link we replaced is said under its record, with the page that gives it.
+        for (const s of g.passages.filter(s => s.link_fix)) {
+          list.append(el("div", {className: "host fix"}, [t("linkFix")(new URL(s.link_fix.sia_url).hostname),
+            el("a", {href: s.link_fix.evidence, target: "_blank", rel: "noopener", textContent: t("linkFixBy")}), "."]));
+        }
         // Where the cited passages point, visible without opening them.
         const seen = new Set();
         const links = g.passages.flatMap(s => s.links || []).filter(l => !seen.has(l.url) && seen.add(l.url)).slice(0, 5);
