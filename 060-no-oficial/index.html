@@ -148,6 +148,7 @@
       lookingCatalogue: "Las guías del Punto de Acceso General no lo explican del todo. Buscando en el catálogo oficial de trámites…",
       catalogueTitle: "En el catálogo oficial de trámites:", records: "Fichas del catálogo",
       goTo: "Ir al trámite: ", siteHome: h => `Web del organismo: ${h}`, noDirect: "(la ficha no enlaza al trámite concreto)",
+      linkFix: "Enlace corregido: el de la ficha oficial ya no funciona. Este es el que da el ", linkFixBy: "Punto de Acceso General",
       catalogueError: "No se ha podido consultar el catálogo de trámites.",
       error: "No se ha podido responder: {e}. Si es la primera pregunta en un rato, el servidor puede estar arrancando. Inténtalo de nuevo.",
       about: `<h2>Qué es</h2>
@@ -201,6 +202,7 @@
       lookingCatalogue: "The Punto de Acceso General guides do not fully explain this. Searching the official catalogue of procedures…",
       catalogueTitle: "In the official catalogue of procedures:", records: "Catalogue records (in Spanish)",
       goTo: "Go to the procedure: ", siteHome: h => `Website of the body: ${h}`, noDirect: "(the record does not link to the procedure itself)",
+      linkFix: "Corrected link: the official record's own link no longer works. This one is given by the ", linkFixBy: "Punto de Acceso General",
       catalogueError: "The catalogue of procedures could not be searched.",
       error: "Could not answer: {e}. If this is the first question in a while, the server may be starting. Please try again.",
       about: `<h2>What this is</h2>
@@ -260,7 +262,9 @@
         const u = new URL(s.url), home = u.pathname.replace(/\/+$/, "") === "" && !u.search;
         const text = home ? t("siteHome")(u.hostname) : t("goTo") + s.title.replace(/\.$/, "");
         return el("li", {}, [el("a", {href: s.url, target: "_blank", rel: "noopener", textContent: text}),
-                             " ", el("span", {className: "host", textContent: home ? t("noDirect") : `(${u.hostname})`})]);
+                             " ", el("span", {className: "host", textContent: home ? t("noDirect") : `(${u.hostname})`}),
+                             ...(s.link_fix ? [el("div", {className: "host"}, [t("linkFix"),
+                               el("a", {href: s.link_fix.evidence, target: "_blank", rel: "noopener", textContent: t("linkFixBy")}), "."])] : [])]);
       });
       if (go.length) box.append(el("ul", {className: "go"}, go));
     }
