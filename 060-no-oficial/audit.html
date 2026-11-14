@@ -30,7 +30,7 @@
          padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
   main { max-width: 900px; margin: 0 auto; padding-block: 24px 64px; }
   a { color: var(--accent); }
-  .top { display: flex; justify-content: flex-end; margin-bottom: 8px; font-size: .9rem; }
+  .top { display: flex; justify-content: space-between; align-items: center; gap: 8px; margin-bottom: 8px; font-size: .9rem; }
   button, select, input { font: inherit; font-size: .9rem; color: var(--ink); background: var(--surface);
                           border: 1px solid var(--line); border-radius: 8px; padding: 4px 10px; }
   button { cursor: pointer; }
@@ -78,7 +78,7 @@
   @media (max-width: 480px) { table { font-size: .8rem; } th, td { padding: 5px 4px; } .meter { display: none; } }
 </style>
 <main>
-  <div class="top"><button id="lang" type="button"></button></div>
+  <div class="top"><a href="./" data-t="back"></a><button id="lang" type="button"></button></div>
   <h1 data-t="title"></h1>
   <p class="lead" data-t="lead"></p>
   <p class="meta" id="meta"></p>
@@ -110,7 +110,7 @@
   const date = s => s ? s.slice(0, 10).split("-").reverse().join("/") : "";
   const TEXT = {
     es: {
-      switchTo: "English", locale: "es-ES",
+      back: "← Volver al asistente", switchTo: "English", locale: "es-ES",
       title: "Enlaces del catálogo de procedimientos",
       lead: "El catálogo oficial de procedimientos de la Administración General del Estado (SIA) da, para cada trámite, un enlace a la página donde se hace. Esta auditoría pide cada enlace y anota qué encuentra.",
       meta: d => `Fichas exportadas del catálogo el ${date(d.exported)} · ${n(d.records)} fichas, ${n(d.links)} enlaces distintos en ${n(d.websites)} webs · comprobados ${d.first === d.last ? "el " + date(d.first) : `del ${date(d.first)} al ${date(d.last)}`}`,
@@ -149,7 +149,7 @@
       more: "Mostrar más", code: "Código SIA", status: s => `HTTP ${s}`, endsAt: "acaba en", checkedOn: "comprobado el",
       none: "Ninguna ficha con estos filtros."},
     en: {
-      switchTo: "Español", locale: "en-GB",
+      back: "← Back to the assistant", switchTo: "Español", locale: "en-GB",
       title: "Links of the procedure catalogue",
       lead: "The official catalogue of the Spanish State's procedures (SIA) gives, for each procedure, a link to the page where it is done. This audit requests each link and records what it finds.",
       meta: d => `Records exported from the catalogue on ${date(d.exported)} · ${n(d.records)} records, ${n(d.links)} distinct links on ${n(d.websites)} websites · checked ${d.first === d.last ? "on " + date(d.first) : `from ${date(d.first)} to ${date(d.last)}`}`,
@@ -187,8 +187,11 @@
       count: (shown, total) => `${n(total)} records${shown < total ? `, ${n(shown)} shown` : ""}`,
       more: "Show more", code: "SIA code", status: s => `HTTP ${s}`, endsAt: "ends at", checkedOn: "checked on",
       none: "No record with these filters."}};
-  let lang = "es";
-  try { lang = localStorage.getItem("lang") || (navigator.language.startsWith("es") ? "es" : "en"); } catch (_) { /* default */ }
+  let lang = new URLSearchParams(location.search).get("lang");
+  if (!TEXT[lang]) {
+    try { lang = localStorage.getItem("lang"); } catch (_) { lang = null; }
+  }
+  if (!TEXT[lang]) lang = navigator.language.startsWith("es") ? "es" : "en";
   const filter = {cat: "broken", ministry: "", q: "", limit: PAGE_SIZE};
   const t = key => TEXT[lang][key];
   const n = x => x.toLocaleString(TEXT[lang].locale);
