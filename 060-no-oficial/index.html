@@ -187,7 +187,7 @@
       noStore: "Do not store my question",
       placeholder: "Type your question",
       send: "Ask", switchTo: "Español", info: "About", infoClose: "Close information", docTitle: "Assistant for procedures with the Spanish administration (demo)",
-      examples: ["How much does the digital certificate cost?", "What is the difference between the temporary and the permanent Cl@ve password?",
+      examples: ["How much does the digital certificate cost?", "What is the difference between Cl@ve PIN and Cl@ve Permanente?",
                  "Where can I see an electronic notification?", "How do I book an appointment to get my DNI?"],
       thinking: "Checking the pages…",
       waking: "Starting the server and checking the pages…",
@@ -252,15 +252,40 @@
     return node;
   }
 
-  // Catalogue answers mark procedure names in bold, as **name**; nothing else is markup.
-  function rich(text) {
-    return text.split(/\*\*(.+?)\*\*/s).map((part, i) => i % 2 ? el("strong", {textContent: part}) : part);
+  // Answers mark names in bold, as **name**; nothing else is markup. A web address
+  // becomes a link only when its site is in the answer's sources, so the model
+  // cannot link to anything the official pages do not name.
+  const ADDRESS = /\b(?:https?:\/\/)?(?:[a-z0-9-]+\.)+[a-z]{2,}(?:\/[^\s<>()\[\]"«»]*)?/gi;
+  const site = host => host.toLowerCase().replace(/^www\./, "");
+  function linked(text, sites) {
+    const parts = [];
+    let last = 0;
+    for (const m of text.matchAll(ADDRESS)) {
+      const address = m[0].replace(/[.,;:!?]+$/, "");
+      const href = /^https?:/i.test(address) ? address : "https://" + address;
+      let host;
+      try { host = site(new URL(href).hostname); } catch (_) { continue; }
+      if (!sites.has(host)) continue;
+      parts.push(text.slice(last, m.index), el("a", {href, target: "_blank", rel: "noopener", textContent: address}));
+      last = m.index + address.length;
+    }
+    parts.push(text.slice(last));
+    return parts.filter(x => x !== "");
+  }
+  function rich(text, sources = []) {
+    const sites = new Set();
+    for (const s of sources) {
+      for (const m of `${s.url} ${s.text}`.matchAll(ADDRESS)) {
+        try { sites.add(site(new URL(/^https?:/i.test(m[0]) ? m[0] : "https://" + m[0]).hostname)); } catch (_) {}
+      }
+    }
+    return text.split(/\*\*(.+?)\*\*/s).flatMap((part, i) => i % 2 ? [el("strong", {}, linked(part, sites))] : linked(part, sites));
   }
 
   // One answer with its sources, notes and rating; the catalogue's cites records, not pages.
   function answerBox(body, catalogue, question) {
     // The service's refusal is in Spanish; show it in the page's language.
-    const box = el("div", {className: "answer"}, [el("p", {}, body.refused ? [t("refusal")] : rich(body.answer))]);
+    const box = el("div", {className: "answer"}, [el("p", {}, body.refused ? [t("refusal")] : rich(body.answer, body.sources))]);
     // What saves the visitor time: the page of each cited procedure, first and in view.
     // A record that only links to a website's home page says so, and is left out
     // when another record links to its procedure (it stays in the records below).
