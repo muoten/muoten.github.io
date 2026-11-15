@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="An unofficial chatbot that answers questions about procedures with the Spanish administration, and an audit of the links in the 8,000 records of the SIA catalogue.">
+<title>SIA ft webchat060: Unstoppable? | Enrique Otero Muras</title>
+<link rel="stylesheet" href="styles.css?v=20261105-shot">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="shell"><a class="site-name" href="/" aria-label="Enrique Otero Muras home">Enrique Otero Muras</a><nav aria-label="Main navigation"><a href="https://github.com/muoten">GitHub ↗</a><a class="nav-contact" href="https://www.linkedin.com/in/enrique-otero-muras-0aab1a133/">LinkedIn ↗</a></nav></header>
+<main id="main">
+<article class="shell post"><div class="post-body">
+<p class="eyebrow">RAG / Public administration</p>
+<h1>SIA ft webchat060: Unstoppable?</h1>
+<p class="post-deck">An unofficial chatbot that answers questions about procedures with the Spanish administration.</p>
+<p class="post-meta">(Written 15/11/2026. 1 min read)</p>
+
+<p>After a <a class="inline-link" href="rag-against-the-machine.html">first experiment with the BOE</a>, I’m now presenting a chatbot that answers questions about procedures with the public administration in Spain.</p>
+<p>The Spanish public administration’s website for citizens is the <a class="inline-link" href="https://administracion.gob.es/">PAG</a> (the Spanish acronym for General Access Point). It is owned and run by the <a class="inline-link" href="https://administracion.gob.es/informacion/quienes-somos" lang="es">Ministerio para la Transformación Digital y de la Función Pública</a>. And it contains information on procedures, a procedure search and help channels such as the 060 phone line, a mailbox and the 060 webchat.</p>
+<p>I noticed that the existing <a class="inline-link" href="https://administracion.gob.es/informacion/formas-recibir-orientacion/canales-atencion/webchat/chat060">060 webchat</a> is very basic, and that the procedure search built on the Administrative Information System (<strong style="font-weight: 700">SIA</strong>, Sistema de Información Administrativa) leaves a lot of room for improvement. So I built an alternative based on GPT-6 Luna, once again deployed on Microsoft Azure.</p>
+<figure class="post-figure"><img style="max-width: 640px; width: 100%; height: auto; display: block" src="assets/chat060-que-es-sia.jpg" alt="The official Chat060, asked what the procedure search and SIA are, answers that for now it can only give information about some services" width="1023" height="582" loading="lazy"><figcaption>The official Chat060 on 15 November 2026, asked “Qué es el buscador de trámites? Qué es SIA?” (what is the procedure search? what is SIA?): for now it can only help with some services, and it gives the hours when an agent answers.</figcaption></figure>
+<figure class="post-figure"><img style="max-width: 640px; width: 100%; height: auto; display: block" src="assets/demo-que-es-sia.jpg" alt="My demo, asked the same question, explains that the procedure search finds information on procedures organised by topic, and says the official guides do not explain what SIA means, citing three sources" width="796" height="482" loading="lazy"><figcaption>My demo, same question, same day. It explains the procedure search and admits that its official sources do not say what SIA means (they only mention a “Código SIA” in the Interior guide). Not a full answer, but an honest one, with its sources.</figcaption></figure>
+<p>So, what is <strong style="font-weight: 700">SIA</strong>? “<span lang="es">Súper Inteligencia Artificial</span>”, Spanish for “Super Artificial Intelligence”? Sia, the singer of “Unstoppable”? Not quite. In the words of the <a class="inline-link" href="https://www.boe.es/buscar/act.php?id=BOE-A-2021-5032">Royal Decree 203/2021</a>, SIA is an “inventory of administrative procedures, services provided and other administrative actions”, classified by function and with their level of digitisation. Each administration connects its own inventory to it, and the <a class="inline-link" href="https://administracion.gob.es/tramites-electronicos/resultados-actuaciones?p=1">procedure search on administracion.gob.es</a> looks through its records: what each procedure is, which body handles it, how it is done and where, with a link. On paper, a classified and structured inventory. In practice, ask for “renovar dni” (renew my ID card) and you get 3,344 results in alphabetical order, starting with a nursery school.</p>
+<figure class="post-figure"><img style="max-width: 360px; width: 100%; height: auto; display: block" src="assets/sia-buscador-renovar-dni.jpg" alt="The procedure search on administracion.gob.es, searching for Renovar dni: 3,344 results sorted alphabetically, the first one a request to renew a place at a municipal nursery school, in Galician" width="485" height="675" loading="lazy"><figcaption>The procedure search on 14 November 2026, which the PAG itself was promoting on X that week.</figcaption></figure>
+<p>My chatbot answers only from official sources, and cites the ones it uses: pages from administracion.gob.es, the 8,000 records of the SIA catalogue, the Ministry of the Interior’s guide to procedures and pages from the Ministry of Health. It can be wrong, and <a class="inline-link" href="060-no-oficial/evaluation.html?lang=en">this is how I evaluate it</a>. The demo is in Spanish, and also answers in English.</p>
+<figure class="post-figure"><a class="button" href="060-no-oficial/?lang=en">Try the demo <span>↗</span></a></figure>
+
+<p>I also took the chance to <a class="inline-link" href="060-no-oficial/audit.html?lang=en">audit the links in the 8,000 records of the SIA catalogue</a>. Only half of them (3,947) lead to a page that works. More than one in five (1,751, or 22%) have a broken link. Another 327 lead to a home page instead of the procedure, and 1,975 could not be checked (robots.txt, bot checks or certificates). It is a single pass: a second one will confirm the broken links.</p>
+<p>Both Sia, the Australian singer shown in the picture below, and SIA, the Spanish system, have a catalogue with many records. Sia’s records include songs like “Unstoppable” or “Genius”. Meanwhile, more than one in five of SIA’s records point to dead links, which do not sound so good.</p>
+<figure class="post-figure"><a href="https://commons.wikimedia.org/wiki/File:SiaFurler_Live2016.jpg"><img style="max-width: 560px; width: 100%; height: auto; display: block" src="assets/sia-boston-2016-scott-murry.jpg" alt="Sia on stage in her half black, half blonde wig with a giant white bow, the fringe hiding her face" width="960" height="640" loading="lazy"></a><figcaption>Not that SIA, although she is just as hard to see behind the fringe. Sia at Boston Calling on 28 May 2016. Photo by Scott Murry, <a class="inline-link" href="https://creativecommons.org/licenses/by/2.0/">CC BY 2.0</a>, via <a class="inline-link" href="https://commons.wikimedia.org/wiki/File:SiaFurler_Live2016.jpg">Wikimedia Commons</a>.</figcaption></figure>
+
+<p class="post-back"><a class="text-link" href="/#year-2026">← Back to the timeline</a></p>
+</div></article>
+</main>
+<footer class="shell"><div><a class="wordmark" href="/">eo<span>.</span></a><span>Enrique Otero Muras</span></div><div><a href="https://github.com/muoten">GitHub ↗</a><a href="https://www.linkedin.com/in/enrique-otero-muras-0aab1a133/">LinkedIn ↗</a><a href="https://muoten.github.io/archive/">Original site ↗</a></div></footer>
+</body>
+</html>
